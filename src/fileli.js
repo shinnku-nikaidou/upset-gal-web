@@ -1,32 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { List, Avatar } from 'antd';
+import 'antd/dist/antd.css';
+import { List, BackTop, Modal, Button, Space } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+const { confirm } = Modal;
+
+function showPromiseConfirm(url, name) {
+  confirm({
+    title: '下载确认',
+    icon: <ExclamationCircleOutlined />,
+    content: '你确定要下载' + name + '吗？',
+    onOk() {
+      window.open(url, "_parent")
+    },
+    onCancel() { },
+  });
+}
 
 
 class FileLi extends React.Component {
-    constructor(props) {
-        super(props)
-        console.log("in FileLi constructor")
-    }
-
-    render() {
-        console.log("this is:", this)
-        return (
-            <div id="hover-gal">
-                <List
-                    itemLayout="horizontal"
-                    dataSource={this.props.files}
-                    renderItem={item => (
-                        <List.Item style={{ paddingLeft: "20px" }}>
-                            <List.Item.Meta title={
-                                <a href={"/" + this.props.url + "/" + item.name}>{decodeURI(item.name)}</a>
-                            } description={"size: " + item.size} />
-                        </List.Item>
-                    )}
-                />
-            </div>
-        );
-    }
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <div id="hover-gal">
+        <BackTop />
+        <List
+          itemLayout="horizontal"
+          dataSource={this.props.files}
+          renderItem={item => (
+            <List.Item style={{ paddingLeft: "20px" }}>
+              <List.Item.Meta title={
+                decodeURI(item.name)
+              } description={"size: " + item.size}
+                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURI(item.name)) }}
+              />
+            </List.Item>
+          )}
+        />
+      </div>
+    );
+  }
 }
 
 export { FileLi }
