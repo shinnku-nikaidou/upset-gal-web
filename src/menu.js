@@ -3,10 +3,36 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './index.css';
 import { Menu, message } from 'antd';
-import { ArrayFile, get_base64 } from './list'
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import { FileLi } from './fileli'
 const { SubMenu } = Menu;
+
+let ArrayFile = [];
+
+function get_base64(url) {
+  var ajaxObj = new XMLHttpRequest();
+  ajaxObj.open('get', window.location.href + url);
+  ajaxObj.onreadystatechange = function () {
+    if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
+      ArrayFile = [];
+      let responce_text = ajaxObj.responseText
+      let PageRawData = window.atob(responce_text.replace(/&#43;/g, '+'));
+      let PageData = JSON.parse(PageRawData);
+      var ArrayFloder = [];
+      for (let item in PageData) {
+        if (item.indexOf("@") === 0) {
+          continue;
+        }
+        if (PageData[item]["@type"] === "file") {
+          ArrayFile.push(PageData[item]);
+        } else if (PageData[item]["@type"] === "folder") {
+          ArrayFloder.push(PageData[item]);
+        }
+      }
+    }
+  }
+  ajaxObj.send();
+}
 
 const success = () => {
   const hide = message.loading('正在加载中', 0);
@@ -23,19 +49,24 @@ class SiderMenu extends React.Component {
       '5': '生肉',
       '6': '模拟器',
     }
-    console.log('click menu', e);
-    if (parseInt(e.key) > 6) {
-      return
+    if (parseInt(e.key) <= 6) {
+      get_base64(key_map[e.key])
+      success()
+      setTimeout(() => {
+        ReactDOM.render(
+          <FileLi files={ArrayFile} url={key_map[e.key]} />
+          , document.getElementById("main")
+        )
+      }, 1400)
+      switch (parseInt(e.key)) {
+        case 7: {
+        }
+      }
+    } else {
+      ReactDOM.unmountComponentAtNode(document.getElementById('main'));
     }
-    get_base64(key_map[e.key])
-    success()
-    setTimeout(() => {
-      ReactDOM.render(
-        <FileLi files={ArrayFile} url={key_map[e.key]} />
-        , document.getElementById("main")
-      )
-    }, 1400)
   };
+
   render() {
     return (
       <Menu

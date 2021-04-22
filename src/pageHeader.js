@@ -14,8 +14,9 @@ class GalPageHead extends React.Component {
       <>
         <PageHeader
           className="site-page-header"
-          onBack={() => window.history.back()}
-          title="失落的小站"
+          title={<>
+            <div onClick={() => window.location.reload()}>失落的小站</div>
+          </>}
           subTitle="欢迎来到 galgame 分享站点"
           extra={[
             <Button key="3" onClick={this.onReturnOld}>回到旧版</Button>,

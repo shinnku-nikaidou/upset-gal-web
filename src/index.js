@@ -6,9 +6,9 @@ import { GalPageHead } from './pageHeader'
 import { Readme } from './readme'
 import { SiderMenu } from './menu'
 import 'antd/dist/antd.css';
-import { Layout, Breadcrumb, Typography, Space } from 'antd';
+import { Layout, Breadcrumb, Typography } from 'antd';
 const { Content, Footer, Sider } = Layout;
-const { Text, Link } = Typography;
+const { Text } = Typography;
 
 class SiderDemo extends React.Component {
   constructor(...args) {
@@ -58,13 +58,13 @@ class SiderDemo extends React.Component {
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               <div id="main"></div>
-              <Readme />
+              <div id="readme"><Readme /></div>
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             <Text type="secondary"> powered by shinnku </Text>
             <br />
-            <Text>此版本为 <Text code>α 1.1.0</Text> 试用版 </Text>
+            <Text>此版本为 <Text code>α 1.1.2</Text> 试用版 </Text>
           </Footer>
         </Layout>
       </Layout>

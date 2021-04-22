@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { List, BackTop, Modal, Button, Space } from 'antd';
+import { List, BackTop, Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 const { confirm } = Modal;
 
@@ -18,9 +18,7 @@ function showPromiseConfirm(url, name) {
 
 
 class FileLi extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+
   render() {
     return (
       <div id="hover-gal">
