@@ -9,4 +9,11 @@ let setReadmeState = (newState) => {
     readmeState = newState
 }
 
-export { getReadmeState, setReadmeState }
+// FeedBack
+
+let feedbackvisible = false
+
+let getfeedbackvisible = () => feedbackvisible
+let setfeedbackvisible = (bool) => { feedbackvisible = bool }
+
+export { getReadmeState, setReadmeState, getfeedbackvisible, setfeedbackvisible }

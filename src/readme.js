@@ -1,18 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "antd/dist/antd.css";
 import "./index.css";
 import { Collapse } from 'antd';
 import { CaretRightOutlined } from '@ant-design/icons';
-import { getReadmeState } from './config'
 
 const { Panel } = Collapse;
 
 
 class Readme extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   state = {
     visible: true
@@ -30,14 +25,12 @@ class Readme extends React.Component {
   }
 
   notVisible() {
-    this.setState({
-      visible: getReadmeState()
-    });
+    this.setState({});
   }
 
   render() {
     return (
-      <div visible={this.state.visible}>
+      <div>
         <Collapse
           bordered={false}
           defaultActiveKey={[]}

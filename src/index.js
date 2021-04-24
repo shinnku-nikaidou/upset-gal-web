@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { GalPageHead } from './pageHeader'
 import { Readme } from './readme'
 import { SiderMenu } from './menu'
+import { FeedBack } from './feedback'
 import 'antd/dist/antd.css';
 import { Layout, Breadcrumb, Typography } from 'antd';
 const { Content, Footer, Sider } = Layout;
@@ -64,7 +65,7 @@ class SiderDemo extends React.Component {
           <Footer style={{ textAlign: 'center' }}>
             <Text type="secondary"> powered by shinnku </Text>
             <br />
-            <Text>此版本为 <Text code>α 1.1.2</Text> 试用版 </Text>
+            <Text>此版本为 <Text code>α 1.5.0</Text> 试用版 </Text>
           </Footer>
         </Layout>
       </Layout>
@@ -72,6 +73,11 @@ class SiderDemo extends React.Component {
   }
 }
 
-ReactDOM.render(<SiderDemo />, document.getElementById('root'));
+ReactDOM.render(
+  <SiderDemo />,
+  document.getElementById('root'),
+);
+
+ReactDOM.render(<FeedBack />, document.getElementById('feedback'));
 
 reportWebVitals();
