@@ -38,12 +38,14 @@ class Readme extends React.Component {
           className="site-collapse-custom-collapse"
         >
           <Panel header="版本相关" key="1" className="site-collapse-custom-panel">
-            <p>此版本为完全预览版,注册等功能暂未开放</p>
-            <p>如果您更习惯旧版,右上角有回到旧版</p>
+            <p>此版本为完全预览版，注册等功能暂未开放</p>
+            <p>如果您更习惯旧版，很可惜，现在已经没有旧版了</p>
           </Panel>
           <Panel header="水群，反馈相关" key="2" className="site-collapse-custom-panel">
-            <p>群号为<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">681053477（点击此处直接加群）</a>，有问题请在此反馈。</p>
-            <p>问题答案为gal.acg18.win</p>
+            <p>1群qq群已满员，暂时无法加群。</p>
+            <p>tg闲聊群刚刚创建（创建时间4/30号21:30分），更希望大伙儿加入<a target="_blank" href="https://t.me/upsetGroup">此群</a>。</p>
+            {/* <p>群号为<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">681053477（点击此处直接加群）</a>，有问题请在此反馈。</p> */}
+            {/* <p>问题答案为gal.acg18.win</p> */}
           </Panel>
           <Panel header="下载相关" key="3" className="site-collapse-custom-panel">
             <p>下载慢请使用多线程下载器(fdm,idm,aria2等)或者使用魔法。</p>
@@ -54,6 +56,11 @@ class Readme extends React.Component {
             <p>本资源仅供学习交流使用，请务必于下载后24小时内删除</p>
             <p>本站不承担任何为此带来的后果。</p>
             <p>由于法律原因，日本境内朋友暂时无法下载。</p>
+          </Panel>
+          <Panel header="其他" key="5" className="site-collapse-custom-panel">
+            <p>本站诚挚邀请您上传本站没有的galgame</p>
+            <p>temp里面即为未被整理的使用本网站上传的gal</p>
+            <p>整理完毕后会被分类到其他类别</p>
           </Panel>
         </Collapse>
       </div>

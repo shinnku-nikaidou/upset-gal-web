@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './index.css';
-import { Menu, message } from 'antd';
+import { Menu, message, Skeleton } from 'antd';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import { setfeedbackvisible } from './config'
 import { FileLi } from './fileli'
@@ -10,6 +10,10 @@ import { GalUpload } from './upload'
 const { SubMenu } = Menu;
 
 let ArrayFile = [];
+
+function getArrayFile() {
+  return ArrayFile
+}
 
 function get_base64(url) {
   var ajaxObj = new XMLHttpRequest();
@@ -43,25 +47,34 @@ const key_map = {
   '4': 'rpg',
   '5': '生肉',
   '6': '模拟器',
+  '7': 'temp'
 }
 
-const success = () => {
-  const hide = message.loading('正在加载中', 0);
-  setTimeout(hide, 1600);
-};
 
 class SiderMenu extends React.Component {
   handleClick = e => {
     ReactDOM.unmountComponentAtNode(document.getElementById('main'));
-    if (parseInt(e.key) <= 6) {
-      get_base64(key_map[e.key])
-      success()
+    ReactDOM.render(<Skeleton active />, document.getElementById('main'));
+    const success = () => {
+      const hide = message.loading('正在加载中', 0);
+      setTimeout(hide, 600);
+    };
+    if (parseInt(e.key) <= 7) {
+      let url = key_map[e.key]
+      get_base64(url)
       setTimeout(() => {
-        ReactDOM.render(
-          <FileLi files={ArrayFile} url={key_map[e.key]} />
-          , document.getElementById("main")
-        )
-      }, 1400)
+        success()
+        let mainMounttimeId = setInterval(() => {
+          if (getArrayFile().length !== 0) {
+            ReactDOM.unmountComponentAtNode(document.getElementById('main'));
+            ReactDOM.render(
+              <FileLi url={url} />
+              , document.getElementById("main")
+            )
+            clearInterval(mainMounttimeId)
+          }
+        }, 200)
+      })
     } else {
       switch (parseInt(e.key)) {
         case 8: {
@@ -98,6 +111,7 @@ class SiderMenu extends React.Component {
             <Menu.Item key="4"> rpg </Menu.Item>
             <Menu.Item key="5"> 生肉 </Menu.Item>
             <Menu.Item key="6"> 模拟器 </Menu.Item>
+            <Menu.Item key="7"> temp </Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
         <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
@@ -111,4 +125,4 @@ class SiderMenu extends React.Component {
   }
 }
 
-export { SiderMenu }
+export { SiderMenu, getArrayFile }

@@ -25,7 +25,7 @@ class SiderDemo extends React.Component {
         break;
       }
     }
-    console.log(flag)
+    console.log(flag ? "mobile" : "pc")
     if (!flag) {
       this.state = {
         collapsed: true,
@@ -65,7 +65,7 @@ class SiderDemo extends React.Component {
           <Footer style={{ textAlign: 'center' }}>
             <Text type="secondary"> powered by shinnku </Text>
             <br />
-            <Text>此版本为 <Text code>α 1.5.0</Text> 试用版 </Text>
+            <Text>此版本为 <Text code>α 1.7.1</Text> 试用版 </Text>
           </Footer>
         </Layout>
       </Layout>
