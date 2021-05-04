@@ -4,7 +4,7 @@ import 'antd/dist/antd.css';
 import './index.css';
 import { Menu, message, Skeleton } from 'antd';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-import { setfeedbackvisible } from './config'
+import { setfeedbackvisible, getismobile } from './config'
 import { FileLi } from './fileli'
 import { GalUpload } from './upload'
 const { SubMenu } = Menu;
@@ -20,7 +20,6 @@ function get_base64(url) {
   ajaxObj.open('get', window.location.href + url);
   ajaxObj.onreadystatechange = function () {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
-      ArrayFile = [];
       let responce_text = ajaxObj.responseText
       let PageRawData = window.atob(responce_text.replace(/&#43;/g, '+'));
       let PageData = JSON.parse(PageRawData);
@@ -41,7 +40,8 @@ function get_base64(url) {
 }
 
 const key_map = {
-  '1': 'win',
+  '0': 'win',
+  '1': 'windows',
   '2': 'krkr',
   '3': 'ons',
   '4': 'rpg',
@@ -61,6 +61,7 @@ class SiderMenu extends React.Component {
     };
     if (parseInt(e.key) <= 7) {
       let url = key_map[e.key]
+      ArrayFile = [];
       get_base64(url)
       setTimeout(() => {
         success()
@@ -99,13 +100,20 @@ class SiderMenu extends React.Component {
       <Menu
         onClick={this.handleClick}
         defaultSelectedKeys={[]}
-        defaultOpenKeys={['sub1', 'g2', 'sub2']}
+        defaultOpenKeys={(() => {
+          if (getismobile()) {
+            return ['sub1', 'g2', 'sub2'];
+          } else {
+            return []
+          }
+        })()}
         mode="inline"
         theme={"dark"}
       >
         <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
           <Menu.ItemGroup key="g1" title="分类">
-            <Menu.Item key="1"> windows </Menu.Item>
+            <Menu.Item key="0"> windows(old) </Menu.Item>
+            <Menu.Item key="1"> windows(new) </Menu.Item>
             <Menu.Item key="2"> kirikiri 2 </Menu.Item>
             <Menu.Item key="3"> ons </Menu.Item>
             <Menu.Item key="4"> rpg </Menu.Item>

@@ -43,7 +43,7 @@ class FileLi extends React.Component {
     let newArrayFile = arrayFile.map(v => [v, 0])
     for (let x = 0; x < arrayFile.length; x++) {
       for (let y = 0; y < value.length; y++) {
-        if (decodeURI(arrayFile[x].name).substring(0, decodeURI(arrayFile[x].name).length - 4).indexOf(value[y]) !== -1 && value[y] !== ' ') {
+        if (decodeURIComponent(arrayFile[x].name).substring(0, decodeURIComponent(arrayFile[x].name).length - 4).indexOf(value[y]) !== -1 && value[y] !== ' ') {
           newArrayFile[x][1] += 1
         }
       }
@@ -79,9 +79,9 @@ class FileLi extends React.Component {
           renderItem={item => (
             <List.Item style={{ paddingLeft: "20px" }}>
               <List.Item.Meta title={
-                decodeURI(item.name)
+                decodeURIComponent(item.name)
               } description={"size: " + item.size}
-                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURI(item.name)) }}
+                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURIComponent(item.name)) }}
               />
             </List.Item>
           )}

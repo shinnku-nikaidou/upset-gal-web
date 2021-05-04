@@ -10,10 +10,15 @@ let setReadmeState = (newState) => {
 }
 
 // FeedBack
+let ismobile = false;
+let getismobile = () => ismobile
+let setismobile = v => {
+    ismobile = v
+}
 
 let feedbackvisible = false
 
 let getfeedbackvisible = () => feedbackvisible
 let setfeedbackvisible = (bool) => { feedbackvisible = bool }
 
-export { getReadmeState, setReadmeState, getfeedbackvisible, setfeedbackvisible }
+export { getReadmeState, setReadmeState, getfeedbackvisible, setfeedbackvisible, getismobile, setismobile }

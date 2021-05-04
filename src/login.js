@@ -19,21 +19,24 @@ const dateFormat = 'YYYY/MM/DD';
 
 const openNotification = (state) => {
   let x = ""
+  var emailRegExp = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
   if (state.name.length === 0) {
-    x = "还有你的昵称在哪里呢？"
+    x = "你的昵称在哪里呢？"
   } else if (state.name.length > 15) {
-    x = "还有都说了昵称不要超过15个字。"
+    x = "都说了昵称不要超过15个字。"
   } else if (state.password === "0") {
-    x = "还有你忘记输入密码了。"
+    x = "你忘记输入密码了。"
   } else if (state.password !== state.repassword) {
-    x = "还有你密码两次输入都不一致。。。"
+    x = "你密码两次输入都不一致。。。"
+  } else if (!emailRegExp.test(state.mail)) {
+    x = "邮箱输入不正确，请重新输入。"
   } else {
     loginPost(state)
+    return
   }
   notification.info({
     message: `注册结果`,
-    description:
-      `别试了，还没开放注册。${x}`,
+    description: x,
     placement: 'topLeft',
   });
 };
@@ -46,6 +49,12 @@ let loginPost = (state) => {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
       let responce_text = ajaxObj.responseText
       console.log(responce_text)
+      notification.info({
+        message: `注册结果`,
+        description:
+          `注册成功`,
+        placement: 'topLeft',
+      });
     }
   }
   ajaxObj.send(JSON.stringify(state));
@@ -60,12 +69,19 @@ class Login extends React.Component {
     repassword: '',
     birth: '',
     description: '',
-    sex: ''
+    sex: '',
+    mail: ''
   };
 
   handleNameChange = (e) => {
     this.setState({
       name: e.target.value
+    });
+  }
+
+  handleMailChange = (e) => {
+    this.setState({
+      mail: e.target.value
     });
   }
 
@@ -212,6 +228,20 @@ class Login extends React.Component {
                 </Form.Item>
               </Col>
             </Row>
+
+            <Row gutter={16}>
+              <Col span={10}>
+                <Form.Item
+                  name="mail"
+                  label="邮箱"
+                  rules={[{ required: true, message: '请输入邮箱' }]}
+                  onChange={this.handleMailChange}
+                >
+                  <Input placeholder="" />
+                </Form.Item>
+              </Col>
+            </Row>
+
             <Row gutter={16}>
               <Col span={20}>
                 <Form.Item

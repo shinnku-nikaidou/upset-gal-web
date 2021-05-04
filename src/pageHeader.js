@@ -3,6 +3,8 @@ import 'antd/dist/antd.css';
 import './index.css';
 import { PageHeader, Button } from 'antd';
 import { Login } from './login'
+import GalChat from './chat'
+import { getismobile } from './config'
 
 class GalPageHead extends React.Component {
   render() {
@@ -19,6 +21,7 @@ class GalPageHead extends React.Component {
           extra={[
             <Button key="2">登陆</Button>,
             <Login key="1" />,
+            <GalChat key="0" width={getismobile() ? 1000 : 300} />
           ]}
         >
         </PageHeader>
