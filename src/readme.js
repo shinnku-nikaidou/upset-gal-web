@@ -33,7 +33,7 @@ class Readme extends React.Component {
       <div>
         <Collapse
           bordered={false}
-          defaultActiveKey={[]}
+          defaultActiveKey={[2,3]}
           expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
           className="site-collapse-custom-collapse"
         >
@@ -42,15 +42,14 @@ class Readme extends React.Component {
             <p>如果您更习惯旧版，很可惜，现在已经没有旧版了</p>
           </Panel>
           <Panel header="水群，反馈相关" key="2" className="site-collapse-custom-panel">
-            <p>1群qq群已满员，暂时无法加群。</p>
-            <p>tg闲聊群刚刚创建（创建时间4/30号21:30分），更希望大伙儿加入<a target="_blank" href="https://t.me/upsetGroup">此群</a>。</p>
-            {/* <p>群号为<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">681053477（点击此处直接加群）</a>，有问题请在此反馈。</p> */}
+            <p>tg闲聊群最近创建，更希望大伙儿加入<a target="_blank" href="https://t.me/upsetGroup">此群</a>。</p>
+            <p>qq群群号为<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">681053477（点击此处直接加群）</a>，有问题请在此反馈。</p>
             {/* <p>问题答案为gal.acg18.win</p> */}
           </Panel>
           <Panel header="下载相关" key="3" className="site-collapse-custom-panel">
-            <p>下载慢请使用多线程下载器(fdm,idm,aria2等)或者使用魔法。</p>
-            <p>为防止恶意刷流量，下载每128mb会自动中断。</p>
-            <p>请手动点击浏览器窗口中的恢复下载。</p>
+            <p>下载慢请使用多线程下载器(<a target="_blank" href="https://www.freedownloadmanager.org/">fdm</a>,idm,aria2等)并且使用魔法。</p>
+            <p>为防止恶意刷流量，<del>下载每128mb会自动中断</del>，已取消，可随意下载。</p>
+            <p><del>请手动点击浏览器窗口中的恢复下载。</del></p>
           </Panel>
           <Panel header="法律与版权" key="4" className="site-collapse-custom-panel">
             <p>本资源仅供学习交流使用，请务必于下载后24小时内删除</p>

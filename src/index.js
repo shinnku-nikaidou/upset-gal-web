@@ -70,7 +70,7 @@ class SiderDemo extends React.Component {
           <Footer style={{ textAlign: 'center' }}>
             <Text type="secondary"> powered by shinnku </Text>
             <br />
-            <Text>此版本为 <Text code>α 1.8.3</Text> 试用版 </Text>
+            <Text>此版本为 <Text code>α 1.8.5</Text> 试用版 </Text>
           </Footer>
         </Layout>
       </Layout>

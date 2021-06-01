@@ -5,7 +5,7 @@ import './index.css';
 import { Modal, Button } from 'antd';
 import Draggable from 'react-draggable';
 import { Chat, ContactItem, ContactList } from 'react-jwchat';
-
+import axios from 'axios';
 
 const Id = parseInt(Math.random() * 10000000000)
 
@@ -50,6 +50,25 @@ class GalChat extends React.Component {
       },
     ]
   };
+
+  componentDidMount = () => {
+    var that = this
+    this.time_Id = setInterval(() => {
+      axios.get('/chat')
+        .then(function (response) {
+          that.setState({
+            msgList: response.data
+          })
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, 3000)
+  }
+
+  componentWillUnmount = () => {
+    clearInterval(this.time_Id)
+  }
 
   draggleRef = React.createRef();
 
