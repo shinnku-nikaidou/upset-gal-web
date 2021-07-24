@@ -12,6 +12,7 @@ const { SubMenu } = Menu;
 let ArrayFile = [];
 
 function getArrayFile() {
+  window.files = ArrayFile
   return ArrayFile
 }
 
@@ -112,8 +113,7 @@ class SiderMenu extends React.Component {
       >
         <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
           <Menu.ItemGroup key="g1" title="分类">
-            <Menu.Item key="0"> windows(old) </Menu.Item>
-            <Menu.Item key="1"> windows(new) </Menu.Item>
+            <Menu.Item key="0"> windows </Menu.Item>
             <Menu.Item key="2"> kirikiri 2 </Menu.Item>
             <Menu.Item key="3"> ons </Menu.Item>
             <Menu.Item key="4"> rpg </Menu.Item>

@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import { List, BackTop, Modal, Input, Pagination, Divider } from 'antd';
 import { ExclamationCircleOutlined, AudioOutlined } from '@ant-design/icons';
 import { getArrayFile } from './menu'
+import { ExceptionMap } from 'antd/lib/result';
 const { confirm } = Modal;
 const { Search } = Input;
 
@@ -43,8 +44,12 @@ class FileLi extends React.Component {
     let newArrayFile = arrayFile.map(v => [v, 0])
     for (let x = 0; x < arrayFile.length; x++) {
       for (let y = 0; y < value.length; y++) {
-        if (decodeURIComponent(arrayFile[x].name).substring(0, decodeURIComponent(arrayFile[x].name).length - 4).indexOf(value[y]) !== -1 && value[y] !== ' ') {
-          newArrayFile[x][1] += 1
+        try {
+          if (decodeURIComponent(arrayFile[x].name).substring(0, decodeURIComponent(arrayFile[x].name).length - 4).indexOf(value[y]) !== -1 && value[y] !== ' ') {
+            newArrayFile[x][1] += 1
+          }
+        } catch {
+
         }
       }
     }
@@ -75,18 +80,20 @@ class FileLi extends React.Component {
         />
         <List
           itemLayout="horizontal"
-          dataSource={this.state.files.slice((this.state.page - 1) * 10, this.state.page * 10)}
-          renderItem={item => (
-            <List.Item style={{ paddingLeft: "20px" }}>
-              <List.Item.Meta title={
-                decodeURIComponent(item.name)
-              } description={"size: " + item.size}
-                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURIComponent(item.name)) }}
-              />
-            </List.Item>
-          )}
+          dataSource={this.state.files}
+          renderItem={item => {
+            console.log(item)
+            return (
+              <List.Item style={{ paddingLeft: "20px" }}>
+                <List.Item.Meta title={
+                  decodeURIComponent(item.name)
+                } description={"size: " + item.size}
+                  onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURIComponent(item.name)) }}
+                />
+              </List.Item>
+            )
+          }}
         />
-        <Pagination size="small" total={this.state.files.length} showSizeChanger={false} showQuickJumper onChange={this.onPaginationChange} />
         <Divider dashed />
       </div>
     );

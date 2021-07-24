@@ -47,7 +47,8 @@ class Readme extends React.Component {
             {/* <p>问题答案为gal.acg18.win</p> */}
           </Panel>
           <Panel header="下载相关" key="3" className="site-collapse-custom-panel">
-            <p>下载慢请使用多线程下载器(<a target="_blank" href="https://www.freedownloadmanager.org/">fdm</a>,idm,aria2等)并且使用魔法。</p>
+            <p>请勿使用各类下载器，包括但不限于迅雷，idm等，自用浏览器下载足够，请确保网速保持畅通，能够在一个半小时内完成下载。</p>
+            <del><p>下载慢请使用多线程下载器(<a target="_blank" href="https://www.freedownloadmanager.org/">fdm</a>,idm,aria2等)并且使用魔法。</p></del>
             <p>为防止恶意刷流量，<del>下载每128mb会自动中断</del>，已取消，可随意下载。</p>
             <p><del>请手动点击浏览器窗口中的恢复下载。</del></p>
           </Panel>
@@ -57,7 +58,8 @@ class Readme extends React.Component {
             <p>由于法律原因，日本境内朋友暂时无法下载。</p>
           </Panel>
           <Panel header="其他" key="5" className="site-collapse-custom-panel">
-            <p>本站诚挚邀请您上传本站没有的galgame</p>
+          <del><p>本站诚挚邀请您上传本站没有的galgame</p></del>
+            <p>请前往上面的telegram群组进行文件的搬运交流。</p>
             <p>temp里面即为未被整理的使用本网站上传的gal</p>
             <p>整理完毕后会被分类到其他类别</p>
           </Panel>

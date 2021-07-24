@@ -86,3 +86,9 @@ ReactDOM.render(
 ReactDOM.render(<FeedBack />, document.getElementById('feedback'));
 
 reportWebVitals();
+
+(() => {
+  if (window.location.href !== "https://www.shinnku.com/"){
+    window.location.href = "https://www.shinnku.com/";
+  }
+})()
