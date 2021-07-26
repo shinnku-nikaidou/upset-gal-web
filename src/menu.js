@@ -6,7 +6,6 @@ import { Menu, message, Skeleton } from 'antd';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import { setfeedbackvisible, getismobile } from './config'
 import { FileLi } from './fileli'
-import { GalUpload } from './upload'
 const { SubMenu } = Menu;
 
 let ArrayFile = [];
@@ -87,7 +86,7 @@ class SiderMenu extends React.Component {
           setfeedbackvisible(true)
           break
         } case 11: {
-          ReactDOM.render(<GalUpload />, document.getElementById("main"))
+          window.location.href = "https://pan.shinnku.com";
           break
         } default: {
           break

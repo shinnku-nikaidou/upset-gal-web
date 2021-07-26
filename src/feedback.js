@@ -60,10 +60,7 @@ class FeedBack extends React.Component {
             </Button>,
           ]}
         >
-          <p>目前暂未设立直接接收反馈的通道</p>
-          <p>可以加入群聊反馈哦</p>
-          <p></p>
-          <p></p>
+          <p>请加入qq群或者telegram群反馈问题(聊天氵)</p>
         </Modal>
       </>
     );

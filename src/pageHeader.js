@@ -1,10 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { PageHeader, Button } from 'antd';
-import { Login } from './login'
-import GalChat from './chat'
-import { getismobile } from './config'
+import { PageHeader } from 'antd';
 
 class GalPageHead extends React.Component {
   render() {
@@ -18,11 +15,6 @@ class GalPageHead extends React.Component {
           subTitle={<>
             欢迎来到 galgame 分享站点
           </>}
-          extra={[
-            <Button key="2">登陆</Button>,
-            <Login key="1" />,
-            <GalChat key="0" width={getismobile() ? 1000 : 300} />
-          ]}
         >
         </PageHeader>
       </>
