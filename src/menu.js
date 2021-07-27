@@ -81,11 +81,9 @@ class SiderMenu extends React.Component {
         case 8: {
           break
         } case 9: {
-          break
-        } case 10: {
           setfeedbackvisible(true)
           break
-        } case 11: {
+        } case 10: {
           window.location.href = "https://pan.shinnku.com";
           break
         } default: {
@@ -123,9 +121,8 @@ class SiderMenu extends React.Component {
         </SubMenu>
         <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
           <Menu.Item key="8"> 主题 </Menu.Item>
-          <Menu.Item key="9"> 账户 </Menu.Item>
-          <Menu.Item key="10"> 反馈 </Menu.Item>
-          <Menu.Item key="11"> 上传 </Menu.Item>
+          <Menu.Item key="9"> 反馈 </Menu.Item>
+          <Menu.Item key="10"> 上传 </Menu.Item>
         </SubMenu>
       </Menu>
     );
