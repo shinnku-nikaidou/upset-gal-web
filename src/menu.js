@@ -47,7 +47,6 @@ const key_map = {
   '4': 'rpg',
   '5': '生肉',
   '6': '模拟器',
-  '7': 'temp'
 }
 
 
@@ -59,7 +58,7 @@ class SiderMenu extends React.Component {
       const hide = message.loading('正在加载中', 0);
       setTimeout(hide, 600);
     };
-    if (parseInt(e.key) <= 7) {
+    if (parseInt(e.key) < 7) {
       let url = key_map[e.key]
       ArrayFile = [];
       get_base64(url)
@@ -78,6 +77,10 @@ class SiderMenu extends React.Component {
       })
     } else {
       switch (parseInt(e.key)) {
+        case 7: {
+          window.location.href = "https://shinnku.com/files";
+          break
+        }
         case 8: {
           break
         } case 9: {

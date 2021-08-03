@@ -6,14 +6,11 @@ import { GalPageHead } from './pageHeader'
 import { Readme } from './readme'
 import { SiderMenu } from './menu'
 import { FeedBack } from './feedback'
-import { galgame } from "./galgame"
 import { setismobile } from "./config"
 import 'antd/dist/antd.css';
 import { Layout, Breadcrumb, Typography } from 'antd';
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
-
-window.galgame = galgame
 
 class SiderDemo extends React.Component {
   constructor(...args) {
@@ -29,7 +26,7 @@ class SiderDemo extends React.Component {
         break;
       }
     }
-    console.log(flag ? "mobile" : "pc")
+    console.log(flag ? "网站检测到您在使用pc" : "网站检测到您在使用mobile")
     setismobile(flag)
     if (!flag) {
       this.state = {
@@ -70,7 +67,7 @@ class SiderDemo extends React.Component {
           <Footer style={{ textAlign: 'center' }}>
             <Text type="secondary"> powered by shinnku </Text>
             <br />
-            <Text>此版本为 <Text code>1.0.1</Text> 正式版 </Text>
+            <Text>此版本为 <Text code>1.1.2</Text> 正式版 </Text>
           </Footer>
         </Layout>
       </Layout>
