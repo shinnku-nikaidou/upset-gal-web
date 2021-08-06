@@ -1,9 +1,8 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { List, BackTop, Modal, Input, Pagination, Divider } from 'antd';
+import { List, BackTop, Modal, Input, Divider } from 'antd';
 import { ExclamationCircleOutlined, AudioOutlined } from '@ant-design/icons';
 import { getArrayFile } from './menu'
-import { ExceptionMap } from 'antd/lib/result';
 const { confirm } = Modal;
 const { Search } = Input;
 
@@ -81,18 +80,16 @@ class FileLi extends React.Component {
         <List
           itemLayout="horizontal"
           dataSource={this.state.files}
-          renderItem={item => {
-            console.log(item)
-            return (
-              <List.Item style={{ paddingLeft: "20px" }}>
-                <List.Item.Meta title={
-                  decodeURIComponent(item.name)
-                } description={"size: " + item.size}
-                  onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURIComponent(item.name)) }}
-                />
-              </List.Item>
-            )
-          }}
+          renderItem={item => (
+            <List.Item style={{ paddingLeft: "20px" }}>
+              <List.Item.Meta title={
+                decodeURIComponent(item.name)
+              } description={"size: " + item.size}
+                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURIComponent(item.name)) }}
+              />
+            </List.Item>
+          )
+          }
         />
         <Divider dashed />
       </div>

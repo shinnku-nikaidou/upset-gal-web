@@ -42,12 +42,12 @@ class Readme extends React.Component {
             <p>目前正在整理非常多的galgame,不久之后即会大大扩充windows资源下的galgame库</p>
           </Panel>
           <Panel header="水群，反馈相关" key="2" className="site-collapse-custom-panel">
-            <p>tg闲聊群最近创建，更希望大伙儿加入<a target="_blank" href="https://t.me/upsetGroup">此群</a>。</p>
-            <p>qq群群号为<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">681053477（点击此处直接加群）</a>，有问题请在此反馈。</p>
+            <p>点此加入<a target="_blank" rel="noreferrer" href="https://t.me/upsetGroup">telegram群组</a>, 群组刚刚创立不久。</p>
+            <p>此为<a target="_blank" rel="noreferrer" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">qq群（点击此处直接加群）</a>，有问题请在此反馈。</p>
           </Panel>
           <Panel header="下载相关" key="3" className="site-collapse-custom-panel">
             <p>请确保网速保持畅通，能够在一个半小时内完成下载。</p>
-            <p>多线程下载器(<a target="_blank" href="https://www.freedownloadmanager.org/">fdm</a>,idm,aria2等)是无效的, 网站资源,包括网盘,强制单线程。</p>
+            <p>多线程下载器(<a target="_blank" rel="noreferrer" href="https://www.freedownloadmanager.org/">fdm</a>,idm,aria2等)是无效的, 网站资源,包括网盘,强制单线程。</p>
             <p>请珍惜我们免费的流量,你每一次下载就消耗了我们与文件大小相同的流量</p>
             <p>如果下载不动请试试流量</p>
           </Panel>

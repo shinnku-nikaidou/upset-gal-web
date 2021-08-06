@@ -67,7 +67,7 @@ class SiderDemo extends React.Component {
           <Footer style={{ textAlign: 'center' }}>
             <Text type="secondary"> powered by shinnku </Text>
             <br />
-            <Text>此版本为 <Text code>1.1.2</Text> 正式版 </Text>
+            <Text>此版本为 <Text code>1.1.4</Text> 正式版 </Text>
           </Footer>
         </Layout>
       </Layout>
@@ -85,7 +85,7 @@ ReactDOM.render(<FeedBack />, document.getElementById('feedback'));
 reportWebVitals();
 
 (() => {
-  if (window.location.href !== "https://shinnku.com/"){
+  if (window.location.href === "https://shinnku.com/#/"){
     window.location.href = "https://shinnku.com/";
   }
 })()

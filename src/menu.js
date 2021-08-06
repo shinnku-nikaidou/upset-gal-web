@@ -5,7 +5,7 @@ import './index.css';
 import { Menu, message, Skeleton } from 'antd';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import { setfeedbackvisible, getismobile } from './config'
-import { FileLi } from './fileli'
+import { FileLi } from './filelist'
 const { SubMenu } = Menu;
 
 let ArrayFile = [];
@@ -47,6 +47,7 @@ const key_map = {
   '4': 'rpg',
   '5': '生肉',
   '6': '模拟器',
+  '7': 'pc'
 }
 
 
@@ -56,9 +57,9 @@ class SiderMenu extends React.Component {
     ReactDOM.render(<Skeleton active />, document.getElementById('main'));
     const success = () => {
       const hide = message.loading('正在加载中', 0);
-      setTimeout(hide, 600);
+      setTimeout(hide, 800);
     };
-    if (parseInt(e.key) < 7) {
+    if (parseInt(e.key) < 8) {
       let url = key_map[e.key]
       ArrayFile = [];
       get_base64(url)
@@ -77,10 +78,6 @@ class SiderMenu extends React.Component {
       })
     } else {
       switch (parseInt(e.key)) {
-        case 7: {
-          window.location.href = "https://shinnku.com/files";
-          break
-        }
         case 8: {
           break
         } case 9: {
@@ -119,7 +116,7 @@ class SiderMenu extends React.Component {
             <Menu.Item key="4"> rpg </Menu.Item>
             <Menu.Item key="5"> 生肉 </Menu.Item>
             <Menu.Item key="6"> 模拟器 </Menu.Item>
-            <Menu.Item key="7"> temp </Menu.Item>
+            <Menu.Item key="7"> pc(by忧郁的弟弟(loli)) </Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
         <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
