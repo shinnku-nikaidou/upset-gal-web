@@ -116,7 +116,7 @@ class SiderMenu extends React.Component {
             <Menu.Item key="4"> rpg </Menu.Item>
             <Menu.Item key="5"> 生肉 </Menu.Item>
             <Menu.Item key="6"> 模拟器 </Menu.Item>
-            <Menu.Item key="7"> pc(by忧郁的弟弟(loli)) </Menu.Item>
+            {/* <Menu.Item key="7"> pc(by忧郁的弟弟(loli)) </Menu.Item> */}
           </Menu.ItemGroup>
         </SubMenu>
         <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
