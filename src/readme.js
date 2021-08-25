@@ -39,7 +39,7 @@ class Readme extends React.Component {
         >
           <Panel header="重磅消息" key="1" className="site-collapse-custom-panel">
             <p>现在有网盘可以使用,点击左下角上传即可, 你可以捐赠此网站上没有的galgame在此处,也可以存自己的东西.</p>
-            <p>目前正在整理非常多的galgame,不久之后即会大大扩充windows资源下的galgame库</p>
+            <p>网站已经整合完毕所有忧郁的弟弟君的资源以及忧郁的loli资源,在windows下均可搜到</p>
           </Panel>
           <Panel header="水群，反馈相关" key="2" className="site-collapse-custom-panel">
             <p>点此加入<a target="_blank" rel="noreferrer" href="https://t.me/upsetGroup">telegram群组</a>, 群组刚刚创立不久。</p>
