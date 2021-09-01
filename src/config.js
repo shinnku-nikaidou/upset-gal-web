@@ -16,9 +16,4 @@ let setismobile = v => {
     ismobile = v
 }
 
-let feedbackvisible = false
-
-let getfeedbackvisible = () => feedbackvisible
-let setfeedbackvisible = (bool) => { feedbackvisible = bool }
-
-export { getReadmeState, setReadmeState, getfeedbackvisible, setfeedbackvisible, getismobile, setismobile }
+export { getReadmeState, setReadmeState, getismobile, setismobile }

@@ -4,15 +4,16 @@ import 'antd/dist/antd.css';
 import './index.css';
 import { Menu, message, Skeleton } from 'antd';
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-import { setfeedbackvisible, getismobile } from './config'
+import { getismobile } from './config'
 import { FileLi } from './filelist'
 const { SubMenu } = Menu;
 
 let ArrayFile = [];
 
 function getArrayFile() {
-  window.files = ArrayFile
-  return ArrayFile
+  window.galgames = ArrayFile
+  window.galgames.sort(() => (Math.random() - 0.5))
+  return window.galgames
 }
 
 function get_base64(url) {
@@ -41,13 +42,13 @@ function get_base64(url) {
 
 const key_map = {
   '0': 'win',
-  '1': 'windows',
+  '1': 'Android直装',
   '2': 'krkr',
   '3': 'ons',
   '4': 'rpg',
   '5': '生肉',
   '6': '模拟器',
-  '7': 'pc'
+  '7': 'Artriod'
 }
 
 
@@ -78,12 +79,13 @@ class SiderMenu extends React.Component {
       })
     } else {
       switch (parseInt(e.key)) {
-        case 8: {
+        case (8): {
           break
-        } case 9: {
-          setfeedbackvisible(true)
+        }
+        case (9): {
           break
-        } case 10: {
+        }
+        case (10): {
           window.location.href = "https://pan.shinnku.com";
           break
         } default: {
@@ -110,18 +112,18 @@ class SiderMenu extends React.Component {
       >
         <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
           <Menu.ItemGroup key="g1" title="分类">
-            <Menu.Item key="0"> windows </Menu.Item>
+            <Menu.Item key="0"> windows/pc硬盘 </Menu.Item>
+            <Menu.Item key="1"> apk安装包 </Menu.Item>
             <Menu.Item key="2"> kirikiri 2 </Menu.Item>
             <Menu.Item key="3"> ons </Menu.Item>
             <Menu.Item key="4"> rpg </Menu.Item>
             <Menu.Item key="5"> 生肉 </Menu.Item>
             <Menu.Item key="6"> 模拟器 </Menu.Item>
-            {/* <Menu.Item key="7"> pc(by忧郁的弟弟(loli)) </Menu.Item> */}
+            <Menu.Item key="7"> Artroid </Menu.Item>
           </Menu.ItemGroup>
         </SubMenu>
         <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
-          <Menu.Item key="8"> 主题 </Menu.Item>
-          <Menu.Item key="9"> 反馈 </Menu.Item>
+          <Menu.Item key="9"> 主题 </Menu.Item>
           <Menu.Item key="10"> 上传 </Menu.Item>
         </SubMenu>
       </Menu>
