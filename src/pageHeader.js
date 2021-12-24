@@ -1,7 +1,7 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import './index.css';
-import { PageHeader } from 'antd';
+import React from "react";
+import "antd/dist/antd.css";
+import "./index.css";
+import { PageHeader } from "antd";
 
 class GalPageHead extends React.Component {
   render() {
@@ -9,17 +9,16 @@ class GalPageHead extends React.Component {
       <>
         <PageHeader
           className="site-page-header"
-          title={<>
-            <div onClick={() => window.location.reload()}>失落的小站</div>
-          </>}
-          subTitle={<>
-            欢迎来到 galgame 分享站点
-          </>}
-        >
-        </PageHeader>
+          title={
+            <>
+              <div onClick={() => window.location.reload()}>失落的小站</div>
+            </>
+          }
+          subTitle={<>欢迎来到 galgame 分享站点</>}
+        ></PageHeader>
       </>
-    )
+    );
   }
 }
 
-export { GalPageHead }
+export { GalPageHead };

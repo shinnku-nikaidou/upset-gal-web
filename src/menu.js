@@ -1,28 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import 'antd/dist/antd.css';
-import './index.css';
-import { Menu, message, Skeleton } from 'antd';
-import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-import { getismobile } from './config'
-import { FileLi } from './filelist'
+import React from "react";
+import ReactDOM from "react-dom";
+import "antd/dist/antd.css";
+import "./index.css";
+import { Menu, message, Skeleton } from "antd";
+import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
+import { getismobile } from "./config";
+import { FileLi } from "./filelist";
 const { SubMenu } = Menu;
 
 let ArrayFile = [];
 
 function getArrayFile() {
-  window.galgames = ArrayFile
-  window.galgames.sort(() => (Math.random() - 0.5))
-  return window.galgames
+  window.galgames = ArrayFile;
+  window.galgames.sort(() => Math.random() - 0.5);
+  return window.galgames;
 }
 
 function get_base64(url) {
   var ajaxObj = new XMLHttpRequest();
-  ajaxObj.open('get', window.location.href + url);
+  ajaxObj.open("get", window.location.href + url);
   ajaxObj.onreadystatechange = function () {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
-      let responce_text = ajaxObj.responseText
-      let PageRawData = window.atob(responce_text.replace(/&#43;/g, '+'));
+      let responce_text = ajaxObj.responseText;
+      let PageRawData = window.atob(responce_text.replace(/&#43;/g, "+"));
       let PageData = JSON.parse(PageRawData);
       var ArrayFloder = [];
       for (let item in PageData) {
@@ -36,60 +36,60 @@ function get_base64(url) {
         }
       }
     }
-  }
+  };
   ajaxObj.send();
 }
 
 const key_map = {
-  '0': 'win',
-  '1': 'Android直装',
-  '2': 'krkr',
-  '3': 'ons',
-  '4': 'rpg',
-  '5': '生肉',
-  '6': '模拟器',
-  '7': 'Artroid'
-}
-
+  0: "win",
+  1: "Android直装",
+  2: "krkr",
+  3: "ons",
+  4: "rpg",
+  5: "生肉",
+  6: "模拟器",
+  7: "Artroid",
+};
 
 class SiderMenu extends React.Component {
-  handleClick = e => {
-    ReactDOM.unmountComponentAtNode(document.getElementById('main'));
-    ReactDOM.render(<Skeleton active />, document.getElementById('main'));
+  handleClick = (e) => {
+    ReactDOM.unmountComponentAtNode(document.getElementById("main"));
+    ReactDOM.render(<Skeleton active />, document.getElementById("main"));
     const success = () => {
-      const hide = message.loading('正在加载中', 0);
+      const hide = message.loading("正在加载中", 0);
       setTimeout(hide, 800);
     };
     if (parseInt(e.key) < 8) {
-      let url = key_map[e.key]
+      let url = key_map[e.key];
       ArrayFile = [];
-      get_base64(url)
+      get_base64(url);
       setTimeout(() => {
-        success()
+        success();
         let mainMounttimeId = setInterval(() => {
           if (getArrayFile().length !== 0) {
-            ReactDOM.unmountComponentAtNode(document.getElementById('main'));
+            ReactDOM.unmountComponentAtNode(document.getElementById("main"));
             ReactDOM.render(
-              <FileLi url={url} />
-              , document.getElementById("main")
-            )
-            clearInterval(mainMounttimeId)
+              <FileLi url={url} />,
+              document.getElementById("main")
+            );
+            clearInterval(mainMounttimeId);
           }
-        }, 200)
-      })
+        }, 200);
+      });
     } else {
       switch (parseInt(e.key)) {
-        case (8): {
-          break
+        case 8: {
+          break;
         }
-        case (9): {
-          break
+        case 9: {
+          break;
         }
-        case (10): {
+        case 10: {
           window.location.href = "https://pan.shinnku.com";
-          break
-        } default: {
-          break
+          break;
+        }
+        default: {
+          break;
         }
       }
     }
@@ -102,9 +102,9 @@ class SiderMenu extends React.Component {
         defaultSelectedKeys={[]}
         defaultOpenKeys={(() => {
           if (getismobile()) {
-            return ['sub1', 'g2', 'sub2'];
+            return ["sub1", "g2", "sub2"];
           } else {
-            return []
+            return [];
           }
         })()}
         mode="inline"
@@ -131,4 +131,4 @@ class SiderMenu extends React.Component {
   }
 }
 
-export { SiderMenu, getArrayFile }
+export { SiderMenu, getArrayFile };
