@@ -48,7 +48,7 @@ const key_map = {
   '4': 'rpg',
   '5': '生肉',
   '6': '模拟器',
-  '7': 'Artriod'
+  '7': 'Artroid'
 }
 
 

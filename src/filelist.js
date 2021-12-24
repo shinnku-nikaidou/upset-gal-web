@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import { List, BackTop, Modal, Input, Divider } from 'antd';
+import { List, BackTop, Modal, Input, Pagination, Divider } from 'antd';
 import { ExclamationCircleOutlined, AudioOutlined } from '@ant-design/icons';
 import { getArrayFile } from './menu'
 const { confirm } = Modal;
@@ -81,18 +81,18 @@ class FileLi extends React.Component {
         />
         <List
           itemLayout="horizontal"
-          dataSource={this.state.files}
+          dataSource={this.state.files.slice((this.state.page - 1) * 10, this.state.page * 10)}
           renderItem={item => (
             <List.Item style={{ paddingLeft: "20px" }}>
               <List.Item.Meta title={
-                decodeURIComponent(item.name)
+                decodeURI(item.name)
               } description={"size: " + item.size}
-                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURIComponent(item.name)) }}
+                onClick={() => { showPromiseConfirm("/" + this.props.url + "/" + item.name, decodeURI(item.name)) }}
               />
             </List.Item>
-          )
-          }
+          )}
         />
+        <Pagination size="small" total={this.state.files.length} showSizeChanger={false} showQuickJumper onChange={this.onPaginationChange} />
         <Divider dashed />
       </div>
     );
