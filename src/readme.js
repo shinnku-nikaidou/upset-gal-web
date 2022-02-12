@@ -76,6 +76,7 @@ class Readme extends React.Component {
             </p>
             <p>
               如果下载不动请试试切换4g/5g, 因为
+              {/* eslint-disable-next-line */}
               <a
                 href="https://baike.baidu.com/item/%E8%9C%82%E7%AA%9D%E7%BD%91%E7%BB%9C/1372681"
                 target="_blank"
