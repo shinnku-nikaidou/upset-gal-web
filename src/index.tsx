@@ -11,9 +11,14 @@ import { Layout, Breadcrumb, Typography } from "antd";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 
-class SiderDemo extends React.Component {
-  constructor(...args) {
-    super(...args);
+interface SiderDemoState {
+  category: any;
+  collapsed: boolean;
+}
+
+class SiderDemo extends React.Component<any, SiderDemoState> {
+  constructor(...args: any) {
+    super(args);
     var userAgentInfo = navigator.userAgent;
     var Agents = [
       "Android",
@@ -45,7 +50,7 @@ class SiderDemo extends React.Component {
     }
   }
 
-  onCollapse = (collapsed) => {
+  onCollapse = (collapsed: boolean) => {
     this.setState({ collapsed });
   };
 

@@ -10,6 +10,7 @@ class Readme extends React.Component {
   state = {
     visible: true,
   };
+  VisibleID!: NodeJS.Timer;
 
   componentDidMount() {
     this.VisibleID = setInterval(() => this.notVisible(), 1000);
@@ -61,30 +62,15 @@ class Readme extends React.Component {
               </a>
               , 群组刚刚创立不久，有问题请在此反馈。
             </p>
-            {/* <p>此为<a target="_blank" rel="noreferrer" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">qq群（点击此处直接加群）</a>，有问题请在此反馈。</p> */}
+            <p>此为<a target="_blank" rel="noreferrer" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">qq群（点击此处直接加群）</a>，有问题请在此反馈。</p>
           </Panel>
           <Panel
             header="下载相关"
             key="3"
             className="site-collapse-custom-panel"
           >
-            <p>请确保网速保持畅通，能够在一个半小时内完成下载。</p>
-            <p>为了良心，不要使用线程下载器, 包括idm,fdm,迅雷等等</p>
-            <p>
-              当下载速度长达几分钟小于200kb/s的时候, 请立即停止下载,
-              换成流量（忍心花点钱买买流量吧）
-            </p>
-            <p>
-              如果下载不动请试试切换4g/5g, 因为
-              {/* eslint-disable-next-line */}
-              <a
-                href="https://baike.baidu.com/item/%E8%9C%82%E7%AA%9D%E7%BD%91%E7%BB%9C/1372681"
-                target="_blank"
-              >
-                蜂窝网
-              </a>
-              它真的不限速（他们按照下载量计费，当然喜欢你下载的越多越好）
-            </p>
+            <p>请确保网速保持畅通，能够在1200s内完成下载, 否则可能会提示需要认证。</p>
+            <p>网站下载不限速, 如果下载不动请试试切换 流量</p>
           </Panel>
           <Panel
             header="法律与版权"
@@ -100,9 +86,6 @@ class Readme extends React.Component {
               you are still responsible to research and comply with local laws.
             </p>
             <p>本公告（法律）长期有效</p>
-          </Panel>
-          <Panel header="后记" key="5" className="site-collapse-custom-panel">
-            <p>网站编写者是一个纯粹的geek, 所以网站画风很没有审美</p>
           </Panel>
         </Collapse>
       </div>
