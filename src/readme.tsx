@@ -60,9 +60,9 @@ class Readme extends React.Component {
               >
                 telegram群组
               </a>
-              , 群组刚刚创立不久，有问题请在此反馈。
+              ，有问题请在此反馈。
             </p>
-            <p>此为<a target="_blank" rel="noreferrer" href="https://qm.qq.com/cgi-bin/qm/qr?k=vg9L34SuUPvtUPAG_rH2pQntBA5YuuEr&jump_from=webapi">qq群（点击此处直接加群）</a>，有问题请在此反馈。</p>
+            <p>此为<a target="_blank" rel="noreferrer" href="https://jq.qq.com/?_wv=1027&k=mrCvdEk8">qq群（点击此处直接加群）</a>，有问题请在此反馈。</p>
           </Panel>
           <Panel
             header="下载相关"

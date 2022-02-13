@@ -1,3 +1,3 @@
-npm run build
+yarn build
 sudo rm -r /www/wwwroot/shinnku.com/*
 sudo cp -r build/* /www/wwwroot/shinnku.com/
