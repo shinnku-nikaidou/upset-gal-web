@@ -8,15 +8,14 @@ import { getismobile } from "./config";
 import { FileLi } from "./filelist";
 const { SubMenu } = Menu;
 
-let ArrayFile = [];
+let ArrayFile: any[] = [];
 
 function getArrayFile() {
-  window.galgames = ArrayFile;
-  window.galgames.sort(() => Math.random() - 0.5);
-  return window.galgames;
+  ArrayFile.sort(() => Math.random() - 0.5);
+  return ArrayFile.sort(() => Math.random() - 0.5);
 }
 
-function get_base64(url) {
+function get_base64(url: string) {
   var ajaxObj = new XMLHttpRequest();
   ajaxObj.open("get", window.location.href + url);
   ajaxObj.onreadystatechange = function () {
@@ -39,6 +38,7 @@ function get_base64(url) {
   };
   ajaxObj.send();
 }
+type indexType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
 const key_map = {
   0: "win",
@@ -52,32 +52,35 @@ const key_map = {
 };
 
 class SiderMenu extends React.Component {
-  handleClick = (e) => {
-    ReactDOM.unmountComponentAtNode(document.getElementById("main"));
+  handleClick = (e: { key: string }) => {
+    const key = parseInt(e.key) as indexType;
+    ReactDOM.unmountComponentAtNode(
+      document.getElementById("main") as HTMLElement
+    );
     ReactDOM.render(<Skeleton active />, document.getElementById("main"));
-    const success = () => {
-      const hide = message.loading("正在加载中", 0);
-      setTimeout(hide, 800);
-    };
-    if (parseInt(e.key) < 8) {
-      let url = key_map[e.key];
+    if (key < 8) {
+      type key_map_type = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+      let url = key_map[key as key_map_type];
       ArrayFile = [];
       get_base64(url);
       setTimeout(() => {
-        success();
+        const hide = message.loading("正在加载中", 0);
         let mainMounttimeId = setInterval(() => {
           if (getArrayFile().length !== 0) {
-            ReactDOM.unmountComponentAtNode(document.getElementById("main"));
+            ReactDOM.unmountComponentAtNode(
+              document.getElementById("main") as HTMLElement
+            );
             ReactDOM.render(
               <FileLi url={url} />,
               document.getElementById("main")
             );
             clearInterval(mainMounttimeId);
+            setTimeout(hide);
           }
         }, 200);
       });
     } else {
-      switch (parseInt(e.key)) {
+      switch (key) {
         case 8: {
           break;
         }
@@ -85,7 +88,6 @@ class SiderMenu extends React.Component {
           break;
         }
         case 10: {
-          window.location.href = "https://pan.shinnku.com";
           break;
         }
         default: {
@@ -123,8 +125,7 @@ class SiderMenu extends React.Component {
           </Menu.ItemGroup>
         </SubMenu>
         <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
-          <Menu.Item key="9"> 主题 </Menu.Item>
-          <Menu.Item key="10"> 上传 </Menu.Item>
+          <Menu.Item key="10"> 主题 </Menu.Item>
         </SubMenu>
       </Menu>
     );

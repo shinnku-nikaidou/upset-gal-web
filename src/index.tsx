@@ -11,13 +11,15 @@ import { Layout, Breadcrumb, Typography } from "antd";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 
-interface SiderDemoState {
+type GalSiderProps = {};
+
+type GalSiderState = {
   category: any;
   collapsed: boolean;
-}
+};
 
-class SiderDemo extends React.Component<any, SiderDemoState> {
-  constructor(...args: any) {
+class GalSider extends React.Component<GalSiderProps, GalSiderState> {
+  constructor(args: GalSiderProps) {
     super(args);
     var userAgentInfo = navigator.userAgent;
     var Agents = [
@@ -35,7 +37,7 @@ class SiderDemo extends React.Component<any, SiderDemoState> {
         break;
       }
     }
-    console.log(flag ? "网站检测到您在使用pc" : "网站检测到您在使用mobile");
+    console.log(flag ? "检测到您在使用pc" : "测到您在使用mobile");
     setismobile(flag);
     if (!flag) {
       this.state = {
@@ -91,12 +93,6 @@ class SiderDemo extends React.Component<any, SiderDemoState> {
   }
 }
 
-ReactDOM.render(<SiderDemo />, document.getElementById("root"));
+ReactDOM.render(<GalSider />, document.getElementById("root"));
 
 reportWebVitals();
-
-(() => {
-  if (window.location.href !== `https://${window.location.host}/`) {
-    window.location.href = `https://${window.location.host}/`;
-  }
-})();
