@@ -34,15 +34,13 @@ export default class Readme extends React.Component {
           className="site-collapse-custom-collapse"
         >
           <Panel
-            header="重磅消息"
+            header="消息"
             key="1"
             className="site-collapse-custom-panel"
           >
             <p>
-              网站已经整合完毕所有忧郁的弟弟/loli君的资源,
-              在windows/pc下均可搜到
+              网站正在更新(维护)中, 可能偶发性一段时间不可下载使用
             </p>
-            <p>由于之前服务器爆炸缘故，网盘暂时不可使用</p>
           </Panel>
           <Panel
             header="水群，反馈相关"
@@ -60,7 +58,7 @@ export default class Readme extends React.Component {
               </a>
               ，有问题请在此反馈。
             </p>
-            <p>此为<a target="_blank" rel="noreferrer" href="https://jq.qq.com/?_wv=1027&k=mrCvdEk8">qq群（点击此处直接加群）</a>，有问题请在此反馈。</p>
+            <p>此为<a target="_blank" rel="noreferrer" href="https://jq.qq.com/?_wv=1027&k=mrCvdEk8">qq群（点击此处直接加群）</a>，有问题也可在此反馈。</p>
           </Panel>
           <Panel
             header="下载相关"

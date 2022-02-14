@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfigProvider, Divider, Switch, Tooltip } from "antd";
+import { Divider, Switch, Tooltip } from "antd";
 import { getisPC } from "./config";
 import dark from "./style/index.dark.less";
 import light from "./style/index.less";
@@ -21,11 +21,10 @@ const handleSkin = (checked: boolean) => {
     addSkin(dark);
   }
 };
-// 添加皮肤的方法
+
 function addSkin(content: string) {
   let head = document.getElementsByTagName("head")[0];
   const getStyle = head.getElementsByTagName("style");
-  // 查找style是否存在，存在的话需要删除dom
   if (getStyle.length > 0) {
     for (let i = 0, l = getStyle.length; i < l; i++) {
       if (getStyle[i].getAttribute("data-type") === "theme") {
@@ -33,7 +32,6 @@ function addSkin(content: string) {
       }
     }
   }
-  // 最后加入对应的主题和加载less的js文件
   let styleDom = document.createElement("style");
   styleDom.dataset.type = "theme";
   styleDom.innerHTML = content;
@@ -41,14 +39,8 @@ function addSkin(content: string) {
 }
 
 export default function changeTheme(): any {
-  ConfigProvider.config({
-    prefixCls: "custom",
-    theme: {
-      primaryColor: "#25b864",
-    },
-  });
   if (!getisPC()) {
-    import("../node_modules/antd/dist/antd.compact.css");
+    import("antd/dist/antd.compact.css");
   }
   if (globalTheme.mode == "dark") {
     handleSkin(false);
@@ -89,6 +81,9 @@ export class ThemeProviderMenu extends React.Component<
                 globalTheme.mode = "light";
                 this.setState({ dark: true });
                 handleSkin(true);
+              }
+              if (!getisPC()) {
+                import("../node_modules/antd/dist/antd.compact.css");
               }
             }}
           />

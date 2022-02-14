@@ -6,7 +6,7 @@ import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
 import { SiderMenu } from "./menu";
-import { setisPC, getisPC } from "./config";
+import { setisPC } from "./config";
 import { Layout, Breadcrumb, Typography } from "antd";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
@@ -101,7 +101,7 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
             <Text type="secondary"> powered by shinnku </Text>
             <br />
             <Text>
-              此版本为 <Text code> beta 2.0.12</Text> 测试版
+              此版本为 <Text code> beta 2.0.13</Text> 测试版
             </Text>
           </Footer>
         </Layout>
