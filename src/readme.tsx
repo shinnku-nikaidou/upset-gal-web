@@ -5,7 +5,7 @@ import { CaretRightOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 
-class Readme extends React.Component {
+export default class Readme extends React.Component {
   state = {
     visible: true,
   };
@@ -91,4 +91,4 @@ class Readme extends React.Component {
     );
   }
 }
-export { Readme };
+

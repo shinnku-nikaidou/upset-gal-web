@@ -15,14 +15,14 @@ function getArrayFile() {
 }
 
 function get_base64(url: string) {
-  var ajaxObj = new XMLHttpRequest();
+  let ajaxObj = new XMLHttpRequest();
   ajaxObj.open("get", window.location.href + url);
   ajaxObj.onreadystatechange = function () {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
       let responce_text = ajaxObj.responseText;
       let PageRawData = window.atob(responce_text.replace(/&#43;/g, "+"));
       let PageData = JSON.parse(PageRawData);
-      var ArrayFloder = [];
+      let ArrayFloder = [];
       for (let item in PageData) {
         if (item.indexOf("@") === 0) {
           continue;
