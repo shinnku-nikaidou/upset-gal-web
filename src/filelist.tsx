@@ -39,7 +39,7 @@ class FileLi extends React.Component {
   onSearch = (value: string) => {
     value = value.toLowerCase();
     console.log(value)
-    let arrayFile = getArrayFile();
+    let arrayFile: any[] = getArrayFile();
     let newArrayFile = arrayFile.map((v) => [v, 0]);
     for (let x = 0; x < arrayFile.length; x++) {
       for (let y = 0; y < value.length; y++) {

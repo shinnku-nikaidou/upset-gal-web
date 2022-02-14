@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import reportWebVitals from "./reportWebVitals";
+import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
-import { Readme } from "./readme";
+import Readme from "./readme";
 import { SiderMenu } from "./menu";
 import { setismobile } from "./config";
 import { Layout, Breadcrumb, Typography } from "antd";
@@ -29,16 +29,10 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
       "iPad",
       "iPod",
     ];
-    let flag = true;
-    for (let v = 0; v < Agents.length; v++) {
-      if (userAgentInfo.indexOf(Agents[v]) > 0) {
-        flag = false;
-        break;
-      }
-    }
-    console.log(flag ? "检测到您在使用pc" : "测到您在使用mobile");
-    setismobile(flag);
-    if (!flag) {
+    let not_exists_userAgent = !Agents.some(agent => userAgentInfo.includes(agent));
+    console.log(not_exists_userAgent ? "检测到您在使用pc" : "测到您在使用mobile");
+    setismobile(not_exists_userAgent);
+    if (!not_exists_userAgent) {
       this.state = {
         collapsed: true,
         category: "",
