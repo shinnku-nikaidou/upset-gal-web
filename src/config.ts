@@ -2,9 +2,9 @@
 // import cookie from 'react-cookies'
 
 let ismobile = false;
-let getismobile = () => ismobile;
-let setismobile = (v: boolean) => {
+let getisPC = () => ismobile;
+let setisPC = (v: boolean) => {
   ismobile = v;
 };
 
-export { getismobile, setismobile };
+export { getisPC, setisPC };

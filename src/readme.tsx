@@ -8,7 +8,7 @@ export default class Readme extends React.Component {
   state = {
     visible: true,
   };
-  VisibleID!: any;
+  VisibleID!: number;
 
   componentDidMount() {
     this.VisibleID = setInterval(() => this.notVisible(), 1000);

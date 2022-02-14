@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.less";
-import '../node_modules/antd/dist/antd.css';
+import changeTheme, { globalTheme, Theme } from "./theme";
 import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
 import { SiderMenu } from "./menu";
-import { setismobile } from "./config";
+import { setisPC, getisPC } from "./config";
 import { Layout, Breadcrumb, Typography } from "antd";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
@@ -14,8 +14,8 @@ const { Text } = Typography;
 type GalSiderProps = {};
 
 type GalSiderState = {
-  category: any;
   collapsed: boolean;
+  theme: Theme;
 };
 
 class GalSider extends React.Component<GalSiderProps, GalSiderState> {
@@ -30,20 +30,38 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
       "iPad",
       "iPod",
     ];
-    let not_exists_Agent = !Agents.some(agent => userAgentInfo.includes(agent));
+    let not_exists_Agent = !Agents.some((agent) =>
+      userAgentInfo.includes(agent)
+    );
     console.log(not_exists_Agent ? "检测到您在使用pc" : "测到您在使用mobile");
-    setismobile(not_exists_Agent);
+    setisPC(not_exists_Agent);
     if (!not_exists_Agent) {
       this.state = {
         collapsed: true,
-        category: "",
+        theme: globalTheme,
       };
     } else {
       this.state = {
         collapsed: false,
-        category: "",
+        theme: globalTheme,
       };
     }
+  }
+
+  ThemeID!: number;
+
+  componentDidMount() {
+    this.ThemeID = setInterval(() => this.changeTheme(), 500);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.ThemeID);
+  }
+
+  changeTheme() {
+    this.setState({
+      theme: globalTheme,
+    });
   }
 
   onCollapse = (collapsed: boolean) => {
@@ -54,7 +72,12 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
     const { collapsed } = this.state;
     return (
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={this.onCollapse}
+          theme={this.state.theme.mode}
+        >
           <div className="logo" />
           <SiderMenu />
         </Sider>
@@ -62,7 +85,7 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
           <GalPageHead />
           <Content style={{ margin: "0 16px" }}>
             <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>{this.state.category}</Breadcrumb.Item>
+              <Breadcrumb.Item></Breadcrumb.Item>
             </Breadcrumb>
             <div
               className="site-layout-background"
@@ -78,7 +101,7 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
             <Text type="secondary"> powered by shinnku </Text>
             <br />
             <Text>
-              此版本为 <Text code>1.5.1</Text> 正式版
+              此版本为 <Text code> beta 2.0.12</Text> 测试版
             </Text>
           </Footer>
         </Layout>
@@ -88,6 +111,7 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
 }
 
 ReactDOM.render(<GalSider />, document.getElementById("root"));
+changeTheme();
 
 reportWebVitals();
 

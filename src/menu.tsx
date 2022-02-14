@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-import { getismobile } from "./config";
+import { globalTheme, Theme, ThemeProviderMenu } from "./theme";
+import { getisPC } from "./config";
 import { FileLi } from "./filelist";
 const { SubMenu } = Menu;
 
@@ -49,7 +50,30 @@ const key_map = {
   7: "Artroid",
 };
 
-class SiderMenu extends React.Component {
+class SiderMenu extends React.Component<{}, { theme: Theme }> {
+  constructor(props: {}) {
+    super(props);
+    this.state = {
+      theme: globalTheme,
+    };
+  }
+
+  ThemeID!: number;
+
+  componentDidMount() {
+    this.ThemeID = setInterval(() => this.changeTheme(), 500);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.ThemeID);
+  }
+
+  changeTheme() {
+    this.setState({
+      theme: globalTheme,
+    });
+  }
+
   handleClick = (e: { key: string }) => {
     const key = parseInt(e.key) as indexType;
     ReactDOM.unmountComponentAtNode(
@@ -86,7 +110,10 @@ class SiderMenu extends React.Component {
           break;
         }
         case 10: {
-          break;
+          ReactDOM.unmountComponentAtNode(
+            document.getElementById("main") as HTMLElement
+          );
+          ReactDOM.render(<ThemeProviderMenu />, document.getElementById("main"));
         }
         default: {
           break;
@@ -101,14 +128,14 @@ class SiderMenu extends React.Component {
         onClick={this.handleClick}
         defaultSelectedKeys={[]}
         defaultOpenKeys={(() => {
-          if (getismobile()) {
+          if (getisPC()) {
             return ["sub1", "g2", "sub2"];
           } else {
             return [];
           }
         })()}
         mode="inline"
-        theme={"dark"}
+        theme={this.state.theme.mode}
       >
         <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
           <Menu.ItemGroup key="g1" title="分类">
