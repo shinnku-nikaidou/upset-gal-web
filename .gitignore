@@ -6,6 +6,7 @@
 .pnp.js
 
 /tmp
+/dist
 
 # testing
 /coverage

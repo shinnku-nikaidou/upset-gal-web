@@ -1,4 +1,3 @@
-import "./index.css";
 import { PageHeader } from "antd";
 
 export const GalPageHead = () =>

@@ -29,10 +29,10 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
       "iPad",
       "iPod",
     ];
-    let not_exists_userAgent = !Agents.some(agent => userAgentInfo.includes(agent));
-    console.log(not_exists_userAgent ? "检测到您在使用pc" : "测到您在使用mobile");
-    setismobile(not_exists_userAgent);
-    if (!not_exists_userAgent) {
+    let not_exists_Agent = !Agents.some(agent => userAgentInfo.includes(agent));
+    console.log(not_exists_Agent ? "检测到您在使用pc" : "测到您在使用mobile");
+    setismobile(not_exists_Agent);
+    if (!not_exists_Agent) {
       this.state = {
         collapsed: true,
         category: "",
@@ -89,3 +89,5 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
 ReactDOM.render(<GalSider />, document.getElementById("root"));
 
 reportWebVitals();
+
+export default GalSider;

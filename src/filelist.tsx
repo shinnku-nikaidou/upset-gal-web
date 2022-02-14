@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 import { List, BackTop, Modal, Input, Pagination, Divider } from "antd";
 import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
 import { getArrayFile } from "./menu";
@@ -23,13 +22,13 @@ function showPromiseConfirm(url: string, name: string) {
     onOk() {
       window.open(url, "_parent");
     },
-    onCancel() { },
+    onCancel() {},
   });
 }
 
-class FileLi extends React.Component {
-  constructor(...args: any[]) {
-    super(...args);
+class FileLi extends React.Component<any, any> {
+  constructor(args: any) {
+    super(args);
     this.state = {
       files: getArrayFile(),
       page: 1,
@@ -38,8 +37,8 @@ class FileLi extends React.Component {
 
   onSearch = (value: string) => {
     value = value.toLowerCase();
-    console.log(value)
-    let arrayFile: any[] = getArrayFile();
+    console.log(value);
+    let arrayFile = getArrayFile();
     let newArrayFile = arrayFile.map((v) => [v, 0]);
     for (let x = 0; x < arrayFile.length; x++) {
       for (let y = 0; y < value.length; y++) {
@@ -51,7 +50,7 @@ class FileLi extends React.Component {
           ) {
             newArrayFile[x][1] += 1;
           }
-        } catch { }
+        } catch {}
       }
     }
     for (let x = 0; x < arrayFile.length; x++) {
@@ -65,7 +64,7 @@ class FileLi extends React.Component {
           ) {
             newArrayFile[x][1] += 5;
           }
-        } catch { }
+        } catch {}
       }
     }
     newArrayFile.sort((a, b) => b[1] - a[1]);
@@ -74,7 +73,7 @@ class FileLi extends React.Component {
     });
   };
 
-  onPaginationChange = (e: any) => {
+  onPaginationChange = (e: number) => {
     this.setState({
       page: e,
     });
@@ -97,17 +96,19 @@ class FileLi extends React.Component {
             (this.state.page - 1) * 10,
             this.state.page * 10
           )}
-          renderItem={(item) => (
-            <List.Item style={{ paddingLeft: "20px" }}>
+          renderItem={(item: any) => (
+            <List.Item
+              style={{ paddingLeft: "20px" }}
+              onClick={() => {
+                showPromiseConfirm(
+                  "/" + this.props.url + "/" + item.name,
+                  decodeURI(item.name)
+                );
+              }}
+            >
               <List.Item.Meta
                 title={decodeURI(item.name)}
                 description={"size: " + item.size}
-                onClick={() => {
-                  showPromiseConfirm(
-                    "/" + this.props.url + "/" + item.name,
-                    decodeURI(item.name)
-                  );
-                }}
               />
             </List.Item>
           )}

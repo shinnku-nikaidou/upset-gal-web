@@ -1,5 +1,4 @@
 import React from "react";
-import "./index.css";
 import { Collapse } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 
@@ -9,7 +8,7 @@ export default class Readme extends React.Component {
   state = {
     visible: true,
   };
-  VisibleID!: NodeJS.Timer;
+  VisibleID!: any;
 
   componentDidMount() {
     this.VisibleID = setInterval(() => this.notVisible(), 1000);
