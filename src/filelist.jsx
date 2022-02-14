@@ -1,5 +1,5 @@
 import React from "react";
-import "antd/dist/antd.css";
+import "./index.css";
 import { List, BackTop, Modal, Input, Pagination, Divider } from "antd";
 import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
 import { getArrayFile } from "./menu";

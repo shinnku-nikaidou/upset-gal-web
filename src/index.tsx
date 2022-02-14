@@ -6,7 +6,6 @@ import { GalPageHead } from "./pageHeader";
 import { Readme } from "./readme";
 import { SiderMenu } from "./menu";
 import { setismobile } from "./config";
-import "antd/dist/antd.css";
 import { Layout, Breadcrumb, Typography } from "antd";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;

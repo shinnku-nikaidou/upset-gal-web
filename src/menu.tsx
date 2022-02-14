@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "antd/dist/antd.css";
 import "./index.css";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
