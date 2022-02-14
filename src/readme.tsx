@@ -41,6 +41,9 @@ export default class Readme extends React.Component {
             <p>
               网站正在更新(维护)中, 可能偶发性一段时间不可下载使用
             </p>
+            <p>
+              更新部分为左侧 设置:主题
+            </p>
           </Panel>
           <Panel
             header="水群，反馈相关"

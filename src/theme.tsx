@@ -40,7 +40,7 @@ function addSkin(content: string) {
 
 export default function changeTheme(): any {
   if (!getisPC()) {
-    import("antd/dist/antd.compact.css");
+    import("../node_modules/antd/dist/antd.compact.css");
   }
   if (globalTheme.mode == "dark") {
     handleSkin(false);
@@ -57,15 +57,22 @@ export class ThemeProviderMenu extends React.Component<
 > {
   constructor(props: {}) {
     super(props);
-    this.state = {
-      dark: true,
-    };
+    if (globalTheme.mode === 'light') {
+      this.state = {
+        dark: true,
+      };
+    } else {
+      this.state = {
+        dark: false,
+      };
+    }
+    
   }
 
   render() {
     return (
       <>
-        <p>主题测试中, 可能会有bug.</p>
+        <p>主题目前正在测试中, 使用起来可能会有bug.</p>
         <Divider dashed />
         <Tooltip title={`切换${!this.state.dark ? "明亮" : "暗黑"}主题`}>
           <Switch
