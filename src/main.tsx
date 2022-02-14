@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./index.less";
+import '../node_modules/antd/dist/antd.css';
 import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
