@@ -20,8 +20,8 @@ type GalSiderState = {
 class GalSider extends React.Component<GalSiderProps, GalSiderState> {
   constructor(args: GalSiderProps) {
     super(args);
-    var userAgentInfo = navigator.userAgent;
-    var Agents = [
+    let userAgentInfo = navigator.userAgent;
+    let Agents = [
       "Android",
       "iPhone",
       "SymbianOS",
@@ -29,8 +29,8 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
       "iPad",
       "iPod",
     ];
-    var flag = true;
-    for (var v = 0; v < Agents.length; v++) {
+    let flag = true;
+    for (let v = 0; v < Agents.length; v++) {
       if (userAgentInfo.indexOf(Agents[v]) > 0) {
         flag = false;
         break;

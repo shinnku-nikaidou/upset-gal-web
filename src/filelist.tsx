@@ -15,7 +15,7 @@ const suffix = (
   />
 );
 
-function showPromiseConfirm(url, name) {
+function showPromiseConfirm(url: string, name: string) {
   confirm({
     title: "下载确认",
     icon: <ExclamationCircleOutlined />,
@@ -23,12 +23,12 @@ function showPromiseConfirm(url, name) {
     onOk() {
       window.open(url, "_parent");
     },
-    onCancel() {},
+    onCancel() { },
   });
 }
 
 class FileLi extends React.Component {
-  constructor(...args) {
+  constructor(...args: any[]) {
     super(...args);
     this.state = {
       files: getArrayFile(),
@@ -36,7 +36,7 @@ class FileLi extends React.Component {
     };
   }
 
-  onSearch = (value) => {
+  onSearch = (value: string) => {
     value = value.toLowerCase();
     console.log(value)
     let arrayFile = getArrayFile();
@@ -46,12 +46,12 @@ class FileLi extends React.Component {
         try {
           let name = decodeURIComponent(arrayFile[x].name).toLowerCase();
           if (
-            name.substring(0, name.length - 3).indexOf(value[y]) !== -1 &&
+            name.substring(0, name.length - 3).includes(value[y]) &&
             value[y] !== " "
           ) {
             newArrayFile[x][1] += 1;
           }
-        } catch {}
+        } catch { }
       }
     }
     for (let x = 0; x < arrayFile.length; x++) {
@@ -65,18 +65,16 @@ class FileLi extends React.Component {
           ) {
             newArrayFile[x][1] += 5;
           }
-        } catch {}
+        } catch { }
       }
     }
-    newArrayFile.sort((a, b) => {
-      return b[1] - a[1];
-    });
+    newArrayFile.sort((a, b) => b[1] - a[1]);
     this.setState({
       files: newArrayFile.map((v) => v[0]),
     });
   };
 
-  onPaginationChange = (e) => {
+  onPaginationChange = (e: any) => {
     this.setState({
       page: e,
     });
