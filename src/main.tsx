@@ -7,7 +7,8 @@ import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
 import { SiderMenu } from "./menu";
 import { setisPC } from "./config";
-import { Layout, Breadcrumb, Typography, ConfigProvider } from "antd";
+import { Layout, Typography, ConfigProvider } from "antd";
+import { DirectionType } from "antd/lib/config-provider";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 
@@ -18,11 +19,26 @@ type GalSiderState = {
   theme: Theme;
 };
 
+function main() {
+  ReactDOM.render(<GalSider />, document.getElementById("root"));
+  if (localStorage.hasOwnProperty("mode")) {
+    const mode = localStorage.getItem("mode") as "light" | "dark";
+    globalTheme.mode = mode
+  }
+  if (localStorage.hasOwnProperty("direction")) {
+    const direction = localStorage.getItem("direction") as DirectionType;
+    globalTheme.direction = direction
+  }
+
+  initChangeTheme();
+  reportWebVitals();
+}
+
 class GalSider extends React.Component<GalSiderProps, GalSiderState> {
   constructor(args: GalSiderProps) {
     super(args);
-    let userAgentInfo = navigator.userAgent;
-    let Agents = [
+    const userAgentInfo = navigator.userAgent;
+    const Agents = [
       "Android",
       "iPhone",
       "SymbianOS",
@@ -115,9 +131,6 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
   }
 }
 
-ReactDOM.render(<GalSider />, document.getElementById("root"));
-initChangeTheme();
-
-reportWebVitals();
+main();
 
 export default GalSider;

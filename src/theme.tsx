@@ -1,14 +1,22 @@
 import React from "react";
 import { SketchPicker } from "react-color";
 import { Divider, Radio, Switch, Tooltip } from "antd";
-import dark from "./style/index.dark.less";
-import light from "./style/index.less";
-import compact from "./style/index.compact.less";
+import dark from "./style/dark.less";
+import light from "./style/light.less";
+import { storage } from "./config";
 import { DirectionType } from "antd/lib/config-provider";
 
 export const backgroundImageNode = document.getElementsByClassName(
   "box"
 )[0] as HTMLElement;
+
+export function changeBackgroundImage(url: string) {
+  if (url === "") {
+    backgroundImageNode.style.backgroundImage = "none";
+  } else {
+    backgroundImageNode.style.backgroundImage = `url(${url})`;
+  }
+}
 
 const pcDefaultBackgroundImageURL: string =
   "https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg";
@@ -58,8 +66,10 @@ export let globalTheme: Theme = {
 
 const handleSkin = (bright: boolean) => {
   if (bright) {
+    console.log("light");
     addSkin(light);
   } else {
+    console.log("dark");
     addSkin(dark);
   }
 };
@@ -83,10 +93,10 @@ function addSkin(content: string) {
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
-    backgroundImageNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
+    changeBackgroundImage(mobileDefaultBackgroundImageURL);
     backgroundImageNode.style.backgroundSize = "cover";
   } else {
-    backgroundImageNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
+    changeBackgroundImage(pcDefaultBackgroundImageURL);
     backgroundImageNode.style.backgroundSize = "100%";
   }
   if (globalTheme.mode == "dark") {
@@ -125,12 +135,13 @@ export class ThemeProviderMenu extends React.Component<
   changeDirection = (e: any) => {
     const directionValue = e.target.value;
     globalTheme.direction = directionValue;
+    storage.setItem("direction", directionValue);
   };
 
   render() {
     return (
       <>
-        <p>主题目前正在测试中, 使用起来可能会有bug, 现在暂不支持保存设置</p>
+        <p>主题目前正在开发中, 使用起来可能会有bug, 主题会自动保存</p>
         <Divider dashed />
         <div style={{ marginBottom: 16 }}>
           <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
@@ -142,10 +153,12 @@ export class ThemeProviderMenu extends React.Component<
               onChange={() => {
                 if (this.state.bright) {
                   globalTheme.mode = "dark";
+                  storage.setItem("mode", "dark");
                   this.setState({ bright: false });
                   handleSkin(false);
                 } else {
                   globalTheme.mode = "light";
+                  storage.setItem("mode", "light");
                   this.setState({ bright: true });
                   handleSkin(true);
                 }
@@ -159,7 +172,10 @@ export class ThemeProviderMenu extends React.Component<
             Change direction of components / 改变方向 / {"  "} تغيير اتجاه
             المكونات
           </span>
-          <Radio.Group defaultValue="ltr" onChange={this.changeDirection}>
+          <Radio.Group
+            defaultValue={globalTheme.direction}
+            onChange={this.changeDirection}
+          >
             <Radio.Button key="ltr" value="ltr">
               LTR
             </Radio.Button>
