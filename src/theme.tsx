@@ -1,23 +1,55 @@
 import React from "react";
-import { Divider, Switch, Tooltip } from "antd";
-import { getisPC } from "./config";
+import { SketchPicker } from "react-color";
+import { Divider, Radio, Switch, Tooltip } from "antd";
 import dark from "./style/index.dark.less";
 import light from "./style/index.less";
+import compact from "./style/index.compact.less";
+import { DirectionType } from "antd/lib/config-provider";
+
+type ThemeProviderMenuState = {
+  bright: boolean;
+  color: {
+    primaryColor: string;
+    errorColor: string;
+    warningColor: string;
+    successColor: string;
+    infoColor: string;
+  };
+};
+
+const defaultColor = {
+  primaryColor: "#1890ff",
+  errorColor: "#ff4d4f",
+  warningColor: "#faad14",
+  successColor: "#52c41a",
+  infoColor: "#1890ff",
+};
 
 export type Theme = {
   mode: "light" | "dark";
+  color: {
+    primaryColor: string;
+    errorColor: string;
+    warningColor: string;
+    successColor: string;
+    infoColor: string;
+  };
+  backgroundImage?: string;
+  mobile: boolean;
+  direction?: DirectionType;
 };
 
 export let globalTheme: Theme = {
   mode: "light",
+  color: defaultColor,
+  mobile: false,
+  direction: "ltr",
 };
 
-const handleSkin = (checked: boolean) => {
-  if (checked) {
-    // 明亮主题
+const handleSkin = (bright: boolean) => {
+  if (bright) {
     addSkin(light);
   } else {
-    // 暗色主题
     addSkin(dark);
   }
 };
@@ -38,18 +70,14 @@ function addSkin(content: string) {
   head.appendChild(styleDom);
 }
 
-export default function changeTheme(): any {
-  if (!getisPC()) {
+export default function initChangeTheme(): any {
+  if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
   }
   if (globalTheme.mode == "dark") {
-    handleSkin(false);
+    import("../node_modules/antd/dist/antd.dark.css");
   }
 }
-
-type ThemeProviderMenuState = {
-  dark: boolean;
-};
 
 export class ThemeProviderMenu extends React.Component<
   {},
@@ -57,44 +85,90 @@ export class ThemeProviderMenu extends React.Component<
 > {
   constructor(props: {}) {
     super(props);
-    if (globalTheme.mode === 'light') {
+    if (globalTheme.mode === "light") {
       this.state = {
-        dark: true,
+        bright: true,
+        color: defaultColor,
       };
     } else {
       this.state = {
-        dark: false,
+        bright: false,
+        color: defaultColor,
       };
     }
-    
   }
+
+  onColorChange(nextColor: { primaryColor: string }) {
+    const mergedNextColor = {
+      ...defaultColor,
+      ...nextColor,
+    };
+    this.setState({ color: mergedNextColor });
+    globalTheme.color = mergedNextColor;
+  }
+
+  changeDirection = (e: any) => {
+    const directionValue = e.target.value;
+    globalTheme.direction = directionValue;
+  };
 
   render() {
     return (
       <>
-        <p>主题目前正在测试中, 使用起来可能会有bug.</p>
+        <p>主题目前正在测试中, 使用起来可能会有bug, 现在暂不支持保存设置</p>
         <Divider dashed />
-        <Tooltip title={`切换${!this.state.dark ? "明亮" : "暗黑"}主题`}>
-          <Switch
-            checkedChildren={<>🌞</>}
-            unCheckedChildren={<>🌜</>}
-            defaultChecked={this.state.dark}
-            onChange={() => {
-              if (this.state.dark) {
-                globalTheme.mode = "dark";
-                this.setState({ dark: false });
-                handleSkin(false);
-              } else {
-                globalTheme.mode = "light";
-                this.setState({ dark: true });
-                handleSkin(true);
-              }
-              if (!getisPC()) {
-                import("../node_modules/antd/dist/antd.compact.css");
-              }
+        <div style={{ marginBottom: 16 }}>
+          <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
+          <Tooltip title={`切换${!this.state.bright ? "明亮" : "暗黑"}主题`}>
+            <Switch
+              checkedChildren={<>🌞</>}
+              unCheckedChildren={<>🌜</>}
+              defaultChecked={this.state.bright}
+              onChange={() => {
+                if (this.state.bright) {
+                  globalTheme.mode = "dark";
+                  this.setState({ bright: false });
+                  handleSkin(false);
+                } else {
+                  globalTheme.mode = "light";
+                  this.setState({ bright: true });
+                  handleSkin(true);
+                }
+              }}
+            />
+          </Tooltip>
+        </div>
+        <Divider dashed />
+        <div style={{ marginBottom: 16 }}>
+          <span style={{ marginRight: 16 }}>
+            Change direction of components / 改变方向 / {"  "} تغيير اتجاه
+            المكونات
+          </span>
+          <Radio.Group defaultValue="ltr" onChange={this.changeDirection}>
+            <Radio.Button key="ltr" value="ltr">
+              LTR
+            </Radio.Button>
+            <Radio.Button key="rtl" value="rtl">
+              RTL
+            </Radio.Button>
+          </Radio.Group>
+        </div>
+        <Divider dashed />
+        <div style={{ marginBottom: 16 }}>
+          <SketchPicker
+            presetColors={["#1890ff", "#25b864", "#ff6f00"]}
+            color={this.state.color.primaryColor}
+            onChange={({ hex }: any) => {
+              this.onColorChange({
+                primaryColor: hex,
+              });
             }}
           />
-        </Tooltip>
+          <span style={{ color: "var(--ant-primary-color)", marginRight: 16 }}>
+            {" "}
+            网站色调{" "}
+          </span>
+        </div>
         <Divider dashed />
       </>
     );

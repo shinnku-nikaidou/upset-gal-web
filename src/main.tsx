@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.less";
-import changeTheme, { globalTheme, Theme } from "./theme";
+import initChangeTheme, { globalTheme, Theme } from "./theme";
 import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
 import { SiderMenu } from "./menu";
 import { setisPC } from "./config";
-import { Layout, Breadcrumb, Typography } from "antd";
+import { Layout, Breadcrumb, Typography, ConfigProvider } from "antd";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 
@@ -62,6 +62,10 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
     this.setState({
       theme: globalTheme,
     });
+    ConfigProvider.config({
+      theme: this.state.theme.color,
+    });
+    // console.log(this.state.theme.color.primaryColor);
   }
 
   onCollapse = (collapsed: boolean) => {
@@ -71,47 +75,48 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
   render() {
     const { collapsed } = this.state;
     return (
-      <Layout style={{ minHeight: "100vh" }}>
-        <Sider
-          collapsible
-          collapsed={collapsed}
-          onCollapse={this.onCollapse}
-          theme={this.state.theme.mode}
-        >
-          <div className="logo" />
-          <SiderMenu />
-        </Sider>
-        <Layout className="site-layout">
-          <GalPageHead />
-          <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item></Breadcrumb.Item>
-            </Breadcrumb>
-            <div
-              className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
+      <div style={{ color: "var(--ant-primary-color)" }}>
+        <ConfigProvider direction={this.state.theme.direction}>
+          <Layout style={{ minHeight: "100vh" }}>
+            <Sider
+              collapsible
+              collapsed={collapsed}
+              onCollapse={this.onCollapse}
+              theme={this.state.theme.mode}
             >
-              <div id="main"></div>
-              <div id="readme">
-                <Readme />
-              </div>
-            </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            <Text type="secondary"> powered by shinnku </Text>
-            <br />
-            <Text>
-              此版本为 <Text code> beta 2.0.13</Text> 测试版
-            </Text>
-          </Footer>
-        </Layout>
-      </Layout>
+              <div className="logo" />
+              <SiderMenu />
+            </Sider>
+            <Layout className="site-layout">
+              <GalPageHead />
+              <Content style={{ margin: "0 16px" }}>
+                <div
+                  className="site-layout-background"
+                  style={{ padding: 24, minHeight: 360 }}
+                >
+                  <div id="main"></div>
+                  <div id="readme">
+                    <Readme />
+                  </div>
+                </div>
+              </Content>
+              <Footer style={{ textAlign: "center" }}>
+                <Text type="secondary"> powered by shinnku </Text>
+                <br />
+                <Text>
+                  此版本为 <Text code> beta 2.0.15</Text> 测试版
+                </Text>
+              </Footer>
+            </Layout>
+          </Layout>
+        </ConfigProvider>
+      </div>
     );
   }
 }
 
 ReactDOM.render(<GalSider />, document.getElementById("root"));
-changeTheme();
+initChangeTheme();
 
 reportWebVitals();
 

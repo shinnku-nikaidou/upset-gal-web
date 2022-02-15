@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { globalTheme, Theme, ThemeProviderMenu } from "./theme";
-import { getisPC } from "./config";
 import { FileLi } from "./filelist";
 const { SubMenu } = Menu;
 
@@ -37,7 +36,7 @@ function get_base64(url: string) {
   };
   ajaxObj.send();
 }
-type indexType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+type indexType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 10;
 
 const key_map = {
   0: "win",
@@ -56,6 +55,12 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
     this.state = {
       theme: globalTheme,
     };
+  }
+
+  removeMain() {
+    ReactDOM.unmountComponentAtNode(
+      document.getElementById("main") as HTMLElement
+    );
   }
 
   ThemeID!: number;
@@ -89,9 +94,7 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
         const hide = message.loading("正在加载中", 0);
         let mainMounttimeId = setInterval(() => {
           if (getArrayFile().length !== 0) {
-            ReactDOM.unmountComponentAtNode(
-              document.getElementById("main") as HTMLElement
-            );
+            this.removeMain();
             ReactDOM.render(
               <FileLi url={url} />,
               document.getElementById("main")
@@ -103,17 +106,12 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
       });
     } else {
       switch (key) {
-        case 8: {
-          break;
-        }
-        case 9: {
-          break;
-        }
         case 10: {
-          ReactDOM.unmountComponentAtNode(
-            document.getElementById("main") as HTMLElement
+          this.removeMain();
+          ReactDOM.render(
+            <ThemeProviderMenu />,
+            document.getElementById("main")
           );
-          ReactDOM.render(<ThemeProviderMenu />, document.getElementById("main"));
         }
         default: {
           break;
@@ -128,7 +126,7 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
         onClick={this.handleClick}
         defaultSelectedKeys={[]}
         defaultOpenKeys={(() => {
-          if (getisPC()) {
+          if (!globalTheme.mobile) {
             return ["sub1", "g2", "sub2"];
           } else {
             return [];

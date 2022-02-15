@@ -1,10 +1,8 @@
 // this config just to change every react component states
 // import cookie from 'react-cookies'
+import { globalTheme } from "./theme";
 
-let ismobile = false;
-let getisPC = () => ismobile;
-let setisPC = (v: boolean) => {
-  ismobile = v;
+export let setisPC = (v: boolean) => {
+  globalTheme.mobile = !v;
 };
 
-export { getisPC, setisPC };
