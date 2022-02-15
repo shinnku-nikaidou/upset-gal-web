@@ -13,6 +13,12 @@ export const backgroundImageNode = document.getElementsByClassName(
 export function changeBackgroundImage(url: string) {
   if (url === "") {
     backgroundImageNode.style.backgroundImage = "none";
+  } else if (url === "default") {
+    if (globalTheme.mobile) {
+      changeBackgroundImage(mobileDefaultBackgroundImageURL);
+    } else {
+      changeBackgroundImage(pcDefaultBackgroundImageURL);
+    }
   } else {
     backgroundImageNode.style.backgroundImage = `url(${url})`;
   }
@@ -33,6 +39,7 @@ type ThemeProviderMenuState = {
     successColor: string;
     infoColor: string;
   };
+  hasBGImage: boolean;
 };
 
 const defaultColor = {
@@ -55,6 +62,7 @@ export type Theme = {
   backgroundImage?: string;
   mobile: boolean;
   direction?: DirectionType;
+  hasBGImage: boolean;
 };
 
 export let globalTheme: Theme = {
@@ -62,6 +70,7 @@ export let globalTheme: Theme = {
   color: defaultColor,
   mobile: false,
   direction: "ltr",
+  hasBGImage: true,
 };
 
 const handleSkin = (bright: boolean) => {
@@ -93,14 +102,15 @@ function addSkin(content: string) {
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
-    changeBackgroundImage(mobileDefaultBackgroundImageURL);
     backgroundImageNode.style.backgroundSize = "cover";
   } else {
-    changeBackgroundImage(pcDefaultBackgroundImageURL);
     backgroundImageNode.style.backgroundSize = "100%";
   }
   if (globalTheme.mode == "dark") {
     import("../node_modules/antd/dist/antd.dark.css");
+  }
+  if (globalTheme.hasBGImage) {
+    changeBackgroundImage("default");
   }
 }
 
@@ -114,11 +124,13 @@ export class ThemeProviderMenu extends React.Component<
       this.state = {
         bright: true,
         color: defaultColor,
+        hasBGImage: globalTheme.hasBGImage,
       };
     } else {
       this.state = {
         bright: false,
         color: defaultColor,
+        hasBGImage: globalTheme.hasBGImage,
       };
     }
   }
@@ -144,8 +156,32 @@ export class ThemeProviderMenu extends React.Component<
         <p>主题目前正在开发中, 使用起来可能会有bug, 主题会自动保存</p>
         <Divider dashed />
         <div style={{ marginBottom: 16 }}>
+          <span style={{ marginRight: 16 }}>开关背景按钮</span>
+          <Tooltip title={`点击${!this.state.hasBGImage ? "打开" : "关闭"}背景图`}>
+            <Switch
+              checkedChildren={<>开</>}
+              unCheckedChildren={<>关</>}
+              defaultChecked={!this.state.hasBGImage}
+              onChange={() => {
+                if (this.state.hasBGImage) {
+                  globalTheme.hasBGImage = false;
+                  storage.setItem("hasBGImage", "false");
+                  this.setState({ hasBGImage: false });
+                  changeBackgroundImage("");
+                } else {
+                  globalTheme.hasBGImage = true;
+                  storage.setItem("hasBGImage", "true");
+                  this.setState({ hasBGImage: true });
+                  changeBackgroundImage("default");
+                }
+              }}
+            />
+          </Tooltip>
+        </div>
+        <Divider dashed />
+        <div style={{ marginBottom: 16 }}>
           <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
-          <Tooltip title={`切换${!this.state.bright ? "明亮" : "暗黑"}主题`}>
+          <Tooltip title={`点击切换${!this.state.bright ? "明亮" : "暗黑"}主题`}>
             <Switch
               checkedChildren={<>🌞</>}
               unCheckedChildren={<>🌜</>}
@@ -169,8 +205,7 @@ export class ThemeProviderMenu extends React.Component<
         <Divider dashed />
         <div style={{ marginBottom: 16 }}>
           <span style={{ marginRight: 16 }}>
-            Change direction of components / 改变方向 / {"  "} تغيير اتجاه
-            المكونات
+            Change direction of components / 改变方向 / تغيير اتجاه المكونات
           </span>
           <Radio.Group
             defaultValue={globalTheme.direction}
@@ -198,8 +233,7 @@ export class ThemeProviderMenu extends React.Component<
             }}
           />
           <span style={{ color: "var(--ant-primary-color)", marginRight: 16 }}>
-            {" "}
-            网站色调{" "}
+            网站色调
           </span>
         </div>
         <Divider dashed />

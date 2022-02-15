@@ -23,11 +23,15 @@ function main() {
   ReactDOM.render(<GalSider />, document.getElementById("root"));
   if (localStorage.hasOwnProperty("mode")) {
     const mode = localStorage.getItem("mode") as "light" | "dark";
-    globalTheme.mode = mode
+    globalTheme.mode = mode;
   }
   if (localStorage.hasOwnProperty("direction")) {
     const direction = localStorage.getItem("direction") as DirectionType;
-    globalTheme.direction = direction
+    globalTheme.direction = direction;
+  }
+  if (localStorage.hasOwnProperty("hasBGImage")) {
+    const hasBGImage = localStorage.getItem("hasBGImage") as "true" | "false";
+    globalTheme.hasBGImage = hasBGImage === "true" ? true : false;
   }
 
   initChangeTheme();
@@ -120,7 +124,7 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
                 <Text type="secondary"> powered by shinnku </Text>
                 <br />
                 <Text>
-                  此版本为 <Text code> beta 2.0.15</Text> 测试版
+                  此版本为 <Text code> beta 2.2.rc3</Text> 测试版
                 </Text>
               </Footer>
             </Layout>
