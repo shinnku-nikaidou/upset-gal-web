@@ -6,6 +6,16 @@ import light from "./style/index.less";
 import compact from "./style/index.compact.less";
 import { DirectionType } from "antd/lib/config-provider";
 
+export const backgroundImageNode = document.getElementsByClassName(
+  "box"
+)[0] as HTMLElement;
+
+const pcDefaultBackgroundImageURL: string =
+  "https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg";
+
+const mobileDefaultBackgroundImageURL: string =
+  "https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg";
+
 type ThemeProviderMenuState = {
   bright: boolean;
   color: {
@@ -73,6 +83,11 @@ function addSkin(content: string) {
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
+    backgroundImageNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
+    backgroundImageNode.style.backgroundSize = "cover";
+  } else {
+    backgroundImageNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
+    backgroundImageNode.style.backgroundSize = "100%";
   }
   if (globalTheme.mode == "dark") {
     import("../node_modules/antd/dist/antd.dark.css");
@@ -153,6 +168,8 @@ export class ThemeProviderMenu extends React.Component<
             </Radio.Button>
           </Radio.Group>
         </div>
+        <Divider dashed />
+
         <Divider dashed />
         <div style={{ marginBottom: 16 }}>
           <SketchPicker

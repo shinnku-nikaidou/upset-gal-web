@@ -7,7 +7,9 @@ Use Vite + React + Antd
 In the project directory, you can run:
 
 ```bash
-yarn dev
+yarn
+yarn run dev
 ```
+to start this project
 
-This project is run in the website <https://www.shinnku.com/> .
+This project is run in the website <https://shinnku.com/> .
