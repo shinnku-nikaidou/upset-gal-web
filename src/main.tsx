@@ -6,9 +6,10 @@ import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
 import { SiderMenu } from "./menu";
-import { setisPC } from "./config";
+import { setisPC, storage } from "./config";
 import { Layout, Typography, ConfigProvider } from "antd";
 import { DirectionType } from "antd/lib/config-provider";
+import localforage from "localforage";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 
@@ -20,20 +21,20 @@ type GalSiderState = {
 };
 
 function main() {
-  ReactDOM.render(<GalSider />, document.getElementById("root"));
-  if (localStorage.hasOwnProperty("mode")) {
-    const mode = localStorage.getItem("mode") as "light" | "dark";
+  localforage.setDriver(localforage.INDEXEDDB);
+  if (storage.hasOwnProperty("mode")) {
+    const mode = storage.getItem("mode") as "light" | "dark";
     globalTheme.mode = mode;
   }
-  if (localStorage.hasOwnProperty("direction")) {
-    const direction = localStorage.getItem("direction") as DirectionType;
+  if (storage.hasOwnProperty("direction")) {
+    const direction = storage.getItem("direction") as DirectionType;
     globalTheme.direction = direction;
   }
-  if (localStorage.hasOwnProperty("hasBGImage")) {
-    const hasBGImage = localStorage.getItem("hasBGImage") as "true" | "false";
+  if (storage.hasOwnProperty("hasBGImage")) {
+    const hasBGImage = storage.getItem("hasBGImage") as "true" | "false";
     globalTheme.hasBGImage = hasBGImage === "true" ? true : false;
   }
-
+  ReactDOM.render(<GalSider />, document.getElementById("root"));
   initChangeTheme();
   reportWebVitals();
 }
@@ -85,7 +86,6 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
     ConfigProvider.config({
       theme: this.state.theme.color,
     });
-    // console.log(this.state.theme.color.primaryColor);
   }
 
   onCollapse = (collapsed: boolean) => {
@@ -135,6 +135,6 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
   }
 }
 
-main();
+await main();
 
 export default GalSider;

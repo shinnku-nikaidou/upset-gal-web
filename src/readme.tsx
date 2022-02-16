@@ -37,7 +37,7 @@ export default class Readme extends React.Component {
           <Panel header="消息" key="1" className="site-collapse-custom-panel">
             <Space direction="vertical">
               <Text>
-                网站正在更新(维护)中, 可能偶发性出现页面异常或者不可下载的情况.
+                网站正在更新中, 可能偶发性出现页面异常或者不可下载的情况.
               </Text>
               <Text>
                 更新部分为左侧 <Text code>设置:主题</Text> 可以切换成
@@ -45,6 +45,7 @@ export default class Readme extends React.Component {
                 <Text keyboard>公司/学校</Text>
                 的机器下载galgame, 可以在主题里选择关闭背景图.
               </Text>
+              <Text>现在支持自定义网站的背景</Text>
               <Text>主题部分会自动保存</Text>
             </Space>
           </Panel>
