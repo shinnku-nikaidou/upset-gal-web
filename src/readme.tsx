@@ -37,7 +37,7 @@ export default class Readme extends React.Component {
           <Panel header="消息" key="1" className="site-collapse-custom-panel">
             <Space direction="vertical">
               <Text>
-                网站正在更新中, 可能偶发性出现页面异常或者不可下载的情况.
+                网站服务器被直接爆破，出现不可用问题，目前不能使用自定义背景，请使用了自定义背景的在主题里面点击清除所有设置。
               </Text>
               <Text>
                 更新部分为左侧 <Text code>设置:主题</Text> 可以切换成

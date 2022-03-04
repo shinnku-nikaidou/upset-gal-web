@@ -135,6 +135,6 @@ class GalSider extends React.Component<GalSiderProps, GalSiderState> {
   }
 }
 
-await main();
+main();
 
 export default GalSider;
