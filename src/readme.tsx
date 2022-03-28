@@ -71,7 +71,7 @@ export default class Readme extends React.Component {
                 <Link
                   target="_blank"
                   rel="noreferrer"
-                  href="https://jq.qq.com/?_wv=1027&k=mrCvdEk8"
+                  href="https://jq.qq.com/?_wv=1027&k=XixqG2P0"
                 >
                   qq群（点击此处直接加群）
                 </Link>
