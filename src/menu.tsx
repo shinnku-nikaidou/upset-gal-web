@@ -1,37 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-import { globalTheme, Theme, ThemeProviderMenu } from "./theme";
+import { globalTheme, Theme, ThemeProviderMenu, useGlobalTheme } from "./theme";
 import { FileLi } from "./filelist";
 const { SubMenu } = Menu;
 
 let ArrayFile: any[] = [];
 
-function getArrayFile() {
-  ArrayFile.sort(() => Math.random() - 0.5);
-  return ArrayFile.sort(() => Math.random() - 0.5);
-}
+const getArrayFile = () => ArrayFile.sort(() => Math.random() - 0.5);
+
 
 function get_base64(url: string) {
   let ajaxObj = new XMLHttpRequest();
   ajaxObj.open("get", window.location.href + url);
-  ajaxObj.onreadystatechange = function () {
+  ajaxObj.onreadystatechange = () => {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
       let responce_text = ajaxObj.responseText;
       let PageRawData = window.atob(responce_text.replace(/&#43;/g, "+"));
       let PageData = JSON.parse(PageRawData);
-      let ArrayFloder = [];
-      for (let item in PageData) {
-        if (item.indexOf("@") === 0) {
-          continue;
+      let ArrayFolder = [];
+      Object.entries(PageData).forEach(([item, value]: [string, any]) => {
+        if (!item.startsWith("@")) {
+          if (value["@type"] === "file") {
+            ArrayFile.push(value);
+          } else if (value["@type"] === "folder") {
+            ArrayFolder.push(value);
+          }
         }
-        if (PageData[item]["@type"] === "file") {
-          ArrayFile.push(PageData[item]);
-        } else if (PageData[item]["@type"] === "folder") {
-          ArrayFloder.push(PageData[item]);
-        }
-      }
+      })
     }
   };
   ajaxObj.send();
@@ -49,37 +46,30 @@ const key_map = {
   7: "Artroid",
 };
 
-class SiderMenu extends React.Component<{}, { theme: Theme }> {
-  constructor(props: {}) {
-    super(props);
-    this.state = {
-      theme: globalTheme,
-    };
-  }
-
-  removeMain() {
+const SiderMenu = (props: {}) => {
+  const [theme, setTheme] = useState(globalTheme);
+  const hookTheme = useGlobalTheme(state => state.changeTheme);
+  function removeMain() {
     ReactDOM.unmountComponentAtNode(
       document.getElementById("main") as HTMLElement
     );
   }
 
-  ThemeID!: number;
+  let ThemeID!: number;
 
-  componentDidMount() {
-    this.ThemeID = setInterval(() => this.changeTheme(), 500);
+  function componentDidMount() {
+    ThemeID = setInterval(() => changeTheme(), 500);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.ThemeID);
+  function componentWillUnmount() {
+    clearInterval(ThemeID);
   }
 
-  changeTheme() {
-    this.setState({
-      theme: globalTheme,
-    });
+  function changeTheme() {
+    hookTheme(globalTheme);
   }
 
-  handleClick = (e: { key: string }) => {
+  function handleClick(e: { key: string }) {
     const key = parseInt(e.key) as indexType;
     ReactDOM.unmountComponentAtNode(
       document.getElementById("main") as HTMLElement
@@ -94,7 +84,7 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
         const hide = message.loading("正在加载中", 0);
         let mainMounttimeId = setInterval(() => {
           if (getArrayFile().length !== 0) {
-            this.removeMain();
+            removeMain();
             ReactDOM.render(
               <FileLi url={url} />,
               document.getElementById("main")
@@ -107,7 +97,7 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
     } else {
       switch (key) {
         case 10: {
-          this.removeMain();
+          removeMain();
           ReactDOM.render(
             <ThemeProviderMenu />,
             document.getElementById("main")
@@ -120,39 +110,30 @@ class SiderMenu extends React.Component<{}, { theme: Theme }> {
     }
   };
 
-  render() {
-    return (
-      <Menu
-        onClick={this.handleClick}
-        defaultSelectedKeys={[]}
-        defaultOpenKeys={(() => {
-          if (!globalTheme.mobile) {
-            return ["sub1", "g2", "sub2"];
-          } else {
-            return [];
-          }
-        })()}
-        mode="inline"
-        theme={this.state.theme.mode}
-      >
-        <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
-          <Menu.ItemGroup key="g1" title="分类">
-            <Menu.Item key="0"> windows/pc硬盘 </Menu.Item>
-            <Menu.Item key="1"> apk安装包 </Menu.Item>
-            <Menu.Item key="2"> kirikiri 2 </Menu.Item>
-            <Menu.Item key="3"> ons </Menu.Item>
-            <Menu.Item key="4"> rpg </Menu.Item>
-            <Menu.Item key="5"> 生肉 </Menu.Item>
-            <Menu.Item key="6"> 模拟器 </Menu.Item>
-            <Menu.Item key="7"> Artroid </Menu.Item>
-          </Menu.ItemGroup>
-        </SubMenu>
-        <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
-          <Menu.Item key="10"> 主题 </Menu.Item>
-        </SubMenu>
-      </Menu>
-    );
-  }
+
+  return <Menu
+    onClick={handleClick}
+    defaultSelectedKeys={[]}
+    defaultOpenKeys={globalTheme.mobile ? [] : ["sub1", "g2", "sub2"]}
+    mode="inline"
+    theme={theme.mode}
+  >
+    <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
+      <Menu.ItemGroup key="g1" title="分类">
+        <Menu.Item key="0"> windows/pc硬盘 </Menu.Item>
+        <Menu.Item key="1"> apk安装包 </Menu.Item>
+        <Menu.Item key="2"> kirikiri 2 </Menu.Item>
+        <Menu.Item key="3"> ons </Menu.Item>
+        <Menu.Item key="4"> rpg </Menu.Item>
+        <Menu.Item key="5"> 生肉 </Menu.Item>
+        <Menu.Item key="6"> 模拟器 </Menu.Item>
+        <Menu.Item key="7"> Artroid </Menu.Item>
+      </Menu.ItemGroup>
+    </SubMenu>
+    <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
+      <Menu.Item key="10"> 主题 </Menu.Item>
+    </SubMenu>
+  </Menu>
 }
 
 export { SiderMenu, getArrayFile };

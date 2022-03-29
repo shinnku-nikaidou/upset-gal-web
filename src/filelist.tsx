@@ -4,7 +4,7 @@ import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
 import { getArrayFile } from "./menu";
 const { confirm } = Modal;
 const { Search } = Input;
-
+import { useState } from 'react';
 const suffix = (
   <AudioOutlined
     style={{
@@ -22,20 +22,14 @@ function showPromiseConfirm(url: string, name: string) {
     onOk() {
       window.open(url, "_parent");
     },
-    onCancel() {},
+    onCancel() { },
   });
 }
+const FileLi = (args: any) => {
+  const [files, setFiles] = useState(getArrayFile());
+  const [page, setPage] = useState(1);
 
-class FileLi extends React.Component<any, any> {
-  constructor(args: any) {
-    super(args);
-    this.state = {
-      files: getArrayFile(),
-      page: 1,
-    };
-  }
-
-  onSearch = (value: string) => {
+  const onSearch = (value: string) => {
     value = value.toLowerCase();
     console.log(value);
     let arrayFile = getArrayFile();
@@ -50,7 +44,7 @@ class FileLi extends React.Component<any, any> {
           ) {
             newArrayFile[x][1] += 1;
           }
-        } catch {}
+        } catch { }
       }
     }
     for (let x = 0; x < arrayFile.length; x++) {
@@ -60,70 +54,59 @@ class FileLi extends React.Component<any, any> {
           if (
             name
               .substring(0, name.length - 3)
-              .indexOf(value.substring(y, y + 2)) !== -1
+              .includes(value.substring(y, y + 2))
           ) {
             newArrayFile[x][1] += 5;
           }
-        } catch {}
+        } catch { }
       }
     }
     newArrayFile.sort((a, b) => b[1] - a[1]);
-    this.setState({
-      files: newArrayFile.map((v) => v[0]),
-    });
+    setFiles(newArrayFile.map((v) => v[0]));
   };
 
-  onPaginationChange = (e: number) => {
-    this.setState({
-      page: e,
-    });
-  };
-
-  render() {
-    return (
-      <div id="hover-gal">
-        <BackTop />
-        <Search
-          placeholder="input search text"
-          enterButton="Search"
-          size="large"
-          suffix={suffix}
-          onSearch={this.onSearch}
-        />
-        <List
-          itemLayout="horizontal"
-          dataSource={this.state.files.slice(
-            (this.state.page - 1) * 10,
-            this.state.page * 10
-          )}
-          renderItem={(item: any) => (
-            <List.Item
-              style={{ paddingLeft: "20px" }}
-              onClick={() => {
-                showPromiseConfirm(
-                  "/" + this.props.url + "/" + item.name,
-                  decodeURI(item.name)
-                );
-              }}
-            >
-              <List.Item.Meta
-                title={decodeURI(item.name)}
-                description={"size: " + item.size}
-              />
-            </List.Item>
-          )}
-        />
-        <Pagination
-          size="small"
-          total={this.state.files.length}
-          showSizeChanger={false}
-          showQuickJumper
-          onChange={this.onPaginationChange}
-        />
-        <Divider dashed />
-      </div>
-    );
-  }
+  const onPaginationChange = (e: number) => setPage(e);
+  return (
+    <div id="hover-gal">
+      <BackTop />
+      <Search
+        placeholder="input search text"
+        enterButton="Search"
+        size="large"
+        suffix={suffix}
+        onSearch={onSearch}
+      />
+      <List
+        itemLayout="horizontal"
+        dataSource={files.slice((page - 1) * 10, page * 10)}
+        renderItem={(item: any) => (
+          <List.Item
+            style={{ paddingLeft: "20px" }}
+            onClick={() => {
+              showPromiseConfirm(
+                "/" + args.url + "/" + item.name, //FIXME: I cant figure out this.props.url , so this may have some bugs.
+                decodeURI(item.name)
+              );
+            }}
+          >
+            <List.Item.Meta
+              title={decodeURI(item.name)}
+              description={"size: " + item.size}
+            />
+          </List.Item>
+        )}
+      />
+      <Pagination
+        size="small"
+        total={files.length}
+        showSizeChanger={false}
+        showQuickJumper
+        onChange={onPaginationChange}
+      />
+      <Divider dashed />
+    </div>
+  );
 }
+
 
 export { FileLi };
