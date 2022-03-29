@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { Collapse } from "antd";
 import { CaretRightOutlined } from "@ant-design/icons";
 import { Typography, Space } from "antd";
@@ -6,12 +5,6 @@ const { Text, Link } = Typography;
 const { Panel } = Collapse;
 
 const Readme = () => {
-  const [visible, setVisible] = useState(true);
-  let VisibleID!: number;
-  const componentDidMount = () => VisibleID = setInterval(() => notVisible(), 1000);
-  const componentWillUnmount = () => clearInterval(VisibleID);
-  const notVisible = () => setVisible(false);
-  // useEffect(() => { componentDidMount(); componentWillUnmount(); notVisible() }, [])
   return <div>
     <Collapse
       bordered={false}

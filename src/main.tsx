@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.less";
 import initChangeTheme, { globalTheme, Theme } from "./theme";
@@ -16,10 +15,6 @@ import { useState } from 'react'
 import { useGlobalTheme } from "./theme"
 type GalSiderProps = {};
 
-type GalSiderState = {
-  collapsed: boolean;
-  theme: Theme;
-};
 
 const main = () => {
   localforage.setDriver(localforage.INDEXEDDB);
@@ -39,7 +34,6 @@ const main = () => {
 }
 
 function GalSider(args: GalSiderProps) {
-  const hookTheme = useGlobalTheme(state => state.changeTheme)
   const userAgentInfo = navigator.userAgent;
   const Agents = [
     "Android",
@@ -56,14 +50,6 @@ function GalSider(args: GalSiderProps) {
   const [collapsed, setCollapsed] = useState(exists_Agent);
   const [theme, setTheme] = useState(globalTheme);
   const color = useGlobalTheme(s => s.color);
-  let ThemeID!: number;
-
-  const componentDidMount = () => ThemeID = setInterval(changeTheme, 500);
-  const componentWillUnmount = () => clearInterval(ThemeID);
-  const changeTheme = () => {
-    hookTheme(globalTheme);
-    ConfigProvider.config({ theme: color });
-  };
 
   const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
 

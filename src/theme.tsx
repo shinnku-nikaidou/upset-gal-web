@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import { useState } from "react";
 import { SketchPicker } from "react-color";
 import {
   Button,
@@ -13,7 +13,6 @@ import dark from "./style/dark.less";
 import light from "./style/light.less";
 import { storage } from "./config";
 import { DirectionType } from "antd/lib/config-provider";
-import localforage from "localforage";
 import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
@@ -52,17 +51,6 @@ const pcDefaultBackgroundImageURL: string =
 const mobileDefaultBackgroundImageURL: string =
   "https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg";
 
-type ThemeProviderMenuState = {
-  bright: boolean;
-  color: {
-    primaryColor: string;
-    errorColor: string;
-    warningColor: string;
-    successColor: string;
-    infoColor: string;
-  };
-  hasBGImage: boolean;
-};
 
 const defaultColor = {
   primaryColor: "#1890ff",

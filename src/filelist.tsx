@@ -1,4 +1,3 @@
-import React from "react";
 import { List, BackTop, Modal, Input, Pagination, Divider } from "antd";
 import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
 import { getArrayFile } from "./menu";

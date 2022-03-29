@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactDOM from "react-dom";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
@@ -48,25 +48,10 @@ const key_map = {
 
 const SiderMenu = (props: {}) => {
   const [theme, setTheme] = useState(globalTheme);
-  const hookTheme = useGlobalTheme(state => state.changeTheme);
   function removeMain() {
     ReactDOM.unmountComponentAtNode(
       document.getElementById("main") as HTMLElement
     );
-  }
-
-  let ThemeID!: number;
-
-  function componentDidMount() {
-    ThemeID = setInterval(() => changeTheme(), 500);
-  }
-
-  function componentWillUnmount() {
-    clearInterval(ThemeID);
-  }
-
-  function changeTheme() {
-    hookTheme(globalTheme);
   }
 
   function handleClick(e: { key: string }) {
