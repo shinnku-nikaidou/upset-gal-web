@@ -4,6 +4,4 @@ import { globalTheme } from "./theme";
 
 export let storage = localStorage;
 
-export let setisPC = (v: boolean) => {
-  globalTheme.mobile = !v;
-};
+export const setisPC = (v: boolean) => (globalTheme.mobile = !v);
