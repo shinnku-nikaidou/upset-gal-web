@@ -16,7 +16,7 @@ import { DirectionType } from "antd/lib/config-provider";
 import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
-import create from 'zustand';
+import create from "zustand";
 
 const { Dragger } = Upload;
 export const backgroundImageNode = document.getElementsByClassName(
@@ -51,7 +51,6 @@ const pcDefaultBackgroundImageURL: string =
 const mobileDefaultBackgroundImageURL: string =
   "https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg";
 
-
 const defaultColor = {
   primaryColor: "#1890ff",
   errorColor: "#ff4d4f",
@@ -85,12 +84,14 @@ export let globalTheme: Theme = {
 export const useGlobalTheme = create((set: Function) => ({
   mode: "light",
   color: defaultColor,
-  changePrimaryColor: (value: string) => set((state: any) => ({ color: { ...state.color, primaryColor: value, } })),
+  changePrimaryColor: (value: string) =>
+    set((state: any) => ({ color: { ...state.color, primaryColor: value } })),
   mobile: false,
   direction: "ltr",
   changeDirection: (dir: string) => set((state: any) => ({ direction: dir })),
   hasBGImage: true,
-  changeTheme: (newValue: Theme) => set((state: any) => ({ ...state, ...newValue })),
+  changeTheme: (newValue: Theme) =>
+    set((state: any) => ({ ...state, ...newValue })),
 }));
 const handleSkin = (bright: boolean) => {
   if (bright) {
@@ -108,8 +109,7 @@ function addSkin(content: string) {
 
   Object.entries(getStyle).forEach(([_, v], i) => {
     if (v.getAttribute("data-type") === "theme") getStyle[i].remove();
-  }
-  )
+  });
   let styleDom = document.createElement("style");
   styleDom.dataset.type = "theme";
   styleDom.innerHTML = content;
@@ -132,17 +132,20 @@ export default function initChangeTheme(): any {
 }
 
 export const ThemeProviderMenu = (props: {}) => {
-  const [bright, setBright] = useState(globalTheme.mode === "light")
-  const color = useGlobalTheme(state => state.color)
-  const [hasBGImage, setHasBGImage] = useState(globalTheme.hasBGImage)
-  const setPrimaryColor = useGlobalTheme(set => set.changePrimaryColor);
-  const setDirection = useGlobalTheme(state => state.changeDirection);
-  const onColorChange = (primaryColor: string) => { setPrimaryColor(primaryColor); console.log(1, primaryColor); console.log(color) }
-
+  const [bright, setBright] = useState(globalTheme.mode === "light");
+  const color = useGlobalTheme((state) => state.color);
+  const [hasBGImage, setHasBGImage] = useState(globalTheme.hasBGImage);
+  const setPrimaryColor = useGlobalTheme((set) => set.changePrimaryColor);
+  const setDirection = useGlobalTheme((state) => state.changeDirection);
+  const onColorChange = (primaryColor: string) => {
+    setPrimaryColor(primaryColor);
+    console.log(1, primaryColor);
+    console.log(color);
+  };
 
   const changeDirection = (e: RadioChangeEvent) => {
     const directionValue = e.target.value;
-    setDirection(directionValue)
+    setDirection(directionValue);
     storage.setItem("direction", directionValue);
   };
 
@@ -153,121 +156,117 @@ export const ThemeProviderMenu = (props: {}) => {
       const res: string = info.file.response;
       storage.setItem("BGImageURL", res);
       console.log(`${info.file.name} file uploaded successfully.`);
-      changeBackgroundImage("default")
+      changeBackgroundImage("default");
     } else if (status === "error") {
       console.error(`${info.file.name} file upload failed.`);
     }
   }
 
-  return <>
-    <p>主题目前正在开发中, 使用起来可能会有bug, 主题会自动保存</p>
-    <Divider dashed />
-    <div style={{ marginBottom: 16 }}>
-      <span style={{ marginRight: 16 }}>开关背景按钮</span>
-      <Tooltip
-        title={`点击${hasBGImage ? "关闭" : "打开"}背景图`}
+  return (
+    <>
+      <p>主题目前正在开发中, 使用起来可能会有bug, 主题会自动保存</p>
+      <Divider dashed />
+      <div style={{ marginBottom: 16 }}>
+        <span style={{ marginRight: 16 }}>开关背景按钮</span>
+        <Tooltip title={`点击${hasBGImage ? "关闭" : "打开"}背景图`}>
+          <Switch
+            checkedChildren="开"
+            unCheckedChildren="关"
+            defaultChecked={!hasBGImage}
+            onChange={() => {
+              if (hasBGImage) {
+                globalTheme.hasBGImage = false;
+                storage.setItem("hasBGImage", "false");
+                setHasBGImage(false);
+                changeBackgroundImage("");
+              } else {
+                globalTheme.hasBGImage = true;
+                storage.setItem("hasBGImage", "true");
+                setHasBGImage(true);
+                changeBackgroundImage("default");
+              }
+            }}
+          />
+        </Tooltip>
+      </div>
+      <Divider dashed />
+      <div style={{ marginBottom: 16 }}>
+        <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
+        <Tooltip title={`点击切换${bright ? "暗黑" : "明亮"}主题`}>
+          <Switch
+            checkedChildren="🌞"
+            unCheckedChildren="🌜"
+            defaultChecked={bright}
+            onChange={() => {
+              if (bright) {
+                globalTheme.mode = "dark";
+                storage.setItem("mode", "dark");
+                setBright(false);
+                handleSkin(false);
+              } else {
+                globalTheme.mode = "light";
+                storage.setItem("mode", "light");
+                setBright(true);
+                handleSkin(true);
+              }
+            }}
+          />
+        </Tooltip>
+      </div>
+      <Divider dashed />
+      <Dragger
+        multiple={false}
+        method="post"
+        action={window.location.origin + "/upload"}
+        onChange={setBackgroundImage}
       >
-        <Switch
-          checkedChildren="开"
-          unCheckedChildren="关"
-          defaultChecked={!hasBGImage}
-          onChange={() => {
-            if (hasBGImage) {
-              globalTheme.hasBGImage = false;
-              storage.setItem("hasBGImage", "false");
-              setHasBGImage(false);
-              changeBackgroundImage("");
-            } else {
-              globalTheme.hasBGImage = true;
-              storage.setItem("hasBGImage", "true");
-              setHasBGImage(true);
-              changeBackgroundImage("default");
-            }
-          }}
+        <p className="ant-upload-drag-icon">
+          <InboxOutlined />
+        </p>
+        <p className="ant-upload-text">点击或者拖拽图片到此处以切换背景图片</p>
+        <p className="ant-upload-hint">
+          pc端最好上传横屏图片, 手机最好上传竖屏的哦
+        </p>
+      </Dragger>
+      <Divider dashed />
+      <div style={{ marginBottom: 16 }}>
+        <span style={{ marginRight: 16 }}>
+          Change direction of components / 改变方向 / تغيير اتجاه المكونات
+        </span>
+        <Radio.Group
+          defaultValue={useGlobalTheme((state) => state.direction)}
+          onChange={changeDirection}
+        >
+          <Radio.Button key="ltr" value="ltr">
+            LTR
+          </Radio.Button>
+          <Radio.Button key="rtl" value="rtl">
+            RTL
+          </Radio.Button>
+        </Radio.Group>
+      </div>
+      <Divider dashed />
+      <Button
+        danger
+        onClick={() => {
+          storage.clear();
+          window.location.reload();
+        }}
+      >
+        清除设置(谨慎操作)
+      </Button>
+      <Divider dashed />
+      <div style={{ marginBottom: 16 }}>
+        <SketchPicker
+          presetColors={["#1890ff", "#25b864", "#ff6f00"]}
+          color={color.primaryColor}
+          onChange={({ hex }: any) => onColorChange(hex)}
         />
-      </Tooltip>
-    </div>
-    <Divider dashed />
-    <div style={{ marginBottom: 16 }}>
-      <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
-      <Tooltip
-        title={`点击切换${bright ? "暗黑" : "明亮"}主题`}
-      >
-        <Switch
-          checkedChildren="🌞"
-          unCheckedChildren="🌜"
-          defaultChecked={bright}
-          onChange={() => {
-            if (bright) {
-              globalTheme.mode = "dark";
-              storage.setItem("mode", "dark");
-              setBright(false);
-              handleSkin(false);
-            } else {
-              globalTheme.mode = "light";
-              storage.setItem("mode", "light");
-              setBright(true);
-              handleSkin(true);
-            }
-          }}
-        />
-      </Tooltip>
-    </div>
-    <Divider dashed />
-    <Dragger
-      multiple={false}
-      method="post"
-      action={window.location.origin + "/upload"}
-      onChange={setBackgroundImage}
-    >
-      <p className="ant-upload-drag-icon">
-        <InboxOutlined />
-      </p>
-      <p className="ant-upload-text">
-        点击或者拖拽图片到此处以切换背景图片
-      </p>
-      <p className="ant-upload-hint">
-        pc端最好上传横屏图片, 手机最好上传竖屏的哦
-      </p>
-    </Dragger>
-    <Divider dashed />
-    <div style={{ marginBottom: 16 }}>
-      <span style={{ marginRight: 16 }}>
-        Change direction of components / 改变方向 / تغيير اتجاه المكونات
-      </span>
-      <Radio.Group
-        defaultValue={useGlobalTheme(state => state.direction)}
-        onChange={changeDirection}
-      >
-        <Radio.Button key="ltr" value="ltr">
-          LTR
-        </Radio.Button>
-        <Radio.Button key="rtl" value="rtl">
-          RTL
-        </Radio.Button>
-      </Radio.Group>
-    </div>
-    <Divider dashed />
-    <Button
-      danger
-      onClick={() => {
-        storage.clear();
-        window.location.reload();
-      }}
-    >
-      清除设置(谨慎操作)
-    </Button>
-    <Divider dashed />
-    <div style={{ marginBottom: 16 }}>
-      <SketchPicker
-        presetColors={["#1890ff", "#25b864", "#ff6f00"]}
-        color={color.primaryColor}
-        onChange={({ hex }: any) => onColorChange(hex)}
-      />
-      <span style={{ color: color.primaryColor, marginRight: 16 }}>
-        网站色调
-      </span>
-    </div>
-    <Divider dashed />
-  </>
-}
+        <span style={{ color: color.primaryColor, marginRight: 16 }}>
+          网站色调
+        </span>
+      </div>
+      <Divider dashed />
+    </>
+  );
+};

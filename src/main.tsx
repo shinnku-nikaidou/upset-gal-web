@@ -83,7 +83,7 @@ function GalSider(args: GalSiderProps) {
               <Text type="secondary"> powered by shinnku </Text>
               <br />
               <Text>
-                此版本为 <Text code> beta 2.2.rc3</Text> 测试版
+                此版本为 <Text code> beta 2.4</Text> 测试版
               </Text>
             </Footer>
           </Layout>
