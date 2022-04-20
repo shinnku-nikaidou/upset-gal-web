@@ -24,6 +24,12 @@ function showPromiseConfirm(url: string, name: string) {
     onCancel() { },
   });
 }
+
+function nginx_trans_chr(uri: string) {
+  uri = uri.replace(/%/g, "%25")
+  return uri
+}
+
 const FileLi = (args: any) => {
   const [files, setFiles] = useState(getArrayFile());
   const [page, setPage] = useState(1);
@@ -82,8 +88,9 @@ const FileLi = (args: any) => {
           <List.Item
             style={{ paddingLeft: "20px" }}
             onClick={() => {
+              console.log(item.name)
               showPromiseConfirm(
-                "/" + args.url + "/" + item.name, //FIXME: I cant figure out this.props.url , so this may have some bugs.
+                "/" + args.url + "/" + nginx_trans_chr(item.name),
                 decodeURI(item.name)
               );
             }}

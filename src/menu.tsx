@@ -4,6 +4,7 @@ import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { globalTheme, Theme, ThemeProviderMenu, useGlobalTheme } from "./theme";
 import { FileLi } from "./filelist";
+import { RAI } from "./config";
 const { SubMenu } = Menu;
 
 let ArrayFile: any[] = [];
@@ -62,7 +63,7 @@ const SiderMenu = (props: {}) => {
     ReactDOM.render(<Skeleton active />, document.getElementById("main"));
     if (key < 8) {
       type key_map_type = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-      let url = key_map[key as key_map_type];
+      let url: string = "query/" + RAI + "/" + key_map[key as key_map_type];
       ArrayFile = [];
       get_base64(url);
       setTimeout(() => {
