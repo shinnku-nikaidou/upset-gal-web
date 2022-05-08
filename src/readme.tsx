@@ -47,6 +47,16 @@ const Readme = () => {
               </Link>
               ，有问题也可在此反馈。
             </Text>
+            <Text>
+              如果你想查看/改进网页的源代码或者发现了网站的bug，请在此
+              <Link
+                target="_blank"
+                href="https://github.com/shinnku-nikaidou/upset-gal-web"
+              >
+                https://github.com/shinnku-nikaidou/upset-gal-web
+              </Link>
+              拉取pull request，或者提出issue。
+            </Text>
           </Space>
         </Panel>
         <Panel header="FAQ" key="3" className="site-collapse-custom-panel">
