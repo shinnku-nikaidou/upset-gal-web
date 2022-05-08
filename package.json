@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^4.19.5",
+    "antd": "^4.20.2",
     "axios": "^0.26.1",
     "less": "^4.1.2",
     "localforage": "^1.10.0",
