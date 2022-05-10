@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import "./index.less";
-import initChangeTheme, { globalTheme, Theme } from "./theme";
+import initChangeTheme, { globalTheme } from "./theme";
 import { reportWebVitals } from "./reportWebVitals";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";

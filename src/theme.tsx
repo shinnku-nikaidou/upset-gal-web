@@ -28,7 +28,6 @@ export function changeBackgroundImage(url: string) {
     console.log("change to no image");
     backgroundImageNode.style.backgroundImage = "none";
   } else if (url === "default") {
-    console.log("change to default image");
     if (storage.hasOwnProperty("BGImageURL")) {
       const url = storage.getItem("BGImageURL") as string;
       changeBackgroundImage(window.location.origin + "/pictures/" + url);
