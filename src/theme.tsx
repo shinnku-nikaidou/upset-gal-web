@@ -102,7 +102,7 @@ const handleSkin = (bright: boolean) => {
   }
 };
 
-function addSkin(content: string) {
+const addSkin = (content: string) => {
   let head = document.getElementsByTagName("head")[0];
   const getStyle = head.getElementsByTagName("style");
 
@@ -148,7 +148,7 @@ export const ThemeProviderMenu = (props: {}) => {
     storage.setItem("direction", directionValue);
   };
 
-  function setBackgroundImage(info: UploadChangeParam<UploadFile>) {
+  const setBackgroundImage = (info: UploadChangeParam<UploadFile>) => {
     const { status } = info.file;
     console.log(`status = ${status}`);
     if (status === "done") {

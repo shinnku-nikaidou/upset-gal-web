@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import "./index.less";
 import initChangeTheme, { globalTheme } from "./theme";
 import { reportWebVitals } from "./reportWebVitals";
@@ -17,6 +17,7 @@ type GalSiderProps = {};
 
 
 const main = () => {
+  const root = createRoot(document.getElementById("root") as HTMLElement)
   localforage.setDriver(localforage.INDEXEDDB);
   if (storage.hasOwnProperty("mode")) {
     globalTheme.mode = storage.getItem("mode") as "light" | "dark";
@@ -28,12 +29,12 @@ const main = () => {
     // enum: true, false
     globalTheme.hasBGImage = storage.getItem("hasBGImage") === "true";
   }
-  ReactDOM.render(<GalSider />, document.getElementById("root"));
+  root.render(<GalSider />);
   initChangeTheme();
   reportWebVitals();
 }
 
-function GalSider(args: GalSiderProps) {
+const GalSider = (args: GalSiderProps) => {
   const userAgentInfo = navigator.userAgent;
   const Agents = [
     "Android",
