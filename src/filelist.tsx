@@ -13,7 +13,7 @@ const suffix = (
   />
 );
 
-function showPromiseConfirm(url: string, name: string) {
+const showPromiseConfirm = (url: string, name: string) => {
   confirm({
     title: "下载确认",
     icon: <ExclamationCircleOutlined />,
@@ -25,10 +25,9 @@ function showPromiseConfirm(url: string, name: string) {
   });
 }
 
-function nginx_trans_chr(uri: string) {
-  uri = uri.replace(/%/g, "%25")
-  return uri
-}
+const nginx_trans_chr = (uri: string) =>
+  uri.replace(/%/g, "%25");
+
 
 const FileLi = (args: any) => {
   const [files, setFiles] = useState(getArrayFile());
