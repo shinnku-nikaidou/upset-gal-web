@@ -11,6 +11,12 @@ let ArrayFile: any[] = [];
 
 const getArrayFile = () => ArrayFile.sort(() => Math.random() - 0.5);
 
+type Item = {
+  "@type": "folder" | "file";
+  date: string;
+  name: string;
+  size: string;
+};
 
 function get_base64(url: string) {
   let ajaxObj = new XMLHttpRequest();
@@ -19,17 +25,10 @@ function get_base64(url: string) {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
       let responce_text = ajaxObj.responseText;
       let PageRawData = window.atob(responce_text.replace(/&#43;/g, "+"));
-      let PageData = JSON.parse(PageRawData);
-      let ArrayFolder = [];
-      Object.entries(PageData).forEach(([item, value]: [string, any]) => {
-        if (!item.startsWith("@")) {
-          if (value["@type"] === "file") {
-            ArrayFile.push(value);
-          } else if (value["@type"] === "folder") {
-            ArrayFolder.push(value);
-          }
-        }
-      })
+      let PageData = JSON.parse(PageRawData) as Array<Item>;
+      PageData.forEach((v) => {
+        ArrayFile.push(v);
+      });
     }
   };
   ajaxObj.send();
@@ -94,32 +93,33 @@ const SiderMenu = (props: {}) => {
         }
       }
     }
-  };
+  }
 
-
-  return <Menu
-    onClick={handleClick}
-    defaultSelectedKeys={[]}
-    defaultOpenKeys={globalTheme.mobile ? [] : ["sub1", "g2", "sub2"]}
-    mode="inline"
-    theme={theme.mode}
-  >
-    <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
-      <Menu.ItemGroup key="g1" title="分类">
-        <Menu.Item key="0"> windows/pc硬盘 </Menu.Item>
-        <Menu.Item key="1"> apk安装包 </Menu.Item>
-        <Menu.Item key="2"> kirikiri 2 </Menu.Item>
-        <Menu.Item key="3"> ons </Menu.Item>
-        <Menu.Item key="4"> rpg </Menu.Item>
-        <Menu.Item key="5"> 生肉 </Menu.Item>
-        <Menu.Item key="6"> 模拟器 </Menu.Item>
-        <Menu.Item key="7"> Artroid </Menu.Item>
-      </Menu.ItemGroup>
-    </SubMenu>
-    <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
-      <Menu.Item key="10"> 主题 </Menu.Item>
-    </SubMenu>
-  </Menu>
-}
+  return (
+    <Menu
+      onClick={handleClick}
+      defaultSelectedKeys={[]}
+      defaultOpenKeys={globalTheme.mobile ? [] : ["sub1", "g2", "sub2"]}
+      mode="inline"
+      theme={theme.mode}
+    >
+      <SubMenu key="sub1" icon={<AppstoreOutlined />} title="目录">
+        <Menu.ItemGroup key="g1" title="分类">
+          <Menu.Item key="0"> windows/pc硬盘 </Menu.Item>
+          <Menu.Item key="1"> apk安装包 </Menu.Item>
+          <Menu.Item key="2"> kirikiri 2 </Menu.Item>
+          <Menu.Item key="3"> ons </Menu.Item>
+          <Menu.Item key="4"> rpg </Menu.Item>
+          <Menu.Item key="5"> 生肉 </Menu.Item>
+          <Menu.Item key="6"> 模拟器 </Menu.Item>
+          <Menu.Item key="7"> Artroid </Menu.Item>
+        </Menu.ItemGroup>
+      </SubMenu>
+      <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
+        <Menu.Item key="10"> 主题 </Menu.Item>
+      </SubMenu>
+    </Menu>
+  );
+};
 
 export { SiderMenu, getArrayFile };
