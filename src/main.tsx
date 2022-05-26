@@ -13,6 +13,7 @@ const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
 import { useState } from 'react'
 import { useGlobalTheme } from "./theme"
+import Link from 'antd/lib/typography/Link';
 type GalSiderProps = {};
 
 
@@ -81,10 +82,16 @@ const GalSider = (args: GalSiderProps) => {
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-              <Text type="secondary"> powered by shinnku </Text>
+              <Text type="secondary"> powered by shinnku, 注：本站不开源，源码展示出来仅供参考 </Text>
+              <Text type="secondary"> <Link
+                target="_blank"
+                href="https://github.com/shinnku-nikaidou/upset-gal-web"
+              >
+                https://github.com/shinnku-nikaidou/upset-gal-web
+              </Link> </Text>
               <br />
               <Text>
-                此版本为 <Text code> beta 2.4</Text> 测试版
+                此版本为 <Text code> v1.0.1 </Text> 正式版
               </Text>
             </Footer>
           </Layout>

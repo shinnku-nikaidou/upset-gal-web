@@ -6,9 +6,11 @@ export let storage = localStorage;
 
 export const setisPC = (v: boolean) => (globalTheme.mobile = v);
 
+const onedrive_accounts = ["mkw", "02", "gal", "gal2"]
+
 // random_onedrive_account_id
 export const RAI: string = (() => {
-    let a = Math.floor(Math.random() * 4) + 1
-    console.log(`正在使用第${a}个onedrive帐号为您提供服务。`)
-    return a.toString()
+    let a = Math.floor(Math.random() * onedrive_accounts.length)
+    console.log(`Using the ${a}th onedrive account to provide the service`)
+    return onedrive_accounts[a]
 })()

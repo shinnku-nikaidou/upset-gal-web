@@ -47,16 +47,6 @@ const Readme = () => {
               </Link>
               ，有问题也可在此反馈。
             </Text>
-            <Text>
-              如果你想查看/改进网页的源代码或者发现了网站的bug，请在此
-              <Link
-                target="_blank"
-                href="https://github.com/shinnku-nikaidou/upset-gal-web"
-              >
-                https://github.com/shinnku-nikaidou/upset-gal-web
-              </Link>
-              拉取pull request，或者提出issue。
-            </Text>
           </Space>
         </Panel>
         <Panel header="FAQ" key="3" className="site-collapse-custom-panel">
@@ -66,8 +56,7 @@ const Readme = () => {
               否则可能会提示需要认证/登录。如果前面情况发生，请取消下载并从头重新下载。
             </Text>
             <Text>
-              网站下载不限速, 如果下载不动请试试<Text strong>切换 流量</Text>
-              。如果您最开始速度快然后慢慢降速到几十kb/s，请打电话投诉当地网络运营商。
+              网站下载不限速, 如果下载很慢请试试<Text strong>切换 流量</Text>。
             </Text>
             <Text>
               点击下载出现：
@@ -77,12 +66,13 @@ const Readme = () => {
               </Text>{" "}
               这种提示，说明服务器负荷达到上限，请等待上面的
               <Text code> retryAfterSeconds </Text>秒时间再次点击下载就行了。
+              （目前不太可能出现这种情况，因为站点采用了负载均衡，多个网盘同时运作能有效负荷每个月高达160tb以上的下载流量）
             </Text>
             <Text>
               关于主题： 在 <Text code>设置:主题</Text> 可以自由选择切换成
               <Text keyboard>黑暗模式</Text>, 您也可以在主题里选择关闭背景图.
             </Text>
-            <Text>现在暂时不支持自定义网站的背景和主题色</Text>
+            <Text>由于服务器很久以前曾被爆破，现在暂时不支持自定义网站的背景和主题色</Text>
             <Text>主题部分会自动保存</Text>
           </Space>
         </Panel>

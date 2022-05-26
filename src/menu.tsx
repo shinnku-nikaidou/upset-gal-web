@@ -23,9 +23,7 @@ function get_base64(url: string) {
   ajaxObj.open("get", window.location.href + url);
   ajaxObj.onreadystatechange = () => {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
-      let responce_text = ajaxObj.responseText;
-      let PageRawData = window.atob(responce_text.replace(/&#43;/g, "+"));
-      let PageData = JSON.parse(PageRawData) as Array<Item>;
+      let PageData = JSON.parse(ajaxObj.responseText) as Array<Item>;
       PageData.forEach((v) => {
         ArrayFile.push(v);
       });
@@ -62,7 +60,7 @@ const SiderMenu = (props: {}) => {
     ReactDOM.render(<Skeleton active />, document.getElementById("main"));
     if (key < 8) {
       type key_map_type = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-      let url: string = "query/" + RAI + "/" + key_map[key as key_map_type];
+      let url: string = RAI + "/" + key_map[key as key_map_type];
       ArrayFile = [];
       get_base64(url);
       setTimeout(() => {
