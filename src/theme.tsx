@@ -80,6 +80,7 @@ export let globalTheme: Theme = {
   direction: "ltr",
   hasBGImage: true,
 };
+
 export const useGlobalTheme = create((set: Function) => ({
   mode: "light",
   color: defaultColor,
@@ -92,6 +93,7 @@ export const useGlobalTheme = create((set: Function) => ({
   changeTheme: (newValue: Theme) =>
     set((state: any) => ({ ...state, ...newValue })),
 }));
+
 const handleSkin = (bright: boolean) => {
   if (bright) {
     console.log("light");
@@ -113,7 +115,7 @@ const addSkin = (content: string) => {
   styleDom.dataset.type = "theme";
   styleDom.innerHTML = content;
   head.appendChild(styleDom);
-}
+};
 
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
@@ -126,7 +128,7 @@ export default function initChangeTheme(): any {
     import("../node_modules/antd/dist/antd.dark.css");
   }
   if (globalTheme.hasBGImage) {
-    changeBackgroundImage("default");
+    setTimeout(() => changeBackgroundImage("default"), 1000);
   }
 }
 
@@ -155,11 +157,11 @@ export const ThemeProviderMenu = (props: {}) => {
       const res: string = info.file.response;
       storage.setItem("BGImageURL", res);
       console.log(`${info.file.name} file uploaded successfully.`);
-      changeBackgroundImage("default");
+      setTimeout(() => changeBackgroundImage("default"), 1000);
     } else if (status === "error") {
       console.error(`${info.file.name} file upload failed.`);
     }
-  }
+  };
 
   return (
     <>

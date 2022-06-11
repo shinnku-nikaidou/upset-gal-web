@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 import "./index.less";
 import initChangeTheme, { globalTheme } from "./theme";
 import { reportWebVitals } from "./reportWebVitals";
@@ -11,14 +11,28 @@ import { DirectionType } from "antd/lib/config-provider";
 import localforage from "localforage";
 const { Content, Footer, Sider } = Layout;
 const { Text } = Typography;
-import { useState } from 'react'
-import { useGlobalTheme } from "./theme"
-import Link from 'antd/lib/typography/Link';
+import { useState } from "react";
+import { useGlobalTheme } from "./theme";
+import Link from "antd/lib/typography/Link";
 type GalSiderProps = {};
 
+const userAgentInfo = navigator.userAgent;
+const Agents = [
+  "Android",
+  "iPhone",
+  "SymbianOS",
+  "Windows Phone",
+  "iPad",
+  "iPod",
+];
+const exists_Agent = Agents.some((agent) => userAgentInfo.includes(agent));
 
 const main = () => {
-  const root = createRoot(document.getElementById("root") as HTMLElement)
+
+  console.log(exists_Agent ? "检测到您在使用mobile" : "检测到您在使用pc");
+  setisPC(exists_Agent);
+
+  const root = createRoot(document.getElementById("root") as HTMLElement);
   localforage.setDriver(localforage.INDEXEDDB);
   if (storage.hasOwnProperty("mode")) {
     globalTheme.mode = storage.getItem("mode") as "light" | "dark";
@@ -33,31 +47,22 @@ const main = () => {
   root.render(<GalSider />);
   initChangeTheme();
   reportWebVitals();
-}
+};
 
 const GalSider = (args: GalSiderProps) => {
-  const userAgentInfo = navigator.userAgent;
-  const Agents = [
-    "Android",
-    "iPhone",
-    "SymbianOS",
-    "Windows Phone",
-    "iPad",
-    "iPod",
-  ];
-  const exists_Agent = Agents.some((agent) => userAgentInfo.includes(agent)
-  );
-  console.log(exists_Agent ? "检测到您在使用mobile" : "检测到您在使用pc");
   setisPC(exists_Agent);
+
   const [collapsed, setCollapsed] = useState(exists_Agent);
   const [theme, setTheme] = useState(globalTheme);
-  const color = useGlobalTheme(s => s.color);
+  const color = useGlobalTheme((s) => s.color);
 
   const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
 
   return (
     <div style={{ color: color.primaryColor }}>
-      <ConfigProvider direction={useGlobalTheme(state => state.direction) as DirectionType}>
+      <ConfigProvider
+        direction={useGlobalTheme((state) => state.direction) as DirectionType}
+      >
         <Layout style={{ minHeight: "100vh" }}>
           <Sider
             collapsible
@@ -82,13 +87,19 @@ const GalSider = (args: GalSiderProps) => {
               </div>
             </Content>
             <Footer style={{ textAlign: "center" }}>
-              <Text type="secondary"> powered by shinnku, 注：本站不开源，源码展示出来仅供参考 </Text>
-              <Text type="secondary"> <Link
-                target="_blank"
-                href="https://github.com/shinnku-nikaidou/upset-gal-web"
-              >
-                https://github.com/shinnku-nikaidou/upset-gal-web
-              </Link> </Text>
+              <Text type="secondary">
+                {" "}
+                powered by shinnku, 注：本站不开源，源码展示出来仅供参考{" "}
+              </Text>
+              <Text type="secondary">
+                {" "}
+                <Link
+                  target="_blank"
+                  href="https://github.com/shinnku-nikaidou/upset-gal-web"
+                >
+                  https://github.com/shinnku-nikaidou/upset-gal-web
+                </Link>{" "}
+              </Text>
               <br />
               <Text>
                 此版本为 <Text code> v1.0.1 </Text> 正式版
@@ -99,7 +110,7 @@ const GalSider = (args: GalSiderProps) => {
       </ConfigProvider>
     </div>
   );
-}
+};
 
 main();
 
