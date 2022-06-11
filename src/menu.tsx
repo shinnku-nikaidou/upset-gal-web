@@ -97,7 +97,7 @@ const SiderMenu = (props: {}) => {
     <Menu
       onClick={handleClick}
       defaultSelectedKeys={[]}
-      defaultOpenKeys={globalTheme.mobile ? [] : ["sub1", "g2", "sub2"]}
+      defaultOpenKeys={globalTheme.mobile ? ["g2"] : ["sub1", "g2", "sub2"]}
       mode="inline"
       theme={theme.mode}
     >

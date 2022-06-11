@@ -122,10 +122,13 @@ export default function initChangeTheme(): any {
     import("../node_modules/antd/dist/antd.compact.css");
     backgroundImageNode.style.backgroundSize = "cover";
   } else {
+    // import("../node_modules/antd/dist/antd.css");
     backgroundImageNode.style.backgroundSize = "100%";
+    handleSkin(true);
   }
+  
   if (globalTheme.mode == "dark") {
-    import("../node_modules/antd/dist/antd.dark.css");
+    handleSkin(false);
   }
   if (globalTheme.hasBGImage) {
     setTimeout(() => changeBackgroundImage("default"), 1000);
