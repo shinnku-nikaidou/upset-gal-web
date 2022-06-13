@@ -94,41 +94,41 @@ export const useGlobalTheme = create((set: Function) => ({
     set((state: any) => ({ ...state, ...newValue })),
 }));
 
-const handleSkin = (bright: boolean) => {
-  if (bright) {
-    console.log("light");
-    addSkin(light);
-  } else {
-    console.log("dark");
-    addSkin(dark);
-  }
-};
+// const handleSkin = (bright: boolean) => {
+//   if (bright) {
+//     console.log("light");
+//     addSkin(light);
+//   } else {
+//     console.log("dark");
+//     addSkin(dark);
+//   }
+// };
 
-const addSkin = (content: string) => {
-  let head = document.getElementsByTagName("head")[0];
-  const getStyle = head.getElementsByTagName("style");
+// const addSkin = (content: string) => {
+//   let head = document.getElementsByTagName("head")[0];
+//   const getStyle = head.getElementsByTagName("style");
 
-  Object.entries(getStyle).forEach(([_, v], i) => {
-    if (v.getAttribute("data-type") === "theme") getStyle[i].remove();
-  });
-  let styleDom = document.createElement("style");
-  styleDom.dataset.type = "theme";
-  styleDom.innerHTML = content;
-  head.appendChild(styleDom);
-};
+//   Object.entries(getStyle).forEach(([_, v], i) => {
+//     if (v.getAttribute("data-type") === "theme") getStyle[i].remove();
+//   });
+//   let styleDom = document.createElement("style");
+//   styleDom.dataset.type = "theme";
+//   styleDom.innerHTML = content;
+//   head.appendChild(styleDom);
+// };
 
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
     backgroundImageNode.style.backgroundSize = "cover";
   } else {
-    // import("../node_modules/antd/dist/antd.css");
+    import("../node_modules/antd/dist/antd.css");
     backgroundImageNode.style.backgroundSize = "100%";
-    handleSkin(true);
+    // handleSkin(true);
   }
   
   if (globalTheme.mode == "dark") {
-    handleSkin(false);
+    // handleSkin(false);
   }
   if (globalTheme.hasBGImage) {
     setTimeout(() => changeBackgroundImage("default"), 1000);
@@ -136,7 +136,7 @@ export default function initChangeTheme(): any {
 }
 
 export const ThemeProviderMenu = (props: {}) => {
-  const [bright, setBright] = useState(globalTheme.mode === "light");
+  // const [bright, setBright] = useState(globalTheme.mode === "light");
   const color = useGlobalTheme((state) => state.color);
   const [hasBGImage, setHasBGImage] = useState(globalTheme.hasBGImage);
   const setPrimaryColor = useGlobalTheme((set) => set.changePrimaryColor);
@@ -194,7 +194,7 @@ export const ThemeProviderMenu = (props: {}) => {
         </Tooltip>
       </div>
       <Divider dashed />
-      <div style={{ marginBottom: 16 }}>
+      {/* <div style={{ marginBottom: 16 }}>
         <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
         <Tooltip title={`点击切换${bright ? "暗黑" : "明亮"}主题`}>
           <Switch
@@ -217,7 +217,7 @@ export const ThemeProviderMenu = (props: {}) => {
           />
         </Tooltip>
       </div>
-      <Divider dashed />
+      <Divider dashed /> */}
       <Dragger
         multiple={false}
         method="post"

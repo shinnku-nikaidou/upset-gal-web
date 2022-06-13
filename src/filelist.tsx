@@ -1,9 +1,10 @@
 import { List, BackTop, Modal, Input, Pagination, Divider } from "antd";
 import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
-import { getArrayFile } from "./menu";
+import { getArrayFile, Item } from "./menu";
 const { confirm } = Modal;
 const { Search } = Input;
-import { useState } from 'react';
+import { useState } from "react";
+
 const suffix = (
   <AudioOutlined
     style={{
@@ -21,13 +22,11 @@ const showPromiseConfirm = (url: string, name: string) => {
     onOk() {
       window.open(url, "_parent");
     },
-    onCancel() { },
+    onCancel() {},
   });
-}
+};
 
-const nginx_trans_chr = (uri: string) =>
-  uri.replace(/%/g, "%25");
-
+const nginx_trans_chr = (uri: string) => uri.replace(/%/g, "%25");
 
 const FileLi = (args: any) => {
   const [files, setFiles] = useState(getArrayFile());
@@ -37,7 +36,7 @@ const FileLi = (args: any) => {
     value = value.toLowerCase();
     console.log(value);
     let arrayFile = getArrayFile();
-    let newArrayFile = arrayFile.map((v) => [v, 0]);
+    let newArrayFile: Array<[Item, number]> = arrayFile.map((v) => [v, 0]);
     for (let x = 0; x < arrayFile.length; x++) {
       for (let y = 0; y < value.length; y++) {
         try {
@@ -48,7 +47,7 @@ const FileLi = (args: any) => {
           ) {
             newArrayFile[x][1] += 1;
           }
-        } catch { }
+        } catch {}
       }
     }
     for (let x = 0; x < arrayFile.length; x++) {
@@ -62,7 +61,7 @@ const FileLi = (args: any) => {
           ) {
             newArrayFile[x][1] += 5;
           }
-        } catch { }
+        } catch {}
       }
     }
     newArrayFile.sort((a, b) => b[1] - a[1]);
@@ -82,12 +81,12 @@ const FileLi = (args: any) => {
       />
       <List
         itemLayout="horizontal"
-        dataSource={files.slice((page - 1) * 10, page * 10)}
+        dataSource={files.slice((page - 1) * 8, page * 8)}
         renderItem={(item: any) => (
           <List.Item
             style={{ paddingLeft: "20px" }}
             onClick={() => {
-              console.log(item.name)
+              console.log(item.name);
               showPromiseConfirm(
                 "/" + args.url + "/" + nginx_trans_chr(item.name),
                 decodeURI(item.name)
@@ -111,7 +110,6 @@ const FileLi = (args: any) => {
       <Divider dashed />
     </div>
   );
-}
-
+};
 
 export { FileLi };

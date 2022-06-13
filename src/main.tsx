@@ -102,7 +102,7 @@ const GalSider = (args: GalSiderProps) => {
               </Text>
               <br />
               <Text>
-                此版本为 <Text code> v1.0.1 </Text> 正式版
+                此版本为 <Text code> v1.1.0 </Text> 正式版
               </Text>
             </Footer>
           </Layout>

@@ -7,11 +7,11 @@ import { FileLi } from "./filelist";
 import { RAI } from "./config";
 const { SubMenu } = Menu;
 
-let ArrayFile: any[] = [];
+let ArrayFile: Item[] = [];
 
 const getArrayFile = () => ArrayFile.sort(() => Math.random() - 0.5);
 
-type Item = {
+export type Item = {
   "@type": "folder" | "file";
   date: string;
   name: string;
@@ -97,7 +97,8 @@ const SiderMenu = (props: {}) => {
     <Menu
       onClick={handleClick}
       defaultSelectedKeys={[]}
-      defaultOpenKeys={globalTheme.mobile ? ["g2"] : ["sub1", "g2", "sub2"]}
+      defaultOpenKeys={["sub1", "g2", "sub2"]}
+      // defaultOpenKeys={globalTheme.mobile ? ["g2"] : ["sub1", "g2", "sub2"]}
       mode="inline"
       theme={theme.mode}
     >

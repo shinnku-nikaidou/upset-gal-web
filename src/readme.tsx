@@ -9,7 +9,7 @@ const Readme = () => {
     <div>
       <Collapse
         bordered={false}
-        defaultActiveKey={[1, 2, 3]}
+        defaultActiveKey={[1, 2]}
         expandIcon={({ isActive }) => (
           <CaretRightOutlined rotate={isActive ? 90 : 0} />
         )}
