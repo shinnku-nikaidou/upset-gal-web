@@ -26,7 +26,6 @@ const Readme = () => {
         <Panel header="反馈相关" key="2" className="site-collapse-custom-panel">
           <Space direction="vertical">
             <Text>
-              <Text strong> 请注意手机部分非最新浏览器内核机型出现了点击就会卡死的情况，请调整成桌面模式，程序员正在猝死调整中。。。 </Text>
               点此加入
               <Link
                 target="_blank"
