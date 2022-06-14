@@ -92,29 +92,6 @@ export const useGlobalTheme = create((set: Function) => ({
     set((state: any) => ({ ...state, ...newValue })),
 }));
 
-// const handleSkin = (bright: boolean) => {
-//   if (bright) {
-//     console.log("light");
-//     addSkin(light);
-//   } else {
-//     console.log("dark");
-//     addSkin(dark);
-//   }
-// };
-
-// const addSkin = (content: string) => {
-//   let head = document.getElementsByTagName("head")[0];
-//   const getStyle = head.getElementsByTagName("style");
-
-//   Object.entries(getStyle).forEach(([_, v], i) => {
-//     if (v.getAttribute("data-type") === "theme") getStyle[i].remove();
-//   });
-//   let styleDom = document.createElement("style");
-//   styleDom.dataset.type = "theme";
-//   styleDom.innerHTML = content;
-//   head.appendChild(styleDom);
-// };
-
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
@@ -122,12 +99,10 @@ export default function initChangeTheme(): any {
   } else {
     
     backgroundImageNode.style.backgroundSize = "100%";
-    // handleSkin(true);
   }
-  
   // if (globalTheme.mode == "dark") {
-  //   // handleSkin(false);
   // }
+  
   if (globalTheme.hasBGImage) {
     setTimeout(() => changeBackgroundImage("default"), 1000);
   }

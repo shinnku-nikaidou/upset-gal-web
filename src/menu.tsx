@@ -44,7 +44,7 @@ const key_map = {
   7: "Artroid",
 };
 
-const SiderMenu = (props: {}) => {
+const SiderMenu = () => {
   const [theme, setTheme] = useState(globalTheme);
   function removeMain() {
     ReactDOM.unmountComponentAtNode(
@@ -97,7 +97,6 @@ const SiderMenu = (props: {}) => {
     <Menu
       onClick={handleClick}
       defaultSelectedKeys={[]}
-      // defaultOpenKeys={["sub1", "g2"]}
       defaultOpenKeys={globalTheme.mobile ? ["g2"] : ["sub1", "g2", "sub2"]}
       mode="inline"
       // theme={theme.mode}

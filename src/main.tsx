@@ -3,7 +3,7 @@ import initChangeTheme, { globalTheme } from "./theme";
 import { GalPageHead } from "./pageHeader";
 import Readme from "./readme";
 import { SiderMenu } from "./menu";
-import { setisPC, storage } from "./config";
+import { setisPC, storage, version } from "./config";
 import { Layout, Typography, ConfigProvider } from "antd";
 import { DirectionType } from "antd/lib/config-provider";
 const { Content, Footer, Sider } = Layout;
@@ -28,16 +28,10 @@ const exists_Agent = Agents.some((agent) => userAgentInfo.includes(agent));
 setisPC(exists_Agent);
 
 const main = () => {
-  storage.clear()
-
-  // if (storage.hasOwnProperty("mode")) {
-  //   globalTheme.mode = storage.getItem("mode") as "light" | "dark";
-  // }
   if (storage.hasOwnProperty("direction")) {
     globalTheme.direction = storage.getItem("direction") as DirectionType;
   }
   if (storage.hasOwnProperty("hasBGImage")) {
-    // enum: true, false
     globalTheme.hasBGImage = storage.getItem("hasBGImage") === "true";
   }
   ReactDOM.render(<GalSider />, document.getElementById("root"));
@@ -45,63 +39,54 @@ const main = () => {
 };
 
 const GalSider = (args: GalSiderProps) => {
-  // setisPC(exists_Agent);
-
   const [collapsed, setCollapsed] = useState(exists_Agent);
-  // const [theme, setTheme] = useState(globalTheme);
-  // const color = useGlobalTheme((s) => s.color);
 
   const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
 
   return (
-    // <div style={{ color: color.primaryColor }}>
-      <ConfigProvider
-        direction={useGlobalTheme((state) => state.direction) as DirectionType}
-      >
-        <Layout style={{ minHeight: "100vh" }}>
-          <Sider
-            collapsible
-            collapsed={collapsed}
-            onCollapse={onCollapse}
-            theme={"light"}
-            // theme={theme.mode}
-          >
-            <div className="logo" />
-            <SiderMenu />
-          </Sider>
-          <Layout className="site-layout">
-            <GalPageHead />
-            <Content style={{ margin: "0 16px" }}>
-              <div
-                className="site-layout-background"
-                style={{ padding: 24, minHeight: 360 }}
-              >
-                <div id="main"></div>
-                <div id="readme">
-                  <Readme />
-                </div>
+    <ConfigProvider
+      direction={useGlobalTheme((state) => state.direction) as DirectionType}
+    >
+      <Layout style={{ minHeight: "100vh" }}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={onCollapse}
+          theme={"light"}
+          // theme={theme.mode}
+        >
+          <div className="logo" />
+          <SiderMenu />
+        </Sider>
+        <Layout className="site-layout">
+          <GalPageHead />
+          <Content style={{ margin: "0 16px" }}>
+            <div
+              className="site-layout-background"
+              style={{ padding: 24, minHeight: 360 }}
+            >
+              <div id="main"></div>
+              <div id="readme">
+                <Readme />
               </div>
-            </Content>
-            <Footer style={{ textAlign: "center" }}>
-              <Text type="secondary">
-                powered by shinnku, 注：源码展示出来仅供参考
-              </Text>
-              <Text type="secondary">
-                <Link
-                  target="_blank"
-                  href="https://github.com/shinnku-nikaidou/upset-gal-web"
-                >
-                </Link>
-              </Text>
-              <br />
-              <Text>
-                此版本为 <Text code> v1.3.0 </Text> 正式版
-              </Text>
-            </Footer>
-          </Layout>
+            </div>
+          </Content>
+          <Footer style={{ textAlign: "center" }}>
+            <Text type="secondary">
+              powered by shinnku, 注：源码展示出来仅供参考
+              <Link
+                target="_blank"
+                href="https://github.com/shinnku-nikaidou/upset-gal-web"
+              ></Link>
+            </Text>
+            <br />
+            <Text>
+              此版本为 <Text code> {version} </Text> 正式版
+            </Text>
+          </Footer>
         </Layout>
-      </ConfigProvider>
-    // </div>
+      </Layout>
+    </ConfigProvider>
   );
 };
 

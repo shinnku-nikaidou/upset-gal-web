@@ -14,3 +14,5 @@ export const RAI: string = (() => {
     console.log(`Using the ${onedrive_accounts[a]} onedrive account to provide the service`)
     return onedrive_accounts[a]
 })()
+
+export const version = "v1.3.0"
