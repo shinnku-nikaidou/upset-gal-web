@@ -61,9 +61,8 @@ const Readme = () => {
             <Text>
               点击下载出现：
               <Text code>
-                {" "}
-                {`{"error":{"code":"activityLimitReached",...`}{" "}
-              </Text>{" "}
+                {`{"error":{"code":"activityLimitReached",...`}
+              </Text>
               这种提示，说明服务器负荷达到上限，请等待上面的
               <Text code> retryAfterSeconds </Text>秒时间再次点击下载就行了。
               （目前不太可能出现这种情况，因为站点采用了负载均衡，多个网盘同时运作能有效负荷每个月高达160tb以上的下载流量）

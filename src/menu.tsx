@@ -2,9 +2,9 @@ import { useState } from "react";
 import ReactDOM from "react-dom";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-// import { globalTheme, Theme, ThemeProviderMenu, useGlobalTheme } from "./theme";
 import { FileLi } from "./filelist";
 import { RAI } from "./config";
+import { globalTheme, ThemeProviderMenu } from "./theme";
 const { SubMenu } = Menu;
 
 let ArrayFile: Item[] = [];
@@ -45,7 +45,7 @@ const key_map = {
 };
 
 const SiderMenu = (props: {}) => {
-  // const [theme, setTheme] = useState(globalTheme);
+  const [theme, setTheme] = useState(globalTheme);
   function removeMain() {
     ReactDOM.unmountComponentAtNode(
       document.getElementById("main") as HTMLElement
@@ -78,18 +78,18 @@ const SiderMenu = (props: {}) => {
         }, 200);
       });
     } else {
-      // switch (key) {
-      //   case 10: {
-      //     removeMain();
-      //     ReactDOM.render(
-      //       <ThemeProviderMenu />,
-      //       document.getElementById("main")
-      //     );
-      //   }
-      //   default: {
-      //     break;
-      //   }
-      // }
+      switch (key) {
+        case 10: {
+          removeMain();
+          ReactDOM.render(
+            <ThemeProviderMenu />,
+            document.getElementById("main")
+          );
+        }
+        default: {
+          break;
+        }
+      }
     }
   }
 
@@ -97,8 +97,8 @@ const SiderMenu = (props: {}) => {
     <Menu
       onClick={handleClick}
       defaultSelectedKeys={[]}
-      defaultOpenKeys={["sub1", "g2"]}
-      // defaultOpenKeys={globalTheme.mobile ? ["g2"] : ["sub1", "g2", "sub2"]}
+      // defaultOpenKeys={["sub1", "g2"]}
+      defaultOpenKeys={globalTheme.mobile ? ["g2"] : ["sub1", "g2", "sub2"]}
       mode="inline"
       // theme={theme.mode}
     >
@@ -114,9 +114,9 @@ const SiderMenu = (props: {}) => {
           <Menu.Item key="7"> Artroid </Menu.Item>
         </Menu.ItemGroup>
       </SubMenu>
-      {/* <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
+      <SubMenu key="sub2" icon={<SettingOutlined />} title="设置">
         <Menu.Item key="10"> 主题 </Menu.Item>
-      </SubMenu> */}
+      </SubMenu>
     </Menu>
   );
 };
