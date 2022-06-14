@@ -1,10 +1,11 @@
 import { List, BackTop, Modal, Input, Pagination, Divider } from "antd";
 import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
-import { getArrayFile } from "./menu";
+import { changeFileLi, getArrayFile } from "./menu";
 const { confirm } = Modal;
 const { Search } = Input;
 import { useState } from "react";
-import { Item } from "./type";
+import { Item, key_map_type } from "./type";
+import { get_key, key_map, RAI } from "./config";
 
 const suffix = (
   <AudioOutlined
@@ -19,7 +20,7 @@ const showPromiseConfirm = (url: string, name: string) => {
   confirm({
     title: "下载确认",
     icon: <ExclamationCircleOutlined />,
-    content: "你确定要下载" + name + "吗？",
+    content: `你确定要下载 ${name} 吗？`,
     onOk() {
       window.open(url, "_parent");
     },
@@ -29,7 +30,7 @@ const showPromiseConfirm = (url: string, name: string) => {
 
 const nginx_trans_chr = (uri: string) => uri.replace(/%/g, "%25");
 
-const FileLi = (args: any) => {
+const FileLi = (args: { url: string }) => {
   const [files, setFiles] = useState(getArrayFile());
   const [page, setPage] = useState(1);
 
@@ -96,7 +97,14 @@ const FileLi = (args: any) => {
                   );
                   break;
                 case "folder":
-                  console.log(`this is just a file ${JSON.stringify(item)}`)
+                  console.log(`this is just a folder ${JSON.stringify(item)}`);
+                  changeFileLi(
+                    RAI +
+                      "/" +
+                      key_map[get_key() as key_map_type] +
+                      "/" +
+                      item.name
+                  );
                   break;
               }
             }}

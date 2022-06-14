@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Menu, message, Skeleton } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { FileLi } from "./filelist";
-import { RAI } from "./config";
+import { get_key, key_map, RAI, set_key } from "./config";
 import { globalTheme, ThemeProviderMenu } from "./theme";
 import { indexType, Item, key_map_type } from "./type";
 const { SubMenu } = Menu;
@@ -12,12 +12,12 @@ let ArrayFile: Item[] = [];
 
 const getArrayFile = () => ArrayFile.sort(() => Math.random() - 0.5);
 
-
 function get_base64(url: string) {
   let ajaxObj = new XMLHttpRequest();
   ajaxObj.open("get", window.location.href + url);
   ajaxObj.onreadystatechange = () => {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
+      ArrayFile = [];
       let PageData = JSON.parse(ajaxObj.responseText) as Array<Item>;
       PageData.forEach((v) => {
         ArrayFile.push(v);
@@ -27,51 +27,41 @@ function get_base64(url: string) {
   ajaxObj.send();
 }
 
-const key_map = {
-  0: "win",
-  1: "Android直装",
-  2: "krkr",
-  3: "ons",
-  4: "rpg",
-  5: "生肉",
-  6: "模拟器",
-  7: "Artroid",
-};
+function removeMain() {
+  ReactDOM.unmountComponentAtNode(
+    document.getElementById("main") as HTMLElement
+  );
+}
+
+export function changeFileLi(url: string) {
+  get_base64(url);
+  setTimeout(() => {
+    const hide = message.loading("正在加载中", 0);
+    let mainMounttimeId = setInterval(() => {
+      if (getArrayFile().length !== 0) {
+        removeMain();
+        ReactDOM.render(<FileLi url={url} />, document.getElementById("main"));
+        clearInterval(mainMounttimeId);
+        setTimeout(hide);
+      }
+    }, 200);
+  });
+}
 
 const SiderMenu = () => {
   const [theme, setTheme] = useState(globalTheme);
-  function removeMain() {
-    ReactDOM.unmountComponentAtNode(
-      document.getElementById("main") as HTMLElement
-    );
-  }
 
   function handleClick(e: { key: string }) {
-    const key = parseInt(e.key) as indexType;
+    set_key(parseInt(e.key) as indexType);
     ReactDOM.unmountComponentAtNode(
       document.getElementById("main") as HTMLElement
     );
     ReactDOM.render(<Skeleton active />, document.getElementById("main"));
-    if (key < 8) {
-      let url: string = RAI + "/" + key_map[key as key_map_type];
-      ArrayFile = [];
-      get_base64(url);
-      setTimeout(() => {
-        const hide = message.loading("正在加载中", 0);
-        let mainMounttimeId = setInterval(() => {
-          if (getArrayFile().length !== 0) {
-            removeMain();
-            ReactDOM.render(
-              <FileLi url={url} />,
-              document.getElementById("main")
-            );
-            clearInterval(mainMounttimeId);
-            setTimeout(hide);
-          }
-        }, 200);
-      });
+    if (get_key() < 8) {
+      let url: string = RAI + "/" + key_map[get_key() as key_map_type];
+      changeFileLi(url);
     } else {
-      switch (key) {
+      switch (get_key()) {
         case 10: {
           removeMain();
           ReactDOM.render(
