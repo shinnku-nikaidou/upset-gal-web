@@ -10,11 +10,11 @@ import {
   Upload,
 } from "antd";
 import { storage } from "./config";
-import { DirectionType } from "antd/lib/config-provider";
 import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
+import { Theme } from "./type";
 
 const { Dragger } = Upload;
 export const backgroundImageNode = document.getElementsByClassName(
@@ -56,20 +56,6 @@ const defaultColor = {
   infoColor: "#1890ff",
 };
 
-export type Theme = {
-  // mode: "light" | "dark";
-  color: {
-    primaryColor: string;
-    errorColor: string;
-    warningColor: string;
-    successColor: string;
-    infoColor: string;
-  };
-  backgroundImage?: string;
-  mobile: boolean;
-  direction?: DirectionType;
-  hasBGImage: boolean;
-};
 
 export let globalTheme: Theme = {
   // mode: "light",
@@ -102,7 +88,7 @@ export default function initChangeTheme(): any {
   }
   // if (globalTheme.mode == "dark") {
   // }
-  
+
   if (globalTheme.hasBGImage) {
     setTimeout(() => changeBackgroundImage("default"), 1000);
   }

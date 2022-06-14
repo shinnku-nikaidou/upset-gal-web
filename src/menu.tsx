@@ -5,18 +5,13 @@ import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { FileLi } from "./filelist";
 import { RAI } from "./config";
 import { globalTheme, ThemeProviderMenu } from "./theme";
+import { indexType, Item, key_map_type } from "./type";
 const { SubMenu } = Menu;
 
 let ArrayFile: Item[] = [];
 
 const getArrayFile = () => ArrayFile.sort(() => Math.random() - 0.5);
 
-export type Item = {
-  "@type": "folder" | "file";
-  date: string;
-  name: string;
-  size: string;
-};
 
 function get_base64(url: string) {
   let ajaxObj = new XMLHttpRequest();
@@ -31,7 +26,6 @@ function get_base64(url: string) {
   };
   ajaxObj.send();
 }
-type indexType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 10;
 
 const key_map = {
   0: "win",
@@ -59,7 +53,6 @@ const SiderMenu = () => {
     );
     ReactDOM.render(<Skeleton active />, document.getElementById("main"));
     if (key < 8) {
-      type key_map_type = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
       let url: string = RAI + "/" + key_map[key as key_map_type];
       ArrayFile = [];
       get_base64(url);

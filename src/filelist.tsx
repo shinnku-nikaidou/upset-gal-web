@@ -1,9 +1,10 @@
 import { List, BackTop, Modal, Input, Pagination, Divider } from "antd";
 import { ExclamationCircleOutlined, AudioOutlined } from "@ant-design/icons";
-import { getArrayFile, Item } from "./menu";
+import { getArrayFile } from "./menu";
 const { confirm } = Modal;
 const { Search } = Input;
 import { useState } from "react";
+import { Item } from "./type";
 
 const suffix = (
   <AudioOutlined
@@ -82,20 +83,27 @@ const FileLi = (args: any) => {
       <List
         itemLayout="horizontal"
         dataSource={files.slice((page - 1) * 8, page * 8)}
-        renderItem={(item: any) => (
+        renderItem={(item: Item) => (
           <List.Item
             style={{ paddingLeft: "20px" }}
             onClick={() => {
               console.log(item.name);
-              showPromiseConfirm(
-                "/" + args.url + "/" + nginx_trans_chr(item.name),
-                decodeURI(item.name)
-              );
+              switch (item["@type"]) {
+                case "file":
+                  showPromiseConfirm(
+                    "/" + args.url + "/" + nginx_trans_chr(item.name),
+                    decodeURI(item.name)
+                  );
+                  break;
+                case "folder":
+                  console.log(`this is just a file ${JSON.stringify(item)}`)
+                  break;
+              }
             }}
           >
             <List.Item.Meta
               title={decodeURI(item.name)}
-              description={"size: " + item.size}
+              description={`size:  ${item.size}  type ${item["@type"]}`}
             />
           </List.Item>
         )}
