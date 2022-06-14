@@ -13,15 +13,12 @@ let ArrayFile: Item[] = [];
 const getArrayFile = () => ArrayFile.sort(() => Math.random() - 0.5);
 
 function get_base64(url: string) {
+  ArrayFile = [];
   let ajaxObj = new XMLHttpRequest();
   ajaxObj.open("get", window.location.href + url);
   ajaxObj.onreadystatechange = () => {
     if (ajaxObj.readyState === 4 && ajaxObj.status === 200) {
-      ArrayFile = [];
-      let PageData = JSON.parse(ajaxObj.responseText) as Array<Item>;
-      PageData.forEach((v) => {
-        ArrayFile.push(v);
-      });
+      ArrayFile = JSON.parse(ajaxObj.responseText) as Array<Item>;
     }
   };
   ajaxObj.send();
