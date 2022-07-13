@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
 import { keyMap } from "./data/consts";
-import { setIsPC, TKey } from "./data/interfaces";
+import { TKey } from "./data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
 import { getAccount } from "./utils";
 
@@ -79,7 +79,7 @@ const main = () => {
     "iPod",
   ];
   const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
-  setIsPC(existsAgent);
+  globalTheme.mobile = existsAgent;
 
   if (localStorage.hasOwnProperty("direction"))
     globalTheme.direction = localStorage.getItem("direction") as DirectionType;
