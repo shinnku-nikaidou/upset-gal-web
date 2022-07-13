@@ -1,18 +1,16 @@
-import { DirectionType } from "antd/lib/config-provider";
+import type { DirectionType } from "antd/es/config-provider";
+import { keyMap } from "./consts";
+
+import { globalTheme } from "../theme";
 
 export type Item = {
   "@type": "folder" | "file";
   date: string;
   name: string;
   size: string;
-};
-
-type indexType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 10;
-
-type key_map_type = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+}
 
 export type Theme = {
-  // mode: "light" | "dark";
   color: {
     primaryColor: string;
     errorColor: string;
@@ -24,4 +22,8 @@ export type Theme = {
   mobile: boolean;
   direction?: DirectionType;
   hasBGImage: boolean;
-};
+}
+
+export const setIsPC = (v: boolean) => (globalTheme.mobile = v);
+
+export type TKey = keyof typeof keyMap | "10" | null;
