@@ -21,14 +21,14 @@ export const FileList = ({
 
   const loadFiles = useCallback(async (hide: MessageType) => {
     let res: Item[] = [];
-    const resp = await fetch(window.location.href + url);
+    const resp = await fetch(`${window.location.origin}/${url}`);
     if (resp.status === 200 || resp.status === 304)
       res = await resp.json();
     shuffleArray(res);
     setFiles(res);
     setDispFiles(res);
     hide();
-  }, [window.location.href, url, setFiles]);
+  }, [window.location.origin, url, setFiles]);
 
   useEffect(() => {
     setFiles([]);
