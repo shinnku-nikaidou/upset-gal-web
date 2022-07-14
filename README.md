@@ -1,6 +1,6 @@
 # In upset web project
 
-Use Vite + React + Antd
+Use Vite + React + Antd.
 
 ## Available Scripts
 
@@ -10,6 +10,7 @@ In the project directory, you can run:
 yarn
 yarn run dev
 ```
-to start this project
 
-This project is run in the website <https://shinnku.com/> .
+to start this project.
+
+This project is run in the website <https://shinnku.com/>.

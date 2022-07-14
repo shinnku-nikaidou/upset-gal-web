@@ -1,5 +1,6 @@
+// TODO: refactor this file
+
 import { useState } from "react";
-// import { SketchPicker } from "react-color";
 import {
   Button,
   Divider,
@@ -9,12 +10,13 @@ import {
   Tooltip,
   Upload,
 } from "antd";
-import { storage } from "./config";
 import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
-import { Theme } from "./type";
+import { Theme } from "./data/interfaces";
+
+let storage = localStorage;
 
 const { Dragger } = Upload;
 export const backgroundImageNode = document.getElementsByClassName(
