@@ -41,7 +41,11 @@ export const FileList = ({
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage]);
 
   const onSearch = useCallback((val: string) => {
-    setDispFiles(files.filter((file) => file.name.includes(val)));
+    const searchStr = val.toLocaleLowerCase();
+    setDispFiles(files.filter((file) => {
+      const fileName = file.name.toLocaleLowerCase();
+      return fileName.includes(searchStr);
+    }));
     setPage(1);
   }, [files, setDispFiles, setPage]);
 
