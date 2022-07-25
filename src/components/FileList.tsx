@@ -41,11 +41,9 @@ export const FileList = ({
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage]);
 
   const onSearch = useCallback((val: string) => {
-    const searchStr = val.toLocaleLowerCase();
-    setDispFiles(files.filter((file) => {
-      const fileName = file.name.toLocaleLowerCase();
-      return fileName.includes(searchStr);
-    }));
+    // 把待搜索字符串逐字符拆开，并在中间插入 (.*?) 来实现模糊匹配
+    const searchReg = new RegExp(`^(.*?)(${val.split("").join(")(.*?)(")})(.*?)$`, "i"); // 终极混乱邪恶正则
+    setDispFiles(files.filter((file) => searchReg.test(file.name)));
     setPage(1);
   }, [files, setDispFiles, setPage]);
 
