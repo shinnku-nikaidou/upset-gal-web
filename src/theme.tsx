@@ -56,7 +56,6 @@ const defaultColor = {
   infoColor: "#1890ff",
 };
 
-
 export let globalTheme: Theme = {
   // mode: "light",
   color: defaultColor,
@@ -72,7 +71,7 @@ export const useGlobalTheme = create((set: Function) => ({
     set((state: any) => ({ color: { ...state.color, primaryColor: value } })),
   mobile: false,
   direction: "ltr",
-  changeDirection: (dir: string) => set((state: any) => ({ direction: dir })),
+  changeDirection: (dir: string) => set(() => ({ direction: dir })),
   hasBGImage: true,
   changeTheme: (newValue: Theme) =>
     set((state: any) => ({ ...state, ...newValue })),
@@ -83,7 +82,6 @@ export default function initChangeTheme(): any {
     import("../node_modules/antd/dist/antd.compact.css");
     backgroundImageNode.style.backgroundSize = "cover";
   } else {
-    
     backgroundImageNode.style.backgroundSize = "100%";
   }
   // if (globalTheme.mode == "dark") {
@@ -95,16 +93,10 @@ export default function initChangeTheme(): any {
 }
 
 export const ThemeProviderMenu = (props: {}) => {
-  // const [bright, setBright] = useState(globalTheme.mode === "light");
   const color = useGlobalTheme((state) => state.color);
   const [hasBGImage, setHasBGImage] = useState(globalTheme.hasBGImage);
   const setPrimaryColor = useGlobalTheme((set) => set.changePrimaryColor);
   const setDirection = useGlobalTheme((state) => state.changeDirection);
-  const onColorChange = (primaryColor: string) => {
-    setPrimaryColor(primaryColor);
-    console.log(1, primaryColor);
-    console.log(color);
-  };
 
   const changeDirection = (e: RadioChangeEvent) => {
     const directionValue = e.target.value;
