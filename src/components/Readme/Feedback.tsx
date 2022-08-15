@@ -20,17 +20,6 @@ export const Feedback = () => (
         </Link>
         <span>，有问题请在此反馈。</span>
       </Text>
-      <Text>
-        <span>此为 </span>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href="https://jq.qq.com/?_wv=1027&k=XixqG2P0"
-        >
-          qq 群（点击此处直接加群）
-        </Link>
-        <span>，有问题也可在此反馈。</span>
-      </Text>
     </Space>
   </Panel>
 );

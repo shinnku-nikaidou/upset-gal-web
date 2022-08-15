@@ -40,10 +40,45 @@ export const FileList = ({
   const [page, setPage] = useState(1);
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage]);
 
+  const _search = (value: string) => {
+    value = value.toLowerCase();
+    console.log(value);
+    let arrayFile: Item[] = files;
+    let newArrayFile: Array<[Item, number]> = arrayFile.map((v) => [v, 0]);
+    for (let x = 0; x < arrayFile.length; x++) {
+      for (let y = 0; y < value.length; y++) {
+        try {
+          let name = decodeURIComponent(arrayFile[x].name).toLowerCase();
+          if (
+            name.substring(0, name.length - 3).includes(value[y]) &&
+            value[y] !== " "
+          ) {
+            newArrayFile[x][1] += 1;
+          }
+        } catch { }
+      }
+    }
+    for (let x = 0; x < arrayFile.length; x++) {
+      for (let y = 0; y < value.length - 2; y++) {
+        try {
+          let name = decodeURIComponent(arrayFile[x].name).toLowerCase();
+          if (
+            name
+              .substring(0, name.length - 3)
+              .includes(value.substring(y, y + 2))
+          ) {
+            newArrayFile[x][1] += 5;
+          }
+        } catch { }
+      }
+    }
+    newArrayFile.sort((a, b) => b[1] - a[1]);
+    setFiles(newArrayFile.map((v) => v[0]));
+  };
+
   const onSearch = useCallback((val: string) => {
-    // 把待搜索字符串逐字符拆开，并在中间插入 (.*?) 来实现模糊匹配
-    const searchReg = new RegExp(`^(.*?)(${val.split("").join(")(.*?)(")})(.*?)$`, "i"); // 终极混乱邪恶正则
-    setDispFiles(files.filter((file) => searchReg.test(file.name)));
+    _search(val);
+    setDispFiles(files);
     setPage(1);
   }, [files, setDispFiles, setPage]);
 
