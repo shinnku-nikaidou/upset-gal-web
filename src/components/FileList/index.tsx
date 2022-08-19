@@ -2,9 +2,46 @@ import { useCallback, useEffect, useState } from "react";
 import { Divider, Dropdown, Input, List, message, Pagination, Skeleton } from "antd";
 import { MessageType } from "antd/lib/message";
 import { Item } from "../../data/interfaces";
-import { nginxTransChar, showPromiseConfirm, shuffleArray } from "../../utils";
-import { searchEngine } from "../../utils/searchFile";
-import { menu } from "./RightClick";
+import { searchEngine, shuffleArray } from "../../utils";
+import { RightClickMenu } from "./RightClick";
+
+const FileItem = ({
+  item,
+  url,
+}: {
+  item: Item;
+  url: string;
+}) => (
+  <List.Item style={{ paddingLeft: "20px" }}>
+    <Dropdown
+      overlay={<RightClickMenu item={item} url={url} />}
+      trigger={["contextMenu", "click"]}
+    >
+      <List.Item.Meta
+        title={item.name}
+        description={`Size: ${item.size}, Type: ${item["@type"]}`}
+      />
+    </Dropdown>
+  </List.Item>
+);
+
+const FolderItem = ({
+  item,
+  changeDirectory,
+}: {
+  item: Item;
+  changeDirectory: (name: string) => void;
+}) => (
+  <List.Item
+    style={{ paddingLeft: "20px" }}
+    onClick={() => { changeDirectory(item.name); }}
+  >
+    <List.Item.Meta
+      title={item.name}
+      description={`Size: ${item.size}, Type: ${item["@type"]}`}
+    />
+  </List.Item>
+);
 
 interface IFileListProps {
   url: string;
@@ -30,7 +67,7 @@ export const FileList = ({
     setFiles(res);
     setDispFiles(res);
     hide();
-  }, [window.location.origin, url, setFiles]);
+  }, [window.location.origin, url]);
 
   useEffect(() => {
     setFiles([]);
@@ -43,46 +80,14 @@ export const FileList = ({
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage]);
 
   const onSearch = useCallback((val: string) => {
-    const newArrayFile = searchEngine(val, files);
-    setFiles(newArrayFile.map((v) => v[0]));
-    setDispFiles(files);
+    const newArrayFile = searchEngine(val, files).map((v) => v[0]);
+    setFiles(newArrayFile);
+    setDispFiles(newArrayFile);
     setPage(1);
-  }, [files, setDispFiles, setPage]);
+  }, [files, setFiles, setDispFiles, setPage]);
 
   if (files.length === 0)
     return <Skeleton active />;
-
-  const fileItem = (item: Item) => (<List.Item
-    style={{ paddingLeft: "20px" }}
-    // onClick={() => {
-    //   if (item["@type"] === "file") {
-    //     showPromiseConfirm(
-    //       item.name,
-    //       `/${url}/${nginxTransChar(item.name)}`
-    //     );
-    //   } else {
-    //     changeDirectory(item.name);
-    //   }
-    // }}
-  >
-    <Dropdown overlay={menu(item, url)} trigger={['contextMenu', 'click']}>
-      <List.Item.Meta
-        title={item.name}
-        description={`Size: ${item.size}, Type: ${item["@type"]}`}
-      />
-    </Dropdown>
-  </List.Item>)
-
-
-  const folderItem = (item: Item) => (<List.Item
-    style={{ paddingLeft: "20px" }}
-    onClick={() => { changeDirectory(item.name); }}
-  >
-    <List.Item.Meta
-      title={item.name}
-      description={`Size: ${item.size}, Type: ${item["@type"]}`}
-    />
-  </List.Item>)
 
   return (
     <div>
@@ -96,8 +101,10 @@ export const FileList = ({
         itemLayout="horizontal"
         dataSource={dispFiles.slice((page - 1) * 8, page * 8)}
         renderItem={(item: Item) => {
-          if (item["@type"] === "file") return fileItem(item)
-          else return folderItem(item)
+          if (item["@type"] === "file") {
+            return <FileItem item={item} url={url} />;
+          }
+          return <FolderItem item={item} changeDirectory={changeDirectory} />;
         }}
       />
       <Pagination

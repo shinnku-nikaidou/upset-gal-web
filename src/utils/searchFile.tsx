@@ -2,11 +2,10 @@ import { Item } from "../data/interfaces";
 
 export const searchEngine = (value: string, files: Item[]) => {
   value = value.toLowerCase();
-  console.log(value);
   let arrayFile: Item[] = files;
   let newArrayFile: Array<[Item, number]> = arrayFile.map((v) => [v, 0]);
-  for (let x = 0; x < arrayFile.length; x++) {
-    for (let y = 0; y < value.length; y++) {
+  for (let x = 0; x < arrayFile.length; x ++) {
+    for (let y = 0; y < value.length; y ++) {
       try {
         const name = decodeURIComponent(arrayFile[x].name).toLowerCase();
         if (
@@ -17,7 +16,7 @@ export const searchEngine = (value: string, files: Item[]) => {
         }
       } catch { }
     }
-    for (let y = 0; y < value.length - 2; y++) {
+    for (let y = 0; y < value.length - 2; y ++) {
       try {
         let name = decodeURIComponent(arrayFile[x].name).toLowerCase();
         if (name.includes(value.substring(y, y + 2))) {
