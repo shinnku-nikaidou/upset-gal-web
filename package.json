@@ -8,7 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "antd": "^4.19.5",
+    "antd": "^4.22.8",
     "less": "^4.1.2",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
