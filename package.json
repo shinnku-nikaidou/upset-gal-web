@@ -1,7 +1,9 @@
 {
   "name": "upset-gal-web",
   "private": true,
-  "version": "0.0.0",
+  "author": "Shinnku <nikaidou@shinnku.com>",
+  "version": "3.0.0",
+  "license": "no license",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
