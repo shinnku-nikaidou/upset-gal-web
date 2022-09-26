@@ -19,14 +19,12 @@ import { Theme } from "./data/interfaces";
 let storage = localStorage;
 
 const { Dragger } = Upload;
-export const backgroundImageNode = document.getElementsByClassName(
-  "box"
-)[0] as HTMLElement;
+export const bgiNode = document.getElementById("bgi") as HTMLElement;
 
 export function changeBackgroundImage(url: string) {
   if (url === "") {
     console.log("change to no image");
-    backgroundImageNode.style.backgroundImage = "none";
+    bgiNode.style.backgroundImage = "none";
   } else if (url === "default") {
     if (storage.hasOwnProperty("BGImageURL")) {
       const url = storage.getItem("BGImageURL") as string;
@@ -40,7 +38,7 @@ export function changeBackgroundImage(url: string) {
     }
   } else {
     console.log(`change to ${url} image`);
-    backgroundImageNode.style.backgroundImage = `url(${url})`;
+    bgiNode.style.backgroundImage = `url(${url})`;
   }
 }
 
@@ -82,9 +80,9 @@ export const useGlobalTheme = create((set: Function) => ({
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
-    backgroundImageNode.style.backgroundSize = "cover";
+    bgiNode.style.backgroundSize = "cover";
   } else {
-    backgroundImageNode.style.backgroundSize = "100%";
+    bgiNode.style.backgroundSize = "100%";
   }
   // if (globalTheme.mode == "dark") {
   // }

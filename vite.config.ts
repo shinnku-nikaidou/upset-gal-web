@@ -6,19 +6,19 @@ export default defineConfig({
   server: {
     proxy: {
       "/mkw": {
-        target: "https://shinnku.com/",
+        target: "https://dev.shinnku.com/",
         changeOrigin: true,
       },
       "/02": {
-        target: "https://shinnku.com/",
+        target: "https://dev.shinnku.com/",
         changeOrigin: true,
       },
       "/gal": {
-        target: "https://shinnku.com/",
+        target: "https://dev.shinnku.com/",
         changeOrigin: true,
       },
       "/gal2": {
-        target: "https://shinnku.com/",
+        target: "https://dev.shinnku.com/",
         changeOrigin: true,
       },
     },

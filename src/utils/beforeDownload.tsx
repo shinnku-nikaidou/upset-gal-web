@@ -7,8 +7,8 @@ export const showPromiseConfirm = (name: string, url: string) => {
   Modal.confirm({
     title: "下载确认",
     icon: <ExclamationCircleOutlined />,
-    content: `你确定要下载 ${name} 吗？`,
-    onOk: () => window.open(url, "_parent"), // Strange download method, which I have never seen before, but it seems to work well :)
+    content: `你确定要下载 ${name} ?`,
+    onOk: () => window.open(url, "_parent"),
     onCancel: () => { },
   });
 };

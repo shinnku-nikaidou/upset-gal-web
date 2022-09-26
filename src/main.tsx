@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
 import { keyMap } from "./data/consts";
@@ -10,6 +10,7 @@ import { getAccount } from "./utils";
 import "./index.less";
 
 import initChangeTheme, { globalTheme, ThemeProviderMenu, useGlobalTheme } from "./theme";
+import t, { initLanguage } from "./languages";
 
 const { Content, Sider } = Layout;
 
@@ -34,6 +35,7 @@ const Main = ({
 
   return (
     <React.StrictMode>
+      <title>{"galgame 资源分享"}</title>
       <ConfigProvider direction={useGlobalTheme((state) => state.direction) as DirectionType}>
         <Layout style={{ minHeight: "100vh" }}>
           <Sider
@@ -52,7 +54,7 @@ const Main = ({
                 style={{ padding: 24, minHeight: 360 }}
               >
                 {key !== null && (key === "10" ? <ThemeProviderMenu /> : (
-                  <FileList 
+                  <FileList
                     url={url}
                     changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
                   />
@@ -68,15 +70,13 @@ const Main = ({
   );
 };
 
-const main = () => {
+const main = async () => {
+  await initLanguage();
   const userAgentInfo = window.navigator.userAgent;
   const Agents = [
     "Android",
     "iPhone",
-    "SymbianOS",
-    "Windows Phone",
     "iPad",
-    "iPod",
   ];
   const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
   globalTheme.mobile = existsAgent;
@@ -85,9 +85,12 @@ const main = () => {
     globalTheme.direction = localStorage.getItem("direction") as DirectionType;
   if (localStorage.hasOwnProperty("hasBGImage"))
     globalTheme.hasBGImage = localStorage.getItem("hasBGImage") === "true";
-
-  ReactDOM.render(<Main existsAgent={existsAgent} />, document.getElementById("root"));
+  const container = document.getElementById("root") as HTMLElement;
+  const root = createRoot(container);
+  root.render(<Main existsAgent={existsAgent} />,);
   initChangeTheme();
 };
 
 main();
+
+
