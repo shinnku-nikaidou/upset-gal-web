@@ -2,7 +2,7 @@
   "name": "upset-gal-web",
   "private": true,
   "author": "Shinnku <nikaidou@shinnku.com>",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "license": "no license",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "antd": "^4.23.3",
     "less": "^4.1.2",
     "react": "^18.2.0",
@@ -20,8 +21,8 @@
   "devDependencies": {
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "typescript": "^4.8.4",
     "@vitejs/plugin-react": "^2.1.0",
+    "typescript": "^4.8.4",
     "vite": "^3.1.4"
   }
 }
