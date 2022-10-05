@@ -1,5 +1,6 @@
+// TODO: refactor this file
+
 import { useState } from "react";
-import { SketchPicker } from "react-color";
 import {
   Button,
   Divider,
@@ -9,26 +10,22 @@ import {
   Tooltip,
   Upload,
 } from "antd";
-import dark from "./style/dark.less";
-import light from "./style/light.less";
-import { storage } from "./config";
-import { DirectionType } from "antd/lib/config-provider";
 import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
+import { Theme } from "./data/interfaces";
+
+let storage = localStorage;
 
 const { Dragger } = Upload;
-export const backgroundImageNode = document.getElementsByClassName(
-  "box"
-)[0] as HTMLElement;
+export const bgiNode = document.getElementById("bgi") as HTMLElement;
 
 export function changeBackgroundImage(url: string) {
   if (url === "") {
     console.log("change to no image");
-    backgroundImageNode.style.backgroundImage = "none";
+    bgiNode.style.backgroundImage = "none";
   } else if (url === "default") {
-    console.log("change to default image");
     if (storage.hasOwnProperty("BGImageURL")) {
       const url = storage.getItem("BGImageURL") as string;
       changeBackgroundImage(window.location.origin + "/pictures/" + url);
@@ -41,7 +38,7 @@ export function changeBackgroundImage(url: string) {
     }
   } else {
     console.log(`change to ${url} image`);
-    backgroundImageNode.style.backgroundImage = `url(${url})`;
+    bgiNode.style.backgroundImage = `url(${url})`;
   }
 }
 
@@ -59,28 +56,14 @@ const defaultColor = {
   infoColor: "#1890ff",
 };
 
-export type Theme = {
-  mode: "light" | "dark";
-  color: {
-    primaryColor: string;
-    errorColor: string;
-    warningColor: string;
-    successColor: string;
-    infoColor: string;
-  };
-  backgroundImage?: string;
-  mobile: boolean;
-  direction?: DirectionType;
-  hasBGImage: boolean;
-};
-
 export let globalTheme: Theme = {
-  mode: "light",
+  // mode: "light",
   color: defaultColor,
   mobile: false,
   direction: "ltr",
   hasBGImage: true,
 };
+
 export const useGlobalTheme = create((set: Function) => ({
   mode: "light",
   color: defaultColor,
@@ -88,60 +71,32 @@ export const useGlobalTheme = create((set: Function) => ({
     set((state: any) => ({ color: { ...state.color, primaryColor: value } })),
   mobile: false,
   direction: "ltr",
-  changeDirection: (dir: string) => set((state: any) => ({ direction: dir })),
+  changeDirection: (dir: string) => set(() => ({ direction: dir })),
   hasBGImage: true,
   changeTheme: (newValue: Theme) =>
     set((state: any) => ({ ...state, ...newValue })),
 }));
-const handleSkin = (bright: boolean) => {
-  if (bright) {
-    console.log("light");
-    addSkin(light);
-  } else {
-    console.log("dark");
-    addSkin(dark);
-  }
-};
-
-function addSkin(content: string) {
-  let head = document.getElementsByTagName("head")[0];
-  const getStyle = head.getElementsByTagName("style");
-
-  Object.entries(getStyle).forEach(([_, v], i) => {
-    if (v.getAttribute("data-type") === "theme") getStyle[i].remove();
-  });
-  let styleDom = document.createElement("style");
-  styleDom.dataset.type = "theme";
-  styleDom.innerHTML = content;
-  head.appendChild(styleDom);
-}
 
 export default function initChangeTheme(): any {
   if (globalTheme.mobile) {
     import("../node_modules/antd/dist/antd.compact.css");
-    backgroundImageNode.style.backgroundSize = "cover";
+    bgiNode.style.backgroundSize = "cover";
   } else {
-    backgroundImageNode.style.backgroundSize = "100%";
+    bgiNode.style.backgroundSize = "100%";
   }
-  if (globalTheme.mode == "dark") {
-    import("../node_modules/antd/dist/antd.dark.css");
-  }
+  // if (globalTheme.mode == "dark") {
+  // }
+
   if (globalTheme.hasBGImage) {
-    changeBackgroundImage("default");
+    setTimeout(() => changeBackgroundImage("default"), 1000);
   }
 }
 
 export const ThemeProviderMenu = (props: {}) => {
-  const [bright, setBright] = useState(globalTheme.mode === "light");
   const color = useGlobalTheme((state) => state.color);
   const [hasBGImage, setHasBGImage] = useState(globalTheme.hasBGImage);
   const setPrimaryColor = useGlobalTheme((set) => set.changePrimaryColor);
   const setDirection = useGlobalTheme((state) => state.changeDirection);
-  const onColorChange = (primaryColor: string) => {
-    setPrimaryColor(primaryColor);
-    console.log(1, primaryColor);
-    console.log(color);
-  };
 
   const changeDirection = (e: RadioChangeEvent) => {
     const directionValue = e.target.value;
@@ -149,18 +104,18 @@ export const ThemeProviderMenu = (props: {}) => {
     storage.setItem("direction", directionValue);
   };
 
-  function setBackgroundImage(info: UploadChangeParam<UploadFile>) {
+  const setBackgroundImage = (info: UploadChangeParam<UploadFile>) => {
     const { status } = info.file;
     console.log(`status = ${status}`);
     if (status === "done") {
       const res: string = info.file.response;
       storage.setItem("BGImageURL", res);
       console.log(`${info.file.name} file uploaded successfully.`);
-      changeBackgroundImage("default");
+      setTimeout(() => changeBackgroundImage("default"), 1000);
     } else if (status === "error") {
       console.error(`${info.file.name} file upload failed.`);
     }
-  }
+  };
 
   return (
     <>
@@ -190,7 +145,7 @@ export const ThemeProviderMenu = (props: {}) => {
         </Tooltip>
       </div>
       <Divider dashed />
-      <div style={{ marginBottom: 16 }}>
+      {/* <div style={{ marginBottom: 16 }}>
         <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
         <Tooltip title={`点击切换${bright ? "暗黑" : "明亮"}主题`}>
           <Switch
@@ -213,7 +168,7 @@ export const ThemeProviderMenu = (props: {}) => {
           />
         </Tooltip>
       </div>
-      <Divider dashed />
+      <Divider dashed /> */}
       <Dragger
         multiple={false}
         method="post"
@@ -256,7 +211,7 @@ export const ThemeProviderMenu = (props: {}) => {
         清除设置(谨慎操作)
       </Button>
       <Divider dashed />
-      <div style={{ marginBottom: 16 }}>
+      {/* <div style={{ marginBottom: 16 }}>
         <SketchPicker
           presetColors={["#1890ff", "#25b864", "#ff6f00"]}
           color={color.primaryColor}
@@ -266,7 +221,7 @@ export const ThemeProviderMenu = (props: {}) => {
           网站色调
         </span>
       </div>
-      <Divider dashed />
+      <Divider dashed /> */}
     </>
   );
 };

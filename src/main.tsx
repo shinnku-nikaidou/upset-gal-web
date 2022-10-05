@@ -1,98 +1,96 @@
-import ReactDOM from "react-dom";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { createRoot } from 'react-dom/client';
+import { Layout, ConfigProvider } from "antd";
+import { DirectionType } from "antd/es/config-provider";
+import { keyMap } from "./data/consts";
+import { TKey } from "./data/interfaces";
+import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
+import { getAccount } from "./utils";
+
 import "./index.less";
-import initChangeTheme, { globalTheme, Theme } from "./theme";
-import { reportWebVitals } from "./reportWebVitals";
-import { GalPageHead } from "./pageHeader";
-import Readme from "./readme";
-import { SiderMenu } from "./menu";
-import { setisPC, storage } from "./config";
-import { Layout, Typography, ConfigProvider } from "antd";
-import { DirectionType } from "antd/lib/config-provider";
-import localforage from "localforage";
-const { Content, Footer, Sider } = Layout;
-const { Text } = Typography;
-import { useState } from 'react'
-import { useGlobalTheme } from "./theme"
-type GalSiderProps = {};
 
+import initChangeTheme, { globalTheme, ThemeProviderMenu, useGlobalTheme } from "./theme";
+import t, { initLanguage } from "./languages";
 
-const main = () => {
-  localforage.setDriver(localforage.INDEXEDDB);
-  if (storage.hasOwnProperty("mode")) {
-    globalTheme.mode = storage.getItem("mode") as "light" | "dark";
-  }
-  if (storage.hasOwnProperty("direction")) {
-    globalTheme.direction = storage.getItem("direction") as DirectionType;
-  }
-  if (storage.hasOwnProperty("hasBGImage")) {
-    // enum: true, false
-    globalTheme.hasBGImage = storage.getItem("hasBGImage") === "true";
-  }
-  ReactDOM.render(<GalSider />, document.getElementById("root"));
-  initChangeTheme();
-  reportWebVitals();
-}
+const { Content, Sider } = Layout;
 
-function GalSider(args: GalSiderProps) {
-  const userAgentInfo = navigator.userAgent;
-  const Agents = [
-    "Android",
-    "iPhone",
-    "SymbianOS",
-    "Windows Phone",
-    "iPad",
-    "iPod",
-  ];
-  const exists_Agent = Agents.some((agent) => userAgentInfo.includes(agent)
-  );
-  console.log(exists_Agent ? "检测到您在使用mobile" : "检测到您在使用pc");
-  setisPC(exists_Agent);
-  const [collapsed, setCollapsed] = useState(exists_Agent);
-  const [theme, setTheme] = useState(globalTheme);
-  const color = useGlobalTheme(s => s.color);
+const Main = ({
+  existsAgent
+}: {
+  existsAgent: boolean;
+}) => {
+  const [collapsed, setCollapsed] = useState(existsAgent);
 
-  const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
+  const urlPrefix = useMemo(() => getAccount(), []);
+
+  const [key, setKey] = useState<TKey>(null);
+  const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    if (key !== null && key !== "10")
+      setUrl(`${urlPrefix}/${keyMap[key]}`);
+  }, [key, setUrl]);
+
+  const onCollapse = useCallback((collapsed: boolean) => setCollapsed(collapsed), [setCollapsed]);
 
   return (
-    <div style={{ color: color.primaryColor }}>
-      <ConfigProvider direction={useGlobalTheme(state => state.direction) as DirectionType}>
+    <React.StrictMode>
+      <title>{"galgame 资源分享"}</title>
+      <ConfigProvider direction={useGlobalTheme((state) => state.direction) as DirectionType}>
         <Layout style={{ minHeight: "100vh" }}>
           <Sider
             collapsible
             collapsed={collapsed}
             onCollapse={onCollapse}
-            theme={theme.mode}
+            theme="light"
           >
-            <div className="logo" />
-            <SiderMenu />
+            <SideMenu setKey={setKey} />
           </Sider>
           <Layout className="site-layout">
-            <GalPageHead />
+            <GalPageHeader />
             <Content style={{ margin: "0 16px" }}>
               <div
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
               >
-                <div id="main"></div>
-                <div id="readme">
-                  <Readme />
-                </div>
+                {key !== null && (key === "10" ? <ThemeProviderMenu /> : (
+                  <FileList
+                    url={url}
+                    changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
+                  />
+                ))}
+                <Readme />
               </div>
             </Content>
-            <Footer style={{ textAlign: "center" }}>
-              <Text type="secondary"> powered by shinnku </Text>
-              <br />
-              <Text>
-                此版本为 <Text code> beta 2.4</Text> 测试版
-              </Text>
-            </Footer>
+            <PageFooter />
           </Layout>
         </Layout>
       </ConfigProvider>
-    </div>
+    </React.StrictMode>
   );
-}
+};
+
+const main = async () => {
+  await initLanguage();
+  const userAgentInfo = window.navigator.userAgent;
+  const Agents = [
+    "Android",
+    "iPhone",
+    "iPad",
+  ];
+  const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
+  globalTheme.mobile = existsAgent;
+
+  if (localStorage.hasOwnProperty("direction"))
+    globalTheme.direction = localStorage.getItem("direction") as DirectionType;
+  if (localStorage.hasOwnProperty("hasBGImage"))
+    globalTheme.hasBGImage = localStorage.getItem("hasBGImage") === "true";
+  const container = document.getElementById("root") as HTMLElement;
+  const root = createRoot(container);
+  root.render(<Main existsAgent={existsAgent} />,);
+  initChangeTheme();
+};
 
 main();
 
-export default GalSider;
+

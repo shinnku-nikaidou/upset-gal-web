@@ -1,14 +1,26 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  css: {
-    preprocessorOptions: {
-      less: {
-        javascriptEnabled: true,
-      }
+  server: {
+    proxy: {
+      "/mkw": {
+        target: "https://dev.shinnku.com/",
+        changeOrigin: true,
+      },
+      "/02": {
+        target: "https://dev.shinnku.com/",
+        changeOrigin: true,
+      },
+      "/gal": {
+        target: "https://dev.shinnku.com/",
+        changeOrigin: true,
+      },
+      "/gal2": {
+        target: "https://dev.shinnku.com/",
+        changeOrigin: true,
+      },
     },
   },
-})
+});

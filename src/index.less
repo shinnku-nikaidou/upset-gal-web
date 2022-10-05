@@ -1,3 +1,5 @@
+@import "../node_modules/antd/dist/antd.css";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, oxygen,
@@ -7,9 +9,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 img {
@@ -29,7 +39,7 @@ img {
   opacity: 0.25;
 }
 
+// https://stackoverflow.com/a/61316941/13040423
 .ant-list-item:hover {
-  // https://stackoverflow.com/a/61316941/13040423
   box-shadow: 0 0 4px #eee;
 }
