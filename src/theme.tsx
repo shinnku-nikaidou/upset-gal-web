@@ -56,13 +56,16 @@ const defaultColor = {
   infoColor: "#1890ff",
 };
 
-export let globalTheme: Theme = {
-  // mode: "light",
-  color: defaultColor,
-  mobile: false,
-  direction: "ltr",
-  hasBGImage: true,
-};
+export const useImageURL = create<BGIState>((set: Function) => ({
+  url: "",
+  changeURL: (newURL: string) => set(() => {
+    console.log(`in changeURL, newURL is ${newURL}`)
+    if (newURL === "default") {
+      bgiNode.style.
+    }
+    return ({ url: newURL })
+  })
+}));
 
 export const useGlobalTheme = create((set: Function) => ({
   mode: "light",
