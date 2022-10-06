@@ -3,7 +3,7 @@ import { Menu } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { TKey } from "../data/interfaces";
 
-import { globalTheme } from "../theme";
+import { getMobile } from "../theme";
 
 const { SubMenu, ItemGroup, Item } = Menu;
 
@@ -22,7 +22,7 @@ export const SideMenu = ({
     <Menu
       onClick={onClick}
       defaultSelectedKeys={[]}
-      defaultOpenKeys={globalTheme.mobile ? [] : ["sub1", "sub2"]}
+      defaultOpenKeys={getMobile() ? [] : ["sub1", "sub2"]}
       mode="inline"
     >
       <SubMenu

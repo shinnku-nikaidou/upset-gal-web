@@ -1,6 +1,4 @@
-// TODO: refactor this file
-
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Button,
   Divider,
@@ -14,33 +12,22 @@ import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
-import { Theme } from "./data/interfaces";
-
-let storage = localStorage;
+import { persist } from 'zustand/middleware';
+import { ThemeState, Mode, BGIState } from "./data/interfaces";
+import { DirectionType } from "antd/es/config-provider";
 
 const { Dragger } = Upload;
 export const bgiNode = document.getElementById("bgi") as HTMLElement;
 
-export function changeBackgroundImage(url: string) {
-  if (url === "") {
-    console.log("change to no image");
-    bgiNode.style.backgroundImage = "none";
-  } else if (url === "default") {
-    if (storage.hasOwnProperty("BGImageURL")) {
-      const url = storage.getItem("BGImageURL") as string;
-      changeBackgroundImage(window.location.origin + "/pictures/" + url);
-    } else {
-      if (globalTheme.mobile) {
-        changeBackgroundImage(mobileDefaultBackgroundImageURL);
-      } else {
-        changeBackgroundImage(pcDefaultBackgroundImageURL);
-      }
-    }
-  } else {
-    console.log(`change to ${url} image`);
-    bgiNode.style.backgroundImage = `url(${url})`;
-  }
+// mobile is prop not state, so do not move it to GlobalTheme
+let mobile = true;
+export function getMobile() {
+  return mobile;
 }
+export const isMobile = (existsAgent: boolean) => {
+  console.log(`find this device is ${existsAgent} mobile`);
+  mobile = existsAgent
+};
 
 const pcDefaultBackgroundImageURL: string =
   "https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg";
@@ -57,64 +44,72 @@ const defaultColor = {
 };
 
 export const useImageURL = create<BGIState>((set: Function) => ({
-  url: "",
+  url: "default",
   changeURL: (newURL: string) => set(() => {
     console.log(`in changeURL, newURL is ${newURL}`)
     if (newURL === "default") {
-      bgiNode.style.
+      if (!getMobile())
+        bgiNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
+      else bgiNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
+    } else if (newURL === "") {
+      bgiNode.style.backgroundImage = 'None';
     }
     return ({ url: newURL })
   })
 }));
 
-export const useGlobalTheme = create((set: Function) => ({
+
+export const useGlobalTheme = create<ThemeState>((set: Function) => ({
   mode: "light",
+  changeMode: (newMode: Mode) => set((state: ThemeState) => {
+    console.log(`I change ${newMode}`)
+    if (state.mode == "dark") { import('../node_modules/antd/dist/antd.dark.less') };
+    return ({ mode: newMode })
+  }),
   color: defaultColor,
   changePrimaryColor: (value: string) =>
     set((state: any) => ({ color: { ...state.color, primaryColor: value } })),
-  mobile: false,
   direction: "ltr",
-  changeDirection: (dir: string) => set(() => ({ direction: dir })),
+  changeDirection: (dir: DirectionType) => { set(() => ({ direction: dir })) },
   hasBGImage: true,
-  changeTheme: (newValue: Theme) =>
-    set((state: any) => ({ ...state, ...newValue })),
+  isUploadBGI: (flag: boolean) => {
+    set(() => ({ hasBGImage: flag }))
+  }
 }));
 
-export default function initChangeTheme(): any {
-  if (globalTheme.mobile) {
+export default function initChangeTheme(): void {
+  const globalTheme = useGlobalTheme.getState();
+  if (getMobile()) {
     import("../node_modules/antd/dist/antd.compact.css");
     bgiNode.style.backgroundSize = "cover";
   } else {
     bgiNode.style.backgroundSize = "100%";
   }
-  // if (globalTheme.mode == "dark") {
-  // }
 
+  console.log(globalTheme);
   if (globalTheme.hasBGImage) {
-    setTimeout(() => changeBackgroundImage("default"), 1000);
+    // changeURL("")
   }
 }
 
 export const ThemeProviderMenu = (props: {}) => {
   const color = useGlobalTheme((state) => state.color);
-  const [hasBGImage, setHasBGImage] = useState(globalTheme.hasBGImage);
-  const setPrimaryColor = useGlobalTheme((set) => set.changePrimaryColor);
+  const [hasBGImage, setHasBGImage] = useState(useGlobalTheme.getState().hasBGImage);
+  const setPrimaryColor = useGlobalTheme((state) => state.changePrimaryColor);
   const setDirection = useGlobalTheme((state) => state.changeDirection);
-
-  const changeDirection = (e: RadioChangeEvent) => {
-    const directionValue = e.target.value;
-    setDirection(directionValue);
-    storage.setItem("direction", directionValue);
-  };
+  const setMode = useGlobalTheme((s) => s.changeMode);
+  const changeURL = useImageURL((state) => state.changeURL)
+  const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value);
+  const changeMode = (mode: boolean) => setMode(mode ? "light" : "dark");
 
   const setBackgroundImage = (info: UploadChangeParam<UploadFile>) => {
     const { status } = info.file;
     console.log(`status = ${status}`);
     if (status === "done") {
       const res: string = info.file.response;
-      storage.setItem("BGImageURL", res);
+      // storage.setItem("BGImageURL", res);
       console.log(`${info.file.name} file uploaded successfully.`);
-      setTimeout(() => changeBackgroundImage("default"), 1000);
+      setTimeout(() => changeURL("default"), 1000);
     } else if (status === "error") {
       console.error(`${info.file.name} file upload failed.`);
     }
@@ -122,8 +117,6 @@ export const ThemeProviderMenu = (props: {}) => {
 
   return (
     <>
-      <p>主题目前正在开发中, 使用起来可能会有bug, 主题会自动保存</p>
-      <Divider dashed />
       <div style={{ marginBottom: 16 }}>
         <span style={{ marginRight: 16 }}>开关背景按钮</span>
         <Tooltip title={`点击${hasBGImage ? "关闭" : "打开"}背景图`}>
@@ -133,45 +126,30 @@ export const ThemeProviderMenu = (props: {}) => {
             defaultChecked={!hasBGImage}
             onChange={() => {
               if (hasBGImage) {
-                globalTheme.hasBGImage = false;
-                storage.setItem("hasBGImage", "false");
                 setHasBGImage(false);
-                changeBackgroundImage("");
+                changeURL("");
               } else {
-                globalTheme.hasBGImage = true;
-                storage.setItem("hasBGImage", "true");
                 setHasBGImage(true);
-                changeBackgroundImage("default");
+                changeURL("default");
               }
-            }}
+            }
+            }
           />
         </Tooltip>
       </div>
       <Divider dashed />
-      {/* <div style={{ marginBottom: 16 }}>
+      <div style={{ marginBottom: 16 }}>
         <span style={{ marginRight: 16 }}>黑暗/明亮主题切换</span>
-        <Tooltip title={`点击切换${bright ? "暗黑" : "明亮"}主题`}>
+        <Tooltip title={`点击切换${useGlobalTheme(s => s.mode) == "light" ? "暗黑" : "明亮"}主题`}>
           <Switch
             checkedChildren="🌞"
             unCheckedChildren="🌜"
-            defaultChecked={bright}
-            onChange={() => {
-              if (bright) {
-                globalTheme.mode = "dark";
-                storage.setItem("mode", "dark");
-                setBright(false);
-                handleSkin(false);
-              } else {
-                globalTheme.mode = "light";
-                storage.setItem("mode", "light");
-                setBright(true);
-                handleSkin(true);
-              }
-            }}
+            defaultChecked={useGlobalTheme(s => s.mode) == "light" ? true : false}
+            onChange={changeMode}
           />
         </Tooltip>
       </div>
-      <Divider dashed /> */}
+      <Divider dashed />
       <Dragger
         multiple={false}
         method="post"
@@ -192,7 +170,7 @@ export const ThemeProviderMenu = (props: {}) => {
           Change direction of components / 改变方向 / تغيير اتجاه المكونات
         </span>
         <Radio.Group
-          defaultValue={useGlobalTheme((state) => state.direction)}
+          defaultValue={useGlobalTheme(s => s.direction)}
           onChange={changeDirection}
         >
           <Radio.Button key="ltr" value="ltr">
@@ -207,7 +185,6 @@ export const ThemeProviderMenu = (props: {}) => {
       <Button
         danger
         onClick={() => {
-          storage.clear();
           window.location.reload();
         }}
       >
