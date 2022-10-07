@@ -8,17 +8,13 @@ import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./compone
 import { getAccount } from "./utils";
 import "./index.less";
 
-import initChangeTheme, { isMobile, ThemeProviderMenu, useGlobalTheme } from "./theme";
+import initChangeTheme, { getMobile, isMobile, ThemeProviderMenu, useGlobalTheme } from "./theme";
 import t, { initLanguage } from "./languages";
 
 const { Content, Sider } = Layout;
 
-const Main = ({
-  existsAgent
-}: {
-  existsAgent: boolean;
-}) => {
-  const [collapsed, setCollapsed] = useState(existsAgent);
+const Main = () => {
+  const [collapsed, setCollapsed] = useState(getMobile());
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);
   const [url, setUrl] = useState("");
@@ -72,7 +68,7 @@ const main = async () => {
     theme: {
       primaryColor: '#25b864',
     },
-  });  
+  });
   checkversion();
   await initLanguage();
   const userAgentInfo = window.navigator.userAgent;
@@ -84,7 +80,7 @@ const main = async () => {
   const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
   isMobile(existsAgent);
   const container = document.getElementById("root") as HTMLElement;
-  createRoot(container).render(<Main existsAgent={existsAgent} />,);
+  createRoot(container).render(<Main />,);
   initChangeTheme();
 };
 

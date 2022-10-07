@@ -15,19 +15,19 @@ export default defineConfig({
   server: {
     proxy: {
       "/mkw": {
-        target: "https://dev.shinnku.com/",
+        target: "http://localhost:3000/",
         changeOrigin: true,
       },
       "/02": {
-        target: "https://dev.shinnku.com/",
+        target: "http://localhost:3000/",
         changeOrigin: true,
       },
       "/gal": {
-        target: "https://dev.shinnku.com/",
+        target: "http://localhost:3000/",
         changeOrigin: true,
       },
       "/gal2": {
-        target: "https://dev.shinnku.com/",
+        target: "http://localhost:3000/",
         changeOrigin: true,
       },
     },
