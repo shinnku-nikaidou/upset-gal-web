@@ -15,7 +15,8 @@ import create from "zustand";
 import { persist } from 'zustand/middleware';
 import { ThemeState, Mode, BGIState } from "./data/interfaces";
 import { DirectionType } from "antd/es/config-provider";
-const toggleTheme = require("@zougt/vite-plugin-theme-preprocessor/dist/browser-utils.js");
+// @ts-ignore
+import { toggleTheme } from "@zougt/vite-plugin-theme-preprocessor/dist/browser-utils.js";
 
 const { Dragger } = Upload;
 export const bgiNode = document.getElementById("bgi") as HTMLElement;
