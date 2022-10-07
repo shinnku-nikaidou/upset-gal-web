@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useState } from "react";
-import { Divider, Dropdown, Input, List, message, Pagination, Skeleton } from "antd";
+import {
+  Divider,
+  Dropdown,
+  Input,
+  List,
+  message,
+  Pagination,
+  Skeleton,
+} from "antd";
 import { MessageType } from "antd/lib/message";
 import { Item } from "../../data/interfaces";
 import { searchEngine, shuffleArray } from "../../utils";
 import { RightClickMenu } from "./RightClick";
 
-const FileItem = ({
-  item,
-  url,
-}: {
-  item: Item;
-  url: string;
-}) => (
+const FileItem = ({ item, url }: { item: Item; url: string }) => (
   <List.Item style={{ paddingLeft: "20px" }}>
     <Dropdown
       overlay={<RightClickMenu item={item} url={url} />}
@@ -34,7 +36,9 @@ const FolderItem = ({
 }) => (
   <List.Item
     style={{ paddingLeft: "20px" }}
-    onClick={() => { changeDirectory(item.name); }}
+    onClick={() => {
+      changeDirectory(item.name);
+    }}
   >
     <List.Item.Meta
       title={item.name}
@@ -48,26 +52,26 @@ interface IFileListProps {
   changeDirectory: (name: string) => void;
 }
 
-export const FileList = ({
-  url,
-  changeDirectory,
-}: IFileListProps) => {
-  if (url === "") /// TODO: remove this hack
+export const FileList = ({ url, changeDirectory }: IFileListProps) => {
+  if (url === "")
+    /// TODO: remove this hack
     return <Skeleton active />;
 
   const [files, setFiles] = useState<Item[]>([]);
   const [dispFiles, setDispFiles] = useState<Item[]>([]);
 
-  const loadFiles = useCallback(async (hide: MessageType) => {
-    let res: Item[] = [];
-    const resp = await fetch(`${window.location.origin}/${url}`);
-    if (resp.status === 200 || resp.status === 304)
-      res = await resp.json();
-    shuffleArray(res);
-    setFiles(res);
-    setDispFiles(res);
-    hide();
-  }, [window.location.origin, url]);
+  const loadFiles = useCallback(
+    async (hide: MessageType) => {
+      let res: Item[] = [];
+      const resp = await fetch(`${window.location.origin}/${url}`);
+      if (resp.status === 200 || resp.status === 304) res = await resp.json();
+      shuffleArray(res);
+      setFiles(res);
+      setDispFiles(res);
+      hide();
+    },
+    [window.location.origin, url]
+  );
 
   useEffect(() => {
     setFiles([]);
@@ -79,15 +83,18 @@ export const FileList = ({
   const [page, setPage] = useState(1);
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage]);
 
-  const onSearch = useCallback((val: string) => {
-    const newArrayFile = searchEngine(val, files).map((v) => v[0]);
-    setFiles(newArrayFile);
-    setDispFiles(newArrayFile);
-    setPage(1);
-  }, [files, setFiles, setDispFiles, setPage]);
+  const onSearch = useCallback(
+    (val: string) => {
+      const tmp = searchEngine(val, files);
+      const newArrayFile = tmp.map((v) => v[0]);
+      setFiles(newArrayFile);
+      setDispFiles(tmp.filter((v) => v[1] > 0).map((v) => v[0]));
+      setPage(1);
+    },
+    [files, setFiles, setDispFiles, setPage]
+  );
 
-  if (files.length === 0)
-    return <Skeleton active />;
+  if (files.length === 0) return <Skeleton active />;
 
   return (
     <div>

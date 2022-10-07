@@ -1,4 +1,4 @@
-export const VERSION = "v1.3.0";
+export const VERSION = "v3.0.1";
 
 export const onedriveAccounts = ["mkw", "02", "gal", "gal2"];
 
