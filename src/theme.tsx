@@ -15,8 +15,7 @@ import create from "zustand";
 import { persist } from 'zustand/middleware';
 import { ThemeState, Mode, BGIState } from "./data/interfaces";
 import { DirectionType } from "antd/es/config-provider";
-// @ts-ignore
-import { toggleTheme } from "@zougt/vite-plugin-theme-preprocessor/dist/browser-utils.js";
+
 
 const { Dragger } = Upload;
 export const bgiNode = document.getElementById("bgi") as HTMLElement;
@@ -65,12 +64,17 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
   mode: "light",
   changeMode: (newMode: Mode) => set((state: ThemeState) => {
     console.log(`I change ${newMode}`)
-    if (state.mode == "dark") { import('../node_modules/antd/dist/antd.dark.less') };
+    if (newMode == "dark") {
+
+    };
     return ({ mode: newMode })
   }),
   color: defaultColor,
   changePrimaryColor: (value: string) =>
-    set((state: any) => ({ color: { ...state.color, primaryColor: value } })),
+    set((state: any) => {
+
+      return ({ color: { ...state.color, primaryColor: value } })
+    }),
   direction: "ltr",
   changeDirection: (dir: DirectionType) => { set(() => ({ direction: dir })) },
   hasBGImage: true,
@@ -192,18 +196,6 @@ export const ThemeProviderMenu = (props: {}) => {
       >
         清除设置(谨慎操作)
       </Button>
-      <Divider dashed />
-      {/* <div style={{ marginBottom: 16 }}>
-        <SketchPicker
-          presetColors={["#1890ff", "#25b864", "#ff6f00"]}
-          color={color.primaryColor}
-          onChange={({ hex }: any) => onColorChange(hex)}
-        />
-        <span style={{ color: color.primaryColor, marginRight: 16 }}>
-          网站色调
-        </span>
-      </div>
-      <Divider dashed /> */}
     </>
   );
 };

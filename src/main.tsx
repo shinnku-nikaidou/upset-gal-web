@@ -6,10 +6,9 @@ import { keyMap } from "./data/consts";
 import { Mode, TKey } from "./data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
 import { getAccount } from "./utils";
-
 import "./index.less";
 
-import initChangeTheme, { isMobile, ThemeProviderMenu, useGlobalTheme, useImageURL } from "./theme";
+import initChangeTheme, { isMobile, ThemeProviderMenu, useGlobalTheme } from "./theme";
 import t, { initLanguage } from "./languages";
 
 const { Content, Sider } = Layout;
@@ -57,7 +56,7 @@ const Main = ({
                     changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
                   />
                 ))}
-                <Readme />
+                {key === null && <Readme />}
               </div>
             </Content>
             <PageFooter />
