@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
-import { keyMap } from "./data/consts";
+import checkversion, { keyMap } from "./data/consts";
 import { Mode, TKey } from "./data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
 import { getAccount } from "./utils";
@@ -68,6 +68,12 @@ const Main = ({
 };
 
 const main = async () => {
+  ConfigProvider.config({
+    theme: {
+      primaryColor: '#25b864',
+    },
+  });  
+  checkversion();
   await initLanguage();
   const userAgentInfo = window.navigator.userAgent;
   const Agents = [

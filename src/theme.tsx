@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import {
   Button,
   Divider,
@@ -12,8 +12,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
-import { persist } from 'zustand/middleware';
-import { ThemeState, Mode, BGIState } from "./data/interfaces";
+import { ThemeState, Mode } from "./data/interfaces";
 import { DirectionType } from "antd/es/config-provider";
 
 
@@ -44,42 +43,52 @@ const defaultColor = {
   infoColor: "#1890ff",
 };
 
-export const useImageURL = create<BGIState>((set: Function) => ({
-  url: "default",
-  changeURL: (newURL: string) => set(() => {
-    console.log(`in changeURL, newURL is ${newURL}`)
-    if (newURL === "default") {
-      if (!getMobile())
-        bgiNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
-      else bgiNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
-    } else if (newURL === "") {
-      bgiNode.style.backgroundImage = 'None';
-    }
-    return ({ url: newURL })
-  })
-}));
-
+const changeImageURL = (url: string) => {
+  console.log(`in changeURL, newURL is ${url}`)
+  if (url === "default") {
+    if (!getMobile())
+      bgiNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
+    else bgiNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
+  } else if (url === "") {
+    bgiNode.style.backgroundImage = 'None';
+  }
+}
 
 export const useGlobalTheme = create<ThemeState>((set: Function) => ({
-  mode: "light",
-  changeMode: (newMode: Mode) => set((state: ThemeState) => {
-    console.log(`I change ${newMode}`)
-    if (newMode == "dark") {
+  mode: localStorage.getItem('mode') as Mode || "light",
+  url: localStorage.getItem('url') as string || "default",
+  color: defaultColor,
+  direction: localStorage.getItem('direction') as DirectionType || "ltr",
+  hasBGImage: localStorage.getItem('hasBGImage') === 'true',
 
+  changeURL: (newURL: string) => set(() => {
+    localStorage.setItem('url', newURL)
+    changeImageURL(newURL)
+    return ({ url: newURL })
+  }),
+
+  changeMode: (newMode: Mode) => set(() => {
+    localStorage.setItem('mode', newMode)
+    if (newMode == "dark") {
     };
     return ({ mode: newMode })
   }),
-  color: defaultColor,
+
   changePrimaryColor: (value: string) =>
     set((state: any) => {
-
       return ({ color: { ...state.color, primaryColor: value } })
     }),
-  direction: "ltr",
-  changeDirection: (dir: DirectionType) => { set(() => ({ direction: dir })) },
-  hasBGImage: true,
-  isUploadBGI: (flag: boolean) => {
-    set(() => ({ hasBGImage: flag }))
+
+  changeDirection: (dir: DirectionType) => set(() => {
+    localStorage.setItem('direction', dir as string)
+    return ({ direction: dir })
+  }),
+
+  changeBGI: (flag: boolean) => {
+    set(() => {
+      localStorage.setItem('hasBGImage', flag.toString())
+      return ({ hasBGImage: flag })
+    })
   }
 }));
 
@@ -94,17 +103,18 @@ export default function initChangeTheme(): void {
 
   console.log(globalTheme);
   if (globalTheme.hasBGImage) {
-    // changeURL("")
+    changeImageURL(globalTheme.url)
   }
 }
 
 export const ThemeProviderMenu = (props: {}) => {
   const color = useGlobalTheme((state) => state.color);
   const [hasBGImage, setHasBGImage] = useState(useGlobalTheme.getState().hasBGImage);
+  const setBGImage = useGlobalTheme(s => s.changeBGI)
   const setPrimaryColor = useGlobalTheme((state) => state.changePrimaryColor);
   const setDirection = useGlobalTheme((state) => state.changeDirection);
   const setMode = useGlobalTheme((s) => s.changeMode);
-  const changeURL = useImageURL((state) => state.changeURL)
+  const changeURL = useGlobalTheme((state) => state.changeURL)
   const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value);
   const changeMode = (mode: boolean) => setMode(mode ? "light" : "dark");
 
@@ -132,9 +142,11 @@ export const ThemeProviderMenu = (props: {}) => {
             defaultChecked={!hasBGImage}
             onChange={() => {
               if (hasBGImage) {
+                setBGImage(false)
                 setHasBGImage(false);
                 changeURL("");
               } else {
+                setBGImage(true)
                 setHasBGImage(true);
                 changeURL("default");
               }

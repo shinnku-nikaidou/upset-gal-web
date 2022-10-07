@@ -12,6 +12,7 @@ export type Mode = "light" | "dark";
 
 export type Theme = {
   mode: Mode;
+  url: string;
   color: {
     primaryColor: string;
     errorColor: string;
@@ -24,13 +25,10 @@ export type Theme = {
   hasBGImage: boolean;
 }
 
-export interface BGIState {
-  url: string;
-  changeURL: (newURL: string) => any;
-}
-
 export interface ThemeState {
+  changeURL: any;
   mode: Mode;
+  url: string;
   color: {
     primaryColor: string;
     errorColor: string;
@@ -44,6 +42,7 @@ export interface ThemeState {
   changePrimaryColor: Function;
   changeDirection: (dir: DirectionType) => any;
   changeMode: Function;
+  changeBGI: Function;
 }
 
 export type TKey = keyof typeof keyMap | "10" | null;
