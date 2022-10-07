@@ -8,7 +8,11 @@ export type Item = {
   size: string;
 }
 
+export type Mode = "light" | "dark";
+
 export type Theme = {
+  mode: Mode;
+  url: string;
   color: {
     primaryColor: string;
     errorColor: string;
@@ -16,10 +20,29 @@ export type Theme = {
     successColor: string;
     infoColor: string;
   };
-  backgroundImage?: string;
   mobile: boolean;
   direction?: DirectionType;
   hasBGImage: boolean;
+}
+
+export interface ThemeState {
+  changeURL: any;
+  mode: Mode;
+  url: string;
+  color: {
+    primaryColor: string;
+    errorColor: string;
+    warningColor: string;
+    successColor: string;
+    infoColor: string;
+  };
+  direction?: DirectionType;
+  hasBGImage: boolean;
+
+  changePrimaryColor: Function;
+  changeDirection: (dir: DirectionType) => any;
+  changeMode: Function;
+  changeBGI: Function;
 }
 
 export type TKey = keyof typeof keyMap | "10" | null;

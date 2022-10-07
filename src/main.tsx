@@ -2,14 +2,13 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
-import { keyMap } from "./data/consts";
-import { TKey } from "./data/interfaces";
+import checkversion, { keyMap } from "./data/consts";
+import { Mode, TKey } from "./data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
 import { getAccount } from "./utils";
-
 import "./index.less";
 
-import initChangeTheme, { globalTheme, ThemeProviderMenu, useGlobalTheme } from "./theme";
+import initChangeTheme, { isMobile, ThemeProviderMenu, useGlobalTheme } from "./theme";
 import t, { initLanguage } from "./languages";
 
 const { Content, Sider } = Layout;
@@ -20,16 +19,14 @@ const Main = ({
   existsAgent: boolean;
 }) => {
   const [collapsed, setCollapsed] = useState(existsAgent);
-
   const urlPrefix = useMemo(() => getAccount(), []);
-
   const [key, setKey] = useState<TKey>(null);
   const [url, setUrl] = useState("");
 
   useEffect(() => {
     if (key !== null && key !== "10")
       setUrl(`${urlPrefix}/${keyMap[key]}`);
-  }, [key, setUrl]);
+  }, [key]);
 
   const onCollapse = useCallback((collapsed: boolean) => setCollapsed(collapsed), [setCollapsed]);
 
@@ -42,7 +39,7 @@ const Main = ({
             collapsible
             collapsed={collapsed}
             onCollapse={onCollapse}
-            theme="light"
+            theme={useGlobalTheme((state) => state.mode as Mode)}
           >
             <SideMenu setKey={setKey} />
           </Sider>
@@ -59,7 +56,7 @@ const Main = ({
                     changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
                   />
                 ))}
-                <Readme />
+                {key === null && <Readme />}
               </div>
             </Content>
             <PageFooter />
@@ -71,6 +68,12 @@ const Main = ({
 };
 
 const main = async () => {
+  ConfigProvider.config({
+    theme: {
+      primaryColor: '#25b864',
+    },
+  });  
+  checkversion();
   await initLanguage();
   const userAgentInfo = window.navigator.userAgent;
   const Agents = [
@@ -79,18 +82,10 @@ const main = async () => {
     "iPad",
   ];
   const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
-  globalTheme.mobile = existsAgent;
-
-  if (localStorage.hasOwnProperty("direction"))
-    globalTheme.direction = localStorage.getItem("direction") as DirectionType;
-  if (localStorage.hasOwnProperty("hasBGImage"))
-    globalTheme.hasBGImage = localStorage.getItem("hasBGImage") === "true";
+  isMobile(existsAgent);
   const container = document.getElementById("root") as HTMLElement;
-  const root = createRoot(container);
-  root.render(<Main existsAgent={existsAgent} />,);
+  createRoot(container).render(<Main existsAgent={existsAgent} />,);
   initChangeTheme();
 };
 
 main();
-
-
