@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { Menu, Typography } from "antd";
-import { Item } from "../../data/interfaces";
+import { Item } from "../../../data/interfaces";
 import { nginxTransChar } from "../../utils";
 
 const { Text, Link } = Typography;

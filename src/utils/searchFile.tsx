@@ -1,4 +1,4 @@
-import { Item } from "../data/interfaces";
+import { Item } from "../../data/interfaces";
 
 export const searchEngine = (value: string, files: Item[]) => {
   value = value.toLowerCase();

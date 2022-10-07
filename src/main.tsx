@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { createRoot } from 'react-dom/client';
 import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
-import checkversion, { keyMap } from "./data/consts";
-import { Mode, TKey } from "./data/interfaces";
+import checkversion, { keyMap } from "../data/consts";
+import { Mode, TKey } from "../data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
 import { getAccount } from "./utils";
 import "./index.less";
@@ -13,7 +13,7 @@ import t, { initLanguage } from "./languages";
 
 const { Content, Sider } = Layout;
 
-const Main = () => {
+export const Main = () => {
   const [collapsed, setCollapsed] = useState(getMobile());
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);

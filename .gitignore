@@ -26,3 +26,12 @@ yarn-debug.log*
 yarn-error.log*
 
 /.vscode
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+.next/

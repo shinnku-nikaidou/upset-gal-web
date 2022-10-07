@@ -1,4 +1,4 @@
-import { onedriveAccounts } from "../data/consts";
+import { onedriveAccounts } from "../../data/consts";
 
 export const getAccount = () => {
   const index = Math.floor(Math.random() * onedriveAccounts.length);

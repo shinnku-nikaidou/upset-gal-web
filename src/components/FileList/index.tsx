@@ -9,7 +9,7 @@ import {
   Skeleton,
 } from "antd";
 import { MessageType } from "antd/lib/message";
-import { Item } from "../../data/interfaces";
+import { Item } from "../../../data/interfaces";
 import { searchEngine, shuffleArray } from "../../utils";
 import { RightClickMenu } from "./RightClick";
 
