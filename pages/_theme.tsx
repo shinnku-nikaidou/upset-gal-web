@@ -17,7 +17,7 @@ import { DirectionType } from "antd/es/config-provider";
 
 
 const { Dragger } = Upload;
-export const bgiNode = document.getElementById("bgi") as HTMLElement;
+// export const bgiNode = document.getElementById("bgi") as HTMLElement;
 
 // mobile is prop not state, so do not move it to GlobalTheme
 let mobile = true;
@@ -45,21 +45,26 @@ const defaultColor = {
 
 const changeImageURL = (url: string) => {
   console.log(`in changeURL, newURL is ${url}`)
-  if (url === "default") {
-    if (!getMobile())
-      bgiNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
-    else bgiNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
-  } else if (url === "") {
-    bgiNode.style.backgroundImage = 'None';
-  }
+  // if (url === "default") {
+  //   if (!getMobile())
+  //     bgiNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
+  //   else bgiNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
+  // } else if (url === "") {
+  //   bgiNode.style.backgroundImage = 'None';
+  // }
 }
 
 export const useGlobalTheme = create<ThemeState>((set: Function) => ({
-  mode: localStorage.getItem('mode') as Mode || "light",
-  url: localStorage.getItem('url') as string || "default",
+  mode: "light",
+  url: "default",
   color: defaultColor,
-  direction: localStorage.getItem('direction') as DirectionType || "ltr",
-  hasBGImage: localStorage.getItem('hasBGImage') === 'true',
+  direction: "ltr",
+  hasBGImage: true,
+  // mode: localStorage.getItem('mode') as Mode || "light",
+  // url: localStorage.getItem('url') as string || "default",
+  // color: defaultColor,
+  // direction: localStorage.getItem('direction') as DirectionType || "ltr",
+  // hasBGImage: localStorage.getItem('hasBGImage') === 'true',
 
   changeURL: (newURL: string) => set(() => {
     localStorage.setItem('url', newURL)
@@ -95,10 +100,10 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
 export default function initChangeTheme(): void {
   const globalTheme = useGlobalTheme.getState();
   if (getMobile()) {
-    import("../node_modules/antd/dist/antd.compact.css");
-    bgiNode.style.backgroundSize = "cover";
+    // import("../node_modules/antd/dist/antd.compact.css");
+    // bgiNode.style.backgroundSize = "cover";
   } else {
-    bgiNode.style.backgroundSize = "100%";
+    // bgiNode.style.backgroundSize = "100%";
   }
 
   console.log(globalTheme);

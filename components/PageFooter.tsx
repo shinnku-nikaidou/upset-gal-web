@@ -1,5 +1,5 @@
 import { Layout, Typography } from "antd";
-import { VERSION } from "../../data/consts";
+import { VERSION } from "../data/consts";
 
 const { Footer } = Layout;
 const { Text, Link } = Typography;

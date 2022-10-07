@@ -4,11 +4,10 @@ import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
 import checkversion, { keyMap } from "../data/consts";
 import { Mode, TKey } from "../data/interfaces";
-import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "./components";
-import { getAccount } from "./utils";
-import "./index.less";
+import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../components";
+import { getAccount } from "../utils";
 
-import initChangeTheme, { getMobile, isMobile, ThemeProviderMenu, useGlobalTheme } from "./theme";
+import initChangeTheme, { getMobile, isMobile, ThemeProviderMenu, useGlobalTheme } from "./_theme";
 import t, { initLanguage } from "./languages";
 
 const { Content, Sider } = Layout;
@@ -28,7 +27,6 @@ export const Main = () => {
 
   return (
     <React.StrictMode>
-      <title>{"galgame 资源分享"}</title>
       <ConfigProvider direction={useGlobalTheme((state) => state.direction) as DirectionType}>
         <Layout style={{ minHeight: "100vh" }}>
           <Sider
@@ -70,17 +68,16 @@ const main = async () => {
     },
   });
   checkversion();
-  await initLanguage();
-  const userAgentInfo = window.navigator.userAgent;
-  const Agents = [
-    "Android",
-    "iPhone",
-    "iPad",
-  ];
-  const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
+  // await initLanguage();
+  // const userAgentInfo = window.navigator.userAgent;
+  // const Agents = [
+  //   "Android",
+  //   "iPhone",
+  //   "iPad",
+  // ];
+  // const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
+  const existsAgent = true;
   isMobile(existsAgent);
-  const container = document.getElementById("root") as HTMLElement;
-  createRoot(container).render(<Main />,);
   initChangeTheme();
 };
 

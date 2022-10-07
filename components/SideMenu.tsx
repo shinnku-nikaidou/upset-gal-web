@@ -1,9 +1,9 @@
 import { useCallback } from "react";
 import { Menu } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
-import { TKey } from "../../data/interfaces";
+import { TKey } from "../data/interfaces";
 
-import { getMobile } from "../theme";
+import { getMobile } from "../pages/_theme";
 
 const { SubMenu, ItemGroup, Item } = Menu;
 

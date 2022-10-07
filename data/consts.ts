@@ -1,11 +1,15 @@
 export const VERSION = "v4.1.2-rc1";
 
 export default function checkversion() {
-  const ver = localStorage.getItem('VERSION');
-  if (ver !== VERSION) {
-    localStorage.clear()
-  }
-  localStorage.setItem('VERSION', VERSION)
+  // if (typeof window !== 'undefined') {
+  //   // Perform localStorage action
+  //   const ver = localStorage.getItem('VERSION');
+  //   if (ver !== VERSION) {
+  //     localStorage.clear()
+  //   }
+  //   localStorage.setItem('VERSION', VERSION)
+  // }
+
 }
 
 export const onedriveAccounts = ["mkw", "02", "gal", "gal2"];
