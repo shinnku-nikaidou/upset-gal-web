@@ -1,4 +1,5 @@
 import gatherResponse from "./gatherResponse";
+import fetch from "isomorphic-fetch";
 
 export default async function getContentWithHeaders(
   url: RequestInfo,

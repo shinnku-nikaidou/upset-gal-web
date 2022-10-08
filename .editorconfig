@@ -1,7 +1,7 @@
 # stop .editorconfig files search on current file.
 root = true
 
-[*.ts]
+[*.ts, *.tsx]
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true

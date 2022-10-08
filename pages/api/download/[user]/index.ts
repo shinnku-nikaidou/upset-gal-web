@@ -1,15 +1,20 @@
-import { useRouter } from 'next/router'
+import { NextApiRequest, NextApiResponse } from "next"
+import path from 'path';
+import { promises as fs } from 'fs';
 
-import type { NextApiRequest, NextApiResponse } from 'next'
+const usernotfound = "user doesn't exist or the config is still initializing";
 
-type Data = {
-    name: string
-}
-export default function handler(
+export default async function handler(
     req: NextApiRequest,
-    res: NextApiResponse<Data>
+    res: NextApiResponse<any>
 ) {
-    const router = useRouter()
-    const user = "1234"//router.query.user as string
-    res.status(200).json({ name: user })
+    const { user } = req.query
+    const users = user as string
+    const jsonDirectory = path.join(process.cwd(), '.config', users, "root.json");
+    try {
+        const fileContents = await fs.readFile(jsonDirectory, 'utf8');
+        res.status(200).json(JSON.parse(fileContents))
+    } catch {
+        res.status(404).send(usernotfound)
+    }
 }

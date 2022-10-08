@@ -1,5 +1,6 @@
 import { AccessToken } from "../../../data/downloadtype";
 import gatherResponse from "../../../utils/gatherResponse";
+import fetch from "isomorphic-fetch";
 
 export default async function fetchFormData(
   url: RequestInfo,
