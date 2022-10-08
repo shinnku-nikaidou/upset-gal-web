@@ -18,7 +18,6 @@ import { DirectionType } from "antd/es/config-provider";
 import { defaultColor, mobileDefaultBackgroundImageURL, pcDefaultBackgroundImageURL } from "../data/consts";
 
 const { Dragger } = Upload;
-// export const bgiNode = document.getElementById("bgi") as HTMLElement;
 
 export const BgiNode = (props: { isMobile: boolean }) => {
   const url = useGlobalTheme(s => s.url)
@@ -44,11 +43,6 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
   color: defaultColor,
   direction: "ltr",
   hasBGImage: true,
-  // mode: localStorage.getItem('mode') as Mode || "light",
-  // url: localStorage.getItem('url') as string || "default",
-  // color: defaultColor,
-  // direction: localStorage.getItem('direction') as DirectionType || "ltr",
-  // hasBGImage: localStorage.getItem('hasBGImage') === 'true',
 
   changeURL: (newURL: string) => set(() => {
     console.log(`in changeURL, newURL is ${newURL}`)

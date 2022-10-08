@@ -35,3 +35,9 @@ yarn-error.log*
 next-env.d.ts
 
 .next/
+
+tmp/
+.config/
+config.yaml
+log.txt
+start.sh

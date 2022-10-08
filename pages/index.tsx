@@ -17,7 +17,6 @@ const Home: NextPage = () => {
                     Welcome to <a href="/download">shinnku.com!</a>
                 </h1>
             </main>
-
         </div>
     )
 }

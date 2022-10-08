@@ -19,7 +19,7 @@ export const Main = (props: { isMobile: boolean }) => {
 
   useEffect(() => {
     if (key !== null && key !== "10")
-      setUrl(`${urlPrefix}/${keyMap[key]}`);
+      setUrl(`api/download/${urlPrefix}/${keyMap[key]}`);
   }, [key]);
 
   const onCollapse = useCallback((collapsed: boolean) => setCollapsed(collapsed), [setCollapsed]);

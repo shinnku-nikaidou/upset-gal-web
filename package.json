@@ -2,7 +2,7 @@
   "name": "upset-gal-web",
   "private": true,
   "author": "Shinnku <nikaidou@shinnku.com>",
-  "version": "5.0.0",
+  "version": "5.1.0",
   "license": "no license",
   "scripts": {
     "dev": "next dev",
@@ -13,6 +13,9 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "antd": "^4.23.3",
+    "dotenv": "^16.0.1",
+    "yaml": "^2.1.0",
+    "form-data": "^4.0.0",
     "less-loader": "^11.1.0",
     "next": "12.3.1",
     "next-with-less": "^2.0.5",
@@ -29,6 +32,8 @@
     "@types/react-dom": "^18.0.6",
     "color": "^4.2.3",
     "eslint": "8.24.0",
+    "concurrently": "^7.2.1",
+    "nodemon": "^2.0.16",
     "eslint-config-next": "12.3.1",
     "less": "^4.1.2",
     "typescript": "^4.8.4"

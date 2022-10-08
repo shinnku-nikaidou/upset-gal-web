@@ -54,7 +54,6 @@ interface IFileListProps {
 
 export const FileList = ({ url, changeDirectory }: IFileListProps) => {
   if (url === "")
-    /// TODO: remove this hack
     return <Skeleton active />;
 
   const [files, setFiles] = useState<Item[]>([]);
