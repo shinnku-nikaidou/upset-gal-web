@@ -1,19 +1,18 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { createRoot } from 'react-dom/client';
 import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
-import checkversion, { keyMap } from "../data/consts";
-import { Mode, TKey } from "../data/interfaces";
-import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../components";
-import { getAccount } from "../utils";
+import checkversion, { keyMap } from "../../data/consts";
+import { Mode, TKey } from "../../data/interfaces";
+import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../components";
+import { getAccount } from "../../utils";
 
-import initChangeTheme, { getMobile, isMobile, ThemeProviderMenu, useGlobalTheme } from "./_theme";
-import t, { initLanguage } from "./languages";
+import { ThemeProviderMenu, useGlobalTheme } from "../_theme";
+import t, { initLanguage } from "../languages";
 
 const { Content, Sider } = Layout;
 
-export const Main = () => {
-  const [collapsed, setCollapsed] = useState(getMobile());
+export const Main = (props: { isMobile: boolean }) => {
+  const [collapsed, setCollapsed] = useState(props.isMobile);
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);
   const [url, setUrl] = useState("");
@@ -35,7 +34,7 @@ export const Main = () => {
             onCollapse={onCollapse}
             theme={useGlobalTheme((state) => state.mode as Mode)}
           >
-            <SideMenu setKey={setKey} />
+            <SideMenu setKey={setKey} isMobile={props.isMobile} />
           </Sider>
           <Layout className="site-layout">
             <GalPageHeader />
@@ -68,17 +67,6 @@ const main = async () => {
     },
   });
   checkversion();
-  // await initLanguage();
-  // const userAgentInfo = window.navigator.userAgent;
-  // const Agents = [
-  //   "Android",
-  //   "iPhone",
-  //   "iPad",
-  // ];
-  // const existsAgent = Agents.some((agent) => userAgentInfo.includes(agent));
-  const existsAgent = true;
-  isMobile(existsAgent);
-  initChangeTheme();
 };
 
 main();

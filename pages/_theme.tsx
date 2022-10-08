@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from 'next/image'
 import {
   Button,
   Divider,
@@ -14,44 +15,27 @@ import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
 import { ThemeState, Mode } from "../data/interfaces";
 import { DirectionType } from "antd/es/config-provider";
-
+import { defaultColor, mobileDefaultBackgroundImageURL, pcDefaultBackgroundImageURL } from "../data/consts";
 
 const { Dragger } = Upload;
 // export const bgiNode = document.getElementById("bgi") as HTMLElement;
 
-// mobile is prop not state, so do not move it to GlobalTheme
-let mobile = true;
-export function getMobile() {
-  return mobile;
-}
-export const isMobile = (existsAgent: boolean) => {
-  console.log(`find this device is ${existsAgent} mobile`);
-  mobile = existsAgent
-};
+export const BgiNode = (props: { isMobile: boolean }) => {
+  const url = useGlobalTheme(s => s.url)
 
-const pcDefaultBackgroundImageURL: string =
-  "https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg";
-
-const mobileDefaultBackgroundImageURL: string =
-  "https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg";
-
-const defaultColor = {
-  primaryColor: "#1890ff",
-  errorColor: "#ff4d4f",
-  warningColor: "#faad14",
-  successColor: "#52c41a",
-  infoColor: "#1890ff",
-};
-
-const changeImageURL = (url: string) => {
-  console.log(`in changeURL, newURL is ${url}`)
-  // if (url === "default") {
-  //   if (!getMobile())
-  //     bgiNode.style.backgroundImage = `url(${pcDefaultBackgroundImageURL})`;
-  //   else bgiNode.style.backgroundImage = `url(${mobileDefaultBackgroundImageURL})`;
-  // } else if (url === "") {
-  //   bgiNode.style.backgroundImage = 'None';
-  // }
+  return (
+    <div>
+      <Image src={(() => {
+        if (url === "default") {
+          if (!props.isMobile)
+            return `url(${pcDefaultBackgroundImageURL})`;
+          else return `url(${mobileDefaultBackgroundImageURL})`;
+        } else if (url === "") {
+          return 'None';
+        } else return `url(${url})`
+      })()} />
+    </div>
+  )
 }
 
 export const useGlobalTheme = create<ThemeState>((set: Function) => ({
@@ -67,13 +51,12 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
   // hasBGImage: localStorage.getItem('hasBGImage') === 'true',
 
   changeURL: (newURL: string) => set(() => {
-    localStorage.setItem('url', newURL)
-    changeImageURL(newURL)
+    console.log(`in changeURL, newURL is ${newURL}`)
     return ({ url: newURL })
   }),
 
   changeMode: (newMode: Mode) => set(() => {
-    localStorage.setItem('mode', newMode)
+    console.log(`newMode is ${newMode}`)
     if (newMode == "dark") {
     };
     return ({ mode: newMode })
@@ -81,36 +64,23 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
 
   changePrimaryColor: (value: string) =>
     set((state: any) => {
+      console.log(`new PrimaryColor is ${value}`)
       return ({ color: { ...state.color, primaryColor: value } })
     }),
 
   changeDirection: (dir: DirectionType) => set(() => {
-    localStorage.setItem('direction', dir as string)
+    console.log(`new Direction is ${dir}`)
     return ({ direction: dir })
   }),
 
   changeBGI: (flag: boolean) => {
     set(() => {
-      localStorage.setItem('hasBGImage', flag.toString())
+      console.log(`has bgi? ${flag}`)
       return ({ hasBGImage: flag })
     })
   }
 }));
 
-export default function initChangeTheme(): void {
-  const globalTheme = useGlobalTheme.getState();
-  if (getMobile()) {
-    // import("../node_modules/antd/dist/antd.compact.css");
-    // bgiNode.style.backgroundSize = "cover";
-  } else {
-    // bgiNode.style.backgroundSize = "100%";
-  }
-
-  console.log(globalTheme);
-  if (globalTheme.hasBGImage) {
-    changeImageURL(globalTheme.url)
-  }
-}
 
 export const ThemeProviderMenu = (props: {}) => {
   const color = useGlobalTheme((state) => state.color);

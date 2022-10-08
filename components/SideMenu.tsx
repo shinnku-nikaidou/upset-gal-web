@@ -3,16 +3,16 @@ import { Menu } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { TKey } from "../data/interfaces";
 
-import { getMobile } from "../pages/_theme";
-
 const { SubMenu, ItemGroup, Item } = Menu;
 
 interface ISideMenuProps {
   setKey: (key: TKey) => void;
+  isMobile: boolean
 }
 
 export const SideMenu = ({
   setKey,
+  isMobile
 }: ISideMenuProps) => {
   const onClick = useCallback((e: { key: string }) => {
     setKey(e.key as TKey);
@@ -22,7 +22,7 @@ export const SideMenu = ({
     <Menu
       onClick={onClick}
       defaultSelectedKeys={[]}
-      defaultOpenKeys={getMobile() ? [] : ["sub1", "sub2"]}
+      defaultOpenKeys={isMobile ? [] : ["sub1", "sub2"]}
       mode="inline"
     >
       <SubMenu
