@@ -47,7 +47,7 @@ const Main = (props: { isMobile: boolean }) => {
                 {key !== null && (key === "10" ? <ThemeProviderMenu /> : (url !== "" ?
                   <FileList
                     url={url}
-                    changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
+                    changeDirectory={(name) => setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)}
                   /> : <></>
                 ))}
                 {key === null && <Readme />}
