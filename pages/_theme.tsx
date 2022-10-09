@@ -24,6 +24,7 @@ export const BgiNode = (props: { isMobile: boolean }) => {
 
   return (
     <div>
+      {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image src={(() => {
         if (url === "default") {
           if (!props.isMobile)
@@ -76,7 +77,7 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
 }));
 
 
-export const ThemeProviderMenu = (props: {}) => {
+const ThemeProviderMenu = (props: {}) => {
   const color = useGlobalTheme((state) => state.color);
   const [hasBGImage, setHasBGImage] = useState(useGlobalTheme.getState().hasBGImage);
   const setBGImage = useGlobalTheme(s => s.changeBGI)
@@ -140,7 +141,7 @@ export const ThemeProviderMenu = (props: {}) => {
       <Dragger
         multiple={false}
         method="post"
-        action={window.location.origin + "/upload"}
+        action={"/upload"}
         onChange={setBackgroundImage}
       >
         <p className="ant-upload-drag-icon">
@@ -180,3 +181,5 @@ export const ThemeProviderMenu = (props: {}) => {
     </>
   );
 };
+
+export default ThemeProviderMenu;

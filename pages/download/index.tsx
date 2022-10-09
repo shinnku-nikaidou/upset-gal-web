@@ -1,7 +1,8 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { addDefaultProp } from '..'
 import styles from '../../styles/Home.module.css'
-import { Main } from './_main'
+import Main from './_main'
 
 const Download: NextPage = (props: {}) => {
   return (
@@ -23,19 +24,6 @@ const Download: NextPage = (props: {}) => {
   )
 }
 
-Download.getInitialProps = async (ctx) => {
-  const isMobileView = ((ctx.req
-    ? ctx.req.headers['user-agent']
-    : navigator.userAgent) as string).match(
-      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    )
-
-  //Returning the isMobileView as a prop to the component for further use.
-  const isMobile = Boolean(isMobileView)
-  console.log(`isMobile is ${isMobile}`)
-  return {
-    isMobile: isMobile
-  }
-}
+Download.getInitialProps = addDefaultProp
 
 export default Download

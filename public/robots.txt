@@ -1,4 +1,5 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Disallow: /api
+Disallow: /api*
 Disallow:
-baidu.com

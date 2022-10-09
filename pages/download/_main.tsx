@@ -6,12 +6,12 @@ import { Mode, TKey } from "../../data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../components";
 import { getAccount } from "../../utils";
 
-import { ThemeProviderMenu, useGlobalTheme } from "../_theme";
+import ThemeProviderMenu, { useGlobalTheme } from "../_theme";
 import t, { initLanguage } from "../languages";
 
 const { Content, Sider } = Layout;
 
-export const Main = (props: { isMobile: boolean }) => {
+const Main = (props: { isMobile: boolean }) => {
   const [collapsed, setCollapsed] = useState(props.isMobile);
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);
@@ -60,6 +60,8 @@ export const Main = (props: { isMobile: boolean }) => {
     </React.StrictMode>
   );
 };
+
+export default Main;
 
 const main = async () => {
   ConfigProvider.config({
