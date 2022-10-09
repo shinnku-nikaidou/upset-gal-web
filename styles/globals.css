@@ -1,4 +1,4 @@
-@import "antd/dist/antd.variable.less";
+@import "antd/dist/antd.variable.css";
 
 body {
   margin: 0;
@@ -37,9 +37,4 @@ img {
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.25;
-}
-
-// https://stackoverflow.com/a/61316941/13040423
-.ant-list-item:hover {
-  box-shadow: 0 0 4px #eee;
 }
