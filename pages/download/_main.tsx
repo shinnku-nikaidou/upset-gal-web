@@ -7,11 +7,11 @@ import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../com
 import { getAccount } from "../../utils";
 
 import ThemeProviderMenu, { useGlobalTheme } from "../_theme";
-import t, { initLanguage } from "../languages";
+import t from "../languages";
 
 const { Content, Sider } = Layout;
 
-const Main = (props: { isMobile: boolean }) => {
+const Main = (props: { isMobile: boolean , lang: string}) => {
   const [collapsed, setCollapsed] = useState(props.isMobile);
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);

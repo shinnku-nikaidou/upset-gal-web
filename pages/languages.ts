@@ -1,24 +1,25 @@
 type SupportLang = "zh-CN" | "en" | "zh-TW" | "ja";
+import res_zh_TW from '../data/lang/zh-TW';
+import res_en from '../data/lang/en';
+import res_zh_CN from '../data/lang/zh-CN';
 
-const initLanguage = async () => {
-    // let lang: SupportLang = checkLanguage();
-    // switch (lang) {
 
-    // }
+const getLang = (s: string) => {
+    if (s.startsWith("en")) {
+        return res_en
+    }
+    switch (s) {
+        case "zh-CN":
+            return res_zh_CN
+        case "zh-TW":
+            return res_zh_TW
+    }
+    return res_en
+};
+
+const t = (s: keyof typeof res_en, language: string): string => {
+    const lang = getLang(language)
+    return lang[s]
 }
 
-const checkLanguage = () => {
-    // let lang = navigator.language
-    // if (lang.substring(0, 2) === "en") return "en";
-    // else if (lang === "zh-CN") return "zh-CN";
-    // else if (lang.substring(0, 2) === "zh") return "zh-TW";
-    // else if (lang.substring(0, 2) === "ja") return "ja";
-    // else return "en";
-}
-
-const t = (s: string) => {
-    return ""
-}
-
-export { checkLanguage, initLanguage };
 export default t;
