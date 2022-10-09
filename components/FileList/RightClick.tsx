@@ -16,7 +16,7 @@ export const RightClickMenu = ({
 }: IRightClickMenuProps) => {
   const downloadLink = useMemo(() => {
     return `${window.location.origin}/${url}/${nginxTransChar(item.name)}`;
-  }, [window.location.origin, url, item.name]);
+  }, [url, item.name]);
 
   const copyLink = useCallback(() => navigator.clipboard.writeText(downloadLink), [downloadLink]);
 

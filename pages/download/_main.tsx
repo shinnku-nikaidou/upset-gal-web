@@ -18,9 +18,10 @@ export const Main = (props: { isMobile: boolean }) => {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
+    console.log(key);
     if (key !== null && key !== "10")
       setUrl(`api/download/${urlPrefix}/${keyMap[key]}`);
-  }, [key]);
+  }, [key, urlPrefix]);
 
   const onCollapse = useCallback((collapsed: boolean) => setCollapsed(collapsed), [setCollapsed]);
 
@@ -43,11 +44,11 @@ export const Main = (props: { isMobile: boolean }) => {
                 className="site-layout-background"
                 style={{ padding: 24, minHeight: 360 }}
               >
-                {key !== null && (key === "10" ? <ThemeProviderMenu /> : (
+                {key !== null && (key === "10" ? <ThemeProviderMenu /> : (url !== "" ?
                   <FileList
                     url={url}
                     changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
-                  />
+                  /> : <></>
                 ))}
                 {key === null && <Readme />}
               </div>

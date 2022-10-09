@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import {
   Divider,
   Dropdown,
@@ -12,6 +12,7 @@ import { MessageType } from "antd/lib/message";
 import { Item } from "../../data/interfaces";
 import { searchEngine, shuffleArray } from "../../utils";
 import { RightClickMenu } from "./RightClick";
+import { useLayoutEffect } from "react";
 
 const FileItem = ({ item, url }: { item: Item; url: string }) => (
   <List.Item style={{ paddingLeft: "20px" }}>
@@ -53,31 +54,32 @@ interface IFileListProps {
 }
 
 export const FileList = ({ url, changeDirectory }: IFileListProps) => {
-  if (url === "")
-    return <Skeleton active />;
-
   const [files, setFiles] = useState<Item[]>([]);
   const [dispFiles, setDispFiles] = useState<Item[]>([]);
 
-  const loadFiles = useCallback(
-    async (hide: MessageType) => {
-      let res: Item[] = [];
-      const resp = await fetch(`${window.location.origin}/${url}`);
-      if (resp.status === 200 || resp.status === 304) res = await resp.json();
-      shuffleArray(res);
-      setFiles(res);
-      setDispFiles(res);
-      hide();
-    },
-    [window.location.origin, url]
-  );
-
-  useEffect(() => {
-    setFiles([]);
-    setDispFiles([]);
+  useLayoutEffect(() => {
     const hide = message.loading("正在加载中", 0);
-    loadFiles(hide);
-  }, [loadFiles]);
+    const a = async (hide: MessageType) => {
+      let res: Item[] = [];
+      console.log(`url is ${url}`);
+      const resp = await fetch(`${window.location.origin}/${url}`);
+      if (resp.status === 200 || resp.status === 304) {
+        try {
+          res = await resp.json();
+          shuffleArray(res);
+          setFiles(res);
+          setDispFiles(res);
+        } catch (e) {
+          console.error('in FileList loading', e);
+          hide();
+        }
+      } else {
+        console.error(resp.status)
+      }
+      hide();
+    }
+    a(hide);
+  }, [url]);
 
   const [page, setPage] = useState(1);
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage]);
@@ -95,7 +97,7 @@ export const FileList = ({ url, changeDirectory }: IFileListProps) => {
 
   if (files.length === 0) return <Skeleton active />;
 
-  return (
+  return url === "" ? <Skeleton active /> : (
     <div>
       <Input.Search
         placeholder="Input search text"
