@@ -34,7 +34,7 @@
     "@types/react-dom": "^18.0.6",
     "color": "^4.2.3",
     "concurrently": "^7.2.1",
-    "eslint": "8.24.0",
+    "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
     "less": "^4.1.2",
     "nodemon": "^2.0.16",
