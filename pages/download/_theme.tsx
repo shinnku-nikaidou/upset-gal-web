@@ -13,9 +13,9 @@ import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
-import { ThemeState, Mode } from "../data/interfaces";
+import { ThemeState, Mode } from "../../data/interfaces";
 import { DirectionType } from "antd/es/config-provider";
-import { defaultColor, mobileDefaultBackgroundImageURL, pcDefaultBackgroundImageURL } from "../data/consts";
+import { defaultColor, mobileDefaultBackgroundImageURL, pcDefaultBackgroundImageURL } from "../../data/consts";
 
 const { Dragger } = Upload;
 

@@ -6,7 +6,7 @@ import { Mode, TKey } from "../../data/interfaces";
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../components";
 import { getAccount } from "../../utils";
 
-import ThemeProviderMenu, { useGlobalTheme } from "../_theme";
+import ThemeProviderMenu, { useGlobalTheme } from "./_theme";
 import t from "../languages";
 
 const { Content, Sider } = Layout;
