@@ -1,8 +1,9 @@
 import { PageHeader } from "antd";
+import t from "../pages/languages";
 
-export const GalPageHeader = () => (
+export const GalPageHeader = (props: { lang: string }) => (
   <PageHeader
-    title={<div>失落小站</div>}
-    subTitle="欢迎来到 galgame 分享站点"
+    title={<div>{t("Head", props.lang)}</div>}
+    subTitle={t("SubHead", props.lang)}
   />
 );

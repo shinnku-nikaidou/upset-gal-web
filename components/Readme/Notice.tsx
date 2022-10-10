@@ -3,7 +3,7 @@ import { Collapse, Space, Typography } from "antd";
 const { Panel } = Collapse;
 const { Text } = Typography;
 
-export const Notice = () => (
+export const Notice = ({ lang }: { lang: string }) => (
   <Panel
     header="法律与版权"
     key="4"

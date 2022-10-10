@@ -14,10 +14,10 @@ import { searchEngine, shuffleArray } from "../../utils";
 import { RightClickMenu } from "./RightClick";
 import { useLayoutEffect } from "react";
 
-const FileItem = ({ item, url }: { item: Item; url: string }) => (
+const FileItem = ({ item, url, lang }: { item: Item; url: string; lang: string }) => (
   <List.Item style={{ paddingLeft: "20px" }}>
     <Dropdown
-      overlay={<RightClickMenu item={item} url={url} />}
+      overlay={<RightClickMenu item={item} url={url} lang={lang} />}
       trigger={["contextMenu", "click"]}
     >
       <List.Item.Meta
@@ -51,9 +51,10 @@ const FolderItem = ({
 interface IFileListProps {
   url: string;
   changeDirectory: (name: string) => void;
+  lang: string
 }
 
-export const FileList = ({ url, changeDirectory }: IFileListProps) => {
+export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
   const [files, setFiles] = useState<Item[]>([]);
   const [dispFiles, setDispFiles] = useState<Item[]>([]);
 
@@ -110,7 +111,7 @@ export const FileList = ({ url, changeDirectory }: IFileListProps) => {
         dataSource={dispFiles.slice((page - 1) * 8, page * 8)}
         renderItem={(item: Item) => {
           if (item["@type"] === "file") {
-            return <FileItem item={item} url={url} />;
+            return <FileItem item={item} url={url} lang={lang} />;
           }
           return <FolderItem item={item} changeDirectory={changeDirectory} />;
         }}

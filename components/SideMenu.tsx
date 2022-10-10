@@ -2,17 +2,20 @@ import { useCallback } from "react";
 import { Menu } from "antd";
 import { AppstoreOutlined, SettingOutlined } from "@ant-design/icons";
 import { TKey } from "../data/interfaces";
+import t from "../pages/languages";
 
 const { SubMenu, ItemGroup, Item } = Menu;
 
 interface ISideMenuProps {
   setKey: (key: TKey) => void;
   isMobile: boolean
+  lang: string
 }
 
 export const SideMenu = ({
   setKey,
-  isMobile
+  isMobile,
+  lang
 }: ISideMenuProps) => {
   const onClick = useCallback((e: { key: string }) => {
     setKey(e.key as TKey);
@@ -28,25 +31,25 @@ export const SideMenu = ({
       <SubMenu
         key="sub1"
         icon={<AppstoreOutlined />}
-        title="目录"
+        title={t("Menu", lang)}
       >
-        <ItemGroup key="g1" title="分类">
-          <Item key="0">Windows / PC 硬盘</Item>
-          <Item key="1">apk 安装包</Item>
+        <ItemGroup key="g1" title={t("Classify", lang)}>
+          <Item key="0">Windows</Item>
+          <Item key="1">{t("APK", lang)}</Item>
           <Item key="2">kirikiri 2</Item>
           <Item key="3">ons</Item>
           <Item key="4">rpg</Item>
-          <Item key="5">生肉</Item>
-          <Item key="6">模拟器</Item>
+          <Item key="5">{t("生肉", lang)}</Item>
+          <Item key="6">{t("Simulator", lang)}</Item>
           <Item key="7">Artroid</Item>
         </ItemGroup>
       </SubMenu>
       <SubMenu
         key="sub2"
         icon={<SettingOutlined />}
-        title="设置"
+        title={t("Setting", lang)}
       >
-        <Item key="10">主题</Item>
+        <Item key="10">{t("Theme", lang)}</Item>
       </SubMenu>
     </Menu>
   );

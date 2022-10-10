@@ -1,16 +1,17 @@
 import { Collapse, Space, Typography } from "antd";
+import t from "../../pages/languages";
 
 const { Panel } = Collapse;
 const { Text } = Typography;
 
-export const Intro = () => (
+export const Intro = ({ lang }: { lang: string }) => (
   <Panel
-    header="简介"
+    header={t("Intro", lang)}
     key="1"
   >
     <Space direction="vertical">
-      <Text>这里收录了大部分的汉化（破解）galgame，没有解压密码。</Text>
-      <Text>有在 Windows 电脑上面运行的，krkr 和 ons 是手机版，需要下载专属的模拟器解压再运行。</Text>
+      <Text>{t("Intro1", lang)}</Text>
+      <Text>{t("Intro2", lang)}</Text>
     </Space>
   </Panel>
 );

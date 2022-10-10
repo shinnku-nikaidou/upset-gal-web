@@ -11,7 +11,7 @@ import t from "../languages";
 
 const { Content, Sider } = Layout;
 
-const Main = (props: { isMobile: boolean , lang: string}) => {
+const Main = (props: { isMobile: boolean, lang: string }) => {
   const [collapsed, setCollapsed] = useState(props.isMobile);
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);
@@ -35,10 +35,10 @@ const Main = (props: { isMobile: boolean , lang: string}) => {
             onCollapse={onCollapse}
             theme={useGlobalTheme((state) => state.mode as Mode)}
           >
-            <SideMenu setKey={setKey} isMobile={props.isMobile} />
+            <SideMenu setKey={setKey} isMobile={props.isMobile} lang={props.lang} />
           </Sider>
           <Layout className="site-layout">
-            <GalPageHeader />
+            <GalPageHeader lang={props.lang} />
             <Content style={{ margin: "0 16px" }}>
               <div
                 className="site-layout-background"
@@ -47,13 +47,14 @@ const Main = (props: { isMobile: boolean , lang: string}) => {
                 {key !== null && (key === "10" ? <ThemeProviderMenu /> : (url !== "" ?
                   <FileList
                     url={url}
-                    changeDirectory={(name) => setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)}
-                  /> : <></>
+                    changeDirectory={(name) =>
+                      setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)}
+                    lang={props.lang} /> : <></>
                 ))}
-                {key === null && <Readme />}
+                {key === null && <Readme lang={props.lang}/>}
               </div>
             </Content>
-            <PageFooter />
+            <PageFooter lang={props.lang} />
           </Layout>
         </Layout>
       </ConfigProvider>

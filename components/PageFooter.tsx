@@ -4,7 +4,7 @@ import { VERSION } from "../data/consts";
 const { Footer } = Layout;
 const { Text, Link } = Typography;
 
-export const PageFooter = () => (
+export const PageFooter = (props: {lang: string}) => (
   <Footer style={{ textAlign: "center" }}>
     <Text type="secondary">
       <div>Powered by shinnku</div>

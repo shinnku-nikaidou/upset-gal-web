@@ -1,24 +1,25 @@
 import { Collapse, Space, Typography } from "antd";
+import t from "../../pages/languages";
 
 const { Panel } = Collapse;
 const { Text, Link } = Typography;
 
-export const Feedback = () => (
+export const Feedback = ({ lang }: { lang: string }) => (
   <Panel
-    header="反馈相关"
+    header={t("Feedback", lang)}
     key="2"
   >
     <Space direction="vertical">
       <Text>
-        <span>点此加入 </span>
+        <span>{t("Click", lang)}</span>
         <Link
           target="_blank"
           rel="noreferrer"
           href="https://t.me/upsetGroup"
         >
-          telegram 群组
+          {t("Telegram", lang)}
         </Link>
-        <span>，有问题请在此反馈。</span>
+        <span>{t("Feedback-last", lang)}</span>
       </Text>
     </Space>
   </Panel>
