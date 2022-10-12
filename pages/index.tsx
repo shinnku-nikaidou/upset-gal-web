@@ -4,7 +4,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import App from '../components'
 
-const Home: NextPage = (props: {}) => {
+const Home: NextPage = (props: Record<string, never>) => {
   const language: string = (props as any).language
   return (
     <div className={styles.container}>

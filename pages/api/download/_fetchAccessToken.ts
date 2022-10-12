@@ -5,7 +5,7 @@ import fetchFormData from "./_fetchFormData";
 export default async function fetchAccessToken(
   oauth_drive: OauthDrive
 ): Promise<string> {
-  let refreshToken = oauth_drive.refreshToken;
+  const refreshToken = oauth_drive.refreshToken;
 
   const url = oauth_drive["oauthUrl"] + "token";
   const data: AccessToken = {

@@ -1,4 +1,3 @@
-type SupportLang = "zh-CN" | "en" | "zh-TW" | "ja";
 import res_zh_TW from '../data/lang/zh-TW';
 import res_en from '../data/lang/en';
 import res_zh_CN from '../data/lang/zh-CN';

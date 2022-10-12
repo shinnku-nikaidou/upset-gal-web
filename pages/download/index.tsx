@@ -5,7 +5,7 @@ import styles from '../../styles/Home.module.css'
 import t from '../../components/languages'
 import Main from '../../components/download/Main'
 
-const Download: NextPage = (props: {}) => {
+const Download: NextPage = (props: Record<string, never>) => {
   const language: string = (props as any).language
   return (
     <div className={styles.container}>
