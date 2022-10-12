@@ -13,9 +13,9 @@ import { InboxOutlined } from "@ant-design/icons";
 import { UploadChangeParam } from "antd/lib/upload";
 import { UploadFile } from "antd/lib/upload/interface";
 import create from "zustand";
-import { ThemeState, Mode } from "../data/interfaces";
+import { ThemeState, Mode } from "../../data/interfaces";
 import { DirectionType } from "antd/es/config-provider";
-import { defaultColor, mobileDefaultBackgroundImageURL, pcDefaultBackgroundImageURL } from "../data/consts";
+import { defaultColor, mobileDefaultBackgroundImageURL, pcDefaultBackgroundImageURL } from "../../data/consts";
 
 const { Dragger } = Upload;
 
@@ -38,7 +38,7 @@ export const BgiNode = (props: { isMobile: boolean }) => {
   )
 }
 
-export const useGlobalTheme = create<ThemeState>((set: Function) => ({
+export const useGlobalTheme = create<ThemeState>((set: (arg0: any) => any) => ({
   mode: "light",
   url: "default",
   color: defaultColor,
@@ -52,8 +52,6 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
 
   changeMode: (newMode: Mode) => set(() => {
     console.log(`newMode is ${newMode}`)
-    if (newMode == "dark") {
-    };
     return ({ mode: newMode })
   }),
 
@@ -77,11 +75,11 @@ export const useGlobalTheme = create<ThemeState>((set: Function) => ({
 }));
 
 
-const ThemeProviderMenu = (props: {}) => {
-  const color = useGlobalTheme((state) => state.color);
+const ThemeProviderMenu = (_props: Record<string, never>) => {
+  const _color = useGlobalTheme((state) => state.color);
   const [hasBGImage, setHasBGImage] = useState(useGlobalTheme.getState().hasBGImage);
   const setBGImage = useGlobalTheme(s => s.changeBGI)
-  const setPrimaryColor = useGlobalTheme((state) => state.changePrimaryColor);
+  const _setPrimaryColor = useGlobalTheme((state) => state.changePrimaryColor);
   const setDirection = useGlobalTheme((state) => state.changeDirection);
   const setMode = useGlobalTheme((s) => s.changeMode);
   const changeURL = useGlobalTheme((state) => state.changeURL)
@@ -92,7 +90,7 @@ const ThemeProviderMenu = (props: {}) => {
     const { status } = info.file;
     console.log(`status = ${status}`);
     if (status === "done") {
-      const res: string = info.file.response;
+      const _res: string = info.file.response;
       // storage.setItem("BGImageURL", res);
       console.log(`${info.file.name} file uploaded successfully.`);
       setTimeout(() => changeURL("default"), 1000);

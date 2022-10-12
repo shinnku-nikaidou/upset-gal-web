@@ -3,7 +3,7 @@ import { Collapse, Space, Typography } from "antd";
 const { Panel } = Collapse;
 const { Text } = Typography;
 
-export const FAQ = () => (
+export const FAQ = (_props: { lang: string }) => (
   <Panel
     header="FAQ"
     key="3"

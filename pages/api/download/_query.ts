@@ -4,7 +4,7 @@ import fetchAccessToken from "./_fetchAccessToken";
 
 export default async function query_one(
   oauth_drive: OauthDrive,
-  path: string = "root",
+  path: string,
   params?: string
 ): Promise<Headers> {
   const accessToken = await fetchAccessToken(oauth_drive);

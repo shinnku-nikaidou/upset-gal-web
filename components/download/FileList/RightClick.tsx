@@ -1,18 +1,20 @@
 import { useCallback, useMemo } from "react";
 import { Menu, Typography } from "antd";
-import { Item } from "../../data/interfaces";
-import { nginxTransChar } from "../../utils";
+import { Item } from "../../../data/interfaces";
+import { nginxTransChar } from "../../../utils";
 
 const { Text, Link } = Typography;
 
 interface IRightClickMenuProps {
   item: Item;
   url: string;
+  lang: string
 }
 
 export const RightClickMenu = ({
   item,
   url,
+  lang
 }: IRightClickMenuProps) => {
   const downloadLink = useMemo(() => {
     return `${window.location.origin}/${url}/${nginxTransChar(item.name)}`;

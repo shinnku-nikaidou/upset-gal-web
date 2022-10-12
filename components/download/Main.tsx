@@ -3,15 +3,14 @@ import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
 import checkversion, { keyMap } from "../../data/consts";
 import { Mode, TKey } from "../../data/interfaces";
-import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../components";
+import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from ".";
 import { getAccount } from "../../utils";
 
-import ThemeProviderMenu, { useGlobalTheme } from "../_theme";
-import t, { initLanguage } from "../languages";
+import ThemeProviderMenu, { useGlobalTheme } from "./Theme";
 
 const { Content, Sider } = Layout;
 
-const Main = (props: { isMobile: boolean }) => {
+const Main = (props: { isMobile: boolean, lang: string }) => {
   const [collapsed, setCollapsed] = useState(props.isMobile);
   const urlPrefix = useMemo(() => getAccount(), []);
   const [key, setKey] = useState<TKey>(null);
@@ -35,10 +34,10 @@ const Main = (props: { isMobile: boolean }) => {
             onCollapse={onCollapse}
             theme={useGlobalTheme((state) => state.mode as Mode)}
           >
-            <SideMenu setKey={setKey} isMobile={props.isMobile} />
+            <SideMenu setKey={setKey} isMobile={props.isMobile} lang={props.lang} />
           </Sider>
           <Layout className="site-layout">
-            <GalPageHeader />
+            <GalPageHeader lang={props.lang} />
             <Content style={{ margin: "0 16px" }}>
               <div
                 className="site-layout-background"
@@ -47,13 +46,14 @@ const Main = (props: { isMobile: boolean }) => {
                 {key !== null && (key === "10" ? <ThemeProviderMenu /> : (url !== "" ?
                   <FileList
                     url={url}
-                    changeDirectory={(name) => setUrl(`${urlPrefix}/${keyMap[key]}/${name}`)}
-                  /> : <></>
+                    changeDirectory={(name) =>
+                      setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)}
+                    lang={props.lang} /> : <></>
                 ))}
-                {key === null && <Readme />}
+                {key === null && <Readme lang={props.lang}/>}
               </div>
             </Content>
-            <PageFooter />
+            <PageFooter lang={props.lang} />
           </Layout>
         </Layout>
       </ConfigProvider>
