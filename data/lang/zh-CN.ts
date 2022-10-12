@@ -17,6 +17,10 @@ const res = {
     "Click": "点击此处加入",
     "Telegram": "Telegram 群组",
     "Feedback-last": "，有问题请在此反馈。",
+    "Copyright": "法律与版权",
+    "Right1": "本资源仅供学习交流使用，请务必于下载后 24 小时内删除，如有能力请购买正版支持。",
+    "Right2": "本站不承担任何为此带来的后果。",
+    "Right3": "本公告长期有效。",
 }
 
 export default res

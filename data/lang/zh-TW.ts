@@ -17,6 +17,10 @@ const res = {
     "Click": "點擊此處加入",
     "Telegram": "Telegram 公開社群",
     "Feedback-last": "，有問題請在此進行反饋。",
+    "Copyright": "版權聲明",
+    "Right1": "本破解資源僅供學習交流使用，請務必於下載後 24 小時內刪除，如有能力請進入官網購買正版。",
+    "Right2": "本站不承擔任何為此帶來的惡果。",
+    "Right3": "本公告長期有效。",
 }
 
 export default res

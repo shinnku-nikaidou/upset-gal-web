@@ -17,6 +17,10 @@ const res = {
     "Click": "Click here to join ",
     "Telegram": "Telegram discussion group",
     "Feedback-last": ". And if you want to improve the website, please report feedback in our group.",
+    "Copyright": "Copyright",
+    "Right1": "This pirate version is only for learning, please make sure to delete it within 24 hours after downloading. And try to purchase in the official website.",
+    "Right2": "Our website assumes no responsibility for any condition.",
+    "Right3": "This announcement has a long-term validity.",
 }
 
 export default res
