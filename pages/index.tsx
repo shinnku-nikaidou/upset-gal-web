@@ -1,11 +1,11 @@
-// import { CircularProgress, ChakraProvider } from '@chakra-ui/react'
+import { ColorModeScript, theme } from '@chakra-ui/react'
 import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import t from './languages'
+import App from './init'
 
-const Home: NextPage = () => {
+const Home: NextPage = (props: {}) => {
+    const language: string = (props as any).language
     return (
         <div className={styles.container}>
             <Head>
@@ -15,15 +15,8 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
-                
-                <h1 className="text-3xl font-bold underline">
-                    Hello world!
-                </h1>
-                {/* <CircularProgress isIndeterminate color='green.300' /> */}
-
-                <h1 className={styles.title}>
-                    Welcome to <Link href="/download">shinnku.com!</Link>
-                </h1>
+                <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+                <App lang={language} />
             </main>
         </div>
     )
@@ -41,8 +34,6 @@ export async function addDefaultProp(ctx: NextPageContext) {
         : navigator.userAgent) as string).match(
             /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
         )
-
-    //Returning the isMobileView as a prop to the component for further use.
     const isMobile = Boolean(isMobileView)
     console.log(`isMobile is ${isMobile}`)
     return {
