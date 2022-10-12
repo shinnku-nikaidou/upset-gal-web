@@ -3,10 +3,10 @@ import { Layout, ConfigProvider } from "antd";
 import { DirectionType } from "antd/es/config-provider";
 import checkversion, { keyMap } from "../../data/consts";
 import { Mode, TKey } from "../../data/interfaces";
-import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../components";
+import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from ".";
 import { getAccount } from "../../utils";
 
-import ThemeProviderMenu, { useGlobalTheme } from "./_theme";
+import ThemeProviderMenu, { useGlobalTheme } from "./Theme";
 
 const { Content, Sider } = Layout;
 

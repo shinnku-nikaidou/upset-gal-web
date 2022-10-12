@@ -1,5 +1,5 @@
 import { PageHeader } from "antd";
-import t from "../pages/languages";
+import t from "../languages";
 
 export const GalPageHeader = (props: { lang: string }) => (
   <PageHeader

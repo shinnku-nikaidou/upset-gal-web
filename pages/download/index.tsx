@@ -2,8 +2,8 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { addDefaultProp } from '..'
 import styles from '../../styles/Home.module.css'
-import t from '../languages'
-import Main from './_main'
+import t from '../../components/languages'
+import Main from '../../components/download/Main'
 
 const Download: NextPage = (props: {}) => {
   const language: string = (props as any).language
