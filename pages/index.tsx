@@ -1,3 +1,4 @@
+// import { CircularProgress, ChakraProvider } from '@chakra-ui/react'
 import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -14,9 +15,11 @@ const Home: NextPage = () => {
             </Head>
 
             <main className={styles.main}>
+                
                 <h1 className="text-3xl font-bold underline">
                     Hello world!
                 </h1>
+                {/* <CircularProgress isIndeterminate color='green.300' /> */}
 
                 <h1 className={styles.title}>
                     Welcome to <Link href="/download">shinnku.com!</Link>

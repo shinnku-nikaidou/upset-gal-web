@@ -5,7 +5,8 @@ import res_zh_CN from '../data/lang/zh-CN';
 
 
 const getLang = (s: string) => {
-    if (s.startsWith("en")) {
+    if (s === undefined) return res_en;
+    else if (s.toString().startsWith("en")) {
         return res_en
     }
     switch (s) {

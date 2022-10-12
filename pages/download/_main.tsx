@@ -7,7 +7,6 @@ import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from "../../com
 import { getAccount } from "../../utils";
 
 import ThemeProviderMenu, { useGlobalTheme } from "./_theme";
-import t from "../languages";
 
 const { Content, Sider } = Layout;
 
