@@ -1,15 +1,33 @@
-import { CircularProgress, Text } from '@chakra-ui/react'
-import Link from 'next/link'
-import t from './languages'
+import {
+  Box,
+  Center,
+  CircularProgress,
+  Img,
+} from '@chakra-ui/react'
+import Header from './header'
+import Search from './search'
 
-const App = (props: { lang: string }) => {
+const App = (props: { isMobile: boolean, lang: string }) => {
   return (
     <>
-      <CircularProgress isIndeterminate color='green.300' />
+      <Header />
+      <Box h='80px' />
+      <Center>
+        <Img
+          height='160px'
+          objectFit='cover'
+          src='/assets/upsetgal-logo.png'
+          alt='upset visual novel logo'
+        />
+      </Center>
+      <Search isMobile={props.isMobile} lang={props.lang} />
+      <Box minH={120}/>
 
-      <Text fontSize='2xl'>
-        Welcome to <Link href='/download'>shinnku.com!</Link>
-      </Text>
+      <Center>
+        <Box>
+          <CircularProgress isIndeterminate color='green.300' />
+        </Box>
+      </Center>
     </>
   )
 }

@@ -3,9 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@ant-design/icons': ^4.7.0
   '@babel/core': ^7.0.0
+  '@chakra-ui/icons': ^2.0.11
   '@chakra-ui/react': ^2.3.5
+  '@chakra-ui/system': ^2.2.12
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
+  '@types/highlight-words-core': ^1.2.1
   '@types/isomorphic-fetch': ^0.0.36
   '@types/node': ^18.8.4
   '@types/react': ^18.0.21
@@ -18,13 +21,14 @@ specifiers:
   concurrently: ^7.2.1
   dotenv: ^16.0.1
   eslint: 8.25.0
-  eslint-config-next: 12.3.1
+  eslint-config-next: ^12.3.1
   eslint-config-prettier: ^8.3.0
   eslint-import-resolver-typescript: ^3.1.3
   eslint-plugin-import: ^2.25.4
   eslint-plugin-prettier: ^4.0.0
   form-data: ^4.0.0
   framer-motion: ^7.5.3
+  highlight-words-core: ^1.2.2
   isomorphic-fetch: ^3.0.0
   less: ^4.1.2
   less-loader: ^11.1.0
@@ -35,10 +39,12 @@ specifiers:
   nodemon: ^2.0.16
   path: ^0.12.7
   postcss: ^8.4.17
-  prettier: 2.7.1
+  prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
   react-draggable: ^4.4.5
+  react-icons: ^4.4.0
+  react-multi-ref: ^1.0.1
   tailwindcss: ^3.1.8
   typescript: ^4.8.4
   webpack: ^5.74.0
@@ -48,13 +54,16 @@ specifiers:
 dependencies:
   '@ant-design/icons': 4.7.0_biqbaboplfbrettd7655fr4n2y
   '@babel/core': 7.19.3
+  '@chakra-ui/icons': 2.0.11_e25o37k4ko3jrmpkbvnp56dnfq
   '@chakra-ui/react': 2.3.5_356kgaleomk4jdithf3bcp4v5i
+  '@chakra-ui/system': 2.2.12_hfzxdiydbrbhhfpkwuv3jhvwmq
   '@emotion/react': 11.10.4_bjroym7kxlcs2vvwnej4p3gzwu
   '@emotion/styled': 11.10.4_ogudqqhlstsi7uge4lir7ff3ty
   antd: 4.23.5_biqbaboplfbrettd7655fr4n2y
   dotenv: 16.0.3
   form-data: 4.0.0
   framer-motion: 7.5.3_biqbaboplfbrettd7655fr4n2y
+  highlight-words-core: 1.2.2
   isomorphic-fetch: 3.0.0
   less-loader: 11.1.0_less@4.1.3+webpack@5.74.0
   next: 12.3.1_6tziyx3dehkoeijunclpkpolha
@@ -65,11 +74,14 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-draggable: 4.4.5_biqbaboplfbrettd7655fr4n2y
+  react-icons: 4.4.0_react@18.2.0
+  react-multi-ref: 1.0.1
   webpack: 5.74.0
   yaml: 2.1.3
   zustand: 4.1.2_react@18.2.0
 
 devDependencies:
+  '@types/highlight-words-core': 1.2.1
   '@types/isomorphic-fetch': 0.0.36
   '@types/node': 18.8.4
   '@types/react': 18.0.21
@@ -603,6 +615,17 @@ packages:
       react: '>=18'
     dependencies:
       '@chakra-ui/shared-utils': 2.0.2
+      '@chakra-ui/system': 2.2.12_hfzxdiydbrbhhfpkwuv3jhvwmq
+      react: 18.2.0
+    dev: false
+
+  /@chakra-ui/icons/2.0.11_e25o37k4ko3jrmpkbvnp56dnfq:
+    resolution: {integrity: sha512-WjxrFMt9hHpuZlnBh4fhtGOkIVlwYwHNmwq4sJGxYWlg8UnEhVJMoOojheJDy/d3Gp9+ApetlK3vt8fV/rZamg==}
+    peerDependencies:
+      '@chakra-ui/system': '>=2.0.0'
+      react: '>=18'
+    dependencies:
+      '@chakra-ui/icon': 3.0.11_e25o37k4ko3jrmpkbvnp56dnfq
       '@chakra-ui/system': 2.2.12_hfzxdiydbrbhhfpkwuv3jhvwmq
       react: 18.2.0
     dev: false
@@ -1831,6 +1854,10 @@ packages:
   /@types/estree/0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
     dev: false
+
+  /@types/highlight-words-core/1.2.1:
+    resolution: {integrity: sha512-9VZUA5omXBfn+hDxFjUDu1FOJTBM3LmvqfDey+Z6Aa8B8/JmF5SMj6FBrjfgJ/Q3YXOZd3qyTDfJyMZSs/wCUA==}
+    dev: true
 
   /@types/isomorphic-fetch/0.0.36:
     resolution: {integrity: sha512-ulw4d+vW1HKn4oErSmNN2HYEcHGq0N1C5exlrMM0CRqX1UUpFhGb5lwiom5j9KN3LBJJDLRmYIZz1ghm7FIzZw==}
@@ -3584,6 +3611,10 @@ packages:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: false
 
+  /highlight-words-core/1.2.2:
+    resolution: {integrity: sha512-BXUKIkUuh6cmmxzi5OIbUJxrG8OAk2MqoL1DtO3Wo9D2faJg2ph5ntyuQeLqaHJmzER6H5tllCDA9ZnNe9BVGg==}
+    dev: false
+
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
@@ -5099,8 +5130,22 @@ packages:
       use-sidecar: 1.1.2_iapumuv4e6jcjznwuxpf4tt22e
     dev: false
 
+  /react-icons/4.4.0_react@18.2.0:
+    resolution: {integrity: sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-multi-ref/1.0.1:
+    resolution: {integrity: sha512-zgQKmduv95vtXIkze6583pRW7Y+mNj7R0bYgxIRWOrsEfxBQaK+MZ6yjTiZ/qcFV4bYGM74nE9isb+YRBNIw2g==}
+    dependencies:
+      '@babel/runtime': 7.19.4
+    dev: false
 
   /react-remove-scroll-bar/2.3.3_iapumuv4e6jcjznwuxpf4tt22e:
     resolution: {integrity: sha512-i9GMNWwpz8XpUpQ6QlevUtFjHGqnPG4Hxs+wlIJntu/xcsZVEpJcIV71K3ZkqNy2q3GfgvkD7y6t/Sv8ofYSbw==}

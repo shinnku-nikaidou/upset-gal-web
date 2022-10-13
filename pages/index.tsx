@@ -6,6 +6,7 @@ import App from '../components'
 
 const Home: NextPage = (props: Record<string, never>) => {
   const language: string = (props as any).language
+  const isMobile: boolean = (props as any).isMobile
   return (
     <div className={styles.container}>
       <Head>
@@ -16,7 +17,7 @@ const Home: NextPage = (props: Record<string, never>) => {
 
       <main className={styles.main}>
         <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <App lang={language} />
+        <App lang={language} isMobile={isMobile} />
       </main>
     </div>
   )
