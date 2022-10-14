@@ -1,13 +1,8 @@
-import {
-  Box,
-  Center,
-  CircularProgress,
-  Img,
-} from '@chakra-ui/react'
+import { Box, Center, CircularProgress, Img } from '@chakra-ui/react'
 import Header from './header'
 import Search from './search'
 
-const App = (props: { isMobile: boolean, lang: string }) => {
+const App = (props: { isMobile: boolean; lang: string }) => {
   return (
     <>
       <Header />
@@ -21,11 +16,18 @@ const App = (props: { isMobile: boolean, lang: string }) => {
         />
       </Center>
       <Search isMobile={props.isMobile} lang={props.lang} />
-      <Box minH={120}/>
+      <Box minH={"80px"} />
 
       <Center>
         <Box>
-          <CircularProgress isIndeterminate color='green.300' />
+          <iframe
+            width='560'
+            height='315'
+            src='https://www.youtube.com/embed/dQw4w9WgXcQ'
+            title='YouTube video player'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+            allowFullScreen
+          ></iframe>
         </Box>
       </Center>
     </>

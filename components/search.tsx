@@ -171,7 +171,15 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
   return (
     <Center display='flex'>
       <Box minW={props.isMobile ? '' : '520px'}>
-        <LinkBox as='article' p='1' borderWidth='1px' rounded='md'>
+        <LinkBox
+          as='article'
+          borderWidth='1px'
+          transition='box-shadow 0.1s ease-out'
+          overflow='hidden'
+          rounded="24px"
+          _dark={{ bg: 'whiteAlpha.50' }}
+          _hover={{ shadow: 'md' }}
+        >
           <Flex pos='relative' align='stretch'>
             <chakra.input
               aria-autocomplete='list'
