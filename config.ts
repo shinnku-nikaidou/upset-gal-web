@@ -46,7 +46,7 @@ export function initConfig() {
           { encoding: "utf8" }
         );
         recursive_get_children(
-          body as Object as DriveItem,
+          body as unknown as DriveItem,
           `.config/${ONEDRIVE_NAME}`,
           oauth_drive
         );
@@ -68,7 +68,7 @@ async function recursive_get_children(
       fs.writeFileSync(children_path, JSON.stringify(childs), {
         encoding: "utf8",
       });
-      (childs as Object as DriveItemChildren).value
+      (childs as unknown as DriveItemChildren).value
         .filter((i) => i.hasOwnProperty("folder"))
         .forEach(async (i) => {
           await new Promise((resolve) => setTimeout(resolve, 2000));
