@@ -1,0 +1,24 @@
+import json
+import requests
+import urllib3
+
+url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+code = ""
+clientId = ""
+clientSecret = ""
+redirectUri = "https://shinnku.us/onedrive-login"
+
+res = requests.post(url=url, data={
+    'code': code,
+    'client_id': clientId,
+    'client_secret': clientSecret,
+    'redirect_uri': redirectUri,
+    'grant_type': 'authorization_code'
+})
+
+j = json.loads(res.text)
+
+print(j)
+
+print("refresh_token is: \n")
+print(j["refresh_token"])
