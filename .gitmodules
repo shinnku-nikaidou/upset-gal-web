@@ -1,3 +1,0 @@
-[submodule "pages/api/search"]
-	path = pages/api/search
-	url = git@github.com:shinnku-nikaidou/upset-gal-search-api.git
