@@ -8,6 +8,18 @@ import { DriveItemChildren } from '../../../../data/downloadtype'
 const users = config.ONEDRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
 
+const rewriteUrl = (url: string, proxy: string | undefined) => {
+  if (typeof proxy === "undefined") {
+    return url;
+  }
+
+  if (proxy.endsWith("/")) {
+    proxy = proxy.slice(0, -1);
+  }
+
+  return url.replace("https://s0cjp-my.sharepoint.com", proxy);
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>,
@@ -36,7 +48,7 @@ export default async function handler(
     ])
     if (ans) {
       if (typeof ans === 'string') {
-        res.redirect(302, ans)
+        res.redirect(302, rewriteUrl(ans, config.REVERSE_PROXY));
       } else {
         res.send(ans)
       }

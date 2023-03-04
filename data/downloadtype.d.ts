@@ -1,5 +1,6 @@
 export type Config = {
-    PORT: Number;
+    PORT: number;
+    REVERSE_PROXY?: string;
     ONEDRIVE: OneDrive;
 };
 
