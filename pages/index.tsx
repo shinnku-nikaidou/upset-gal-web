@@ -3,7 +3,6 @@ import type { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import App from '../components'
-import Download from './download'
 
 const Home: NextPage = (props: Record<string, never>) => {
   const language: string = (props as any).language
@@ -41,6 +40,4 @@ export async function addDefaultProp(ctx: NextPageContext) {
   }
 }
 
-// export default Home
-
-export default Download
+export default Home

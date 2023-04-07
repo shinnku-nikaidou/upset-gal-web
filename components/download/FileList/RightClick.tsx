@@ -2,6 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { Menu, Typography } from 'antd'
 import { Item } from '../../../data/interfaces'
 import { nginxTransChar } from '../../../utils'
+import t from '../../languages'
 
 const { Text, Link } = Typography
 
@@ -27,13 +28,13 @@ export const RightClickMenu = ({ item, url, lang }: IRightClickMenuProps) => {
         {
           label: (
             <Link target='_blank' href={downloadLink}>
-              点击下载 {item.name}
+              {t('Download1', lang)} {item.name}
             </Link>
           ),
           key: '1',
         },
         {
-          label: <Text onClick={copyLink}>复制下载链接</Text>,
+          label: <Text onClick={copyLink}>{t('Download2', lang)}</Text>,
           key: '2',
         },
       ]}

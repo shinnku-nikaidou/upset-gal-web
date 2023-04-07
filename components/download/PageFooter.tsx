@@ -10,7 +10,7 @@ export const PageFooter = (props: { lang: string }) => (
       <div>Powered by shinnku</div>
       <div>
         <Text>
-          此版本为<Text code>{VERSION}</Text>正式版
+          此版本为<Text code>{VERSION}</Text>
         </Text>
       </div>
       <div>
