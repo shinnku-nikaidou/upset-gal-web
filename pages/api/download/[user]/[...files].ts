@@ -17,7 +17,7 @@ const rewriteUrl = (url: string, proxy: string | undefined) => {
     proxy = proxy.slice(0, -1);
   }
 
-  return url.replace("https://s0cjp-my.sharepoint.com", proxy);
+  return url.replace(/https:\/\/\w+\.sharepoint\.com/, proxy);
 };
 
 export default async function handler(
