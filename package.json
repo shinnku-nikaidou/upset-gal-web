@@ -18,7 +18,7 @@
     "@chakra-ui/system": "^2.2.12",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
-    "antd": "^4.23.3",
+    "antd": "^5.3.3",
     "dotenv": "^16.0.1",
     "form-data": "^4.0.0",
     "framer-motion": "^7.5.3",
