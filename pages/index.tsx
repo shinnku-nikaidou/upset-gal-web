@@ -44,4 +44,3 @@ export async function addDefaultProp(ctx: NextPageContext) {
 // export default Home
 
 export default Download
-

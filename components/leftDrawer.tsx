@@ -15,7 +15,7 @@ const LeftDrawer = () => {
 
   return (
     <>
-      <Button onClick={onOpen} bg="whiteAlpha.50">
+      <Button onClick={onOpen} bg='whiteAlpha.50'>
         <HamburgerIcon />
       </Button>
       <Drawer placement={'left'} onClose={onClose} isOpen={isOpen}>

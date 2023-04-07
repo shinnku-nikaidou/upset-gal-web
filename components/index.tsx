@@ -16,7 +16,7 @@ const App = (props: { isMobile: boolean; lang: string }) => {
         />
       </Center>
       <Search isMobile={props.isMobile} lang={props.lang} />
-      <Box minH={"80px"} />
+      <Box minH={'80px'} />
 
       <Center>
         <Box>

@@ -176,7 +176,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
           borderWidth='1px'
           transition='box-shadow 0.1s ease-out'
           overflow='hidden'
-          rounded="24px"
+          rounded='24px'
           _dark={{ bg: 'whiteAlpha.50' }}
           _hover={{ shadow: 'md' }}
         >
