@@ -8,7 +8,6 @@ import {
   Pagination,
   Skeleton,
 } from "antd";
-import { MessageType } from "antd/lib/message";
 import { Item } from "../../../data/interfaces";
 import { searchEngine, shuffleArray } from "../../../utils";
 import { RightClickMenu } from "./RightClick";
@@ -59,7 +58,7 @@ export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
 
   useLayoutEffect(() => {
     const hide = message.loading("正在加载中", 0);
-    const a = async (hide: MessageType) => {
+    const a = async (hide: any) => {
       let res: Item[] = [];
       console.log(`url is ${url}`);
       const resp = await fetch(`${window.location.origin}/${url}`);

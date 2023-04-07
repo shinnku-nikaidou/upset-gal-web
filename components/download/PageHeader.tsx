@@ -1,4 +1,4 @@
-import { PageHeader } from "antd";
+import { PageHeader } from '@ant-design/pro-layout';
 import t from "../languages";
 
 export const GalPageHeader = (props: { lang: string }) => (
