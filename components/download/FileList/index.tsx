@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useState, useLayoutEffect } from "react";
 import {
   Divider,
   Dropdown,
@@ -12,7 +12,6 @@ import { MessageType } from "antd/lib/message";
 import { Item } from "../../../data/interfaces";
 import { searchEngine, shuffleArray } from "../../../utils";
 import { RightClickMenu } from "./RightClick";
-import { useLayoutEffect } from "react";
 
 const FileItem = ({ item, url, lang }: { item: Item; url: string; lang: string }) => (
   <List.Item style={{ paddingLeft: "20px" }}>
