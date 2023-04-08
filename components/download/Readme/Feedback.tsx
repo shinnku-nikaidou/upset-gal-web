@@ -26,7 +26,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
         >
           西西云
         </Link>
-        <span> 。已经和机场主达成合作协议了。 </span>
+        <span> 。一个月9元200gb流量。已经和机场主达成合作协议了。 </span>
       </Text>
     </Space>
   </Panel>
