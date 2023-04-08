@@ -1,4 +1,4 @@
-export type Link = {
+export type GalLink = {
   url: string
   preview: string
 }
@@ -8,7 +8,7 @@ export type GameItem = {
   keywords: Array<string>
   description: string
   developer?: string
-  links: Link[]
+  links: GalLink[]
 }
 
 export type FrontItem = {
