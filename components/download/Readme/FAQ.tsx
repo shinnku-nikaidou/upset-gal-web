@@ -11,7 +11,7 @@ export const FAQ = (props: { lang: string }) => (
         等下载器，请确保网速保持畅通，能够在较快时间内完成下载，否则可能会提示需要认证/登录。如果前面情况发生，请取消下载并从头重新下载。
       </Text>
       <Text>
-        网站下载不限速，如果下载很慢请试试<Text strong>切换至流量</Text>。
+        网站下载不限速，如果下载很慢请说明被运营商拦截限制了，试试<Text strong>切换至流量/使用上面👆的机场开启vpn下载</Text>。
       </Text>
       <Text>
         点击下载出现
@@ -20,6 +20,7 @@ export const FAQ = (props: { lang: string }) => (
         <Text code>retryAfterSeconds</Text>
         秒时间再次点击下载就行了。
       </Text>
+      <Text>喵喵喵喵喵，接受直接的 usdt/eth 投喂，地址是 shinnku.eth 喵</Text>
     </Space>
   </Panel>
 )
