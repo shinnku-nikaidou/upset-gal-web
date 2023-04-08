@@ -4,13 +4,14 @@ import {
   Dropdown,
   Input,
   List,
+  MenuProps,
   message,
   Pagination,
   Skeleton,
 } from 'antd'
 import { Item } from '../../../data/interfaces'
 import { searchEngine, shuffleArray } from '../../../utils'
-import { RightClickMenu } from './RightClick'
+import { GenerateRightClickMenu } from './RightClick'
 
 const FileItem = ({
   item,
@@ -20,19 +21,23 @@ const FileItem = ({
   item: Item
   url: string
   lang: string
-}) => (
-  <List.Item style={{ paddingLeft: '20px' }}>
-    <Dropdown
-      overlay={<RightClickMenu item={item} url={url} lang={lang} />}
-      trigger={['contextMenu', 'click']}
-    >
-      <List.Item.Meta
-        title={item.name}
-        description={`Size: ${item.size}, Type: ${item['@type']}`}
-      />
-    </Dropdown>
-  </List.Item>
-)
+}) => {
+  const items: MenuProps['items'] = GenerateRightClickMenu({
+    item: item,
+    url: url,
+    lang: lang,
+  })
+  return (
+    <List.Item style={{ paddingLeft: '20px' }}>
+      <Dropdown menu={{ items }} trigger={['contextMenu', 'click']}>
+        <List.Item.Meta
+          title={item.name}
+          description={`Size: ${item.size}, Type: ${item['@type']}`}
+        />
+      </Dropdown>
+    </List.Item>
+  )
+}
 
 const FolderItem = ({
   item,
