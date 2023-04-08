@@ -1,5 +1,6 @@
 import { Layout, Typography } from 'antd'
 import { VERSION } from '../../data/consts'
+import t from '../languages'
 
 const { Footer } = Layout
 const { Text, Link } = Typography
@@ -10,7 +11,8 @@ export const PageFooter = (props: { lang: string }) => (
       <div>Powered by shinnku</div>
       <div>
         <Text>
-          此版本为<Text code>{VERSION}</Text>
+          {t('Version', props.lang)}
+          <Text code>{VERSION}</Text>
         </Text>
       </div>
       <div>

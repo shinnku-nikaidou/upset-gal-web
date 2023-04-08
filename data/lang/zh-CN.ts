@@ -27,6 +27,7 @@ const res = {
 
   Download1: '点击下载',
   Download2: '复制下载链接',
+  Version: '此版本为',
 }
 
 export default res

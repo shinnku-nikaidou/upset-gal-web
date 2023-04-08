@@ -1,4 +1,4 @@
-export const VERSION = "v4.1.2-rc1";
+export const VERSION = "v5.1.0-rc1";
 
 export default function checkversion() {
   // if (typeof window !== 'undefined') {

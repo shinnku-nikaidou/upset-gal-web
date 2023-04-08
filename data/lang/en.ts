@@ -29,6 +29,7 @@ const res = {
 
   Download1: 'click to download',
   Download2: 'Copy download link',
+  Version: 'version is:',
 }
 
 export default res
