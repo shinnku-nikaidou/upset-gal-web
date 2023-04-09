@@ -13,7 +13,6 @@ import {
   useUpdateEffect,
 } from '@chakra-ui/react'
 import { useScroll } from 'framer-motion'
-import NextLink from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { FaMoon, FaSun, FaTelegram } from 'react-icons/fa'
 import { GithubIcon } from './icons/githubIcon'

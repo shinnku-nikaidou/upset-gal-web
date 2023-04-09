@@ -1,4 +1,4 @@
-export const VERSION = "v4.1.2-rc1";
+export const VERSION = "v5.1.0-rc1";
 
 export default function checkversion() {
   // if (typeof window !== 'undefined') {
@@ -25,10 +25,10 @@ export const keyMap = {
   "7": "Artroid",
 };
 
-export const pcDefaultBackgroundImageURL: string =
+export const pcDefaultBackgroundImageURL =
   "https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg";
 
-export const mobileDefaultBackgroundImageURL: string =
+export const mobileDefaultBackgroundImageURL =
   "https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg";
 
 export const defaultColor = {
