@@ -18,6 +18,7 @@ const res = {
   Feedback: '反饋內容',
   Click: '點擊此處加入',
   Telegram: 'Telegram 公開社群',
+  QQ: 'QQ 群',
   'Feedback-last': '，有問題請在此進行反饋。',
   Copyright: '版權聲明',
   Right1:

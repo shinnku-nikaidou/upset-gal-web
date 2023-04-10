@@ -12,6 +12,10 @@ export const Feedback = ({ lang }: { lang: string }) => (
         <Link target='_blank' rel='noreferrer' href='https://t.me/upsetGroup'>
           {t('Telegram', lang)}
         </Link>
+        ,
+        <Link target='_blank' rel='noreferrer' href='https://jq.qq.com/?_wv=1027&k=4aXBpHrh'>
+          {t('QQ', lang)}
+        </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
       <Text>
