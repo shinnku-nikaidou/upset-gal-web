@@ -33,24 +33,28 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
       <ConfigProvider
         direction={useGlobalTheme((state) => state.direction) as DirectionType}
         theme={{
-          algorithm: theme.darkAlgorithm,
+          algorithm:
+            useGlobalTheme((state) => state.mode) === 'light'
+              ? theme.defaultAlgorithm
+              : theme.darkAlgorithm,
         }}
       >
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider
-            collapsible
-            collapsed={collapsed}
-            onCollapse={onCollapse}
-            theme={useGlobalTheme((state) => state.mode as Mode)}
-          >
-            <SideMenu
-              setKey={setKey}
-              isMobile={props.isMobile}
-              lang={props.lang}
-            />
-          </Sider>
-          <Layout className='site-layout'>
-            <GalPageHeader lang={props.lang} />
+        <Layout>
+          <GalPageHeader lang={props.lang} />
+          <Layout style={{ minHeight: '100vh' }}>
+            <Sider
+              collapsible
+              collapsed={collapsed}
+              onCollapse={onCollapse}
+              theme={useGlobalTheme((state) => state.mode as Mode)}
+            >
+              <SideMenu
+                setKey={setKey}
+                isMobile={props.isMobile}
+                lang={props.lang}
+              />
+            </Sider>
+
             <Content style={{ margin: '0 16px' }}>
               <div
                 className='site-layout-background'
@@ -75,8 +79,8 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
                 {key === null && <Readme lang={props.lang} />}
               </div>
             </Content>
-            <PageFooter lang={props.lang} />
           </Layout>
+          <PageFooter lang={props.lang} />
         </Layout>
       </ConfigProvider>
     </React.StrictMode>

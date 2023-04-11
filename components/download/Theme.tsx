@@ -140,21 +140,14 @@ const ThemeProviderMenu = (_props: Record<string, never>) => {
             useGlobalTheme((s) => s.mode) == 'light' ? '暗黑' : '明亮'
           }主题`}
         >
-          <ConfigProvider
-            theme={{
-              algorithm: theme.darkAlgorithm,
-            }}
-          >
-            <Button />
-          </ConfigProvider>
-          {/* <Switch
+          <Switch
             checkedChildren='🌞'
             unCheckedChildren='🌜'
             defaultChecked={
               useGlobalTheme((s) => s.mode) == 'light' ? true : false
             }
             onChange={changeMode}
-          /> */}
+          />
         </Tooltip>
       </div>
       <Divider dashed />
