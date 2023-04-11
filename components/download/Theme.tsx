@@ -8,18 +8,19 @@ import {
   Switch,
   Tooltip,
   Upload,
+  theme,
 } from 'antd'
 import { InboxOutlined } from '@ant-design/icons'
 import { UploadChangeParam } from 'antd/lib/upload'
 import { UploadFile } from 'antd/lib/upload/interface'
 import create from 'zustand'
 import { ThemeState, Mode } from '../../data/interfaces'
-import { DirectionType } from 'antd/es/config-provider'
 import {
   defaultColor,
   mobileDefaultBackgroundImageURL,
   pcDefaultBackgroundImageURL,
 } from '../../data/consts'
+import ConfigProvider, { DirectionType } from 'antd/lib/config-provider'
 
 const { Dragger } = Upload
 
@@ -28,7 +29,6 @@ export const BgiNode = (props: { isMobile: boolean }) => {
 
   return (
     <div>
-      {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <Image
         src={(() => {
           if (url === 'default') {
@@ -140,14 +140,21 @@ const ThemeProviderMenu = (_props: Record<string, never>) => {
             useGlobalTheme((s) => s.mode) == 'light' ? '暗黑' : '明亮'
           }主题`}
         >
-          <Switch
+          <ConfigProvider
+            theme={{
+              algorithm: theme.darkAlgorithm,
+            }}
+          >
+            <Button />
+          </ConfigProvider>
+          {/* <Switch
             checkedChildren='🌞'
             unCheckedChildren='🌜'
             defaultChecked={
               useGlobalTheme((s) => s.mode) == 'light' ? true : false
             }
             onChange={changeMode}
-          />
+          /> */}
         </Tooltip>
       </div>
       <Divider dashed />

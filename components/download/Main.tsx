@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { Layout, ConfigProvider } from 'antd'
 import { DirectionType } from 'antd/es/config-provider'
-import checkversion, { keyMap } from '../../data/consts'
+import { checkversion, keyMap } from '../../data/consts'
 import { Mode, TKey } from '../../data/interfaces'
 import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from '.'
 import { getAccount } from '../../utils'
 
 import ThemeProviderMenu, { useGlobalTheme } from './Theme'
+import theme from 'antd/lib/theme'
 
 const { Content, Sider } = Layout
 
@@ -31,6 +32,9 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
     <React.StrictMode>
       <ConfigProvider
         direction={useGlobalTheme((state) => state.direction) as DirectionType}
+        theme={{
+          algorithm: theme.darkAlgorithm,
+        }}
       >
         <Layout style={{ minHeight: '100vh' }}>
           <Sider
@@ -81,13 +85,18 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
 
 export default Main
 
-const main = async () => {
-  ConfigProvider.config({
-    theme: {
-      primaryColor: '#25b864',
-    },
-  })
-  checkversion()
+const config_init = async () => {
+  console.log('Hello world')
+  if (typeof window === 'object') {
+    ConfigProvider.config({
+      theme: {
+        primaryColor: '#25b864',
+      },
+    })
+    checkversion()
+  }
 }
 
-main()
+config_init()
+
+export { config_init }

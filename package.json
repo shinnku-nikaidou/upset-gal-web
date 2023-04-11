@@ -11,9 +11,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/compatible": "^5.1.1",
     "@ant-design/icons": "^5.0.1",
-    "@ant-design/pro-layout": "^7.10.3",
     "@babel/core": "^7.0.0",
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.5",

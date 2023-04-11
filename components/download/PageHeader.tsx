@@ -1,9 +1,10 @@
-import { PageHeader } from '@ant-design/pro-layout'
 import t from '../languages'
+import { Header } from 'antd/lib/layout/layout'
 
 export const GalPageHeader = (props: { lang: string }) => (
-  <PageHeader
-    title={<div>{t('Head', props.lang)}</div>}
-    subTitle={t('SubHead', props.lang)}
-  />
+  <Header>
+    <div>
+      {t('Head', props.lang)} {t('SubHead', props.lang)}
+    </div>
+  </Header>
 )
