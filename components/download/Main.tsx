@@ -1,9 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { Layout, ConfigProvider } from 'antd'
 import { DirectionType } from 'antd/es/config-provider'
 import { checkversion, keyMap } from '../../data/consts'
 import { Mode, TKey } from '../../data/interfaces'
-import { GalPageHeader, SideMenu, FileList, Readme, PageFooter } from '.'
+import { SideMenu, FileList, Readme, PageFooter } from '.'
+
 import { getAccount } from '../../utils'
 
 import ThemeProviderMenu, { useGlobalTheme } from './Theme'
@@ -17,11 +24,31 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
   const [key, setKey] = useState<TKey>(null)
   const [url, setUrl] = useState('')
 
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      setMode(
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light',
+      )
+
+      window
+        .matchMedia('(prefers-color-scheme: dark)')
+        .addEventListener('change', (event) => {
+          const newColorScheme = event.matches ? 'dark' : 'light'
+          console.log(newColorScheme)
+          setMode(newColorScheme)
+        })
+    }
+  })
+
   useEffect(() => {
     console.log(key)
     if (key !== null && key !== '10')
       setUrl(`api/download/${urlPrefix}/${keyMap[key]}`)
   }, [key, urlPrefix])
+
+  const setMode = useGlobalTheme((s) => s.changeMode)
 
   const onCollapse = useCallback(
     (collapsed: boolean) => setCollapsed(collapsed),
@@ -39,49 +66,47 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
               : theme.darkAlgorithm,
         }}
       >
-        <Layout>
-          <GalPageHeader lang={props.lang} />
-          <Layout style={{ minHeight: '100vh' }}>
-            <Sider
-              collapsible
-              collapsed={collapsed}
-              onCollapse={onCollapse}
-              theme={useGlobalTheme((state) => state.mode as Mode)}
-            >
-              <SideMenu
-                setKey={setKey}
-                isMobile={props.isMobile}
-                lang={props.lang}
-              />
-            </Sider>
+        {/* <Layout>
+          <GalPageHeader lang={props.lang} /> */}
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider
+            collapsible
+            collapsed={collapsed}
+            onCollapse={onCollapse}
+            theme={useGlobalTheme((state) => state.mode as Mode)}
+          >
+            <SideMenu
+              setKey={setKey}
+              isMobile={props.isMobile}
+              lang={props.lang}
+            />
+          </Sider>
 
-            <Content style={{ margin: '0 16px' }}>
-              <div
-                className='site-layout-background'
-                style={{ padding: 24, minHeight: 360 }}
-              >
-                {key !== null &&
-                  (key === '10' ? (
-                    <ThemeProviderMenu />
-                  ) : url !== '' ? (
-                    <FileList
-                      url={url}
-                      changeDirectory={(name) =>
-                        setUrl(
-                          `api/download/${urlPrefix}/${keyMap[key]}/${name}`,
-                        )
-                      }
-                      lang={props.lang}
-                    />
-                  ) : (
-                    <></>
-                  ))}
-                {key === null && <Readme lang={props.lang} />}
-              </div>
-            </Content>
-          </Layout>
-          <PageFooter lang={props.lang} />
+          <Content style={{ margin: '0 16px' }}>
+            <div
+              className='site-layout-background'
+              style={{ padding: 24, minHeight: 360 }}
+            >
+              {key !== null &&
+                (key === '10' ? (
+                  <ThemeProviderMenu />
+                ) : url !== '' ? (
+                  <FileList
+                    url={url}
+                    changeDirectory={(name) =>
+                      setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)
+                    }
+                    lang={props.lang}
+                  />
+                ) : (
+                  <></>
+                ))}
+              {key === null && <Readme lang={props.lang} />}
+            </div>
+          </Content>
         </Layout>
+        <PageFooter lang={props.lang} />
+        {/* </Layout> */}
       </ConfigProvider>
     </React.StrictMode>
   )
