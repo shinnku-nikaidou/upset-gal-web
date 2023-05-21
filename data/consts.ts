@@ -1,15 +1,14 @@
 export const VERSION = "v5.1.0-rc1";
 
-export default function checkversion() {
-  // if (typeof window !== 'undefined') {
-  //   // Perform localStorage action
-  //   const ver = localStorage.getItem('VERSION');
-  //   if (ver !== VERSION) {
-  //     localStorage.clear()
-  //   }
-  //   localStorage.setItem('VERSION', VERSION)
-  // }
-
+export function checkversion() {
+  if (typeof window === 'object') {
+    // Perform localStorage action
+    const ver = localStorage.getItem('VERSION');
+    if (ver !== VERSION) {
+      localStorage.clear()
+    }
+    localStorage.setItem('VERSION', VERSION)
+  }
 }
 
 export const onedriveAccounts = ["mkw", "02", "gal", "gal2"];

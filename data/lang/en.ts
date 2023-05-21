@@ -19,6 +19,7 @@ const res = {
   Feedback: 'Feedback',
   Click: 'Click here to join ',
   Telegram: 'Telegram discussion group',
+  QQ: 'QQ group',
   'Feedback-last':
     '. And if you want to improve the website, please report feedback in our group.',
   Copyright: 'Copyright',

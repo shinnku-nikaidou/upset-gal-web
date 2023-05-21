@@ -12,22 +12,38 @@ export const Feedback = ({ lang }: { lang: string }) => (
         <Link target='_blank' rel='noreferrer' href='https://t.me/upsetGroup'>
           {t('Telegram', lang)}
         </Link>
+        ,
+        <Link
+          target='_blank'
+          rel='noreferrer'
+          href='https://jq.qq.com/?_wv=1027&k=4aXBpHrh'
+        >
+          {t('QQ', lang)}
+        </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
       <Text>
         <span>
-          鉴于每天都有人在tg群询问在国内如何使用梯子/vpn/翻墙事宜，这里推荐本站长（是喜欢gal的可爱美少女喵）自用机场
+          由于每天都有人在交流群询问在如何翻墙，这里推荐galgame玩家(包括本美少女)的专用机场
         </span>
         <Link
           target='_blank'
           rel='noreferrer'
-          href='https://xixiyun.top/#/register?code=wqT1x5ma'
+          href='https://oukasou.moe/index.php#/register?code=N81fWyCw'
         >
-          西西云
+          樱花庄
         </Link>
         <span>
-          。一个月9元200gb/19元800gb吃到饱流量。
-          使用机场的订阅链接请在这里下载开源的clash客户端（安全简单快速通用的指定软件）导入订阅链接(点击下载clash:
+          （节点名字全部很有意思哦）。 还有一个性价比极高的机场
+          <Link
+            target='_blank'
+            rel='noreferrer'
+            href='https://xixiyun.top/#/register?code=wqT1x5ma'
+          >
+            西西云
+          </Link>
+          ，9元200gb/19元800gb,推荐都注册使用喵,全都可以免费体验。
+          使用机场的订阅链接请在这里下载开源的clash客户端，导入订阅链接(clash下载:
           <Link
             target='_blank'
             rel='noreferrer'
@@ -35,7 +51,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             win
           </Link>
-          , 
+          ，
           <Link
             target='_blank'
             rel='noreferrer'
@@ -43,15 +59,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             安卓
           </Link>
-          ) 。当然还有另一个非常好用的机场, 全部自带中转高速线路
-          <Link
-            target='_blank'
-            rel='noreferrer'
-            href='https://oukasou.moe/index.php#/register?code=N81fWyCw'
-          >
-            樱花庄
-          </Link>
-          喵，推荐都注册使用喵。
+          )。 全部机场常用流媒体/chatgpt均解锁。不要再在群内讨论别的机场哦。
         </span>
       </Text>
     </Space>
