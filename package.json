@@ -21,7 +21,7 @@
     "antd": "^5.3.3",
     "dotenv": "^16.0.1",
     "form-data": "^4.0.0",
-    "framer-motion": "^7.5.3",
+    "framer-motion": "^10.12.16",
     "highlight-words-core": "^1.2.2",
     "isomorphic-fetch": "^3.0.0",
     "less-loader": "^11.1.0",
