@@ -9,16 +9,16 @@ const users = config.ONEDRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
 
 const rewriteUrl = (url: string, proxy: string | undefined) => {
-  if (typeof proxy === "undefined") {
-    return url;
+  if (typeof proxy === 'undefined') {
+    return url
   }
 
-  if (proxy.endsWith("/")) {
-    proxy = proxy.slice(0, -1);
+  if (proxy.endsWith('/')) {
+    proxy = proxy.slice(0, -1)
   }
 
-  return url.replace(/https:\/\/\w+\.sharepoint\.com/, proxy);
-};
+  return url.replace(/https:\/\/\w+\.sharepoint\.com/, proxy)
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -48,7 +48,7 @@ export default async function handler(
     ])
     if (ans) {
       if (typeof ans === 'string') {
-        res.redirect(302, rewriteUrl(ans, config.REVERSE_PROXY));
+        res.redirect(302, rewriteUrl(ans, config.REVERSE_PROXY))
       } else {
         res.send(ans)
       }
