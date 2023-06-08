@@ -4,11 +4,25 @@ import styles from '../styles/Home.module.css'
 import t from '../components/languages'
 import Main from '../components/download/Main'
 import { addDefaultProp } from '../utils/addDefaultProp'
+import Script from 'next/script'
 
 const Download: NextPage = (props: Record<string, never>) => {
   const language: string = (props as any).language
   return (
     <div className={styles.container}>
+      <Script
+        async
+        src='https://www.googletagmanager.com/gtag/js?id=G-PG2D8XX3XC'
+      ></Script>
+      <Script id='google-analytics'>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-PG2D8XX3XC');
+        `}
+      </Script>
       <Head>
         <meta charSet='UTF-8' />
         <title>{t('Title', language)}</title>

@@ -1,8 +1,6 @@
 import Header from 'antd/lib/layout/layout'
 import Image from 'next/image'
 import t from '../languages'
-// import Title from 'antd/lib/typography/Title'
-// import Text from 'antd/lib/typography/Text'
 
 export const GalPageHeader = (props: { lang: string }) => {
   return (
