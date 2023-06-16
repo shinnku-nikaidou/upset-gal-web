@@ -13,6 +13,11 @@ const colors = {
 const theme = extendTheme({ colors })
 
 function MyApp({ Component, pageProps }: AppProps) {
+  if (typeof window !== "undefined") {
+    window.onload = () => {
+      document.getElementById("holderStyle").remove();
+    };
+  }
   return (
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
