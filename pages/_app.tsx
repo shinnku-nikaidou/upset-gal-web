@@ -15,7 +15,7 @@ const theme = extendTheme({ colors })
 function MyApp({ Component, pageProps }: AppProps) {
   if (typeof window !== "undefined") {
     window.onload = () => {
-      document.getElementById("holderStyle").remove();
+      document.getElementById("holderStyle")?.remove();
     };
   }
   return (
