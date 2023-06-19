@@ -24,17 +24,18 @@ export const Feedback = ({ lang }: { lang: string }) => (
       </Text>
       <Text>
         <span>
-          由于每天都有人在交流群询问在如何翻墙，这里推荐galgame玩家(包括本美少女)的专用机场
+          鉴于交流群日经询问如何翻墙，这里推荐gal玩家(包括本美少女)的专用机场
         </span>
         <Link
           target='_blank'
           rel='noreferrer'
-          href='https://oukasou.moe/index.php#/register?code=N81fWyCw'
+          href='https://alori.moe/index.php#/register?code=N81fWyCw'
         >
-          樱花庄
+          alori（桜花庄）
         </Link>
         <span>
-          （节点名字全部很有意思哦）。 还有一个性价比极高的机场
+          （节点名字全部都是galgame，都推荐下载玩一遍哦）。
+          还有另外一个性价比极高的机场
           <Link
             target='_blank'
             rel='noreferrer'
@@ -42,12 +43,12 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             西西云
           </Link>
-          ，9元200gb/19元800gb,推荐都注册使用喵,全都可以免费体验。
+          ，9元200gb/19元800gb,推荐都注册使用喵,全都可以无限免费体验。
           使用机场的订阅链接请在这里下载开源的clash客户端，导入订阅链接(clash下载:
           <Link
             target='_blank'
             rel='noreferrer'
-            href='https://shinnku.us/Clash.for.Windows-0.20.20-win.7z'
+            href='https://shinnku.us/Clash.for.Windows.Setup.0.20.25.exe'
           >
             win
           </Link>
@@ -59,7 +60,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             安卓
           </Link>
-          )。 全部机场常用流媒体/chatgpt均解锁。不要再在群内讨论别的机场哦。
+          )。 全部机场流媒体/chatgpt均解锁。请问在群内发送任何别的机场链接哦。
         </span>
       </Text>
     </Space>
