@@ -11,7 +11,7 @@ export function checkversion() {
   }
 }
 
-export const onedriveAccounts = ["mkw", "02", "gal", "gal2"];
+export const onedriveAccounts = ["mk", "02", "03", "04"];
 
 export const keyMap = {
   "0": "win",

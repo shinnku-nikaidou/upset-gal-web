@@ -13,7 +13,6 @@ export const FAQ = (props: { lang: string }) => (
       <Text>
         网站下载不限速，如果下载很慢请说明被运营商拦截限制了，试试<Text strong>切换至流量/使用上面👆的机场开启vpn下载</Text>。
       </Text>
-      <Text>这里接受加密货币赞助 usdt/eth 投喂喵，地址是 shinnku.eth 喵（目前已有 1 人捐赠）</Text>
     </Space>
   </Panel>
 )

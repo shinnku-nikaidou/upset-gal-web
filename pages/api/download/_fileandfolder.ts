@@ -17,7 +17,7 @@ const cache: Map<string, BodyCacheItem> = new Map();
 function isvalidcache(c: BodyCacheItem) {
   const currentTime = Date.now()
   const elapsedTime = currentTime - c.timestamp
-  return elapsedTime <= 60000
+  return elapsedTime <= 300000
 }
 
 export default async function fileandfolder(
