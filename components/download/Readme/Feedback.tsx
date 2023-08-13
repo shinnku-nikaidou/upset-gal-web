@@ -12,7 +12,6 @@ export const Feedback = ({ lang }: { lang: string }) => (
         <Link target='_blank' rel='noreferrer' href='https://t.me/shinnkugroup'>
           {t('Telegram', lang)}
         </Link>
-        ,
         <span>{t('Feedback-last', lang)}</span>
       </Text>
       <Text>
@@ -44,7 +43,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             安卓
           </Link>
-          )。 请勿在群内发送和进行推广任何别的机场链接哦，以免qq群被封。
+          )。 
         </span>
       </Text>
     </Space>
