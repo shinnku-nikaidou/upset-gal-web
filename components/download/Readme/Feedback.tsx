@@ -13,13 +13,6 @@ export const Feedback = ({ lang }: { lang: string }) => (
           {t('Telegram', lang)}
         </Link>
         ,
-        <Link
-          target='_blank'
-          rel='noreferrer'
-          href='https://jq.qq.com/?_wv=1027&k=4aXBpHrh'
-        >
-          {t('QQ', lang)}
-        </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
       <Text>
@@ -29,20 +22,12 @@ export const Feedback = ({ lang }: { lang: string }) => (
         <Link
           target='_blank'
           rel='noreferrer'
-          href='https://qhcy.cc/#/register?code=aRkNuDlz'
-        >
-          青花瓷
-        </Link>，量大管饱，流媒体全部解锁，还有一个相当好用的机场，
-        <Link
-          target='_blank'
-          rel='noreferrer'
           href='https://alori.moe/index.php#/register?code=N81fWyCw'
         >
           alori
         </Link>
         <span>
           （节点名字全部都是gal）。
-          推荐都注册购买。
           使用机场的订阅链接请在这里下载开源的clash客户端，导入订阅链接(clash下载:
           <Link
             target='_blank'
