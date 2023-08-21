@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { Typography } from 'antd'
 import type { MenuProps } from 'antd'
 import { Item } from '../../../data/interfaces'
@@ -18,9 +18,9 @@ export const GenerateRightClickMenu = ({
   url,
   lang,
 }: IRightClickMenuProps): MenuProps['items'] => {
-  const downloadLink = useMemo(() => {
-    return `${window.location.origin}/${url}/${nginxTransChar(item.name)}`
-  }, [url, item.name])
+  const downloadLink = `${window.location.origin}/${url}/${nginxTransChar(
+    item.name,
+  )}`
 
   const copyLink = useCallback(
     () => navigator.clipboard.writeText(downloadLink),

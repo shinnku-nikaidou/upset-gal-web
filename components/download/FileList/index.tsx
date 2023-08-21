@@ -12,6 +12,7 @@ import {
 import { Item } from '../../../data/interfaces'
 import { searchEngine, shuffleArray } from '../../../utils'
 import { GenerateRightClickMenu } from './RightClick'
+import { create } from 'zustand'
 
 const FileItem = ({
   item,
@@ -65,8 +66,22 @@ interface IFileListProps {
   lang: string
 }
 
+interface FileState {
+  files: Item[]
+  removeAllFiles: () => void
+  setFiles: (newFiles: Item[]) => void
+}
+
+const useFileStore = create<FileState>((set) => ({
+  files: [],
+  removeAllFiles: () => set({ files: [] }),
+  setFiles: (newFiles: Item[]) => set({ files: newFiles }),
+}))
+
 export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
-  const [files, setFiles] = useState<Item[]>([])
+  const files = useFileStore((state) => state.files)
+  const setFiles = useFileStore((s) => s.setFiles)
+  // const [files, setFiles] = useState<Item[]>([])
   const [dispFiles, setDispFiles] = useState<Item[]>([])
 
   useLayoutEffect(() => {
@@ -91,7 +106,7 @@ export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
       hide()
     }
     a(hide)
-  }, [url])
+  }, [setFiles, url])
 
   const [page, setPage] = useState(1)
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage])

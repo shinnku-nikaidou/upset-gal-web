@@ -13,7 +13,7 @@ import {
 import { InboxOutlined } from '@ant-design/icons'
 import { UploadChangeParam } from 'antd/lib/upload'
 import { UploadFile } from 'antd/lib/upload/interface'
-import create from 'zustand'
+import { create } from 'zustand'
 import { ThemeState, Mode } from '../../data/interfaces'
 import {
   defaultColor,
@@ -84,12 +84,12 @@ export const useGlobalTheme = create<ThemeState>((set: (arg0: any) => any) => ({
 }))
 
 const ThemeProviderMenu = (_props: Record<string, never>) => {
-  const _color = useGlobalTheme((state) => state.color)
+  const color = useGlobalTheme((state) => state.color)
   const [hasBGImage, setHasBGImage] = useState(
     useGlobalTheme.getState().hasBGImage,
   )
   const setBGImage = useGlobalTheme((s) => s.changeBGI)
-  const _setPrimaryColor = useGlobalTheme((state) => state.changePrimaryColor)
+  const changePrimaryColor = useGlobalTheme((state) => state.changePrimaryColor)
   const setDirection = useGlobalTheme((state) => state.changeDirection)
   const setMode = useGlobalTheme((s) => s.changeMode)
   const changeURL = useGlobalTheme((state) => state.changeURL)
@@ -101,7 +101,6 @@ const ThemeProviderMenu = (_props: Record<string, never>) => {
     console.log(`status = ${status}`)
     if (status === 'done') {
       const _res: string = info.file.response
-      // storage.setItem("BGImageURL", res);
       console.log(`${info.file.name} file uploaded successfully.`)
       setTimeout(() => changeURL('default'), 1000)
     } else if (status === 'error') {
