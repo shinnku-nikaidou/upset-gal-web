@@ -81,7 +81,6 @@ const useFileStore = create<FileState>((set) => ({
 export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
   const files = useFileStore((state) => state.files)
   const setFiles = useFileStore((s) => s.setFiles)
-  // const [files, setFiles] = useState<Item[]>([])
   const [dispFiles, setDispFiles] = useState<Item[]>([])
 
   useLayoutEffect(() => {

@@ -26,16 +26,8 @@ export type Theme = {
 }
 
 export interface ThemeState {
-  changeURL: any
   mode: Mode
   url: string
-  color: {
-    primaryColor: string
-    errorColor: string
-    warningColor: string
-    successColor: string
-    infoColor: string
-  }
   direction?: DirectionType
   hasBGImage: boolean
 

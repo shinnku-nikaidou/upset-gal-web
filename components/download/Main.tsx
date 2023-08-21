@@ -66,8 +66,6 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
               : theme.darkAlgorithm,
         }}
       >
-        {/* <Layout>
-          <GalPageHeader lang={props.lang} /> */}
         <Layout style={{ minHeight: '100vh' }}>
           <Sider
             collapsible
@@ -106,7 +104,6 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
           </Content>
         </Layout>
         <PageFooter lang={props.lang} />
-        {/* </Layout> */}
       </ConfigProvider>
     </React.StrictMode>
   )
