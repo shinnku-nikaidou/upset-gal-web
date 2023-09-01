@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.5",
-    "@babel/core": "^7.22.10",
+    "@babel/core": "^7.22.11",
     "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/react": "^2.8.0",
     "@chakra-ui/system": "^2.6.0",
