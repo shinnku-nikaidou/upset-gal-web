@@ -1,8 +1,8 @@
-import { onedriveAccounts } from '../data/consts'
+import { onedriveAccountsLegacy } from '../data/consts'
 
 export const getAccount = () => {
-  const index = Math.floor(Math.random() * onedriveAccounts.length)
-  return onedriveAccounts[index]
+  const index = Math.floor(Math.random() * onedriveAccountsLegacy.length)
+  return onedriveAccountsLegacy[index]
 }
 
 const randInt = (min: number, max: number) => {

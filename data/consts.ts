@@ -11,7 +11,7 @@ export function checkversion() {
   }
 }
 
-export const onedriveAccounts = ['mk', '02', '03', '04']
+export const onedriveAccountsLegacy = ['mk', '02', '03', '04', 'legacy']
 
 export const keyMap = {
   '0': 'win',
