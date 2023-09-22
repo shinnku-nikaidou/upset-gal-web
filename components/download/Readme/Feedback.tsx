@@ -9,8 +9,8 @@ export const Feedback = ({ lang }: { lang: string }) => (
     <Space direction='vertical'>
       <Text>
         <span>{t('Click', lang)}</span>
-        <Link target='_blank' rel='noreferrer' href='https://t.me/shinnkugroup'>
-          {t('Telegram', lang)}
+        <Link target='_blank' rel='noreferrer' href='https://qm.qq.com/q/EKWa8Vo9Dq'>
+          {t('QQ', lang)}
         </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
