@@ -6,7 +6,7 @@ url = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
 code = ""
 clientId = ""
 clientSecret = ""
-redirectUri = "https://shinnku.us/onedrive-login"
+redirectUri = ""
 
 res = requests.post(url=url, data={
     'code': code,
