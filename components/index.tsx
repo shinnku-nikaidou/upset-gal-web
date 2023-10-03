@@ -1,4 +1,4 @@
-import { Box, Center, CircularProgress, Img } from '@chakra-ui/react'
+import { Box, Center, Img } from '@chakra-ui/react'
 import Header from './header'
 import Search from './search'
 

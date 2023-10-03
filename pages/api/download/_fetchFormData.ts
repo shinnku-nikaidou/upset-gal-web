@@ -10,6 +10,7 @@ export default async function fetchFormData(
   // const FormData = FormData;
   const formdata = new FormData()
   Object.entries(data)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     .filter(([k, _]) => data.hasOwnProperty(k))
     .forEach(([k, v]) => formdata.append(k, v))
   const requestOptions = {

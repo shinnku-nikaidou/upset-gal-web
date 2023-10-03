@@ -12,7 +12,7 @@ type BodyCacheItem = {
   timestamp: number
 }
 
-const cache: Map<string, BodyCacheItem> = new Map();
+const cache: Map<string, BodyCacheItem> = new Map()
 
 function isvalidcache(c: BodyCacheItem) {
   const currentTime = Date.now()
@@ -51,6 +51,7 @@ export default async function fileandfolder(
       })
       console.log(`query_one ${child.id}`)
     }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const downloadUrl = (body as any)['@microsoft.graph.downloadUrl']!
     return downloadUrl
   }

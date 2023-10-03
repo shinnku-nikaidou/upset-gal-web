@@ -28,6 +28,8 @@ const res = {
   Right2: 'Our website assumes no responsibility for any condition.',
   Right3: 'This announcement has a long-term validity.',
 
+  IDM: 'If you are using multi-thread downloaders like IDM, please ensure a stable and fast internet connection to complete the download in a relatively short time; otherwise, you may be prompted to authenticate/log in. If the above situation occurs, please cancel the download and restart it from the beginning.',
+
   Download1: 'click to download',
   Download2: 'Copy download link',
   Version: 'version is:',
