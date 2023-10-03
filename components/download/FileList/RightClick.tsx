@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { Typography } from 'antd'
 import type { MenuProps } from 'antd'
-import { Item } from '../../../data/interfaces'
+import { Item } from '../../../const/interfaces'
 import { nginxTransChar } from '../../../utils'
 import t from '../../languages'
 

@@ -1,5 +1,5 @@
 import type { DirectionType } from 'antd/es/config-provider'
-import { keyMap } from './consts'
+import { keyMap } from '.'
 
 export type Item = {
   '@type': 'folder' | 'file'

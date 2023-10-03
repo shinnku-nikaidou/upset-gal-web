@@ -7,8 +7,8 @@ import React, {
 } from 'react'
 import { Layout, ConfigProvider } from 'antd'
 import { DirectionType } from 'antd/es/config-provider'
-import { checkversion, keyMap } from '../../data/consts'
-import { Mode, TKey } from '../../data/interfaces'
+import { checkversion, keyMap } from '../../const'
+import { Mode, TKey } from '../../const/interfaces'
 import { SideMenu, FileList, Readme, PageFooter } from '.'
 
 import { getAccount } from '../../utils'

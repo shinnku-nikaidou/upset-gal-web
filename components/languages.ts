@@ -1,6 +1,6 @@
-import res_zh_TW from '../data/lang/zh-TW'
-import res_en from '../data/lang/en'
-import res_zh_CN from '../data/lang/zh-CN'
+import res_zh_TW from '../lang/zh-TW'
+import res_en from '../lang/en'
+import res_zh_CN from '../lang/zh-CN'
 
 const getLang = (s: string) => {
   if (s === undefined) return res_en

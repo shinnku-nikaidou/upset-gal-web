@@ -1,4 +1,4 @@
-import { OauthDrive, AccessToken } from '../../../data/downloadtype'
+import { OauthDrive, AccessToken } from '../../../const/downloadtype'
 import fetchFormData from './_fetchFormData'
 
 export default async function fetchAccessToken(

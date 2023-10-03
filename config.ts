@@ -6,7 +6,7 @@ import {
   OauthDrive,
   DriveItem,
   DriveItemChildren,
-} from './data/downloadtype'
+} from './const/downloadtype'
 import query_one from './pages/api/download/_query'
 
 const default_option =

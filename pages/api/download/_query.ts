@@ -1,4 +1,4 @@
-import { OauthDrive } from '../../../data/downloadtype'
+import { OauthDrive } from '../../../const/downloadtype'
 import getContentWithHeaders from '../../../utils/getContentWithHeaders'
 import fetchAccessToken from './_fetchAccessToken'
 

@@ -1,4 +1,4 @@
-import { AccessToken } from '../../../data/downloadtype'
+import { AccessToken } from '../../../const/downloadtype'
 import gatherResponse from '../../../utils/gatherResponse'
 import fetch from 'isomorphic-fetch'
 import FormData from 'form-data'

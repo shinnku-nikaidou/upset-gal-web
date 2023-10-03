@@ -4,7 +4,7 @@ import {
   OauthDrive,
   DriveItemChildren,
   FrontItem,
-} from '../../../data/downloadtype'
+} from '../../../const/downloadtype'
 import query_one from './_query'
 
 type BodyCacheItem = {
