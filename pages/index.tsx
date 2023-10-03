@@ -1,9 +1,9 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import t from '../lang'
-import Main from '../components/download/Main'
-import { addDefaultProp } from '../utils/addDefaultProp'
+import t from '@lang'
+import Main from '@components/download/Main'
+import { addDefaultProp } from '@utils/addDefaultProp'
 import Script from 'next/script'
 
 const Download: NextPage = (props: Record<string, never>) => {

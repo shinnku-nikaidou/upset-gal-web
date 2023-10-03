@@ -1,5 +1,5 @@
-import { OauthDrive } from '../../types/downloadtype'
-import getContentWithHeaders from '../net/getContentWithHeaders'
+import { OauthDrive } from '@/types/downloadtype'
+import { getContentWithHeaders } from '@net'
 import fetchAccessToken from './fetchAccessToken'
 
 export default async function query_one(

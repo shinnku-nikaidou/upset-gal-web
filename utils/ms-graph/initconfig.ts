@@ -6,8 +6,8 @@ import {
   OauthDrive,
   DriveItem,
   DriveItemChildren,
-} from './types/downloadtype'
-import query_one from './utils/ms-graph/query'
+} from '@/types/downloadtype'
+import query_one from './query'
 
 const default_option =
   'top=10000&select=id,name,size,folder,lastModifiedDateTime,file'

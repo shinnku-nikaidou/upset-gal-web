@@ -1,5 +1,5 @@
 import { Collapse, Space, Typography } from 'antd'
-import t from '../../../lang'
+import t from '@lang'
 
 const { Panel } = Collapse
 const { Text } = Typography

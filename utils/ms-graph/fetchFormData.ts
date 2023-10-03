@@ -1,5 +1,5 @@
 import { AccessToken } from '@/types/downloadtype'
-import gatherResponse from '@utils/net/gatherResponse'
+import { gatherResponse } from '@net'
 import fetch from 'isomorphic-fetch'
 import FormData from 'form-data'
 

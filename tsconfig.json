@@ -24,7 +24,11 @@
       "@utils/*": ["utils/*"],
       "@const": ["const/index"],
       "@const/*": ["const/*"],
-      "@lang": ["lang/index"]
+      "@lang": ["lang/index"],
+      "@net": ["utils/net/index"],
+      "@algorithm": ["utils/algorithms/index"],
+      "@ms-graph": ["utils/ms-graph/index"],
+      "@ms-graph/*": ["utils/ms-graph/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -8,13 +8,13 @@ import React, {
 import { Layout, ConfigProvider } from 'antd'
 import { DirectionType } from 'antd/es/config-provider'
 import { checkversion, keyMap } from '../../const'
-import { Mode, TKey } from '../../types/theme'
+import { Mode, TKey } from '@/types/theme'
 import { SideMenu, FileList, Readme, PageFooter } from '.'
 
-import { getAccount } from '../../utils'
 
 import ThemeProviderMenu, { useGlobalTheme } from './Theme'
 import theme from 'antd/lib/theme'
+import { getAccount } from '@algorithm'
 
 const { Content, Sider } = Layout
 
