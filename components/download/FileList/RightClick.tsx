@@ -3,7 +3,7 @@ import { Typography } from 'antd'
 import type { MenuProps } from 'antd'
 import { Item } from '../../../const/interfaces'
 import { nginxTransChar } from '../../../utils'
-import t from '../../languages'
+import t from '../../../utils/languages'
 
 const { Text, Link } = Typography
 

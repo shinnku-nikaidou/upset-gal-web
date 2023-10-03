@@ -7,7 +7,7 @@ import {
   DriveItem,
   DriveItemChildren,
 } from './const/downloadtype'
-import query_one from './pages/api/download/_query'
+import query_one from './utils/ms-graph/query'
 
 const default_option =
   'top=10000&select=id,name,size,folder,lastModifiedDateTime,file'

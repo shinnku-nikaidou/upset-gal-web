@@ -1,4 +1,4 @@
-import gatherResponse from './gatherResponse'
+import gatherResponse from './net/gatherResponse'
 import fetch from 'isomorphic-fetch'
 
 export default async function getContentWithHeaders(

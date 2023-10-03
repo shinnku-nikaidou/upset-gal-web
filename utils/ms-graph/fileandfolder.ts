@@ -1,11 +1,7 @@
 import PATH from 'path'
 import fs from 'fs'
-import {
-  OauthDrive,
-  DriveItemChildren,
-  FrontItem,
-} from '../../../const/downloadtype'
-import query_one from './_query'
+import { OauthDrive, DriveItemChildren, FrontItem } from '@const/downloadtype'
+import query_one from './query'
 
 type BodyCacheItem = {
   body: Headers

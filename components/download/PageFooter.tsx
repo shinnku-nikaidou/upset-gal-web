@@ -1,6 +1,6 @@
 import { Layout, Typography } from 'antd'
 import { VERSION } from '../../const'
-import t from '../languages'
+import t from '../../utils/languages'
 
 const { Footer } = Layout
 const { Text, Link } = Typography

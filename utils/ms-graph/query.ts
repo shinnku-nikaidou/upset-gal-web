@@ -1,6 +1,6 @@
-import { OauthDrive } from '../../../const/downloadtype'
-import getContentWithHeaders from '../../../utils/getContentWithHeaders'
-import fetchAccessToken from './_fetchAccessToken'
+import { OauthDrive } from '../../const/downloadtype'
+import getContentWithHeaders from '../getContentWithHeaders'
+import fetchAccessToken from './fetchAccessToken'
 
 export default async function query_one(
   oauth_drive: OauthDrive,
