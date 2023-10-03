@@ -9,7 +9,7 @@ import {
   Pagination,
   Skeleton,
 } from 'antd'
-import { Item } from '../../../types/theme'
+import { Item } from '@/types/theme'
 import { searchEngine, shuffleArray } from '@utils'
 import { GenerateRightClickMenu } from './RightClick'
 import { create } from 'zustand'

@@ -1,4 +1,4 @@
-import { KeyMap } from '@root/types/theme'
+import { KeyMap } from '@/types/theme'
 
 export const VERSION = 'v5.1.0-rc1'
 

@@ -16,8 +16,8 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@root": ["."],
-      "@root/*": ["./*"],
+      "@": ["."],
+      "@/*": ["./*"],
       "@components": ["components/index"],
       "@components/*": ["components/*"],
       "@utils": ["utils"],

@@ -1,4 +1,4 @@
-import { AccessToken } from '@root/types/downloadtype'
+import { AccessToken } from '@/types/downloadtype'
 import gatherResponse from '@utils/net/gatherResponse'
 import fetch from 'isomorphic-fetch'
 import FormData from 'form-data'
