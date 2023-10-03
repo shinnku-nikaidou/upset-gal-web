@@ -8,7 +8,6 @@ export async function addDefaultProp(ctx: NextPageContext) {
     (ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent) as string
   ).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i)
   const isMobile = Boolean(isMobileView)
-  console.log(`isMobile is ${isMobile}`)
   return {
     isMobile: isMobile,
     language: language,
