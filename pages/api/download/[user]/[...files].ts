@@ -3,7 +3,7 @@ import path from 'path'
 import { promises as fs } from 'fs'
 import config, { get_oauth_drive, initConfig } from '../../../../config'
 import fileandfolder from '../../../../utils/ms-graph/fileandfolder'
-import { DriveItemChildren } from '../../../../const/downloadtype'
+import { DriveItemChildren } from '../../../../types/downloadtype'
 
 const users = config.ONEDRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"

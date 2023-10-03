@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { Menu } from 'antd'
 import { AppstoreOutlined, SettingOutlined } from '@ant-design/icons'
-import { TKey } from '../../const/interfaces'
-import t from '../../utils/languages'
+import { TKey } from '../../types/theme'
+import t from '../../lang'
 
 const { SubMenu, ItemGroup, Item } = Menu
 

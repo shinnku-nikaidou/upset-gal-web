@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { Typography } from 'antd'
 import type { MenuProps } from 'antd'
-import { Item } from '../../../const/interfaces'
-import { nginxTransChar } from '../../../utils'
-import t from '../../../utils/languages'
+import { Item } from '../../../types/theme'
+import t from '../../../lang'
+import { nginxTransChar } from '@utils/algorithms/nginxTransChar'
 
 const { Text, Link } = Typography
 

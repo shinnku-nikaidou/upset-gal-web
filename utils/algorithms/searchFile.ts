@@ -1,4 +1,4 @@
-import { Item } from '../const/interfaces'
+import { Item } from '../../types/theme'
 
 export const searchEngine = (value: string, files: Item[]) => {
   value = value.toLowerCase()

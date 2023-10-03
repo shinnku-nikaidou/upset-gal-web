@@ -1,5 +1,5 @@
-import { OauthDrive, AccessToken } from '@const/downloadtype'
-import fetchFormData from '@utils/net/fetchFormData'
+import { OauthDrive, AccessToken } from '@root/types/downloadtype'
+import fetchFormData from './fetchFormData'
 
 export default async function fetchAccessToken(
   oauth_drive: OauthDrive,

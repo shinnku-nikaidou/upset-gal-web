@@ -1,3 +1,5 @@
+import { KeyMap } from '@root/types/theme'
+
 export const VERSION = 'v5.1.0-rc1'
 
 export function checkversion() {
@@ -13,7 +15,7 @@ export function checkversion() {
 
 export const onedriveAccountsLegacy = ['mkw12345', '02', '03', '04', 'legacy']
 
-export const keyMap = {
+export const keyMap: KeyMap = {
   '0': 'win',
   '1': 'Android直装',
   '2': 'krkr',

@@ -23,7 +23,8 @@
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
       "@const": ["const/index"],
-      "@const/*": ["const/*"]
+      "@const/*": ["const/*"],
+      "@lang": ["lang/index"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

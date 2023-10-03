@@ -6,7 +6,7 @@ import {
   OauthDrive,
   DriveItem,
   DriveItemChildren,
-} from './const/downloadtype'
+} from './types/downloadtype'
 import query_one from './utils/ms-graph/query'
 
 const default_option =

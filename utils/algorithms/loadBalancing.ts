@@ -1,4 +1,4 @@
-import { onedriveAccountsLegacy } from '../const'
+import { onedriveAccountsLegacy } from '../../const'
 
 export const getAccount = () => {
   const index = Math.floor(Math.random() * onedriveAccountsLegacy.length)

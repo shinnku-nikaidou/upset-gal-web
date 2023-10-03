@@ -1,5 +1,4 @@
 import type { DirectionType } from 'antd/es/config-provider'
-import { keyMap } from '.'
 
 export type Item = {
   '@type': 'folder' | 'file'
@@ -37,4 +36,15 @@ export interface ThemeState {
   changeBGI: (flag: boolean) => void
 }
 
-export type TKey = keyof typeof keyMap | '10' | null
+export type KeyMap =  {
+  '0': string;
+  '1': string;
+  '2': string;
+  '3': string;
+  '4': string;
+  '5': string;
+  '6': string;
+  '7': string;
+}
+
+export type TKey = keyof KeyMap | '10' | null

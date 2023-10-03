@@ -1,6 +1,6 @@
 import { Button, Divider, Radio, RadioChangeEvent } from 'antd'
 import { create } from 'zustand'
-import { ThemeState, Mode } from '../../const/interfaces'
+import { ThemeState, Mode } from '../../types/theme'
 import { DirectionType } from 'antd/lib/config-provider'
 
 export const useGlobalTheme = create<ThemeState>((set: (arg0: any) => any) => ({

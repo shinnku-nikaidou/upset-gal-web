@@ -6,7 +6,7 @@ import { Feedback } from './Feedback'
 import { FAQ } from './FAQ'
 import { Notice } from './Notice'
 import Image from 'next/image'
-import t from '../../../utils/languages'
+import t from '../../../lang'
 export const Readme = ({ lang }: { lang: string }) => (
   <>
     <Image
