@@ -1,60 +1,43 @@
 import fs from 'fs'
 import PATH from 'path'
-import {
-  OauthDrive,
-  DriveItem,
-  DriveItemChildren,
-} from '@/types/downloadtype'
+import { OauthDrive, DriveItem, DriveItemChildren } from '@/types/downloadtype'
 import query_one from '@/utils/ms-graph/query'
-import config from '@/config'
-
-const default_option =
-  'top=10000&select=id,name,size,folder,lastModifiedDateTime,file'
-
-
-const oauth_drives: Array<OauthDrive> = []
-export const get_oauth_drive = (i: number) => oauth_drives[i]
+import {
+  default_option,
+  LEGACY_ONECRIVE_OAUTH,
+  LEGACY_ONECRIVE,
+} from '@/config'
 
 export async function initLegacyConfig() {
-  config.ONEDRIVE.forEach((account) =>
-    oauth_drives.push({
-      redirectUri: account.redirectUri,
-      refreshToken: account.ONEDRIVE_REFRESHTOKEN,
-      clientId: account.clientId,
-      clientSecret: account.clientSecret,
-      oauthUrl: account.loginHost + '/common/oauth2/v2.0/',
-      apiUrl: account.apiHost + '/v1.0/me/drive/items/',
-      scope: account.apiHost + '/Files.ReadWrite.All offline_access',
-    }),
-  )
-
   if (!fs.existsSync('data/legacy')) {
     fs.mkdirSync('data/legacy')
   } else {
     return
   }
 
-  config.ONEDRIVE.forEach(async ({ ONEDRIVE_NAME }, id) => {
-    const oauth_drive = oauth_drives[id]
+  LEGACY_ONECRIVE.forEach(async ({ ONEDRIVE_NAME }, id) => {
+    const onedrive_oauth = LEGACY_ONECRIVE_OAUTH[id]
     fs.mkdirSync(`data/legacy/${ONEDRIVE_NAME}`)
     fs.writeFileSync(
       `data/legacy/${ONEDRIVE_NAME}/oauth.json`,
-      JSON.stringify(oauth_drive),
+      JSON.stringify(onedrive_oauth),
       { encoding: 'utf8' },
     )
 
-    await query_one(oauth_drive, 'root', default_option).then(async (body) => {
-      fs.writeFileSync(
-        `data/legacy/${ONEDRIVE_NAME}/root.json`,
-        JSON.stringify(body),
-        { encoding: 'utf8' },
-      )
-      await recursive_get_children(
-        body as unknown as DriveItem,
-        `data/legacy/${ONEDRIVE_NAME}`,
-        oauth_drive,
-      )
-    })
+    await query_one(onedrive_oauth, 'root', default_option).then(
+      async (body) => {
+        fs.writeFileSync(
+          `data/legacy/${ONEDRIVE_NAME}/root.json`,
+          JSON.stringify(body),
+          { encoding: 'utf8' },
+        )
+        await recursive_get_children(
+          body as unknown as DriveItem,
+          `data/legacy/${ONEDRIVE_NAME}`,
+          onedrive_oauth,
+        )
+      },
+    )
   })
 }
 

@@ -3,10 +3,9 @@ import path from 'path'
 import { promises as fs } from 'fs'
 import fileandfolder from '@ms-graph/fileandfolder'
 import { DriveItemChildren } from '@/types/downloadtype'
-import { get_oauth_drive, initLegacyConfig } from '@/scripts/initLagecyConfig'
-import config from '@/config'
+import config, { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
 
-const users = config.ONEDRIVE.map((user) => user.ONEDRIVE_NAME)
+const users = LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
 
 const rewriteUrl = (url: string, proxy: string | undefined) => {
@@ -27,7 +26,6 @@ export default async function handler(
 ) {
   try {
     const { user, files } = req.query as { user: string; files: string[] }
-    initLegacyConfig()
     const i = users.indexOf(user)
     const lastfile = files[files.length - 1]
     files.pop()
@@ -42,11 +40,12 @@ export default async function handler(
       ),
     ) as DriveItemChildren
 
-    const ans = await fileandfolder(get_oauth_drive(i), childs, lastfile, [
-      user,
-      'root',
-      ...initfile,
-    ])
+    const ans = await fileandfolder(
+      LEGACY_ONECRIVE_OAUTH[i],
+      childs,
+      lastfile,
+      [user, 'root', ...initfile],
+    )
     if (ans) {
       if (typeof ans === 'string') {
         res.redirect(302, rewriteUrl(ans, config.REVERSE_PROXY))

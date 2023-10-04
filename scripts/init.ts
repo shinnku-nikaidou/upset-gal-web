@@ -16,7 +16,7 @@ if (!fs.existsSync('data')) {
 }
 
 if (order == 'init') {
-  await initLegacyConfig()
+  initLegacyConfig()
 } else {
   console.log(help)
 }

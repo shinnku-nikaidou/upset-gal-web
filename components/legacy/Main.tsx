@@ -116,7 +116,7 @@ const config_init = async () => {
   if (typeof window === 'object') {
     ConfigProvider.config({
       theme: {
-        primaryColor: '#25b864',
+        primaryColor: '#22D36F',
       },
     })
     checkversion()
