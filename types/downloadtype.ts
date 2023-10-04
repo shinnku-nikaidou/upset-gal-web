@@ -1,9 +1,3 @@
-export type Config = {
-  PORT: number
-  REVERSE_PROXY?: string
-  ONEDRIVE: OneDrive
-}
-
 export type AccessToken = {
   client_id: string
   client_secret: string

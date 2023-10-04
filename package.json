@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "hello": "ts-node scripts/hello.ts"
+    "hello": "bun scripts/hello.ts",
+    "make": "bun scripts/init.ts "
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -20,6 +21,7 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "antd": "^5.9.4",
+    "bun": "^1.0.4",
     "dotenv": "^16.3.1",
     "form-data": "^4.0.0",
     "framer-motion": "^10.16.4",
@@ -37,7 +39,6 @@
     "react-icons": "^4.11.0",
     "react-multi-ref": "^1.0.1",
     "rocksdb": "^5.2.1",
-    "ts-node": "^10.9.1",
     "webpack": "^5.88.2",
     "yaml": "^2.3.2",
     "zustand": "^4.4.1"
