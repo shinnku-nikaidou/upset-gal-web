@@ -20,6 +20,8 @@
     "@chakra-ui/system": "^2.6.1",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.11",
+    "@mui/material": "^5.14.11",
     "antd": "^5.9.4",
     "dotenv": "^16.3.1",
     "form-data": "^4.0.0",

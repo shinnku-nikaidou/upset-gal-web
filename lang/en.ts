@@ -3,9 +3,11 @@ const res = {
   Head: 'Upset Visual Novel',
   SubHead:
     "Welcome to the visual novel (in Chinese & Japanese lang's) sharing site",
-  Menu: 'Contents',
+  Windows: 'Windows',
+  Laptop: 'For Laptop',
+  Mobile: 'For Mobile',
   Classify: 'classification',
-  APK: 'Android Application',
+  APK: 'Android App',
   生肉: 'Japanese lang only',
   Simulator: 'simulators',
   Setting: 'setting',
