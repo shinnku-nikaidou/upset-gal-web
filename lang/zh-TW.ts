@@ -9,6 +9,8 @@ const res = {
   APK: '安卓應用程式安裝包',
   生肉: '日語原版（生肉）',
   Simulator: '模擬器',
+  Software: 'Galgame軟體',
+  Tools: 'Galgame工具',
   Setting: '設置',
   Theme: '主題',
 

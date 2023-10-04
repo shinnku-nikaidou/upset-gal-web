@@ -3,7 +3,10 @@ import { Menu } from 'antd'
 import Image from 'next/image'
 import {
   AndroidOutlined,
+  AppstoreAddOutlined,
+  CodeOutlined,
   LaptopOutlined,
+  MobileOutlined,
   SettingOutlined,
   WindowsOutlined,
 } from '@ant-design/icons'
@@ -35,17 +38,14 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
       mode='inline'
     >
       <SubMenu key='sub1' icon={<LaptopOutlined />} title={t('Laptop', lang)}>
-        <Item key='0'>
+        <Item key='win'>
           <WindowsOutlined /> {t('Windows', lang)}
         </Item>
-        <Item key='4'>
-          <SportsEsportsOutlinedIcon />
-          rpg
-        </Item>
-        <Item key='5'>{t('生肉', lang)}</Item>
+        <Item key='rpg'>rpg</Item>
+        <Item key='japan'>{t('生肉', lang)}</Item>
       </SubMenu>
-      <SubMenu key='sub2' icon={<LaptopOutlined />} title={t('Mobile', lang)}>
-        <Item key='2'>
+      <SubMenu key='sub2' icon={<MobileOutlined />} title={t('Mobile', lang)}>
+        <Item key='kr'>
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <Image
               src='/assets/icon/kirikiroid2.jpg'
@@ -56,15 +56,26 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
             <p style={{ marginLeft: '4px' }}>kirikiri 2</p>
           </div>
         </Item>
-        <Item key='1'>
+        <Item key='apk'>
           <AndroidOutlined />
           {t('APK', lang)}
         </Item>
-        <Item key='3'>ons</Item>
-        <Item key='7'>Artroid</Item>
+        <Item key='ons'>ons</Item>
+        <Item key='artroid'>Artroid</Item>
       </SubMenu>
-      <SubMenu key='sub3' icon={<SettingOutlined />} title={t('Setting', lang)}>
-        <Item key='6'>{t('Simulator', lang)}</Item>
+      <SubMenu
+        key='sub3'
+        icon={<AppstoreAddOutlined />}
+        title={t('Software', lang)}
+      >
+        <Item key='simulate'>
+          <SportsEsportsOutlinedIcon style={{ width: 16 }} />{' '}
+          {t('Simulator', lang)}
+        </Item>
+        <Item key='soft'>
+          <CodeOutlined />{' '}
+          {t('Tools', lang)}
+        </Item>
       </SubMenu>
       <SubMenu key='sub4' icon={<SettingOutlined />} title={t('Setting', lang)}>
         <Item key='10'>{t('Theme', lang)}</Item>

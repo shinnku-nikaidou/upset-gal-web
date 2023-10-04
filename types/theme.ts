@@ -36,15 +36,16 @@ export interface ThemeState {
   changeBGI: (flag: boolean) => void
 }
 
-export type KeyMap =  {
-  '0': string;
-  '1': string;
-  '2': string;
-  '3': string;
-  '4': string;
-  '5': string;
-  '6': string;
-  '7': string;
+export type KeyMap = {
+  win: string
+  apk: string
+  kr: string
+  ons: string
+  rpg: string
+  japan: string
+  soft: string
+  artroid: string
+  simulate: string
 }
 
 export type TKey = keyof KeyMap | '10' | null

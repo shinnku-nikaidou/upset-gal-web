@@ -9,6 +9,8 @@ const res = {
   APK: 'apk 安装包',
   生肉: '生肉',
   Simulator: '模拟器',
+  Software: 'galgame 软件',
+  Tools: 'galgale 工具',
   Setting: '设置',
   Theme: '主题',
 

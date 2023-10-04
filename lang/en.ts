@@ -10,6 +10,8 @@ const res = {
   APK: 'Android App',
   生肉: 'Japanese lang only',
   Simulator: 'simulators',
+  Software: 'Softwares',
+  Tools: 'Tools',
   Setting: 'setting',
   Theme: 'theme',
 
