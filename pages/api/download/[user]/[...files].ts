@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
 import { promises as fs } from 'fs'
-import config, { get_oauth_drive, initConfig } from '@ms-graph/initconfig'
+import config, { get_oauth_drive, initLegacyConfig } from '@ms-graph/initconfig'
 import fileandfolder from '@ms-graph/fileandfolder'
 import { DriveItemChildren } from '@/types/downloadtype'
 
@@ -26,7 +26,7 @@ export default async function handler(
 ) {
   try {
     const { user, files } = req.query as { user: string; files: string[] }
-    initConfig()
+    initLegacyConfig()
     const i = users.indexOf(user)
     const lastfile = files[files.length - 1]
     files.pop()

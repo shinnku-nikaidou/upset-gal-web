@@ -8,7 +8,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "hello": "ts-node scripts/hello.ts"
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
@@ -36,6 +37,7 @@
     "react-icons": "^4.11.0",
     "react-multi-ref": "^1.0.1",
     "rocksdb": "^5.2.1",
+    "ts-node": "^10.9.1",
     "webpack": "^5.88.2",
     "yaml": "^2.3.2",
     "zustand": "^4.4.1"

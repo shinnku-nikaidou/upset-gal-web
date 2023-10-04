@@ -20,30 +20,7 @@ export default config
 const oauth_drives: Array<OauthDrive> = []
 export const get_oauth_drive = (i: number) => oauth_drives[i]
 
-let locked = false
-
-function lock() {
-  locked = true
-}
-
-function unlock() {
-  locked = false
-}
-
-function waitUnlock(time = 2000) {
-  return new Promise<void>((resolve) => {
-    const checkLock = () => {
-      if (!locked) {
-        resolve()
-      } else {
-        setTimeout(checkLock, time) // 等待2s后再次检查
-      }
-    }
-    checkLock()
-  })
-}
-
-export function initConfig() {
+export function initLegacyConfig() {
   config.ONEDRIVE.forEach((account) =>
     oauth_drives.push({
       redirectUri: account.redirectUri,
@@ -90,7 +67,7 @@ export function initConfig() {
   })
 }
 
-async function recursive_get_children(
+export async function recursive_get_children(
   body: DriveItem,
   path: string,
   oauth_drive: OauthDrive,
@@ -98,7 +75,6 @@ async function recursive_get_children(
   path = PATH.join(path, body.name)
   fs.mkdirSync(path)
   const children_path = PATH.join(path, 'child.json')
-  lock()
   await query_one(oauth_drive, `${body.id}/children`, default_option).then(
     async (childs: Headers) => {
       fs.writeFileSync(children_path, JSON.stringify(childs), {
