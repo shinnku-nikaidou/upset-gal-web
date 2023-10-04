@@ -34,7 +34,7 @@ export default async function handler(
     console.log(lastfile, initfile, user)
     const childs = JSON.parse(
       await fs.readFile(
-        path.join('.config', user, 'root', ...initfile, 'child.json'),
+        path.join('data', 'legacy', user, 'root', ...initfile, 'child.json'),
         {
           encoding: 'utf8',
         },

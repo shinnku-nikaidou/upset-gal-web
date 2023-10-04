@@ -20,6 +20,29 @@ export default config
 const oauth_drives: Array<OauthDrive> = []
 export const get_oauth_drive = (i: number) => oauth_drives[i]
 
+let locked = false
+
+function lock() {
+  locked = true
+}
+
+function unlock() {
+  locked = false
+}
+
+function waitUnlock(time = 2000) {
+  return new Promise<void>((resolve) => {
+    const checkLock = () => {
+      if (!locked) {
+        resolve()
+      } else {
+        setTimeout(checkLock, time) // 等待2s后再次检查
+      }
+    }
+    checkLock()
+  })
+}
+
 export function initConfig() {
   config.ONEDRIVE.forEach((account) =>
     oauth_drives.push({
@@ -33,31 +56,38 @@ export function initConfig() {
     }),
   )
 
-  if (!fs.existsSync('.config')) {
-    fs.mkdirSync('.config')
-    config.ONEDRIVE.forEach(({ ONEDRIVE_NAME }, id) => {
-      const oauth_drive = oauth_drives[id]
-      fs.mkdirSync(`.config/${ONEDRIVE_NAME}`)
+  if (!fs.existsSync('data')) {
+    fs.mkdirSync('data')
+  }
+
+  if (!fs.existsSync('data/legacy')) {
+    fs.mkdirSync('data/legacy')
+  } else {
+    return
+  }
+
+  config.ONEDRIVE.forEach(({ ONEDRIVE_NAME }, id) => {
+    const oauth_drive = oauth_drives[id]
+    fs.mkdirSync(`data/legacy/${ONEDRIVE_NAME}`)
+    fs.writeFileSync(
+      `data/legacy/${ONEDRIVE_NAME}/oauth.json`,
+      JSON.stringify(oauth_drive),
+      { encoding: 'utf8' },
+    )
+
+    query_one(oauth_drive, 'root', default_option).then((body) => {
       fs.writeFileSync(
-        `.config/${ONEDRIVE_NAME}/oauth.json`,
-        JSON.stringify(oauth_drive),
+        `data/legacy/${ONEDRIVE_NAME}/root.json`,
+        JSON.stringify(body),
         { encoding: 'utf8' },
       )
-
-      query_one(oauth_drive, 'root', default_option).then((body) => {
-        fs.writeFileSync(
-          `.config/${ONEDRIVE_NAME}/root.json`,
-          JSON.stringify(body),
-          { encoding: 'utf8' },
-        )
-        recursive_get_children(
-          body as unknown as DriveItem,
-          `.config/${ONEDRIVE_NAME}`,
-          oauth_drive,
-        )
-      })
+      recursive_get_children(
+        body as unknown as DriveItem,
+        `data/legacy/${ONEDRIVE_NAME}`,
+        oauth_drive,
+      )
     })
-  }
+  })
 }
 
 async function recursive_get_children(
@@ -68,16 +98,17 @@ async function recursive_get_children(
   path = PATH.join(path, body.name)
   fs.mkdirSync(path)
   const children_path = PATH.join(path, 'child.json')
+  lock()
   await query_one(oauth_drive, `${body.id}/children`, default_option).then(
-    async (childs) => {
+    async (childs: Headers) => {
       fs.writeFileSync(children_path, JSON.stringify(childs), {
         encoding: 'utf8',
       })
-      ;(childs as unknown as DriveItemChildren).value
-        .filter((i) => i.hasOwnProperty('folder'))
-        .forEach(async (i) => {
-          await new Promise((resolve) => setTimeout(resolve, 2000))
-          await recursive_get_children(i, path, oauth_drive)
+      const value = (childs as unknown as DriveItemChildren).value
+      value
+        .filter((item) => item.hasOwnProperty('folder'))
+        .forEach(async (item) => {
+          await recursive_get_children(item, path, oauth_drive)
         })
     },
   )

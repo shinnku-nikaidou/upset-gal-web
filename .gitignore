@@ -37,7 +37,6 @@ yarn-error.log*
 data/
 
 tmp/
-.config/
 config.yaml
 log.txt
 start.sh

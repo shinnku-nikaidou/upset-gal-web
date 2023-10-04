@@ -28,7 +28,7 @@ export default async function fileandfolder(
   }
   if (child.hasOwnProperty('folder')) {
     const child_childs = JSON.parse(
-      fs.readFileSync(PATH.join('.config', ...path, node, 'child.json'), {
+      fs.readFileSync(PATH.join('data', 'legacy', ...path, node, 'child.json'), {
         encoding: 'utf8',
       }),
     ) as DriveItemChildren

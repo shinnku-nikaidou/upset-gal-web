@@ -10,7 +10,13 @@ export default async function handler(
 ) {
   const { user } = req.query
   const users = user as string
-  const jsonDirectory = path.join(process.cwd(), '.config', users, 'root.json')
+  const jsonDirectory = path.join(
+    process.cwd(),
+    'data',
+    'legacy',
+    users,
+    'root.json',
+  )
   try {
     const fileContents = await fs.readFile(jsonDirectory, 'utf8')
     res.status(200).json(JSON.parse(fileContents))
