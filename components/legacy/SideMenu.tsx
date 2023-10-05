@@ -42,7 +42,6 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
           <WindowsOutlined /> {t('Windows', lang)}
         </Item>
         <Item key='rpg'>rpg</Item>
-        <Item key='japan'>{t('生肉', lang)}</Item>
       </SubMenu>
       <SubMenu key='sub2' icon={<MobileOutlined />} title={t('Mobile', lang)}>
         <Item key='kr'>

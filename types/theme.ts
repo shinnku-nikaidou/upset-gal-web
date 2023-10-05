@@ -42,7 +42,6 @@ export type KeyMap = {
   kr: string
   ons: string
   rpg: string
-  japan: string
   soft: string
   artroid: string
   simulate: string

@@ -14,7 +14,7 @@ export function checkversion() {
   }
 }
 
-export const onedriveAccountsLegacy = ['mkw12345', '02', '03', '04', 'legacy']
+export const onedriveAccountsLegacy = ['mkw12345', 'legacy']
 
 export const keyMap: KeyMap = {
   win: 'win',
@@ -22,7 +22,6 @@ export const keyMap: KeyMap = {
   kr: 'krkr',
   ons: 'ons',
   rpg: 'rpg',
-  japan: 'raw',
   soft: 'tools',
   artroid: 'artroid',
   simulate: 'simulate',
