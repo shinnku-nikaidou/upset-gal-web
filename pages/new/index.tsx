@@ -1,11 +1,10 @@
 import { ColorModeScript, theme } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../../styles/Home.module.css'
-import App from '../../components'
-import { addDefaultProp } from '../../utils/addDefaultProp'
+import styles from '@/styles/Home.module.css'
+import App from '@components'
+import { userDefaultInfoProp } from '@utils/userDefaultInfoProp'
 
-const Home: NextPage = (props: Record<string, never>) => {
+function Home(props: Record<string, never>) {
   const language: string = (props as any).language
   const isMobile: boolean = (props as any).isMobile
   return (
@@ -24,6 +23,6 @@ const Home: NextPage = (props: Record<string, never>) => {
   )
 }
 
-Home.getInitialProps = addDefaultProp
+Home.getInitialProps = userDefaultInfoProp
 
 export default Home

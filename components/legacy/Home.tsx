@@ -7,10 +7,9 @@ import React, {
 } from 'react'
 import { Layout, ConfigProvider } from 'antd'
 import { DirectionType } from 'antd/es/config-provider'
-import { checkversion, keyMap } from '../../const'
+import { checkversion, keyMap } from '@const'
 import { Mode, TKey } from '@/types/theme'
 import { SideMenu, FileList, Readme, PageFooter } from '.'
-
 
 import ThemeProviderMenu, { useGlobalTheme } from './Theme'
 import theme from 'antd/lib/theme'
@@ -18,7 +17,7 @@ import { getAccount } from '@algorithm'
 
 const { Content, Sider } = Layout
 
-const Main = (props: { isMobile: boolean; lang: string }) => {
+const Home = (props: { isMobile: boolean; lang: string }) => {
   const [collapsed, setCollapsed] = useState(props.isMobile)
   const urlPrefix = useMemo(() => getAccount(), [])
   const [key, setKey] = useState<TKey>(null)
@@ -109,18 +108,10 @@ const Main = (props: { isMobile: boolean; lang: string }) => {
   )
 }
 
-export default Main
+export default Home
 
 const config_init = async () => {
-  console.log('Hello world')
-  if (typeof window === 'object') {
-    ConfigProvider.config({
-      theme: {
-        primaryColor: '#22D36F',
-      },
-    })
-    checkversion()
-  }
+  checkversion()
 }
 
 config_init()

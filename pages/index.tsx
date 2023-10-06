@@ -1,13 +1,15 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 import t from '@lang'
-import Main from '@/components/legacy/Main'
-import { addDefaultProp } from '@utils/addDefaultProp'
+import Home from '@components/legacy/Home'
+import DefaultInfoProp, {
+  userDefaultInfoProp,
+} from '@utils/userDefaultInfoProp'
 import Script from 'next/script'
 
-const Download: NextPage = (props: Record<string, never>) => {
-  const language: string = (props as any).language
+// now is Legacy Download Pages
+const Download: NextPage<DefaultInfoProp> = ({ isMobile, language }) => {
   return (
     <div className={styles.container}>
       <Script
@@ -19,7 +21,6 @@ const Download: NextPage = (props: Record<string, never>) => {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-
           gtag('config', 'G-PG2D8XX3XC');
         `}
       </Script>
@@ -33,12 +34,12 @@ const Download: NextPage = (props: Record<string, never>) => {
       </Head>
 
       <main className={styles.main}>
-        <Main isMobile={(props as any).isMobile} lang={language} />
+        <Home isMobile={isMobile} lang={language} />
       </main>
     </div>
   )
 }
 
-Download.getInitialProps = addDefaultProp
+Download.getInitialProps = userDefaultInfoProp
 
 export default Download
