@@ -9,11 +9,11 @@ export async function userDefaultInfoProp(ctx: NextPageContext) {
   const isMobile = Boolean(isMobileView)
   return {
     isMobile: isMobile,
-    language: language,
+    lang: language,
   }
 }
 
 export default interface DefaultInfoProp {
   isMobile: boolean
-  language: string
+  lang: string
 }
