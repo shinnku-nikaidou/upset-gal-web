@@ -9,11 +9,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "hello": "tsx scripts/hello.ts",
-    "make": "tsx scripts/init.ts "
+    "hello": "bun scripts/hello.ts",
+    "make": "tsx scripts/init.ts ",
+    "predev": "ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx",
+    "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.6",
+    "@ant-design/static-style-extract": "^1.0.2",
     "@babel/core": "^7.23.0",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
@@ -40,6 +44,7 @@
     "react-icons": "^4.11.0",
     "react-multi-ref": "^1.0.1",
     "rocksdb": "^5.2.1",
+    "ts-node": "^10.9.1",
     "tsx": "^3.13.0",
     "webpack": "^5.88.2",
     "yaml": "^2.3.2",
@@ -54,8 +59,10 @@
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.16",
+    "bun": "^1.0.4",
     "color": "^4.2.3",
     "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "eslint": "8.41.0",
     "eslint-config-next": "^12.3.4",
@@ -68,6 +75,7 @@
     "postcss": "^8.4.30",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.3",
+    "tslib": "^2.6.2",
     "typescript": "^5.2.2"
   }
 }
