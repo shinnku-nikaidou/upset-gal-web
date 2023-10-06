@@ -1,6 +1,8 @@
-import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { StyleProvider } from '@ant-design/cssinjs'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import '../styles/globals.css'
+import '../public/antd.min.css'
 
 const colors = {
   brand: {
@@ -12,17 +14,12 @@ const colors = {
 
 const theme = extendTheme({ colors })
 
-function MyApp({ Component, pageProps }: AppProps) {
-  if (typeof window !== "undefined") {
-    window.onload = () => {
-      document.getElementById("holderStyle")?.remove();
-    };
-  }
-  return (
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <StyleProvider hashPriority='high'>
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
-  )
-}
+  </StyleProvider>
+)
 
 export default MyApp
