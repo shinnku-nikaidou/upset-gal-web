@@ -42,4 +42,5 @@ log.txt
 start.sh
 *.zip
 
-public/antd.min.css
+antd.min.css
+*.db
