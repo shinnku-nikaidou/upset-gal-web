@@ -15,7 +15,7 @@ const colors = {
 const theme = extendTheme({ colors })
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <AntdProvider hashPriority='high'>
+  <AntdProvider hashPriority='low'>
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
