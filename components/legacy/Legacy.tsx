@@ -7,7 +7,7 @@ import React, {
 } from 'react'
 import { Mode, TKey } from '@/types/theme'
 
-import ThemeProviderMenu, { useGlobalTheme } from './Theme'
+import ThemeProviderMenu from './Theme'
 import { getAccount } from '@algorithm'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import { Layout } from 'antd'
@@ -17,6 +17,7 @@ import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
 import { FileList } from './FileList'
 import Logo from './Logo'
+import useGlobalTheme from '@utils/persist/theme'
 
 const { Content, Sider } = Layout
 

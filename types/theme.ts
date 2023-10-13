@@ -12,8 +12,8 @@ export type Mode = 'light' | 'dark'
 export type Theme = {
   mode: Mode
   url: string
-  primaryColor: string
-  direction?: DirectionType
+  color: string
+  direction: DirectionType
   hasBGImage: boolean
 }
 
