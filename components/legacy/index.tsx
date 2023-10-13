@@ -18,7 +18,7 @@ const Home = (props: DefaultInfoProp) => {
           algorithm:
             mode === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
           token: {
-            // fontSize: 16,
+            fontSize: 14,
             colorPrimary: colorPrimary,
             colorLink: colorPrimary,
             // just for fun, next 3 lines

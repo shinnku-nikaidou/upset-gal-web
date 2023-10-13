@@ -13,6 +13,7 @@ export type Theme = {
   mode: Mode
   url: string
   color: string
+  fontSize: number,
   direction: DirectionType
   hasBGImage: boolean
 }
@@ -20,6 +21,7 @@ export type Theme = {
 export interface ThemeState extends Theme {
   changePrimaryColor: (value: string) => void
   changeDirection: (dir: DirectionType) => void
+  changeFontSize: (fontSize: number) => void
   changeMode: (newMode: Mode) => void
   changeBGI: (flag: boolean) => void
 }

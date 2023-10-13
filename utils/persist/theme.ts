@@ -11,6 +11,7 @@ const useGlobalTheme = create<ThemeState>()(
       direction: 'ltr',
       hasBGImage: true,
       color: '#52c41a',
+      fontSize: 14,
 
       changeURL: (newURL: string) =>
         set(() => {
@@ -24,17 +25,15 @@ const useGlobalTheme = create<ThemeState>()(
           return { mode: newMode }
         }),
 
+      changeFontSize: (fontSize: number) => set(() => ({ fontSize: fontSize })),
+
       changePrimaryColor: (value: string) =>
         set(() => {
           console.log(`new PrimaryColor is ${value}`)
           return { color: value }
         }),
 
-      changeDirection: (dir: DirectionType) =>
-        set(() => {
-          console.log(`new Direction is ${dir}`)
-          return { direction: dir }
-        }),
+      changeDirection: (dir: DirectionType) => set(() => ({ direction: dir })),
 
       changeBGI: (flag: boolean) => {
         set(() => {
