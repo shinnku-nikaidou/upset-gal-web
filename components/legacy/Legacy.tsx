@@ -17,6 +17,9 @@ import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
 import { FileList } from './FileList'
 
+import Image from 'next/image'
+import t from '@lang'
+
 const { Content, Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
@@ -73,6 +76,17 @@ const Legacy = (props: DefaultInfoProp) => {
         </Sider>
 
         <Content style={{ margin: '0 16px' }}>
+          <Image
+            src='/assets/upsetgal-logo.png'
+            alt={`${t('Head', props.lang)}, ${t('SubHead', props.lang)}`}
+            width={300}
+            height={1000}
+            style={{
+              display: 'block',
+              margin: '0 auto',
+              // transform: 'translate(-50%, -50%)',
+            }}
+          ></Image>
           <div
             className='site-layout-background'
             style={{ padding: 24, minHeight: 360 }}
