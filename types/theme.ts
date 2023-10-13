@@ -12,24 +12,12 @@ export type Mode = 'light' | 'dark'
 export type Theme = {
   mode: Mode
   url: string
-  color: {
-    primaryColor: string
-    errorColor: string
-    warningColor: string
-    successColor: string
-    infoColor: string
-  }
-  mobile: boolean
+  primaryColor: string
   direction?: DirectionType
   hasBGImage: boolean
 }
 
-export interface ThemeState {
-  mode: Mode
-  url: string
-  direction?: DirectionType
-  hasBGImage: boolean
-
+export interface ThemeState extends Theme {
   changePrimaryColor: (value: string) => void
   changeDirection: (dir: DirectionType) => void
   changeMode: (newMode: Mode) => void

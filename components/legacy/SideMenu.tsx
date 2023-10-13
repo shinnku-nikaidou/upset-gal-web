@@ -1,6 +1,5 @@
 import { useCallback } from 'react'
 import { Menu } from 'antd'
-import Image from 'next/image'
 import {
   AndroidOutlined,
   AppstoreAddOutlined,
