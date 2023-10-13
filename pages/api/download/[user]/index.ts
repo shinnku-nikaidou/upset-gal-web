@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
 import { promises as fs } from 'fs'
+import corsControl from '@utils/corsControl'
 
 const usernotfound = "user doesn't exist or the config is still initializing"
 
@@ -8,6 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
+  res = corsControl(req, res)
   const { user } = req.query
   const users = user as string
   const jsonDirectory = path.join(

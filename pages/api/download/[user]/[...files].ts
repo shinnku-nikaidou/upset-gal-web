@@ -4,6 +4,7 @@ import { promises as fs } from 'fs'
 import fileandfolder from '@ms-graph/fileandfolder'
 import { DriveItemChildren } from '@/types/downloadtype'
 import config, { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
+import corsControl from '@utils/corsControl'
 
 const users = LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
@@ -24,6 +25,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
+  res = corsControl(req, res)
+
   try {
     const { user, files } = req.query as { user: string; files: string[] }
     const i = users.indexOf(user)

@@ -1,7 +1,7 @@
 import { InboxOutlined } from '@ant-design/icons'
 import useGlobalTheme from '@utils/persist/theme'
 import { Button, Divider, Radio, RadioChangeEvent } from 'antd'
-import Dragger from 'antd/es/upload/Dragger'
+import Dragger from 'antd/lib/upload/Dragger'
 import { SketchPicker } from 'react-color'
 
 const ThemeProviderMenu = () => {
