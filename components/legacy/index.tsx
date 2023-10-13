@@ -15,6 +15,16 @@ const Home = (props: DefaultInfoProp) => (
           useGlobalTheme((state) => state.mode) === 'light'
             ? theme.defaultAlgorithm
             : theme.darkAlgorithm,
+        token: {
+          // fontSize: 16,
+          colorPrimary: '#52c41a',
+          colorLink: '#52c41a',
+          // just for fun, next 4 lines
+          // colorPrimary: '#EC0D0D',
+          // colorLink: '#EC0D0D',
+          // colorTextBase: '#EC0D0D',
+          // colorBgBase: '#2B0DEC',
+        },
       }}
     >
       <Legacy isMobile={props.isMobile} lang={props.lang} />

@@ -1,5 +1,5 @@
 import type { AppProps } from 'next/app'
-import { StyleProvider } from '@ant-design/cssinjs'
+import { StyleProvider as AntdProvider } from '@ant-design/cssinjs'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import '../styles/globals.css'
 import '../public/antd.min.css'
@@ -15,11 +15,11 @@ const colors = {
 const theme = extendTheme({ colors })
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <StyleProvider hashPriority='high'>
+  <AntdProvider hashPriority='high'>
     <ChakraProvider theme={theme}>
       <Component {...pageProps} />
     </ChakraProvider>
-  </StyleProvider>
+  </AntdProvider>
 )
 
 export default MyApp

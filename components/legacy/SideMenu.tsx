@@ -13,6 +13,7 @@ import {
 import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined'
 import { TKey } from '@/types/theme'
 import t from '@lang'
+import { KRKROutlined } from '../icons/kirikiri'
 
 const { SubMenu, Item } = Menu
 
@@ -46,12 +47,7 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
       <SubMenu key='sub2' icon={<MobileOutlined />} title={t('Mobile', lang)}>
         <Item key='kr'>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Image
-              src='/assets/icon/kirikiroid2.jpg'
-              alt='kirikiri'
-              width={12}
-              height={12}
-            ></Image>
+            <KRKROutlined width={12} height={12} />
             <p style={{ marginLeft: '4px' }}>kirikiri 2</p>
           </div>
         </Item>
@@ -72,8 +68,7 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
           {t('Simulator', lang)}
         </Item>
         <Item key='soft'>
-          <CodeOutlined />{' '}
-          {t('Tools', lang)}
+          <CodeOutlined /> {t('Tools', lang)}
         </Item>
       </SubMenu>
       <SubMenu key='sub4' icon={<SettingOutlined />} title={t('Setting', lang)}>
