@@ -9,16 +9,14 @@ import { Mode, TKey } from '@/types/theme'
 
 import ThemeProviderMenu, { useGlobalTheme } from './Theme'
 import { getAccount } from '@algorithm'
-import DefaultInfoProp from '@/utils/userDefaultInfoProp'
+import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import { Layout } from 'antd'
 import { Readme } from './Readme'
-import { keyMap } from '@/const'
+import { keyMap } from '@const'
 import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
 import { FileList } from './FileList'
-
-import Image from 'next/image'
-import t from '@lang'
+import Logo from './Logo'
 
 const { Content, Sider } = Layout
 
@@ -76,17 +74,7 @@ const Legacy = (props: DefaultInfoProp) => {
         </Sider>
 
         <Content style={{ margin: '0 16px' }}>
-          <Image
-            src='/assets/upsetgal-logo.png'
-            alt={`${t('Head', props.lang)}, ${t('SubHead', props.lang)}`}
-            width={300}
-            height={1000}
-            style={{
-              display: 'block',
-              margin: '0 auto',
-              // transform: 'translate(-50%, -50%)',
-            }}
-          ></Image>
+          <Logo isMobile={props.isMobile} lang={props.lang} />
           <div
             className='site-layout-background'
             style={{ padding: 24, minHeight: 360 }}
