@@ -2,7 +2,7 @@
 import fs from 'fs'
 import { extractStyle } from '@ant-design/static-style-extract'
 import React from 'react'
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, theme } from 'antd'
 
 const outputPath = './public/antd.min.css'
 
@@ -18,7 +18,20 @@ const css = extractStyle((node) => (
         },
       }}
     >
-      {node}
+      <ConfigProvider
+        theme={{
+          algorithm: theme.defaultAlgorithm,
+        }}
+      >
+        {node}
+      </ConfigProvider>
+      <ConfigProvider
+        theme={{
+          algorithm: theme.darkAlgorithm,
+        }}
+      >
+        {node}
+      </ConfigProvider>
     </ConfigProvider>
   </>
 ))
