@@ -12,26 +12,25 @@ const css = extractStyle((node) => (
   <>
     <ConfigProvider
       theme={{
+        algorithm: theme.defaultAlgorithm,
         token: {
           colorPrimary: defaultGreenColor,
           colorLink: defaultGreenColor,
         },
       }}
     >
-      <ConfigProvider
-        theme={{
-          algorithm: theme.defaultAlgorithm,
-        }}
-      >
-        {node}
-      </ConfigProvider>
-      <ConfigProvider
-        theme={{
-          algorithm: theme.darkAlgorithm,
-        }}
-      >
-        {node}
-      </ConfigProvider>
+      {node}
+    </ConfigProvider>
+    <ConfigProvider
+      theme={{
+        algorithm: theme.darkAlgorithm,
+        token: {
+          colorPrimary: defaultGreenColor,
+          colorLink: defaultGreenColor,
+        },
+      }}
+    >
+      {node}
     </ConfigProvider>
   </>
 ))
