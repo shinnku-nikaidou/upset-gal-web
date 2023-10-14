@@ -3,14 +3,24 @@ import { formattedTimeStamp } from './log/timeStamp'
 
 const ALLOWED_ORIGINS = ['shinnku.com', 'shinnku.us', 'shinku.life']
 
+export function extractOrigin(referer: string) {
+  try {
+    const url = new URL(referer);
+    return url.origin;
+  } catch (e) {
+    console.error(e);
+    return ''
+  }
+}
+
 export default function corsControl(req: NextApiRequest, res: NextApiResponse) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const host = req.headers.host!
-  console.log(formattedTimeStamp(), host)
+  const referer = req.headers.referer!
+  console.log(formattedTimeStamp(), referer)
 
   ALLOWED_ORIGINS.forEach((allowed_origin) => {
-    if (allowed_origin.includes(host)) {
-      const origin = 'https://' + host
+    if (referer.includes(allowed_origin)) {
+      const origin = extractOrigin(referer)
       res.setHeader('Access-Control-Allow-Origin', origin)
       return res
     }
