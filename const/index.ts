@@ -1,13 +1,13 @@
 import { KeyMap } from '@/types/theme'
 
-export const VERSION = 'v6.1.0'
+export const VERSION = 'v6.1.2'
 
 export function checkversion() {
   if (typeof window === 'object') {
     // Perform localStorage action
     const ver = localStorage.getItem('VERSION')
     if (ver !== VERSION) {
-      console.log('set new version')
+      console.log(`set new version ${VERSION}`)
       localStorage.clear()
     }
     localStorage.setItem('VERSION', VERSION)

@@ -3,11 +3,10 @@ import { checkversion } from '@const'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import React from 'react'
 import Legacy from './Legacy'
-import useGlobalTheme from '@utils/persist/theme'
+import useGlobalTheme, { useModeStore } from '@utils/persist/theme'
 
 const Home = (props: DefaultInfoProp) => {
   const direction = useGlobalTheme((state) => state.direction)
-  const mode = useGlobalTheme((state) => state.mode)
   const colorPrimary = useGlobalTheme((state) => state.color)
 
   return (
@@ -16,7 +15,9 @@ const Home = (props: DefaultInfoProp) => {
         direction={direction}
         theme={{
           algorithm:
-            mode === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
+            useModeStore((state) => state.mode) === 'light'
+              ? theme.defaultAlgorithm
+              : theme.darkAlgorithm,
           token: {
             // fontSize: 14,
             colorPrimary: colorPrimary,

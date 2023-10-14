@@ -10,7 +10,6 @@ export type Item = {
 export type Mode = 'light' | 'dark'
 
 export type Theme = {
-  mode: Mode
   url: string
   color: string
   fontSize: number,
@@ -22,7 +21,6 @@ export interface ThemeState extends Theme {
   changePrimaryColor: (value: string) => void
   changeDirection: (dir: DirectionType) => void
   changeFontSize: (fontSize: number) => void
-  changeMode: (newMode: Mode) => void
   changeBGI: (flag: boolean) => void
 }
 

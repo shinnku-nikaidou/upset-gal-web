@@ -3,10 +3,19 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 import { ThemeState, Mode } from '@/types/theme'
 import { DirectionType } from 'antd/lib/config-provider'
 
+type ModeState = {
+  mode: Mode
+  setMode: (newmode: Mode) => void
+}
+
+export const useModeStore = create<ModeState>((set) => ({
+  mode: 'light',
+  setMode: (newmode: Mode) => set({ mode: newmode }),
+}))
+
 const useGlobalTheme = create<ThemeState>()(
   persist(
     (set) => ({
-      mode: 'light',
       url: 'default',
       direction: 'ltr',
       hasBGImage: true,
@@ -17,12 +26,6 @@ const useGlobalTheme = create<ThemeState>()(
         set(() => {
           console.log(`in changeURL, newURL is ${newURL}`)
           return { url: newURL }
-        }),
-
-      changeMode: (newMode: Mode) =>
-        set(() => {
-          console.log(`newMode is ${newMode}`)
-          return { mode: newMode }
         }),
 
       changeFontSize: (fontSize: number) => set(() => ({ fontSize: fontSize })),
