@@ -1,9 +1,26 @@
 // scripts/genAntdCss.tsx
-import fs from 'fs';
-import { extractStyle } from '@ant-design/static-style-extract';
+import fs from 'fs'
+import { extractStyle } from '@ant-design/static-style-extract'
+import React from 'react'
+import { ConfigProvider } from 'antd'
 
-const outputPath = './public/antd.min.css';
+const outputPath = './public/antd.min.css'
 
-const css = extractStyle();
+const defaultGreenColor = '#52c41a'
 
-fs.writeFileSync(outputPath, css);
+const css = extractStyle((node) => (
+  <>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: defaultGreenColor,
+          colorLink: defaultGreenColor,
+        },
+      }}
+    >
+      {node}
+    </ConfigProvider>
+  </>
+))
+
+fs.writeFileSync(outputPath, css)
