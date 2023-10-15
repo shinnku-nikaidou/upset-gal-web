@@ -5,7 +5,7 @@ import React from 'react'
 import { ConfigProvider } from 'antd'
 import { defaultGreenColor } from '../const/theme'
 
-const outputPath = './public/antd.min.css'
+const outputPath = './styles/antd.min.css'
 
 const css = extractStyle((node) => (
   <>

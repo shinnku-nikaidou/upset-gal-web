@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app'
 import { StyleProvider as AntdProvider } from '@ant-design/cssinjs'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import '../styles/globals.css'
-import '../public/antd.min.css'
+import '../styles/antd.min.css'
 
 const colors = {
   brand: {
