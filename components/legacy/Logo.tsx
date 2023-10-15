@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import t from '@lang'
+import Link from 'next/link'
 
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 
@@ -21,13 +22,15 @@ const Logo = (props: DefaultInfoProp) => {
 
   return (
     <div style={styles.imageContainer}>
-      <Image
-        src='/assets/upsetgal-logo.png'
-        alt={`${t('Head', props.lang)}, ${t('SubHead', props.lang)}`}
-        width={1000}
-        height={0}
-        style={styles.responsiveImage}
-      ></Image>
+      <Link href={'/'}>
+        <Image
+          src='/assets/upsetgal-logo.png'
+          alt={`${t('Head', props.lang)}, ${t('SubHead', props.lang)}`}
+          width={1000}
+          height={0}
+          style={styles.responsiveImage}
+        ></Image>
+      </Link>
     </div>
   )
 }
