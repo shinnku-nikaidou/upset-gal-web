@@ -1,25 +1,22 @@
 import { InboxOutlined } from '@ant-design/icons'
 import Dragger from 'antd/lib/upload/Dragger'
 import { Typography, type UploadProps } from 'antd'
+import { saveFile } from '@/utils/persist/blob'
 
 const { Text } = Typography
 
-
-const ImageUploader = () => {
+const ImageUploader: React.FC = () => {
   const props: UploadProps = {
     name: 'file',
     multiple: true,
-    action: window.location.origin + '/api/upload/backgroundimage',
+    // action: window.location.origin + '/api/upload/backgroundimage',
     onChange(info) {
-      const { status } = info.file
-      if (status !== 'uploading') {
-        console.log(info.file, info.fileList)
-      }
-      if (status === 'done') {
-        console.log(`${info.file.name} file uploaded successfully.`)
-      } else if (status === 'error') {
-        console.error(`${info.file.name} file upload failed.`)
-      }
+      console.log(info)
+      const fileobj = info.file.originFileObj
+
+      if (!fileobj) return
+
+      saveFile(fileobj, 'backgroundimage')
     },
     onDrop(e) {
       console.log('Dropped files', e.dataTransfer.files)

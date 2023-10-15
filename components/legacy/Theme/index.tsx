@@ -2,6 +2,7 @@ import useGlobalTheme from '@utils/persist/theme'
 import { Button, Divider, Radio, RadioChangeEvent, Typography } from 'antd'
 import { SketchPicker } from 'react-color'
 import ImageUploader from './ImageUploader'
+import { useEffect } from 'react'
 const { Text } = Typography
 
 const ThemeProviderMenu = () => {
@@ -11,6 +12,10 @@ const ThemeProviderMenu = () => {
 
   const color = useGlobalTheme((s) => s.color)
   const changeColor = useGlobalTheme((s) => s.setColor)
+
+  useEffect(() => {
+    
+  })
 
   return (
     <div>
