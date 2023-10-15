@@ -11,7 +11,7 @@ import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
 import { FileList } from './FileList'
 import Logo from './Logo'
-import { useModeStore } from '@utils/persist/theme'
+import useGlobalTheme from '@/utils/persist/theme'
 
 const { Content, Sider } = Layout
 
@@ -20,6 +20,13 @@ const Legacy = (props: DefaultInfoProp) => {
   const urlPrefix = useMemo(() => getAccount(), [])
   const [key, setKey] = useState<TKey>(null)
   const [url, setUrl] = useState('')
+
+  const setMode = useGlobalTheme((state) => state.setMode)
+
+  const onCollapse = useCallback(
+    (collapsed: boolean) => setCollapsed(collapsed),
+    [setCollapsed],
+  )
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -45,13 +52,6 @@ const Legacy = (props: DefaultInfoProp) => {
       setUrl(`api/download/${urlPrefix}/${keyMap[key]}`)
   }, [key, urlPrefix])
 
-  const setMode = useModeStore((state) => state.setMode)
-
-  const onCollapse = useCallback(
-    (collapsed: boolean) => setCollapsed(collapsed),
-    [setCollapsed],
-  )
-
   return (
     <>
       <Layout style={{ minHeight: '100vh' }}>
@@ -59,7 +59,7 @@ const Legacy = (props: DefaultInfoProp) => {
           collapsible
           collapsed={collapsed}
           onCollapse={onCollapse}
-          theme={useModeStore((state) => state.mode)}
+          theme={useGlobalTheme((state) => state.mode)}
         >
           <SideMenu
             setKey={setKey}

@@ -1,6 +1,6 @@
 import { KeyMap } from '@/types/theme'
 
-export const VERSION = 'v6.1.2'
+export const VERSION = 'v6.1.3'
 
 export function checkversion() {
   if (typeof window === 'object') {

@@ -12,16 +12,18 @@ export type Mode = 'light' | 'dark'
 export type Theme = {
   url: string
   color: string
-  fontSize: number,
+  fontSize: number
   direction: DirectionType
   hasBGImage: boolean
+  mode: Mode
 }
 
 export interface ThemeState extends Theme {
-  changePrimaryColor: (value: string) => void
+  setColor: (value: string) => void
   changeDirection: (dir: DirectionType) => void
   changeFontSize: (fontSize: number) => void
-  changeBGI: (flag: boolean) => void
+  setHasBGI: (flag: boolean) => void
+  setMode: (newmode: Mode) => void
 }
 
 export type KeyMap = {

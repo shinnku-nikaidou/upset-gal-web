@@ -6,7 +6,11 @@ import { SketchPicker } from 'react-color'
 
 const ThemeProviderMenu = () => {
   const setDirection = useGlobalTheme((state) => state.changeDirection)
+
   const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value)
+
+  const color = useGlobalTheme((s) => s.color)
+  const changeColor = useGlobalTheme((s) => s.setColor)
 
   return (
     <>
@@ -41,17 +45,15 @@ const ThemeProviderMenu = () => {
           pc端最好上传横屏图片, 手机最好上传竖屏的哦
         </p>
       </Dragger>
-      {/* <Divider dashed />
+      <Divider dashed />
       <div style={{ marginBottom: 16 }}>
         <SketchPicker
-          presetColors={["#1890ff", "#25b864", "#ff6f00"]}
-          color={color.primaryColor}
-          onChange={({ hex }: any) => onColorChange(hex)}
+          presetColors={['#1890ff', '#25b864', '#ff6f00']}
+          color={color}
+          onChange={({ hex }) => changeColor(hex)}
         />
-        <span style={{ color: color.primaryColor, marginRight: 16 }}>
-          网站色调
-        </span>
-      </div> */}
+        <span style={{ color: color, marginRight: 16 }}>网站色调</span>
+      </div>
       <Divider dashed />
       <Button
         danger
