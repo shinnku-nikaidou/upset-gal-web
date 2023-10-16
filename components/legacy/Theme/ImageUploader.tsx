@@ -27,7 +27,7 @@ const ImageUploader: React.FC<DefaultInfoProp> = (props: DefaultInfoProp) => {
       saveFile(fileobj, 'backgroundimage')
       changeURL('local')
       setTimeout(() => {
-        setBackgroundImage('local', props.isMobile, node!)
+        setBackgroundImage('local', props.isMobile, node)
       })
     },
     onDrop(e) {

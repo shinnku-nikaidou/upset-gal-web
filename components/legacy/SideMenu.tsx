@@ -10,9 +10,9 @@ import {
   WindowsOutlined,
 } from '@ant-design/icons'
 import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined'
-import { TKey } from '@/types/theme'
 import t from '@lang'
 import { KRKROutlined } from '../icons/kirikiri'
+import { TKey } from '@/types/onedrivelegacy'
 
 const { SubMenu, Item } = Menu
 

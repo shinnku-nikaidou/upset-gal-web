@@ -4,12 +4,12 @@ import { getFile } from './blob'
 
 export interface NodeState {
   node: HTMLDivElement | null
-  setNode: (newNode: HTMLDivElement) => void
+  setNode: (newNode: HTMLDivElement | null) => void
 }
 
 const useBackGroundNode = create<NodeState>((set) => ({
   node: null,
-  setNode: (newNode: HTMLDivElement) => set({ node: newNode }),
+  setNode: (newNode) => set({ node: newNode }),
 }))
 
 export default useBackGroundNode
@@ -17,9 +17,11 @@ export default useBackGroundNode
 export function setBackgroundImage(
   url: string,
   isMobile: boolean,
-  node: HTMLDivElement,
+  node: HTMLDivElement | null,
 ) {
-  if (url === '') {
+  if (node === null) {
+    console.error('node is null')
+  } else if (url === '') {
     console.log('close BackgroundImage')
     node.style.backgroundImage = 'none'
   } else if (url === 'default') {

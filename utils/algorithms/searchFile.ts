@@ -1,4 +1,4 @@
-import { Item } from '../../types/theme'
+import { Item } from '@/types/onedrivelegacy'
 
 export const searchEngine = (value: string, files: Item[]) => {
   value = value.toLowerCase()

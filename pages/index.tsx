@@ -21,11 +21,11 @@ const Download: NextPage<DefaultInfoProp> = ({ isMobile, lang }) => {
 
   useLayoutEffect(() => {
     console.log(node.current)
-    setNode(node.current!)
+    setNode(node.current)
   })
 
   useEffect(() => {
-    setBackgroundImage(url, isMobile, node.current!)
+    setBackgroundImage(url, isMobile, node.current)
   })
 
   return (

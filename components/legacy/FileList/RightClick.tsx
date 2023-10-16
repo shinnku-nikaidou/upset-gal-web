@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { Typography } from 'antd'
 import type { MenuProps } from 'antd'
-import { Item } from '@/types/theme'
 import t from '@lang'
 import { nginxTransChar } from '@algorithm'
+import { Item } from '@/types/onedrivelegacy'
 
 const { Text, Link } = Typography
 
