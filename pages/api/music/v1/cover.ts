@@ -18,7 +18,7 @@ export default async function handler(
     const jpgData = await fs.readFile(path.join(MUSIC_DIR_V1, 'cover', cover))
 
     res.setHeader('Content-Type', 'image/jpeg')
-    res.setHeader('Content-Disposition', `attachment; filename=${cover}`)
+    // res.setHeader('Content-Disposition', `attachment; filename=${cover}`)
     res.send(jpgData)
   } catch (error) {
     res.status(404).send('Cover not found.')

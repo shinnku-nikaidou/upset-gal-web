@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
+import { refreshmusic } from '@utils/music'
+import axios from 'axios'
 
 export const musictheme = '#F57F17'
 
 const Music = () => {
   const [beforeSSR, setBeforeSSR] = useState(false)
-  const [origin, setOrigin] = useState('')
+  const [audios, setAudios] = useState([])
 
   let ReactAplayer
 
@@ -25,22 +27,19 @@ const Music = () => {
   const props = {
     theme: musictheme,
     // lrcType: 3,
-    audio: [
-      {
-        name: 'Musa',
-        artist: 'Active Planets',
-        url: `${origin}/api/music/v1?music=Active Planets - Musa.mp3`,
-        cover: `${origin}/api/music/v1/cover?cover=Active Planets - Musa.jpg`,
-        // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
-        theme: '#ebd0c2',
-      },
-    ],
+    audio: audios,
   }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setBeforeSSR(true)
-      setOrigin(window.location.origin)
+      const origin = window.location.origin
+      axios.get(`${origin}/api/music/v1/list`).then((res) => {
+        const musics = res.data
+        const audios = refreshmusic(musics, origin)
+        console.log(audios)
+        setAudios(audios)
+        setBeforeSSR(true)
+      })
     }
   }, [])
 

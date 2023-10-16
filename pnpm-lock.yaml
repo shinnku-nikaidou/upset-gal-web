@@ -62,6 +62,9 @@ dependencies:
   localforage:
     specifier: ^1.10.0
     version: 1.10.0
+  lodash:
+    specifier: ^4.17.21
+    version: 4.17.21
   music-metadata:
     specifier: ^8.1.4
     version: 8.1.4
@@ -118,6 +121,9 @@ devDependencies:
   '@types/isomorphic-fetch':
     specifier: ^0.0.36
     version: 0.0.36
+  '@types/lodash':
+    specifier: ^4.14.199
+    version: 4.14.199
   '@types/node':
     specifier: ^20.8.6
     version: 20.8.6
@@ -2364,7 +2370,6 @@ packages:
 
   /@types/lodash@4.14.199:
     resolution: {integrity: sha512-Vrjz5N5Ia4SEzWWgIVwnHNEnb1UE1XMkvY5DGXrAeOGE9imk0hgTHh5GyDjLDJi9OTCn9oo9dXH1uToK1VRfrg==}
-    dev: false
 
   /@types/node@20.8.6:
     resolution: {integrity: sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==}

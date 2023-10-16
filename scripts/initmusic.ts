@@ -1,7 +1,7 @@
 import * as mm from 'music-metadata'
 import * as fse from 'fs-extra'
 import sharp from 'sharp'
-import { MUSIC_FILES_V1 } from '@/const/music'
+import { MUSIC_FILES_V1, coverbase } from '@/const/music'
 
 import axios from 'axios'
 import fs from 'fs'
@@ -40,8 +40,6 @@ export async function extractCoverFromMusic(
     console.log('No cover found in the music file.')
   }
 }
-const musicbase = 'data/music/v1/'
-const coverbase = 'data/music/v1/cover/'
 
 export async function netease_pic(id: number) {
   const uri = `https://netease.project.ac.cn/song/detail?ids=${id}`
