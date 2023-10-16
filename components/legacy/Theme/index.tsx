@@ -7,6 +7,9 @@ import { getFile } from '@utils/persist/blob'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import Search, { SearchProps } from 'antd/lib/input/Search'
 import { PlusOutlined } from '@ant-design/icons'
+import useBackGroundNode, {
+  setBackgroundImage,
+} from '@/utils/persist/background'
 const { Text } = Typography
 
 export const isValidURL = (url: string) => {
@@ -23,6 +26,11 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
   const color = useGlobalTheme((s) => s.color)
   const changeColor = useGlobalTheme((s) => s.setColor)
 
+  const url = useGlobalTheme((s) => s.url)
+  const changeURL = useGlobalTheme((s) => s.changeURL)
+
+  const node = useBackGroundNode((s) => s.node)
+
   useEffect(() => {
     console.log(getFile('backgroundimage'))
   })
@@ -32,9 +40,18 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
     console.log(uri)
     if (isValidURL(uri)) {
       console.log('Looks like a valid URI')
+      changeURL(uri)
+      setBackgroundImage(uri, props.isMobile, node)
     } else {
       console.log('Not a URI')
     }
+  }
+
+  const onChangeBGIButtun = (e: RadioChangeEvent) => {
+    const v: string = e.target.value
+    console.log(v)
+    changeURL(v)
+    setBackgroundImage(v, props.isMobile, node)
   }
 
   return (
@@ -60,12 +77,22 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
       <Divider dashed />
       <Search
         addonBefore='https://'
-        placeholder='自定义网站背景网址, 请勿重复添加 https:// 头'
+        placeholder={
+          isValidURL(url)
+            ? url.substring(8)
+            : '自定义网站背景网址, 请勿重复添加 https:// 头'
+        }
         allowClear
         onSearch={onSearch}
         style={{ width: '100%' }}
         enterButton={<PlusOutlined />}
       />
+      <Divider dashed />
+      <Radio.Group value={url} onChange={onChangeBGIButtun}>
+        <Radio.Button value='default'>默认背景</Radio.Button>
+        <Radio.Button value='local'>自行上传</Radio.Button>
+        <Radio.Button value=''>清除背景</Radio.Button>
+      </Radio.Group>
       <Divider dashed />
       <div style={{ marginBottom: 16 }}>
         <SketchPicker
