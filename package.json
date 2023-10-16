@@ -36,6 +36,7 @@
     "next-cookies": "^2.0.3",
     "node-cron": "^3.0.2",
     "react": "^18.2.0",
+    "react-aplayer": "^1.0.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",

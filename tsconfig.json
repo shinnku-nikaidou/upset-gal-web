@@ -31,6 +31,6 @@
       "@ms-graph/*": ["utils/ms-graph/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "components/music.jsx"],
   "exclude": ["node_modules"]
 }
