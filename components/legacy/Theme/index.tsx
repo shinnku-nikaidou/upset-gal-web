@@ -3,6 +3,7 @@ import { Button, Divider, Radio, RadioChangeEvent, Typography } from 'antd'
 import { SketchPicker } from 'react-color'
 import ImageUploader from './ImageUploader'
 import { useEffect } from 'react'
+import { getFile } from '@/utils/persist/blob'
 const { Text } = Typography
 
 const ThemeProviderMenu = () => {
@@ -14,7 +15,7 @@ const ThemeProviderMenu = () => {
   const changeColor = useGlobalTheme((s) => s.setColor)
 
   useEffect(() => {
-    
+    console.log(getFile('backgroundimage'))
   })
 
   return (

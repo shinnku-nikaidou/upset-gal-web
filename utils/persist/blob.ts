@@ -12,14 +12,20 @@ export async function saveFile(file: File, name: string): Promise<void> {
   }
 }
 
-export async function getFile(name: string): Promise<Blob | null> {
+export async function getFile(name: string): Promise<{
+  url: string
+  blob: Blob
+} | null> {
   try {
     const fileBlob = await localforage.getItem<Blob>(name)
     if (fileBlob) {
       // Create a URL for accessing stored files
       const fileUrl = URL.createObjectURL(fileBlob)
       console.log(fileUrl)
-      return fileBlob
+      return {
+        url: fileUrl,
+        blob: fileBlob,
+      }
     } else {
       console.log('No file found')
       return null

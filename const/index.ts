@@ -1,4 +1,4 @@
-import { KeyMap } from '@/types/theme'
+import { KeyMap } from '@/types/onedrivelegacy'
 
 export const VERSION = 'v6.1.3'
 
@@ -27,10 +27,10 @@ export const keyMap: KeyMap = {
   simulate: 'simulate',
 }
 
-export const pcDefaultBackgroundImageURL =
+export const pcbgurl =
   'https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg'
 
-export const mobileDefaultBackgroundImageURL =
+export const mobgurl =
   'https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg'
 
 export const defaultColor = {

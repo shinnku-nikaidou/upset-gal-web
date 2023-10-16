@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { TKey } from '@/types/theme'
 
 import ThemeProviderMenu from './Theme'
 import { getAccount } from '@algorithm'
@@ -12,6 +11,7 @@ import { SideMenu } from './SideMenu'
 import { FileList } from './FileList'
 import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
+import { TKey } from '@/types/onedrivelegacy'
 
 const { Content, Sider } = Layout
 

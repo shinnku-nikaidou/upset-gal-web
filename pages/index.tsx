@@ -34,6 +34,7 @@ const Download: NextPage<DefaultInfoProp> = ({ isMobile, lang }) => {
       </Head>
 
       <main className={styles.main}>
+        <div className='box'></div>
         <Home isMobile={isMobile} lang={lang} />
       </main>
     </div>
