@@ -3,9 +3,9 @@ import res_en from './en'
 import res_zh_CN from './zh-CN'
 
 const getLang = (s: string) => {
-  if (s === undefined) return res_en
+  if (s === undefined) return res_zh_CN
   else if (s.toString().startsWith('en')) {
-    return res_zh_CN
+    return res_en
   }
   switch (s) {
     case 'zh-CN':
