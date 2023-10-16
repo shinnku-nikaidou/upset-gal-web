@@ -1,11 +1,14 @@
 import { InboxOutlined } from '@ant-design/icons'
 import Dragger from 'antd/lib/upload/Dragger'
 import { Typography, type UploadProps } from 'antd'
-import { saveFile } from '@/utils/persist/blob'
+import { saveFile } from '@utils/persist/blob'
+import useGlobalTheme from '@/utils/persist/theme'
 
 const { Text } = Typography
 
 const ImageUploader: React.FC = () => {
+  const changeURL = useGlobalTheme((s) => s.changeURL)
+
   const props: UploadProps = {
     name: 'file',
     multiple: true,
@@ -17,6 +20,7 @@ const ImageUploader: React.FC = () => {
       if (!fileobj) return
 
       saveFile(fileobj, 'backgroundimage')
+      changeURL('local')
     },
     onDrop(e) {
       console.log('Dropped files', e.dataTransfer.files)

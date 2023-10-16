@@ -8,7 +8,6 @@ const useGlobalTheme = create<ThemeState>()(
     (set) => ({
       url: 'default',
       direction: 'ltr',
-      hasBGImage: true,
       color: '#52c41a',
       fontSize: 14,
       mode: 'light',
@@ -26,10 +25,6 @@ const useGlobalTheme = create<ThemeState>()(
       setColor: (value: string) => set(() => ({ color: value })),
 
       changeDirection: (dir: DirectionType) => set(() => ({ direction: dir })),
-
-      setHasBGI: (flag: boolean) => {
-        set(() => ({ hasBGImage: flag }))
-      },
     }),
     {
       name: 'legacy-theme', // name of the item in the storage (must be unique)

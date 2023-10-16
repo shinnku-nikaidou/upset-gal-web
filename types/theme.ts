@@ -7,15 +7,13 @@ export type Theme = {
   color: string
   fontSize: number
   direction: DirectionType
-  hasBGImage: boolean
   mode: Mode
 }
 
 export interface ThemeState extends Theme {
+  changeURL: (url: string) => void
   setColor: (value: string) => void
   changeDirection: (dir: DirectionType) => void
   changeFontSize: (fontSize: number) => void
-  setHasBGI: (flag: boolean) => void
   setMode: (newmode: Mode) => void
 }
-

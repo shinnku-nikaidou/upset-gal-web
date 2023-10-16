@@ -32,11 +32,3 @@ export const pcbgurl =
 
 export const mobgurl =
   'https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg'
-
-export const defaultColor = {
-  primaryColor: '#1890ff',
-  errorColor: '#ff4d4f',
-  warningColor: '#faad14',
-  successColor: '#52c41a',
-  infoColor: '#1890ff',
-}
