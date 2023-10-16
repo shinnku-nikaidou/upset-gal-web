@@ -3,13 +3,18 @@ import Dragger from 'antd/lib/upload/Dragger'
 import { Typography, type UploadProps } from 'antd'
 import { saveFile } from '@utils/persist/blob'
 import useGlobalTheme from '@/utils/persist/theme'
+import useBackGroundNode, {
+  setBackgroundImage,
+} from '@/utils/persist/background'
+import DefaultInfoProp from '@/utils/userDefaultInfoProp'
 
 const { Text } = Typography
 
-const ImageUploader: React.FC = () => {
+const ImageUploader: React.FC<DefaultInfoProp> = (props: DefaultInfoProp) => {
   const changeURL = useGlobalTheme((s) => s.changeURL)
+  const node = useBackGroundNode((s) => s.node)
 
-  const props: UploadProps = {
+  const draggerprops: UploadProps = {
     name: 'file',
     multiple: true,
     // action: window.location.origin + '/api/upload/backgroundimage',
@@ -21,6 +26,9 @@ const ImageUploader: React.FC = () => {
 
       saveFile(fileobj, 'backgroundimage')
       changeURL('local')
+      setTimeout(() => {
+        setBackgroundImage('local', props.isMobile, node!)
+      })
     },
     onDrop(e) {
       console.log('Dropped files', e.dataTransfer.files)
@@ -28,7 +36,7 @@ const ImageUploader: React.FC = () => {
   }
 
   return (
-    <Dragger {...props}>
+    <Dragger {...draggerprops}>
       <p className='ant-upload-drag-icon'>
         <InboxOutlined />
       </p>

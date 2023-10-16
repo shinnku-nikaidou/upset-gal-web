@@ -3,10 +3,11 @@ import { Button, Divider, Radio, RadioChangeEvent, Typography } from 'antd'
 import { SketchPicker } from 'react-color'
 import ImageUploader from './ImageUploader'
 import { useEffect } from 'react'
-import { getFile } from '@/utils/persist/blob'
+import { getFile } from '@utils/persist/blob'
+import DefaultInfoProp from '@utils/userDefaultInfoProp'
 const { Text } = Typography
 
-const ThemeProviderMenu = () => {
+const ThemeProviderMenu = (props: DefaultInfoProp) => {
   const setDirection = useGlobalTheme((state) => state.changeDirection)
 
   const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value)
@@ -37,7 +38,7 @@ const ThemeProviderMenu = () => {
         </Radio.Group>
       </div>
       <Divider dashed />
-      <ImageUploader />
+      <ImageUploader isMobile={props.isMobile} lang={props.lang} />
       <Divider dashed />
       <div style={{ marginBottom: 16 }}>
         <SketchPicker

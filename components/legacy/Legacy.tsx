@@ -76,7 +76,10 @@ const Legacy = (props: DefaultInfoProp) => {
           >
             {key !== null &&
               (key === '10' ? (
-                <ThemeProviderMenu />
+                <ThemeProviderMenu
+                  isMobile={props.isMobile}
+                  lang={props.lang}
+                />
               ) : url !== '' ? (
                 <FileList
                   url={url}
