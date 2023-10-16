@@ -16,7 +16,8 @@ export function name2audio(file: string, origin: string): Audio {
   if (index !== -1) {
     const artist = name.substring(0, index).trim()
     const musicname = name.substring(index + 1).trim()
-    console.log({ artist, musicname }) // { artist: '40mP,初音ミク', musicname: 'からくりピエロ' }
+    // console.log({ artist, musicname })
+    // { artist: '40mP,初音ミク', musicname: 'からくりピエロ' }
     return {
       artist: artist,
       name: musicname,

@@ -135,7 +135,7 @@ export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
       />
       <List
         itemLayout='horizontal'
-        dataSource={dispFiles.slice((page - 1) * 8, page * 8)}
+        dataSource={dispFiles.slice((page - 1) * 6, page * 6)}
         renderItem={(item: Item) => {
           if (item['@type'] === 'file') {
             return <FileItem item={item} url={url} lang={lang} />

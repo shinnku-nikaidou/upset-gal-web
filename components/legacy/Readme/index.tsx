@@ -5,11 +5,17 @@ import { Intro } from './Intro'
 import { Feedback } from './Feedback'
 import { Notice } from './Notice'
 
-export const Readme = ({ lang }: { lang: string }) => (
+export const Readme = ({
+  lang,
+  isMobile,
+}: {
+  lang: string
+  isMobile: boolean
+}) => (
   <>
     <Collapse
       bordered={false}
-      defaultActiveKey={['1', '2']}
+      defaultActiveKey={isMobile ? ['2'] : ['1', '2']}
       expandIcon={({ isActive }) => (
         <CaretRightOutlined rotate={isActive ? 90 : 0} />
       )}

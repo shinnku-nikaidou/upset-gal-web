@@ -28,6 +28,8 @@ const Music = () => {
     theme: musictheme,
     // lrcType: 3,
     audio: audios,
+    listFolded: true,
+    autoplay: true,
   }
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Music = () => {
       axios.get(`${origin}/api/music/v1/list`).then((res) => {
         const musics = res.data
         const audios = refreshmusic(musics, origin)
-        console.log(audios)
+        // console.log(audios)
         setAudios(audios)
         setBeforeSSR(true)
       })

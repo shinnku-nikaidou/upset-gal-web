@@ -13,7 +13,6 @@ import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
 import { TKey } from '@/types/onedrivelegacy'
 import Music from '../music'
-
 const { Content, Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
@@ -21,6 +20,7 @@ const Legacy = (props: DefaultInfoProp) => {
   const urlPrefix = useMemo(() => getAccount(), [])
   const [key, setKey] = useState<TKey>(null)
   const [url, setUrl] = useState('')
+  const [musicpos, setMusicpos] = useState('calc(70%)')
 
   const setMode = useGlobalTheme((state) => state.setMode)
 
@@ -49,13 +49,30 @@ const Legacy = (props: DefaultInfoProp) => {
 
   useEffect(() => {
     console.log(key)
-    if (key !== null && key !== '10')
+    if (key !== null && key !== '10') {
       setUrl(`api/download/${urlPrefix}/${keyMap[key]}`)
+      setMusicpos('calc(90%)')
+    } else {
+      setMusicpos('calc(70%)')
+    }
   }, [key, urlPrefix])
 
   return (
     <>
-      <Music />
+      <div
+        style={{
+          width: props.isMobile ? '300px' : '600px',
+          height: '80px',
+          // background: 'lightgray',
+          position: 'fixed',
+          top: musicpos, // Let the initial position be lower in the middle of the page
+          left: '50%',
+          transform: 'translateX(-50%)', // This will center the element horizontally
+          zIndex: 4,
+        }}
+      >
+        <Music />
+      </div>
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
           collapsible
@@ -93,7 +110,9 @@ const Legacy = (props: DefaultInfoProp) => {
               ) : (
                 <></>
               ))}
-            {key === null && <Readme lang={props.lang} />}
+            {key === null && (
+              <Readme isMobile={props.isMobile} lang={props.lang} />
+            )}
           </div>
         </Content>
       </Layout>

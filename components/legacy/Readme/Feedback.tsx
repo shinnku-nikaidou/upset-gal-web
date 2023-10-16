@@ -9,15 +9,21 @@ export const Feedback = ({ lang }: { lang: string }) => (
     <Space direction='vertical'>
       <Text>
         <span>{t('Click', lang)}</span>
-        <Link target='_blank' rel='noreferrer' href='https://qm.qq.com/q/EKWa8Vo9Dq'>
+        <Link
+          target='_blank'
+          rel='noreferrer'
+          href='https://qm.qq.com/q/EKWa8Vo9Dq'
+        >
           {t('QQ', lang)}
+        </Link>
+        {',\n'}
+        <Link target='_blank' rel='noreferrer' href='https://t.me/upsetgal'>
+          {t('Telegram', lang)}
         </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
       <Text>
-        <span>
-          鉴于群内日经询问如何翻墙，这里推荐机场
-        </span>
+        <span>鉴于群内日经询问如何翻墙，这里推荐机场</span>
         <Link
           target='_blank'
           rel='noreferrer'
@@ -43,7 +49,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             安卓
           </Link>
-          )。 
+          )。
         </span>
       </Text>
     </Space>

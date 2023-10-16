@@ -22,7 +22,7 @@ const res = {
     'Most of them run on Windows computers, also KRKR and ONS are mobile versions. You need to go to the simulator download page then download the corresponding simulator and decompress before running it.',
   Feedback: 'Feedback',
   Click: 'Click here to join ',
-  Telegram: 'Telegram discussion group',
+  Telegram: 'Telegram group',
   QQ: 'QQ group',
   'Feedback-last':
     '. And if you want to improve the website, please report feedback in our group.',
