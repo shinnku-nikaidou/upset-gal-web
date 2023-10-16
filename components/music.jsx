@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 
+export const musictheme = '#F57F17'
+
 const Music = () => {
   const [beforeSSR, setBeforeSSR] = useState(false)
+  const [origin, setOrigin] = useState('')
 
   let ReactAplayer
 
@@ -20,14 +23,14 @@ const Music = () => {
   }
 
   const props = {
-    theme: '#F57F17',
+    theme: musictheme,
     // lrcType: 3,
     audio: [
       {
-        name: '散花',
-        artist: '水月陵',
-        url: 'https://xxxxxxx/api/music/v1?music=水月陵 - 散花.flac',
-        // cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        name: 'Musa',
+        artist: 'Active Planets',
+        url: `${origin}/api/music/v1?music=Active Planets - Musa.mp3`,
+        cover: `${origin}/api/music/v1/cover?cover=Active Planets - Musa.jpg`,
         // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
         theme: '#ebd0c2',
       },
@@ -37,6 +40,7 @@ const Music = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setBeforeSSR(true)
+      setOrigin(window.location.origin)
     }
   }, [])
 

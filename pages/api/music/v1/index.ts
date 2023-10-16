@@ -3,6 +3,12 @@ import fs from 'fs'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { MUSIC_DIR_V1, MUSIC_FILES_V1 } from '@const/music'
 
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+}
+
 export default function handle(req: NextApiRequest, res: NextApiResponse) {
   const {
     method,

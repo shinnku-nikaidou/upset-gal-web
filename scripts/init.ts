@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { initLegacyConfig } from './initLagecyConfig'
+import initmusic from './initmusic'
 
 const help = `
     add more parama to pnpm make ***,
@@ -17,6 +18,8 @@ if (!fs.existsSync('data')) {
 
 if (order == 'init') {
   initLegacyConfig()
+} else if (order == 'music') {
+  initmusic()
 } else {
   console.log(help)
 }
