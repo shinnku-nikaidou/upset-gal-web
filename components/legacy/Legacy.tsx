@@ -12,6 +12,7 @@ import { FileList } from './FileList'
 import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
 import { TKey } from '@/types/onedrivelegacy'
+import Music from '../music'
 
 const { Content, Sider } = Layout
 
@@ -54,6 +55,7 @@ const Legacy = (props: DefaultInfoProp) => {
 
   return (
     <>
+      <Music />
       <Layout style={{ minHeight: '100vh' }}>
         <Sider
           collapsible

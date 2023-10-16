@@ -1,48 +1,58 @@
-import React, { Component } from 'react'
-import ReactAplayer from 'react-aplayer'
+import React, { useEffect, useState } from 'react'
 
-export default class Music extends Component {
+const Music = () => {
+  const [beforeSSR, setBeforeSSR] = useState(false)
+
+  let ReactAplayer
+
+  if (typeof window !== 'undefined') {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    ReactAplayer = require('react-aplayer').default
+  }
+
   // event binding example
-  onPlay = () => {
+  const onPlay = () => {
     console.log('on play')
   }
 
-  onPause = () => {
+  const onPause = () => {
     console.log('on pause')
   }
 
-  // example of access aplayer instance
-  onInit = (ap) => {
-    this.ap = ap
+  const props = {
+    theme: '#F57F17',
+    // lrcType: 3,
+    audio: [
+      {
+        name: '散花',
+        artist: '水月陵',
+        url: 'https://xxxxxxx/api/music/v1?music=水月陵 - 散花.flac',
+        // cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
+        // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
+        theme: '#ebd0c2',
+      },
+    ],
   }
 
-  render() {
-    const props = {
-      theme: '#F57F17',
-      // lrcType: 3,
-      audio: [
-        {
-          name: '散花',
-          artist: '水月陵',
-          url: 'https://dev.tcshust.top/api/music/v1?music=水月陵 - 散花.flac',
-          // cover: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.jpg',
-          // lrc: 'https://moeplayer.b0.upaiyun.com/aplayer/hikarunara.lrc',
-          theme: '#ebd0c2',
-        },
-      ],
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setBeforeSSR(true)
     }
+  }, [])
 
-    return (
-      <div>
+  return (
+    <div>
+      {beforeSSR && (
         <ReactAplayer
           {...props}
-          onInit={this.onInit}
-          onPlay={this.onPlay}
-          onPause={this.onPause}
+          // onInit={onInit}
+          onPlay={onPlay}
+          onPause={onPause}
         />
-        {/* example of access aplayer instance API */}
-        <button onClick={() => this.ap.toggle()}>toggle</button>
-      </div>
-    )
-  }
+      )}
+      {/* <button onClick={() => this.ap.toggle()}>toggle</button> */}
+    </div>
+  )
 }
+
+export default Music
