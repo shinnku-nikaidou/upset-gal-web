@@ -1,7 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { formattedTimeStamp } from './log/timeStamp'
 
-const ALLOWED_ORIGINS = ['shinnku.com', 'shinnku.us', 'shinku.life']
+const ALLOWED_ORIGINS = [
+  'shinnku.com',
+  'shinnku.us',
+  'shinku.life',
+  'localhost',
+  '127.0.0.1',
+  'shinnku.plr.moe'
+]
 
 export function extractOrigin(referer: string) {
   try {
