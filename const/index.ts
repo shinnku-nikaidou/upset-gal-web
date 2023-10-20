@@ -27,8 +27,10 @@ export const keyMap: KeyMap = {
   simulate: 'simulate',
 }
 
-export const pcbgurl =
-  'https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg'
+export const pcbgurls = [
+  'https://shinnku.com/img-original/img/2020/05/05/17/35/26/81320307_p0.jpg',
+  'https://shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg',
+]
 
 export const mobgurl =
   'https://shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg'

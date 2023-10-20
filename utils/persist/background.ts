@@ -1,4 +1,4 @@
-import { mobgurl, pcbgurl } from '@const'
+import { mobgurl, pcbgurls } from '@const'
 import { create } from 'zustand'
 import { getFile } from './blob'
 
@@ -28,7 +28,7 @@ export function setBackgroundImage(
     if (isMobile) {
       node.style.backgroundImage = `url(${mobgurl})`
     } else {
-      node.style.backgroundImage = `url(${pcbgurl})`
+      node.style.backgroundImage = `url(${pcbgurls[0]})`
     }
   } else if (url === 'local') {
     getFile('backgroundimage').then((res) => {
