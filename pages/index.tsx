@@ -10,7 +10,7 @@ import Script from 'next/script'
 import useBackGroundNode, {
   setBackgroundImage,
 } from '@utils/persist/background'
-import { useEffect, useLayoutEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import useGlobalTheme from '@/utils/persist/theme'
 
 // now is Legacy Download Pages
@@ -19,12 +19,8 @@ const Download: NextPage<DefaultInfoProp> = ({ isMobile, lang }) => {
   const url = useGlobalTheme((s) => s.url)
   const setNode = useBackGroundNode((s) => s.setNode)
 
-  useLayoutEffect(() => {
-    console.log(node.current)
-    setNode(node.current)
-  })
-
   useEffect(() => {
+    setNode(node.current)
     setBackgroundImage(url, isMobile, node.current)
   })
 

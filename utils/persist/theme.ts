@@ -12,7 +12,9 @@ const useGlobalTheme = create<ThemeState>()(
       fontSize: 14,
       mode: 'light',
 
-      setMode: (newmode: Mode) => set({ mode: newmode }),
+      setMode: (newmode: Mode) => set(() => {
+        return { mode: newmode }
+      }),
 
       changeURL: (newURL: string) =>
         set(() => {

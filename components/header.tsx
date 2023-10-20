@@ -67,7 +67,7 @@ function HeaderContent() {
             <Link
               isExternal
               aria-label='Go to upset gal Group channel'
-              href={'https://t.me/upsetGroup/'}
+              href={'https://t.me/upsetgal'}
             >
               <Icon
                 as={FaTelegram}

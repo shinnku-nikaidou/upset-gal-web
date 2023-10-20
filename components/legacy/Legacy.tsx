@@ -13,9 +13,13 @@ import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
 import { TKey } from '@/types/onedrivelegacy'
 import Music from '../music'
+import { useColorMode, useColorModeValue } from '@chakra-ui/react'
 const { Content, Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
+  const { toggleColorMode: toggleMode } = useColorMode()
+  const text = useColorModeValue('dark', 'light')
+
   const [collapsed, setCollapsed] = useState(props.isMobile)
   const urlPrefix = useMemo(() => getAccount(), [])
   const [key, setKey] = useState<TKey>(null)
@@ -31,11 +35,15 @@ const Legacy = (props: DefaultInfoProp) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setMode(
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light',
-      )
+      const newColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light'
+      console.log(newColorScheme)
+      setMode(newColorScheme)
+      if (text == newColorScheme) {
+        toggleMode()
+      }
 
       window
         .matchMedia('(prefers-color-scheme: dark)')
@@ -43,6 +51,9 @@ const Legacy = (props: DefaultInfoProp) => {
           const newColorScheme = event.matches ? 'dark' : 'light'
           console.log(newColorScheme)
           setMode(newColorScheme)
+          if (text == newColorScheme) {
+            toggleMode()
+          }
         })
     }
   })
