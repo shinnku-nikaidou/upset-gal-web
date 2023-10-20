@@ -7,6 +7,7 @@ export const musictheme = '#F57F17'
 const Music = () => {
   const [beforeSSR, setBeforeSSR] = useState(false)
   const [audios, setAudios] = useState([])
+  const [isMini, setIsMini] = useState(true)
 
   let ReactAplayer
 
@@ -30,6 +31,7 @@ const Music = () => {
     audio: audios,
     listFolded: true,
     autoplay: true,
+    mini: isMini,
   }
 
   useEffect(() => {

@@ -21,8 +21,8 @@ export function name2audio(file: string, origin: string): Audio {
     return {
       artist: artist,
       name: musicname,
-      url: `${origin}/api/music/v1?music=${file}`,
-      cover: `${origin}/api/music/v1/cover?cover=${name}.jpg`,
+      url: `https://r2.shinnku.com/v1/${file}`,
+      cover: `https://r2.shinnku.com/cover/${name}.jpg`,
       theme: '#ebd0c2',
     }
   } else {
