@@ -1,24 +1,32 @@
 import { useCallback, useState, useLayoutEffect } from 'react'
-import {
-  Divider,
-  Dropdown,
-  Input,
-  List,
-  MenuProps,
-  message,
-  Pagination,
-  Skeleton,
-} from 'antd'
+import { Dropdown, Input, MenuProps, message, Pagination } from 'antd'
 import { Item } from '@/types/onedrivelegacy'
 import { searchEngine, shuffleArray } from '@algorithm'
 import { GenerateRightClickMenu } from './RightClick'
 import { create } from 'zustand'
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Divider,
+  Heading,
+  Skeleton,
+  Stack,
+  StackDivider,
+  Text,
+} from '@chakra-ui/react'
+import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
+import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
 
 const FileItem = ({
+  key,
   item,
   url,
   lang,
 }: {
+  key: number
   item: Item
   url: string
   lang: string
@@ -29,41 +37,57 @@ const FileItem = ({
     lang: lang,
   })
   return (
-    <List.Item style={{ paddingLeft: '20px' }}>
+    <Box key={key}>
       <Dropdown menu={{ items }} trigger={['contextMenu', 'click']}>
-        <List.Item.Meta
-          title={item.name}
-          description={`Size: ${item.size}, Type: ${item['@type']}`}
-        />
+        <span>
+          <Heading as='h6' size='xs'>
+            <FolderZipOutlinedIcon /> {'  '}
+            {item.name}
+          </Heading>
+          <Text pt='2' fontSize='sm'>
+            {`Size: ${item.size}`}
+          </Text>
+        </span>
       </Dropdown>
-    </List.Item>
+    </Box>
   )
 }
 
 const FolderItem = ({
   item,
+  key,
   changeDirectory,
+  setPage,
 }: {
   item: Item
+  key: number
   changeDirectory: (name: string) => void
-}) => (
-  <List.Item
-    style={{ paddingLeft: '20px' }}
-    onClick={() => {
-      changeDirectory(item.name)
-    }}
-  >
-    <List.Item.Meta
-      title={item.name}
-      description={`Size: ${item.size}, Type: ${item['@type']}`}
-    />
-  </List.Item>
-)
+  setPage: (page: number) => void
+}) => {
+  return (
+    <Box
+      key={key}
+      onClick={() => {
+        changeDirectory(item.name)
+        setPage(1)
+      }}
+    >
+      <Heading as='h6' size='xs'>
+        <FolderOpenOutlinedIcon /> {'  '}
+        {item.name}
+      </Heading>
+      <Text pt='2' fontSize='sm'>
+        {`Total Size: ${item.size}`}
+      </Text>
+    </Box>
+  )
+}
 
 interface IFileListProps {
   url: string
   changeDirectory: (name: string) => void
   lang: string
+  isMobile: boolean
 }
 
 interface FileState {
@@ -78,7 +102,12 @@ const useFileStore = create<FileState>((set) => ({
   setFiles: (newFiles: Item[]) => set({ files: newFiles }),
 }))
 
-export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
+export const FileList = ({
+  url,
+  changeDirectory,
+  lang,
+  isMobile,
+}: IFileListProps) => {
   const files = useFileStore((state) => state.files)
   const setFiles = useFileStore((s) => s.setFiles)
   const [dispFiles, setDispFiles] = useState<Item[]>([])
@@ -86,22 +115,14 @@ export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
   useLayoutEffect(() => {
     const hide = message.loading('正在加载中', 0)
     const a = async (hide: any) => {
-      let res: Item[] = []
       console.log(`url is ${url}`)
-      const resp = await fetch(`${window.location.origin}/${url}`)
-      if (resp.status === 200 || resp.status === 304) {
-        try {
-          res = await resp.json()
-          shuffleArray(res)
-          setFiles(res)
-          setDispFiles(res)
-        } catch (e) {
-          console.error('in FileList loading', e)
-          hide()
-        }
-      } else {
-        console.error(resp.status)
-      }
+      await fetch(`${window.location.origin}/${url}`)
+        .then((res) => res.json())
+        .then((data: Item[]) => {
+          shuffleArray(data)
+          setFiles(data)
+          setDispFiles(data)
+        })
       hide()
     }
     a(hide)
@@ -121,36 +142,52 @@ export const FileList = ({ url, changeDirectory, lang }: IFileListProps) => {
     [files, setFiles, setDispFiles, setPage],
   )
 
-  if (files.length === 0) return <Skeleton active />
+  if (files.length === 0) return <Skeleton isLoaded={true} />
 
-  return url === '' ? (
-    <Skeleton active />
-  ) : (
+  return (
     <div>
-      <Input.Search
-        placeholder='Input search text'
-        enterButton='Search'
-        size='large'
-        onSearch={onSearch}
-      />
-      <List
-        itemLayout='horizontal'
-        dataSource={dispFiles.slice((page - 1) * 6, page * 6)}
-        renderItem={(item: Item) => {
-          if (item['@type'] === 'file') {
-            return <FileItem item={item} url={url} lang={lang} />
-          }
-          return <FolderItem item={item} changeDirectory={changeDirectory} />
-        }}
-      />
-      <Pagination
-        size='small'
-        total={dispFiles.length}
-        showSizeChanger={false}
-        showQuickJumper
-        onChange={onPaginationChange}
-      />
-      <Divider dashed />
+      <Card>
+        <CardHeader>
+          <Input.Search
+            placeholder='Input search text'
+            enterButton='Search'
+            size='large'
+            onSearch={onSearch}
+          />
+        </CardHeader>
+
+        <CardBody>
+          <Stack divider={<StackDivider />} spacing='4'>
+            {dispFiles
+              .slice((page - 1) * 6, page * 6)
+              .map((item: Item, key: number) => {
+                if (item['@type'] === 'file') {
+                  return (
+                    <FileItem key={key} item={item} url={url} lang={lang} />
+                  )
+                } else {
+                  return (
+                    <FolderItem
+                      key={key}
+                      item={item}
+                      changeDirectory={changeDirectory}
+                      setPage={setPage}
+                    />
+                  )
+                }
+              })}
+          </Stack>
+        </CardBody>
+        <CardFooter>
+          <Pagination
+            size={isMobile ? 'small' : 'default'}
+            total={dispFiles.length}
+            showSizeChanger={false}
+            showQuickJumper
+            onChange={onPaginationChange}
+          />
+        </CardFooter>
+      </Card>
     </div>
   )
 }
