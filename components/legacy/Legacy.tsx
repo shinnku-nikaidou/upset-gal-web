@@ -26,6 +26,8 @@ const Legacy = (props: DefaultInfoProp) => {
   const [key, setKey] = useState<TKey>(null)
   const [url, setUrl] = useState('')
 
+  const siderShift = collapsed ? 80 : 200
+
   const setMode = useGlobalTheme((state) => state.setMode)
 
   const onCollapse = useCallback(
@@ -83,20 +85,26 @@ const Legacy = (props: DefaultInfoProp) => {
           <Music />
         </div>
       </Draggable>
-      <Layout style={{ minHeight: '100vh' }}>
-        <Sider
-          collapsible
-          collapsed={collapsed}
-          onCollapse={onCollapse}
-          theme={useGlobalTheme((state) => state.mode)}
-        >
-          <SideMenu
-            setKey={setKey}
-            isMobile={props.isMobile}
-            lang={props.lang}
-          />
-        </Sider>
-
+      <Sider
+        // collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        theme={useGlobalTheme((state) => state.mode)}
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0,
+        }}
+      >
+        <SideMenu setKey={setKey} isMobile={props.isMobile} lang={props.lang} />
+      </Sider>
+      <Layout
+        className='site-layout'
+        style={{ marginLeft: siderShift, minHeight: '100vh' }}
+      >
         <Content style={{ margin: '0 16px' }}>
           <Logo isMobile={props.isMobile} lang={props.lang} />
           <div
