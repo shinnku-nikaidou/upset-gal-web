@@ -1,6 +1,6 @@
 import { KeyMap } from '@/types/onedrivelegacy'
 
-export const VERSION = 'v6.1.3'
+export const VERSION = 'v6.2.0'
 
 export function checkversion() {
   if (typeof window === 'object') {

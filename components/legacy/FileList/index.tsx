@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react'
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
+import { useFileList } from '../LegacyContent'
 
 const FileItem = ({
   key,
@@ -56,13 +57,12 @@ const FolderItem = ({
   item,
   key,
   changeDirectory,
-  setPage,
 }: {
   item: Item
   key: number
   changeDirectory: (name: string) => void
-  setPage: (page: number) => void
 }) => {
+  const setPage = useFileList().setPage
   return (
     <Box
       key={key}
@@ -107,8 +107,7 @@ export const FileList = ({
   lang,
   isMobile,
 }: IFileListProps) => {
-  const files = useFileStore((state) => state.files)
-  const setFiles = useFileStore((s) => s.setFiles)
+  const { files, setFiles } = useFileStore()
   const [dispFiles, setDispFiles] = useState<Item[]>([])
 
   useLayoutEffect(() => {
@@ -127,7 +126,7 @@ export const FileList = ({
     a(hide)
   }, [setFiles, url])
 
-  const [page, setPage] = useState(1)
+  const { page, setPage } = useFileList()
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage])
 
   const onSearch = useCallback(
@@ -144,49 +143,44 @@ export const FileList = ({
   if (files.length === 0) return <Skeleton isLoaded={true} />
 
   return (
-    <div>
-      <Card>
-        <CardHeader>
-          <Input.Search
-            placeholder='Input search text'
-            enterButton='Search'
-            size='large'
-            onSearch={onSearch}
-          />
-        </CardHeader>
+    <Card>
+      <CardHeader>
+        <Input.Search
+          placeholder='Input search text'
+          enterButton='Search'
+          size='large'
+          onSearch={onSearch}
+        />
+      </CardHeader>
 
-        <CardBody>
-          <Stack divider={<StackDivider />} spacing='4'>
-            {dispFiles
-              .slice((page - 1) * 6, page * 6)
-              .map((item: Item, key: number) => {
-                if (item['@type'] === 'file') {
-                  return (
-                    <FileItem key={key} item={item} url={url} lang={lang} />
-                  )
-                } else {
-                  return (
-                    <FolderItem
-                      key={key}
-                      item={item}
-                      changeDirectory={changeDirectory}
-                      setPage={setPage}
-                    />
-                  )
-                }
-              })}
-          </Stack>
-        </CardBody>
-        <CardFooter>
-          <Pagination
-            size={isMobile ? 'small' : 'default'}
-            total={dispFiles.length}
-            showSizeChanger={false}
-            showQuickJumper
-            onChange={onPaginationChange}
-          />
-        </CardFooter>
-      </Card>
-    </div>
+      <CardBody>
+        <Stack divider={<StackDivider />} spacing='4'>
+          {dispFiles
+            .slice((page - 1) * 6, page * 6)
+            .map((item: Item, key: number) => {
+              if (item['@type'] === 'file') {
+                return <FileItem key={key} item={item} url={url} lang={lang} />
+              } else {
+                return (
+                  <FolderItem
+                    key={key}
+                    item={item}
+                    changeDirectory={changeDirectory}
+                  />
+                )
+              }
+            })}
+        </Stack>
+      </CardBody>
+      <CardFooter>
+        <Pagination
+          size={isMobile ? 'small' : 'default'}
+          total={dispFiles.length}
+          showSizeChanger={false}
+          showQuickJumper
+          onChange={onPaginationChange}
+        />
+      </CardFooter>
+    </Card>
   )
 }

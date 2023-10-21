@@ -1,30 +1,22 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-
-import ThemeProviderMenu from './Theme'
-import { getAccount } from '@algorithm'
+import React, { useCallback, useEffect, useState } from 'react'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import { Layout } from 'antd'
-import { Readme } from './Readme'
 import { keyMap } from '@const'
 import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
-import { FileList } from './FileList'
 import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
-import { TKey } from '@/types/onedrivelegacy'
 import Music from '../music'
 import { useColorMode, useColorModeValue } from '@chakra-ui/react'
 import Draggable from 'react-draggable'
+import LegacyContent, { useFileList } from './LegacyContent'
 const { Content, Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
   const { toggleColorMode: toggleMode } = useColorMode()
   const text = useColorModeValue('dark', 'light')
-
   const [collapsed, setCollapsed] = useState(props.isMobile)
-  const urlPrefix = useMemo(() => getAccount(), [])
-  const [key, setKey] = useState<TKey>(null)
-  const [url, setUrl] = useState('')
+  const { key, setKey, urlPrefix, setUrl, setPage } = useFileList()
 
   const siderShift = collapsed ? 80 : 200
 
@@ -41,7 +33,6 @@ const Legacy = (props: DefaultInfoProp) => {
         .matches
         ? 'dark'
         : 'light'
-      console.log(newColorScheme)
       setMode(newColorScheme)
       if (text == newColorScheme) {
         toggleMode()
@@ -51,7 +42,6 @@ const Legacy = (props: DefaultInfoProp) => {
         .matchMedia('(prefers-color-scheme: dark)')
         .addEventListener('change', (event) => {
           const newColorScheme = event.matches ? 'dark' : 'light'
-          console.log(newColorScheme)
           setMode(newColorScheme)
           if (text == newColorScheme) {
             toggleMode()
@@ -64,8 +54,9 @@ const Legacy = (props: DefaultInfoProp) => {
     console.log(key)
     if (key !== null && key !== '10') {
       setUrl(`api/download/${urlPrefix}/${keyMap[key]}`)
+      setPage(1)
     }
-  }, [key, urlPrefix])
+  }, [key, setPage, setUrl, urlPrefix])
 
   return (
     <>
@@ -107,32 +98,7 @@ const Legacy = (props: DefaultInfoProp) => {
       >
         <Content style={{ margin: '0 16px' }}>
           <Logo isMobile={props.isMobile} lang={props.lang} />
-          <div
-            className='site-layout-background'
-            style={{ padding: props.isMobile ? 0 : 24, minHeight: 360 }}
-          >
-            {key !== null &&
-              (key === '10' ? (
-                <ThemeProviderMenu
-                  isMobile={props.isMobile}
-                  lang={props.lang}
-                />
-              ) : url !== '' ? (
-                <FileList
-                  url={url}
-                  changeDirectory={(name: any) =>
-                    setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)
-                  }
-                  lang={props.lang}
-                  isMobile={props.isMobile}
-                />
-              ) : (
-                <></>
-              ))}
-            {key === null && (
-              <Readme isMobile={props.isMobile} lang={props.lang} />
-            )}
-          </div>
+          <LegacyContent isMobile={props.isMobile} lang={props.lang} />
         </Content>
       </Layout>
       <PageFooter lang={props.lang} />
