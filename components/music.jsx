@@ -30,7 +30,7 @@ const Music = () => {
     // lrcType: 3,
     audio: audios,
     listFolded: true,
-    autoplay: true,
+    // autoplay: true,
     mini: isMini,
   }
 
