@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { refreshmusic } from '@utils/music'
 import axios from 'axios'
+import Draggable from 'react-draggable'
 
 export const musictheme = '#F57F17'
 
@@ -48,17 +49,31 @@ const Music = () => {
   }, [])
 
   return (
-    <div>
-      {beforeSSR && (
-        <ReactAplayer
-          {...props}
-          // onInit={onInit}
-          onPlay={onPlay}
-          onPause={onPause}
-        />
-      )}
-      {/* <button onClick={() => this.ap.toggle()}>toggle</button> */}
-    </div>
+    <Draggable>
+      <div
+        style={{
+          width: '75px',
+          height: '75px',
+          // background: 'lightgray',
+          position: 'fixed',
+          top: 'calc(90%)', // Let the initial position be lower in the middle of the page
+          left: '0%',
+          transform: 'translateX(-50%)', // This will center the element horizontally
+          zIndex: 4,
+        }}
+      >
+        {beforeSSR && (
+          <ReactAplayer
+            {...props}
+            // onInit={onInit}
+            onPlay={onPlay}
+            onPause={onPause}
+          />
+        )}
+      </div>
+    </Draggable>
+
+    // {/* <button onClick={() => this.ap.toggle()}>toggle</button> */}
   )
 }
 

@@ -8,7 +8,6 @@ import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
 import Music from '../music'
 import { useColorMode, useColorModeValue } from '@chakra-ui/react'
-import Draggable from 'react-draggable'
 import LegacyContent, { useFileList } from './LegacyContent'
 const { Content, Sider } = Layout
 
@@ -60,22 +59,7 @@ const Legacy = (props: DefaultInfoProp) => {
 
   return (
     <>
-      <Draggable>
-        <div
-          style={{
-            width: '80px',
-            height: '80px',
-            // background: 'lightgray',
-            position: 'fixed',
-            top: 'calc(80%)', // Let the initial position be lower in the middle of the page
-            left: '8%',
-            transform: 'translateX(-50%)', // This will center the element horizontally
-            zIndex: 4,
-          }}
-        >
-          <Music />
-        </div>
-      </Draggable>
+      <Music />
       <Sider
         // collapsible
         collapsed={collapsed}
@@ -100,8 +84,8 @@ const Legacy = (props: DefaultInfoProp) => {
           <Logo isMobile={props.isMobile} lang={props.lang} />
           <LegacyContent isMobile={props.isMobile} lang={props.lang} />
         </Content>
+        <PageFooter lang={props.lang} />
       </Layout>
-      <PageFooter lang={props.lang} />
     </>
   )
 }
