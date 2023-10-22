@@ -9,25 +9,16 @@ import Search, { SearchProps } from 'antd/lib/input/Search'
 import { PlusOutlined } from '@ant-design/icons'
 import useBackGroundNode, {
   setBackgroundImage,
-} from '@/utils/persist/background'
+} from '@utils/persist/background'
+import { isValidURL } from '@utils/algorithms/isValidURL'
 const { Text } = Typography
-
-export const isValidURL = (url: string) => {
-  const regex =
-    /^(https?|http):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|net|org|biz|moe|info|name|pro|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/
-  return regex.test(url)
-}
 
 const ThemeProviderMenu = (props: DefaultInfoProp) => {
   const setDirection = useGlobalTheme((state) => state.changeDirection)
 
   const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value)
 
-  const color = useGlobalTheme((s) => s.color)
-  const changeColor = useGlobalTheme((s) => s.setColor)
-
-  const url = useGlobalTheme((s) => s.url)
-  const changeURL = useGlobalTheme((s) => s.changeURL)
+  const { color, setColor, url, changeURL } = useGlobalTheme()
 
   const node = useBackGroundNode((s) => s.node)
 
@@ -58,7 +49,7 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
     <div>
       <div style={{ marginBottom: 16 }}>
         <Text style={{ marginRight: 16 }}>
-          Change direction of components / 改变方向 / تغيير اتجاه المكونات
+          Change direction of components / 改变方向
         </Text>
         <Radio.Group
           defaultValue={useGlobalTheme((s) => s.direction)}
@@ -98,7 +89,7 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
         <SketchPicker
           presetColors={['#1890ff', '#25b864', '#ff6f00']}
           color={color}
-          onChange={({ hex }) => changeColor(hex)}
+          onChange={({ hex }) => setColor(hex)}
         />
         <Text style={{ color: color, marginRight: 16 }}>网站色调</Text>
       </div>
