@@ -8,6 +8,7 @@ import { create } from 'zustand'
 import { getAccount } from '@utils/algorithms'
 import { TKey } from '@/types/onedrivelegacy'
 import { keyMap } from '@/const'
+import { Flex, Box } from '@chakra-ui/react'
 
 interface FileListState {
   url: string
@@ -19,7 +20,7 @@ interface FileListState {
   setPage: (page: number) => void
 }
 
-const useFileList = create<FileListState>((set) => ({
+const useFileListStore = create<FileListState>((set) => ({
   url: '',
   urlPrefix: getAccount(),
   key: null,
@@ -31,32 +32,34 @@ const useFileList = create<FileListState>((set) => ({
   setPage: (page: number) => set(() => ({ page: page })),
 }))
 
-export { useFileList }
+export { useFileListStore }
 
 const LegacyContent = (props: DefaultInfoProp) => {
-  const { key, url, setUrl, urlPrefix } = useFileList()
+  const { key, url, setUrl, urlPrefix } = useFileListStore()
+
+  const a = (
+    <Flex>
+      <Box flex='1'></Box>
+      <Box flex='1'>box332454435</Box>
+    </Flex>
+  )
 
   return (
     <div
       className='site-layout-background'
       style={{ padding: props.isMobile ? 0 : 24, minHeight: 360 }}
     >
-      {key !== null &&
-        (key === '10' ? (
-          <ThemeProviderMenu isMobile={props.isMobile} lang={props.lang} />
-        ) : url !== '' ? (
-          <FileList
-            url={url}
-            changeDirectory={(name: any) =>
-              setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${name}`)
-            }
-            lang={props.lang}
-            isMobile={props.isMobile}
-          />
-        ) : (
-          <></>
-        ))}
-      {key === null && <Readme isMobile={props.isMobile} lang={props.lang} />}
+      {(() => {
+        if (key === null) {
+          return <Readme isMobile={props.isMobile} lang={props.lang} />
+        } else if (key === '10') {
+          return (
+            <ThemeProviderMenu isMobile={props.isMobile} lang={props.lang} />
+          )
+        } else {
+          return <FileList isMobile={props.isMobile} lang={props.lang} />
+        }
+      })()}
     </div>
   )
 }

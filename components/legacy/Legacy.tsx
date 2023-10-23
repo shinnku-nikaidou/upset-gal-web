@@ -8,14 +8,14 @@ import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
 import Music from '../music'
 import { useColorMode, useColorModeValue } from '@chakra-ui/react'
-import LegacyContent, { useFileList } from './LegacyContent'
+import LegacyContent, { useFileListStore } from './LegacyContent'
 const { Content, Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
   const { toggleColorMode: toggleMode } = useColorMode()
   const text = useColorModeValue('dark', 'light')
   const [collapsed, setCollapsed] = useState(props.isMobile)
-  const { key, setKey, urlPrefix, setUrl, setPage } = useFileList()
+  const { key, setKey, urlPrefix, setUrl, setPage } = useFileListStore()
 
   const siderShift = collapsed ? 80 : 200
 

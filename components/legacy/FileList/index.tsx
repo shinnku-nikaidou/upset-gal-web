@@ -1,6 +1,6 @@
-import { useCallback, useState, useLayoutEffect } from 'react'
-import { Dropdown, Input, MenuProps, message, Pagination } from 'antd'
-import { Item } from '@/types/onedrivelegacy'
+import { useCallback, useState, useEffect } from 'react'
+import { Dropdown, Input, MenuProps, Pagination } from 'antd'
+import { Item, KeyMap } from '@/types/onedrivelegacy'
 import { searchEngine, shuffleArray } from '@algorithm'
 import { GenerateRightClickMenu } from './RightClick'
 import { create } from 'zustand'
@@ -11,33 +11,30 @@ import {
   CardFooter,
   CardHeader,
   Heading,
-  Skeleton,
   Stack,
   StackDivider,
   Text,
 } from '@chakra-ui/react'
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
-import { useFileList } from '../LegacyContent'
+import { useFileListStore } from '../LegacyContent'
+import { keyMap } from '@/const'
+import DefaultInfoProp from '@/utils/userDefaultInfoProp'
 
-const FileItem = ({
-  key,
-  item,
-  url,
-  lang,
-}: {
-  key: number
+interface IFileItemProps {
   item: Item
-  url: string
   lang: string
-}) => {
+}
+
+const FileItem = ({ item, lang }: IFileItemProps) => {
+  const url = useFileListStore().url
   const items: MenuProps['items'] = GenerateRightClickMenu({
     item: item,
     url: url,
     lang: lang,
   })
   return (
-    <Box key={key}>
+    <Box>
       <Dropdown menu={{ items }} trigger={['contextMenu', 'click']}>
         <span>
           <Heading as='h6' size='xs'>
@@ -53,21 +50,13 @@ const FileItem = ({
   )
 }
 
-const FolderItem = ({
-  item,
-  key,
-  changeDirectory,
-}: {
-  item: Item
-  key: number
-  changeDirectory: (name: string) => void
-}) => {
-  const setPage = useFileList().setPage
+const FolderItem = ({ item }: { item: Item }) => {
+  const { setUrl, setPage, urlPrefix } = useFileListStore()
+  const key = useFileListStore((s) => s.key) as keyof KeyMap
   return (
     <Box
-      key={key}
       onClick={() => {
-        changeDirectory(item.name)
+        setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${item.name}`)
         setPage(1)
       }}
     >
@@ -82,65 +71,56 @@ const FolderItem = ({
   )
 }
 
-interface IFileListProps {
-  url: string
-  changeDirectory: (name: string) => void
-  lang: string
-  isMobile: boolean
-}
-
 interface FileState {
   files: Item[]
+  cacheURL: string | null
   removeAllFiles: () => void
-  setFiles: (newFiles: Item[]) => void
+  setFiles: (newFiles: Item[], url: string) => void
 }
 
 const useFileStore = create<FileState>((set) => ({
   files: [],
-  removeAllFiles: () => set({ files: [] }),
-  setFiles: (newFiles: Item[]) => set({ files: newFiles }),
+  cacheURL: null,
+  removeAllFiles: () => set({ files: [], cacheURL: null }),
+  setFiles: (newFiles: Item[], url: string) =>
+    set({ files: newFiles, cacheURL: url }),
 }))
 
-export const FileList = ({
-  url,
-  changeDirectory,
-  lang,
-  isMobile,
-}: IFileListProps) => {
-  const { files, setFiles } = useFileStore()
+export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
+  const { files, setFiles, cacheURL } = useFileStore()
+  const url = useFileListStore().url
   const [dispFiles, setDispFiles] = useState<Item[]>([])
 
-  useLayoutEffect(() => {
-    const hide = message.loading('正在加载中', 0)
-    const a = async (hide: any) => {
-      console.log(`url is ${url}`)
-      await fetch(`${window.location.origin}/${url}`)
+  useEffect(() => {
+    console.log(`url is ${url}`)
+    if (cacheURL !== url) {
+      console.log(`cache miss, now fetching`)
+      fetch(`${window.location.origin}/${url}`)
         .then((res) => res.json())
         .then((data: Item[]) => {
           shuffleArray(data)
-          setFiles(data)
+          setFiles(data, url)
           setDispFiles(data)
         })
-      hide()
+        .then(() => console.log('fetch success'))
+    } else {
+      console.log(`cache hit ${cacheURL}`)
     }
-    a(hide)
-  }, [setFiles, url])
+  }, [cacheURL, setFiles, url])
 
-  const { page, setPage } = useFileList()
+  const { page, setPage } = useFileListStore()
   const onPaginationChange = useCallback((e: number) => setPage(e), [setPage])
 
   const onSearch = useCallback(
     (val: string) => {
       const tmp = searchEngine(val, files)
       const newArrayFile = tmp.map((v) => v[0])
-      setFiles(newArrayFile)
+      setFiles(newArrayFile, url)
       setDispFiles(tmp.filter((v) => v[1] > 0).map((v) => v[0]))
       setPage(1)
     },
-    [files, setFiles, setDispFiles, setPage],
+    [files, setFiles, url, setPage],
   )
-
-  if (files.length === 0) return <Skeleton isLoaded={true} />
 
   return (
     <Card>
@@ -159,15 +139,9 @@ export const FileList = ({
             .slice((page - 1) * 6, page * 6)
             .map((item: Item, key: number) => {
               if (item['@type'] === 'file') {
-                return <FileItem key={key} item={item} url={url} lang={lang} />
+                return <FileItem key={key} item={item} lang={lang} />
               } else {
-                return (
-                  <FolderItem
-                    key={key}
-                    item={item}
-                    changeDirectory={changeDirectory}
-                  />
-                )
+                return <FolderItem key={key} item={item} />
               }
             })}
         </Stack>
@@ -176,8 +150,9 @@ export const FileList = ({
         <Pagination
           size={isMobile ? 'small' : 'default'}
           total={dispFiles.length}
-          showSizeChanger={false}
+          current={page}
           showQuickJumper
+          hideOnSinglePage
           onChange={onPaginationChange}
         />
       </CardFooter>

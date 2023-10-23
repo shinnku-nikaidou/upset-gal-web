@@ -3,10 +3,10 @@ import t from '@lang'
 import Link from 'next/link'
 
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
-import { useFileList } from './LegacyContent'
+import { useFileListStore } from './LegacyContent'
 
 const Logo = (props: DefaultInfoProp) => {
-  const setKey = useFileList().setKey
+  const setKey = useFileListStore().setKey
 
   const styles = {
     imageContainer: {

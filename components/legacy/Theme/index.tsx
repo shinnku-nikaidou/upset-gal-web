@@ -15,11 +15,8 @@ const { Text } = Typography
 
 const ThemeProviderMenu = (props: DefaultInfoProp) => {
   const setDirection = useGlobalTheme((state) => state.changeDirection)
-
   const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value)
-
   const { color, setColor, url, changeURL } = useGlobalTheme()
-
   const node = useBackGroundNode((s) => s.node)
 
   useEffect(() => {
