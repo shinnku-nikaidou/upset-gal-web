@@ -40,7 +40,7 @@ const Music = () => {
       const origin = window.location.origin
       axios.get(`${origin}/api/music/v1/list`).then((res) => {
         const musics = res.data
-        const audios = refreshmusic(musics, origin)
+        const audios = refreshmusic(musics)
         // console.log(audios)
         setAudios(audios)
         setBeforeSSR(true)

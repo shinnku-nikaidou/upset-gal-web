@@ -7,8 +7,7 @@ import { FileList } from './FileList'
 import { create } from 'zustand'
 import { getAccount } from '@utils/algorithms'
 import { TKey } from '@/types/onedrivelegacy'
-import { keyMap } from '@/const'
-import { Flex, Box } from '@chakra-ui/react'
+import { Box, Flex } from '@chakra-ui/react'
 
 interface FileListState {
   url: string
@@ -35,14 +34,7 @@ const useFileListStore = create<FileListState>((set) => ({
 export { useFileListStore }
 
 const LegacyContent = (props: DefaultInfoProp) => {
-  const { key, url, setUrl, urlPrefix } = useFileListStore()
-
-  const a = (
-    <Flex>
-      <Box flex='1'></Box>
-      <Box flex='1'>box332454435</Box>
-    </Flex>
-  )
+  const { key } = useFileListStore()
 
   return (
     <div
@@ -51,7 +43,14 @@ const LegacyContent = (props: DefaultInfoProp) => {
     >
       {(() => {
         if (key === null) {
-          return <Readme isMobile={props.isMobile} lang={props.lang} />
+          return (
+            <Flex>
+              <Box flex='1'>
+                <Readme isMobile={props.isMobile} lang={props.lang} />
+              </Box>
+              <Box p='10' bg='red.200' flex='1'>box332454435</Box>
+            </Flex>
+          )
         } else if (key === '10') {
           return (
             <ThemeProviderMenu isMobile={props.isMobile} lang={props.lang} />
