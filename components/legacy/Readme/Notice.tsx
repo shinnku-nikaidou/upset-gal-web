@@ -5,7 +5,7 @@ const { Panel } = Collapse
 const { Text } = Typography
 
 export const Notice = ({ lang }: { lang: string }) => (
-  <Panel header={t('Copyright', lang)} key='4'>
+  <Panel header={t('Copyright', lang)} key='3'>
     <Space direction='vertical'>
       <Text>{t('Right1', lang)}</Text>
       <Text>{t('Right2', lang)}</Text>

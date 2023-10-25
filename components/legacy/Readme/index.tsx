@@ -15,7 +15,7 @@ export const Readme = ({
   <>
     <Collapse
       bordered={false}
-      defaultActiveKey={isMobile ? ['2'] : ['1', '2']}
+      defaultActiveKey={isMobile ? ['2'] : ['1', '2', '3']}
       expandIcon={({ isActive }) => (
         <CaretRightOutlined rotate={isActive ? 90 : 0} />
       )}

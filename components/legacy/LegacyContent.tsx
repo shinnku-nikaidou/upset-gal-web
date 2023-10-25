@@ -8,7 +8,8 @@ import { create } from 'zustand'
 import { getAccount } from '@utils/algorithms'
 import { TKey } from '@/types/onedrivelegacy'
 import { Box, Flex } from '@chakra-ui/react'
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import ExtendIntro from './ExtendIntro'
 
 interface FileListState {
   url: string
@@ -71,8 +72,8 @@ const LegacyContent = (props: DefaultInfoProp) => {
               <Box flex='1'>
                 <Readme isMobile={props.isMobile} lang={props.lang} />
               </Box>
-              <Box p='10' bg='red.200' flex='1'>
-                box332454435
+              <Box p='10' flex='1'>
+                <ExtendIntro />
               </Box>
             </Flex>
           )
