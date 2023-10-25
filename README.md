@@ -2,7 +2,7 @@
 
 Use Nextjs + Antd.
 
-This project is run in the website [shinnku.com](https://shinnku.com/).
+This project is run in the website [shinnku.com](https://www.shinnku.com/).
 
 ## for collaborator
 
@@ -47,13 +47,13 @@ then
 
 `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={%改写成你自己的%}&scope=offline_access%20User.Read%20Files.ReadWrite.All&response_type=code&redirect_uri={%改写成你自己的跳转网址%}`
 
-我的的一些网址均为 `https://shinnku.com/api/onedrive-login` 也就是:
+我的的一些网址均为 `https://www.shinnku.com/api/onedrive-login` 也就是:
 
-`https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={%改写成你自己的%}&scope=offline_access%20User.Read%20Files.ReadWrite.All&response_type=code&redirect_uri=https://shinnku.com/api/onedrive-login`
+`https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id={%改写成你自己的%}&scope=offline_access%20User.Read%20Files.ReadWrite.All&response_type=code&redirect_uri=https://www.shinnku.com/api/onedrive-login`
 
 之后会跳转到一个网址，复制网址的 url，大概这样
 
-`https://shinnku.com/api/onedrive-login?code={%需要被复制的内容%}&session_state={%不需要的uuid%}#`
+`https://www.shinnku.com/api/onedrive-login?code={%需要被复制的内容%}&session_state={%不需要的uuid%}#`
 
 ### 有关缓存
 
