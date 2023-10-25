@@ -38,8 +38,6 @@ const Download: NextPage<DefaultInfoProp> = ({ isMobile, lang }) => {
           gtag('config', 'G-PG2D8XX3XC');
         `}
       </Script>
-      {/* Cloudflare Web Analytics */}
-      <Script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "52771d5ff81d43c4891da41ae31b4c24"}'></Script>
       <Head>
         <meta charSet='UTF-8' />
         <title>{t('Title', lang)}</title>
