@@ -28,14 +28,14 @@ const Download: NextPage<DefaultInfoProp> = ({ isMobile, lang }) => {
     <div className={styles.container}>
       <Script
         async
-        src='https://www.googletagmanager.com/gtag/js?id=G-PG2D8XX3XC'
+        src='https://www.googletagmanager.com/gtag/js?id=G-61P3NL510C'
       ></Script>
       <Script id='google-analytics'>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-PG2D8XX3XC');
+          gtag('config', 'G-61P3NL510C');
         `}
       </Script>
       <Head>
