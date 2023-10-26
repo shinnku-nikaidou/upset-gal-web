@@ -8,7 +8,6 @@ import { create } from 'zustand'
 import { getAccount } from '@utils/algorithms'
 import { TKey } from '@/types/onedrivelegacy'
 import { Box, Flex } from '@chakra-ui/react'
-import { useEffect, useRef, useState } from 'react'
 import ExtendIntro from './ExtendIntro'
 import useGlobalTheme from '@/utils/persist/theme'
 
