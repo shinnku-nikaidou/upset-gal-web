@@ -112,7 +112,7 @@ const Card3 = () => {
 
 const ExtendIntro = () => {
   return (
-    <VStack spacing='24px' align='stretch'>
+    <VStack spacing='12px' align='stretch'>
       <Box>
         <Card1 />
       </Box>

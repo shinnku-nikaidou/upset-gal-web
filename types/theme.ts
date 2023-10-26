@@ -8,6 +8,7 @@ export type Theme = {
   fontSize: number
   direction: DirectionType
   mode: Mode
+  articleOpen: boolean
 }
 
 export interface ThemeState extends Theme {
@@ -16,4 +17,5 @@ export interface ThemeState extends Theme {
   changeDirection: (dir: DirectionType) => void
   changeFontSize: (fontSize: number) => void
   setMode: (newmode: Mode) => void
+  changeArticleOpen: (open: boolean) => void
 }

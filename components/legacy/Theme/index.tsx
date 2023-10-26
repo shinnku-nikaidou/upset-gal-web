@@ -16,7 +16,8 @@ const { Text } = Typography
 const ThemeProviderMenu = (props: DefaultInfoProp) => {
   const setDirection = useGlobalTheme((state) => state.changeDirection)
   const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value)
-  const { color, setColor, url, changeURL } = useGlobalTheme()
+  const { color, setColor, url, changeURL, articleOpen, changeArticleOpen } =
+    useGlobalTheme()
   const node = useBackGroundNode((s) => s.node)
 
   useEffect(() => {
@@ -33,6 +34,10 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
     } else {
       console.log('Not a URI')
     }
+  }
+
+  const onChangeArticleOpen = (e: RadioChangeEvent) => {
+    changeArticleOpen(e.target.value)
   }
 
   const onChangeBGIButtun = (e: RadioChangeEvent) => {
@@ -60,6 +65,11 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
           </Radio.Button>
         </Radio.Group>
       </div>
+      <Divider dashed />
+      <Radio.Group value={articleOpen} onChange={onChangeArticleOpen}>
+        <Radio.Button value={false}>关闭文章</Radio.Button>
+        <Radio.Button value={true}>打开文章</Radio.Button>
+      </Radio.Group>
       <Divider dashed />
       <ImageUploader isMobile={props.isMobile} lang={props.lang} />
       <Divider dashed />
