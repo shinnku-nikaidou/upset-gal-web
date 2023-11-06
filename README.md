@@ -1,6 +1,6 @@
 # upset gal
 
-Use Nextjs + Antd.
+Use Nextjs.
 
 This project is run in the website [shinnku.com](https://www.shinnku.com/).
 
@@ -8,7 +8,7 @@ This project is run in the website [shinnku.com](https://www.shinnku.com/).
 
 ### How to Build
 
-`git clone git@github.com:shinnku-nikaidou/upset-gal.git`
+`git clone https://github.com/shinnku-nikaidou/upset-gal-web.git`
 
 `pnpm install`
 

@@ -1,11 +1,11 @@
 import fs from 'fs'
 import YAML from 'yaml'
-import { OauthDrive, OneDrive } from '@/types/downloadtype'
+import { OauthDrive, OneDriveLegacy } from '@/types/downloadtype'
 
 export type Config = {
   PORT: number
   REVERSE_PROXY?: string
-  LEGACY_ONECRIVE: OneDrive
+  LEGACY_ONECRIVE: OneDriveLegacy
 }
 
 const file = fs.readFileSync('config.yaml', 'utf8')

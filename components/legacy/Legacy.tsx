@@ -15,7 +15,7 @@ const Legacy = (props: DefaultInfoProp) => {
   const { toggleColorMode: toggleMode } = useColorMode()
   const text = useColorModeValue('dark', 'light')
   const [collapsed, setCollapsed] = useState(props.isMobile)
-  const { key, setKey, urlPrefix, setUrl, setPage } = useFileListStore()
+  const { key, setKey, setUrl, setPage } = useFileListStore()
 
   const siderShift = collapsed ? 80 : 200
 
@@ -52,10 +52,10 @@ const Legacy = (props: DefaultInfoProp) => {
   useEffect(() => {
     console.log(key)
     if (key !== null && key !== '10') {
-      setUrl(`api/download/${urlPrefix}/${keyMap[key]}`)
+      setUrl(`api/download/legacy/${keyMap[key]}`)
       setPage(1)
     }
-  }, [key, setPage, setUrl, urlPrefix])
+  }, [key, setPage, setUrl])
 
   return (
     <>

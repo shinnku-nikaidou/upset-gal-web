@@ -51,12 +51,12 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
 }
 
 const FolderItem = ({ item }: { item: Item }) => {
-  const { setUrl, setPage, urlPrefix } = useFileListStore()
+  const { setUrl, setPage } = useFileListStore()
   const key = useFileListStore((s) => s.key) as keyof KeyMap
   return (
     <Box
       onClick={() => {
-        setUrl(`api/download/${urlPrefix}/${keyMap[key]}/${item.name}`)
+        setUrl(`api/download/legacy/${keyMap[key]}/${item.name}`)
         setPage(1)
       }}
     >

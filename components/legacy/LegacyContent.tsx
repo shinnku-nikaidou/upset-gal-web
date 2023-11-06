@@ -14,7 +14,7 @@ import useGlobalTheme from '@/utils/persist/theme'
 interface FileListState {
   url: string
   setUrl: (url: string) => void
-  urlPrefix: string
+  // urlPrefix: string
   key: TKey
   setKey: (key: TKey) => void
   page: number
@@ -23,7 +23,7 @@ interface FileListState {
 
 const useFileListStore = create<FileListState>((set) => ({
   url: '',
-  urlPrefix: getAccount(),
+  // urlPrefix: getAccount(),
   key: null,
   page: 1,
 

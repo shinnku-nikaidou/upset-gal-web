@@ -5,30 +5,30 @@ import fileandfolder from '@ms-graph/fileandfolder'
 import { DriveItemChildren } from '@/types/downloadtype'
 import config, { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
 import corsControl from '@utils/corsControl'
+import { getAccount } from '@/utils/algorithms'
 
 const users = LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
 
-const rewriteUrl = (url: string, proxy: string | undefined) => {
-  if (typeof proxy === 'undefined') {
-    return url
+interface FilesApiRequest extends NextApiRequest {
+  query: {
+    user: string
+    files: Array<string>
   }
-
-  if (proxy.endsWith('/')) {
-    proxy = proxy.slice(0, -1)
-  }
-
-  return url.replace(/https:\/\/\w+\.sharepoint\.com/, proxy)
 }
 
 export default async function handler(
-  req: NextApiRequest,
+  req: FilesApiRequest,
   res: NextApiResponse<any>,
 ) {
   res = corsControl(req, res)
 
   try {
-    const { user, files } = req.query as { user: string; files: string[] }
+    const files = req.query.files
+    let user = req.query.user
+    if (user === 'legacy') {
+      user = getAccount()
+    }
     const i = users.indexOf(user)
     const lastfile = files[files.length - 1]
     files.pop()
@@ -51,7 +51,7 @@ export default async function handler(
     )
     if (ans) {
       if (typeof ans === 'string') {
-        res.redirect(302, rewriteUrl(ans, config.REVERSE_PROXY))
+        res.redirect(302, ans)
       } else {
         res.send(ans)
       }

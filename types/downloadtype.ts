@@ -8,7 +8,7 @@ export type AccessToken = {
   redirect_uri?: string
 }
 
-export type OneDrive = Array<Account>
+export type OneDriveLegacy = Array<Account>
 
 export type DriveItem = {
   id: string
@@ -40,7 +40,6 @@ export type DriveItemChildren = {
 
 export type Account = {
   ONEDRIVE_NAME: string
-  EXPOSE_PATH: string
   ONEDRIVE_REFRESHTOKEN: string
   clientId: string
   clientSecret: string

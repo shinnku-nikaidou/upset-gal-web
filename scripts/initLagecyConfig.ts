@@ -9,17 +9,17 @@ import {
 } from '@/config'
 
 export async function initLegacyConfig() {
-  if (!fs.existsSync('data/legacy')) {
-    fs.mkdirSync('data/legacy')
+  if (!fs.existsSync('data/_legacy')) {
+    fs.mkdirSync('data/_legacy')
   } else {
     return
   }
 
   LEGACY_ONECRIVE.forEach(async ({ ONEDRIVE_NAME }, id) => {
     const onedrive_oauth = LEGACY_ONECRIVE_OAUTH[id]
-    fs.mkdirSync(`data/legacy/${ONEDRIVE_NAME}`)
+    fs.mkdirSync(`data/_legacy/${ONEDRIVE_NAME}`)
     fs.writeFileSync(
-      `data/legacy/${ONEDRIVE_NAME}/oauth.json`,
+      `data/_legacy/${ONEDRIVE_NAME}/oauth.json`,
       JSON.stringify(onedrive_oauth),
       { encoding: 'utf8' },
     )
@@ -27,13 +27,13 @@ export async function initLegacyConfig() {
     await query_one(onedrive_oauth, 'root', default_option).then(
       async (body) => {
         fs.writeFileSync(
-          `data/legacy/${ONEDRIVE_NAME}/root.json`,
+          `data/_legacy/${ONEDRIVE_NAME}/root.json`,
           JSON.stringify(body),
           { encoding: 'utf8' },
         )
         await recursive_get_children(
           body as unknown as DriveItem,
-          `data/legacy/${ONEDRIVE_NAME}`,
+          `data/_legacy/${ONEDRIVE_NAME}`,
           onedrive_oauth,
         )
       },
