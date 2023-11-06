@@ -1,5 +1,5 @@
 const res = {
-  Title: 'galgame资源站',
+  Title: '失落小站 - galgame资源站',
   Head: '失落小站',
   SubHead: '欢迎来到 galgame 分享站点',
   Windows: 'Win汉化硬盘',
@@ -16,7 +16,7 @@ const res = {
 
   Intro: '简介',
   Intro1:
-    '这里收录了大部分的汉化（也可只运行日文原版，已经破解）galgame，全部压缩包都没有解压密码。',
+    '这里是失落小站, 一个galgame资源站, 这里收录了大部分的汉化（也可只运行日文原版，已经破解）galgame，全部压缩包都没有解压密码。',
   Intro2:
     '有在 Windows 电脑上面运行的，krkr 和 ons 是手机版，需要进入模拟器页面下载专属的模拟器解压再运行。',
   Feedback: '有关反馈',
