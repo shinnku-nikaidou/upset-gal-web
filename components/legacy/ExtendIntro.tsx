@@ -32,6 +32,64 @@ const Card1 = () => {
 }
 
 const Card2 = () => {
+  const containerStyle = {
+    display: 'flex',
+    alignItems: 'center',
+  }
+
+  return (
+    <Card
+      direction={{ base: 'column', sm: 'row' }}
+      overflow='hidden'
+      variant='outline'
+    >
+      <Stack>
+        <CardBody>
+          <Heading size='md'>
+            <div style={containerStyle}>
+              <Image
+                objectFit='cover'
+                src='assets/cards/winlator.png'
+                alt='Caffe Latte'
+                zIndex={20}
+                style={{
+                  width: '50px', // 或者你希望的任何尺寸
+                  height: 'auto', // 保持图片的比例
+                }}
+              />
+              <p
+                style={{
+                  flexGrow: 1,
+                }}
+              >
+                手机游玩 galgame 模拟器的终极解决方案: winlator
+              </p>
+            </div>
+          </Heading>
+
+          <Text py='2'>
+            winlator是一款能在手机上点开exe电脑版galgame的开源软件
+          </Text>
+          <Text py='2'>
+            大部分情况下我们可以很轻松的找到galgame的手机版本（例如ons，krkr）这些版本都是由电脑版本移植而来的。
+          </Text>
+          <Text py='2'>
+            但少数情况下我们很难找到或者根本找不到某个游戏的移植版本或者直装版本，但是我们只有手机,
+            这时候就可以使用winlator。
+          </Text>
+
+          <Link href={'extend/blog/2023/11/06/win-lator'} target='_blank'>
+            <Button fontWeight='bold' variant='outline'>
+              查看原文
+            </Button>
+          </Link>
+        </CardBody>
+      </Stack>
+    </Card>
+  )
+}
+
+const Card3 = () => {
   return (
     <Card
       direction={{ base: 'column', sm: 'row' }}
@@ -67,7 +125,7 @@ const Card2 = () => {
   )
 }
 
-const Card3 = () => {
+const Card4 = () => {
   return (
     <Card
       direction={{ base: 'column', sm: 'row' }}
@@ -121,6 +179,9 @@ const ExtendIntro = () => {
       </Box>
       <Box>
         <Card3 />
+      </Box>
+      <Box>
+        <Card4 />
       </Box>
     </VStack>
   )
