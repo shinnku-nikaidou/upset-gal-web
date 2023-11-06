@@ -5,7 +5,6 @@ import { Readme } from './Readme'
 import { FileList } from './FileList'
 
 import { create } from 'zustand'
-import { getAccount } from '@utils/algorithms'
 import { TKey } from '@/types/onedrivelegacy'
 import { Box, Flex } from '@chakra-ui/react'
 import ExtendIntro from './ExtendIntro'
@@ -14,7 +13,6 @@ import useGlobalTheme from '@/utils/persist/theme'
 interface FileListState {
   url: string
   setUrl: (url: string) => void
-  // urlPrefix: string
   key: TKey
   setKey: (key: TKey) => void
   page: number
@@ -23,7 +21,6 @@ interface FileListState {
 
 const useFileListStore = create<FileListState>((set) => ({
   url: '',
-  // urlPrefix: getAccount(),
   key: null,
   page: 1,
 

@@ -3,7 +3,7 @@ import path from 'path'
 import { promises as fs } from 'fs'
 import fileandfolder from '@ms-graph/fileandfolder'
 import { DriveItemChildren } from '@/types/downloadtype'
-import config, { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
+import { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
 import corsControl from '@utils/corsControl'
 import { getAccount } from '@/utils/algorithms'
 

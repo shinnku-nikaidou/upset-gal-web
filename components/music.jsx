@@ -8,7 +8,7 @@ export const musictheme = '#F57F17'
 const Music = () => {
   const [beforeSSR, setBeforeSSR] = useState(false)
   const [audios, setAudios] = useState([])
-  const [isMini, setIsMini] = useState(true)
+  const [isMini, _setIsMini] = useState(true)
 
   let ReactAplayer
 
