@@ -24,6 +24,8 @@ export const Feedback = ({ lang }: { lang: string }) => (
       </Text>
       <Text>
         <span>网站架设在香港, 遵守香港本土法律</span>
+      </Text>
+      <Text>
         <span>
           网站的新服务器是来自丛雨大人捐赠, 如果您觉得网站加载速度令人满意,
           那这里推荐
