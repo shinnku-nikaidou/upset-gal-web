@@ -59,7 +59,7 @@ const Legacy = (props: DefaultInfoProp) => {
 
   return (
     <>
-      <Music />
+      {/* <Music /> */}
       <Sider
         // collapsible
         collapsed={collapsed}
