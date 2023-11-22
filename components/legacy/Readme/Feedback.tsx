@@ -38,25 +38,8 @@ export const Feedback = ({ lang }: { lang: string }) => (
           丛雨vpn: 丛雨云
         </Link>
         <span>
-          （柚子社专属机场, 既有iepl专线高速流量, 延迟25ms内,
-          游戏延迟超越uu加速器 又有低倍率流量让你能19块钱用1tb, 性价比之神）。
-          使用机场的订阅链接请在这里下载开源的clash客户端，导入订阅链接(已经绝版的clash下载链接:
-          <Link
-            target='_blank'
-            rel='noreferrer'
-            href='https://shinnku.us/Clash.for.Windows.Setup.0.20.25.exe'
-          >
-            win
-          </Link>
-          ，
-          <Link
-            target='_blank'
-            rel='noreferrer'
-            href='https://shinnku.us/cfa-2.5.12-premium-universal-release.apk'
-          >
-            安卓
-          </Link>
-          当然 clash 已经停止维护了, 你也可以使用 v2ray, 请github自行搜索 )。
+          （柚子厨专属vpn, 既有专线高速流量, 延迟25ms内,
+          又有低倍率流量让你能不间断使用, 性价比之神）。
         </span>
         <span>
           或者使用
