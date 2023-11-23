@@ -1,4 +1,4 @@
-import { Collapse } from 'antd'
+import { Collapse } from 'antd/lib'
 import { CaretRightOutlined } from '@ant-design/icons'
 
 import { Intro } from './Intro'

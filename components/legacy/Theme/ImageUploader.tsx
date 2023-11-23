@@ -1,6 +1,6 @@
 import { InboxOutlined } from '@ant-design/icons'
 import Dragger from 'antd/lib/upload/Dragger'
-import { Typography, type UploadProps } from 'antd'
+import { Typography, type UploadProps } from 'antd/lib'
 import { saveFile } from '@utils/persist/blob'
 import useGlobalTheme from '@/utils/persist/theme'
 import useBackGroundNode, {

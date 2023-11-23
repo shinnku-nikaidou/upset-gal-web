@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
-import { Typography } from 'antd'
-import type { MenuProps } from 'antd'
+import { Typography } from 'antd/lib'
+import type { MenuProps } from 'antd/lib'
 import t from '@lang'
 import { nginxTransChar } from '@algorithm'
 import { Item } from '@/types/onedrivelegacy'

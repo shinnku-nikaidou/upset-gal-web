@@ -1,4 +1,4 @@
-import { Layout, Typography } from 'antd'
+import { Layout, Typography } from 'antd/lib'
 import { VERSION } from '@const'
 import t from '@lang'
 

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
-import { Layout } from 'antd'
+import { Layout } from 'antd/lib'
 import { keyMap } from '@const'
 import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'

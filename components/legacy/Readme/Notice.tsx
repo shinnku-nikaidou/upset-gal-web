@@ -1,4 +1,4 @@
-import { Collapse, Space, Typography } from 'antd'
+import { Collapse, Space, Typography } from 'antd/lib'
 import t from '@lang'
 
 const { Panel } = Collapse

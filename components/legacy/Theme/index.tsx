@@ -1,5 +1,5 @@
 import useGlobalTheme from '@utils/persist/theme'
-import { Button, Divider, Radio, RadioChangeEvent, Typography } from 'antd'
+import { Button, Divider, Radio, RadioChangeEvent, Typography } from 'antd/lib'
 import { SketchPicker } from 'react-color'
 import ImageUploader from './ImageUploader'
 import { useEffect } from 'react'

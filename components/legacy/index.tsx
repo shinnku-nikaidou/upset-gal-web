@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from 'antd'
+import { ConfigProvider, theme } from 'antd/lib'
 import { checkversion } from '@const'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import React, { useEffect, useState } from 'react'
