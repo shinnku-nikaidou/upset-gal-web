@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react'
 import { Dropdown, Input, MenuProps, Pagination } from 'antd/lib'
-import { Item, KeyMap } from '@/types/onedrivelegacy'
+import { Item } from '@/types/onedrivelegacy'
 import { searchEngine, shuffleArray } from '@algorithm'
 import { GenerateRightClickMenu } from './RightClick'
 import { create } from 'zustand'
@@ -18,7 +18,6 @@ import {
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
 import { useFileListStore } from '../LegacyContent'
-import { keyMap } from '@/const'
 import DefaultInfoProp from '@/utils/userDefaultInfoProp'
 
 interface IFileItemProps {
@@ -51,12 +50,11 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
 }
 
 const FolderItem = ({ item }: { item: Item }) => {
-  const { setUrl, setPage } = useFileListStore()
-  const key = useFileListStore((s) => s.key) as keyof KeyMap
+  const { url, setUrl, setPage } = useFileListStore()
   return (
     <Box
       onClick={() => {
-        setUrl(`api/download/legacy/${keyMap[key]}/${item.name}`)
+        setUrl(url + '/' + item.name)
         setPage(1)
       }}
     >

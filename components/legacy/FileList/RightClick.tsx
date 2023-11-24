@@ -26,6 +26,7 @@ export const GenerateRightClickMenu = ({
     () => navigator.clipboard.writeText(downloadLink),
     [downloadLink],
   )
+
   return [
     {
       label: (
@@ -38,6 +39,17 @@ export const GenerateRightClickMenu = ({
     {
       label: <Text onClick={copyLink}>{t('Download2', lang)}</Text>,
       key: '2',
+    },
+    {
+      label: (
+        <Link
+          target='_blank'
+          href={'https://congyu.moe/auth/register?code=e30dc2bc97'}
+        >
+          下载慢? 说明被运营商掐网络了, 试试丛雨vpn
+        </Link>
+      ),
+      key: '3',
     },
   ]
 }

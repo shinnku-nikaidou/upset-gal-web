@@ -28,9 +28,12 @@ export default async function fileandfolder(
   }
   if (child.hasOwnProperty('folder')) {
     const child_childs = JSON.parse(
-      fs.readFileSync(PATH.join('data', 'legacy', ...path, node, 'child.json'), {
-        encoding: 'utf8',
-      }),
+      fs.readFileSync(
+        PATH.join('data', 'legacy', ...path, node, 'child.json'),
+        {
+          encoding: 'utf8',
+        },
+      ),
     ) as DriveItemChildren
     return getfolder(child_childs)
   } else if (child.hasOwnProperty('file')) {
@@ -66,6 +69,7 @@ const sizeUnit = [
 ]
 
 function num2size(num: number): string {
+  if (num === 0) return '0'
   let size = num
   let i = 0
   for (; i < sizeUnit.length; ++i) {

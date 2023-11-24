@@ -27,8 +27,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
       </Text>
       <Text>
         <span>
-          网站的新服务器是来自丛雨大人捐赠, 如果您觉得网站加载速度令人满意,
-          那这里推荐
+          新服务器来自丛雨大人捐赠, 如果您觉得网站加载速度令人满意, 这里推荐
         </span>
         <Link
           target='_blank'
@@ -39,7 +38,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
         </Link>
         <span>
           （柚子厨专属vpn, 既有专线高速流量, 延迟25ms内,
-          又有低倍率流量让你能不间断使用, 性价比之神）。
+          又有低倍率流量让你用到爽, 性价比之神, 循环10%off优惠码:shinnku）。
         </span>
         <span>
           或者使用
