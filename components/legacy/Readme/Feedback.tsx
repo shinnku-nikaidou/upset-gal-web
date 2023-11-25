@@ -27,14 +27,14 @@ export const Feedback = ({ lang }: { lang: string }) => (
       </Text>
       <Text>
         <span>
-          新服务器来自丛雨大人捐赠, 如果您觉得网站加载速度令人满意, 这里推荐
+          如果发现网站进不去加载慢，或者下载速度慢，说明被当地运营商掐网络了，这里推荐
         </span>
         <Link
           target='_blank'
           rel='noreferrer'
           href='https://congyu.moe/auth/register?code=e30dc2bc97'
         >
-          丛雨vpn: 丛雨云
+          丛雨vpn/加速器: 丛雨云
         </Link>
         <span>
           （柚子厨专属vpn, 既有专线高速流量, 延迟25ms内,
