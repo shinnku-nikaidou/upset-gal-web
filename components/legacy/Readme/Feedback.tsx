@@ -9,25 +9,21 @@ export const Feedback = ({ lang }: { lang: string }) => (
     <Space direction='vertical'>
       <Text>
         <span>{t('Click', lang)}</span>
-        <Link
-          target='_blank'
-          rel='noreferrer'
-          href='https://qm.qq.com/q/EKWa8Vo9Dq'
-        >
-          {t('QQ', lang)}
-        </Link>
-        {',\n'}
         <Link target='_blank' rel='noreferrer' href='https://t.me/upsetgal'>
           {t('Telegram', lang)}
         </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
       <Text>
-        <span>网站架设在香港, 遵守香港本土法律</span>
+        <span>
+          网站架设在香港, 遵守香港本土法律, 由于最近境内处于严打状态,
+          为了保持存活, 我们不得不关闭一切境内通讯软件(例如qq)的入口
+        </span>
       </Text>
       <Text>
         <span>
-          如果发现网站进不去加载慢，或者下载速度慢，说明被当地运营商掐网络了，这里推荐
+          如果发现网站进不去加载慢，或者下载速度慢，或者想来telegram聊天进不去,
+          说明被当地运营商掐网络了，这里推荐
         </span>
         <Link
           target='_blank'
