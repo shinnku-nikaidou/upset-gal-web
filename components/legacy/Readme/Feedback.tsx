@@ -45,7 +45,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           丛雨vpn/加速器: 丛雨云
         </Link>
         <span>
-          （柚子厨专属vpn, 中转高速流量, 延迟25ms内, 垃圾网络秒开4k,
+          （柚子厨专属vpn, 中转高速流量, 延迟25ms内, 垃圾网络也能秒开油管4k,
           流媒体全解锁, 又有 0.1低倍率流量9元1tb, 性价比之神,
           本站专属循环10%off优惠码:shinnku）。
         </span>
