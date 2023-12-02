@@ -51,6 +51,7 @@ const Card2 = () => {
                 objectFit='cover'
                 src='assets/cards/winlator.png'
                 alt='Caffe Latte'
+                loading='lazy'
                 zIndex={20}
                 style={{
                   width: '50px', // 或者你希望的任何尺寸
@@ -101,6 +102,7 @@ const Card3 = () => {
         maxW={{ base: '100%', sm: '200px' }}
         src='assets/cards/card2.png'
         alt='Caffe Latte'
+        loading='lazy'
         zIndex={20}
       />
 
@@ -137,6 +139,7 @@ const Card4 = () => {
         maxW={{ base: '100%', sm: '200px' }}
         src='assets/cards/card3.jpeg'
         alt='Caffe Latte'
+        loading='lazy'
         zIndex={20}
       />
 

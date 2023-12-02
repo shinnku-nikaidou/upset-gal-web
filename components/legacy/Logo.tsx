@@ -31,6 +31,7 @@ const Logo = (props: DefaultInfoProp) => {
           alt={`${t('Head', props.lang)}, ${t('SubHead', props.lang)}`}
           width={1000}
           height={0}
+          loading='lazy'
           style={styles.responsiveImage}
         ></Image>
       </Link>
