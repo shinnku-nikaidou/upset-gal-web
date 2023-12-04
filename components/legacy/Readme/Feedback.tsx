@@ -23,7 +23,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
       <Text>
         <span>
           小站正在紧急整理所有已故终点的galgame, 预计12月底左右将会上架网站,
-          预计超过10tb内容(当然会有一堆重复的, 真红姐姐懒得去重了).
+          预计5.7tb内容(当然会和原本就有的产生一堆重复, 真红姐姐懒得去重了).
         </span>
       </Text>
       <Text>
