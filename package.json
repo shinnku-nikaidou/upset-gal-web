@@ -23,6 +23,7 @@
     "@chakra-ui/system": "^2.6.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@marsidev/react-turnstile": "^0.4.0",
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "antd": "^5.11.3",

@@ -29,6 +29,9 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.38)(react@18.2.0)
+  '@marsidev/react-turnstile':
+    specifier: ^0.4.0
+    version: 0.4.0(react-dom@18.2.0)(react@18.2.0)
   '@mui/icons-material':
     specifier: ^5.14.18
     version: 5.14.18(@mui/material@5.14.18)(@types/react@18.2.38)(react@18.2.0)
@@ -1910,6 +1913,16 @@ packages:
       '@jridgewell/resolve-uri': 3.1.1
       '@jridgewell/sourcemap-codec': 1.4.15
     dev: true
+
+  /@marsidev/react-turnstile@0.4.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-U0lwTWQhP04AnIdWEbLpF/phpqtblNbrnE4yJMdvGyeOZOTmuHW3wB+V8X+BO55pTXZitp2GgJsrGkbUjwJIeQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /@mui/base@5.0.0-beta.24(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-bKt2pUADHGQtqWDZ8nvL2Lvg2GNJyd/ZUgZAJoYzRgmnxBL9j36MSlS3+exEdYkikcnvVafcBtD904RypFKb0w==}
