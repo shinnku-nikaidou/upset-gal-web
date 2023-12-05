@@ -21,10 +21,9 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
 
   const handleClick = () => {
     const cfValidation = ref.current?.getResponse()
-    const urlParams = new URLSearchParams(window.location.search)
     window.open(
       window.location.origin +
-        urlParams.get('redirect') +
+        window.location.search.substring(10) +
         `?cf=${cfValidation}`,
     )
   }
