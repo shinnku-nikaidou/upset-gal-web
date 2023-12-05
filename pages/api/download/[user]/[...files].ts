@@ -3,9 +3,10 @@ import path from 'path'
 import { promises as fs } from 'fs'
 import fileandfolder from '@ms-graph/fileandfolder'
 import { DriveItemChildren } from '@/types/downloadtype'
-import { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
+import config, { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
 import corsControl from '@utils/corsControl'
 import { getAccount } from '@/utils/algorithms'
+import url from 'url'
 
 const users = LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
@@ -14,6 +15,7 @@ interface FilesApiRequest extends NextApiRequest {
   query: {
     user: string
     files: Array<string>
+    cf?: string
   }
 }
 
@@ -24,6 +26,7 @@ export default async function handler(
   res = corsControl(req, res)
 
   try {
+    const { cf } = req.query
     const files = req.query.files
     let user = req.query.user
     if (user === 'legacy') {
@@ -48,9 +51,15 @@ export default async function handler(
       childs,
       lastfile,
       [user, 'root', ...initfile],
+      cf,
     )
     if (ans) {
       if (typeof ans === 'string') {
+        if (ans == 'cf') {
+          const fullUrl = req.url
+          const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
+          res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
+        }
         res.redirect(302, ans)
       } else {
         res.send(ans)

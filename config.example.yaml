@@ -1,5 +1,7 @@
 PORT: 3000
 
+SITE: "http://localhost:3000"
+
 CLOUDFLARE:
   Turnstile:
     SiteKey: "0x4AAAAAAAL-XXXXXXXXXXX"

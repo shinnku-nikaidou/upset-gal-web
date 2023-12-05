@@ -1,11 +1,13 @@
 import fs from 'fs'
 import YAML from 'yaml'
 import { OauthDrive, OneDriveLegacy } from '@/types/downloadtype'
+import { CloudFlare } from './types/cloudflare'
 
 export type Config = {
+  SITE: string
   PORT: number
-  REVERSE_PROXY?: string
   LEGACY_ONECRIVE: OneDriveLegacy
+  CLOUDFLARE: CloudFlare
 }
 
 const file = fs.readFileSync('config.yaml', 'utf8')

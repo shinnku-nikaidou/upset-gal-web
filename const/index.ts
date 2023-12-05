@@ -27,6 +27,8 @@ export const keyMap: KeyMap = {
   simulate: 'simulate',
 }
 
+export const cfVerifyEndpoint = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
+
 export const pcbgurls = [
   'https://www.shinnku.com/img-original/img/2020/05/05/17/35/26/81320307_p0.jpg',
   'https://www.shinnku.com/img-original/img/2020/02/07/19/30/04/79335719_p0.jpg',
