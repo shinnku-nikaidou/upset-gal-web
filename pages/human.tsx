@@ -20,12 +20,13 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
   const ref = useRef<TurnstileInstance>(null)
 
   const handleClick = () => {
+    console.log('成功')
     const cfValidation = ref.current?.getResponse()
-    window.open(
+    const url =
       window.location.origin +
-        window.location.search.substring(10) +
-        `?cf=${cfValidation}`,
-    )
+      window.location.search.substring(10) +
+      `?cf=${cfValidation}`
+    window.open(url)
   }
 
   return (
@@ -36,7 +37,8 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
         </Heading>
         <Box borderWidth='1px' borderRadius='lg' padding={4} width='100%'>
           <Text fontSize='md'>
-            由于高流量以及持续不断接近9个月的ddos攻击, 我们不得不启用人机验证
+            由于高流量以及持续不断接近9个月的ddos攻击, 我们不得不启用人机验证,
+            请等待, 勿关闭此页面
           </Text>
           <Box borderWidth='1px' borderRadius='lg' padding={4} marginY={4}>
             <Turnstile
@@ -45,12 +47,14 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
               options={{
                 language: 'zh-CN',
               }}
+              onSuccess={() => {
+                handleClick()
+              }}
             />
           </Box>
-          <Text fontSize='md'>当验证通过✅时, 请手动点击完成验证</Text>
-          <Button colorScheme='blue' onClick={handleClick}>
-            完成验证
-          </Button>
+          <Text fontSize='md'>
+            当您验证通过✅时, 页面就会自动跳转到下载, 请给予浏览器允许弹窗权限
+          </Text>
         </Box>
       </VStack>
     </Container>
