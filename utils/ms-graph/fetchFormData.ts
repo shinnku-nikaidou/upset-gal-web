@@ -1,4 +1,4 @@
-import { AccessToken } from '@/types/downloadtype'
+import { AccessToken } from '@/types/onedrive'
 import { gatherResponse } from '@net'
 import fetch from 'isomorphic-fetch'
 import FormData from 'form-data'

@@ -8,9 +8,7 @@ export type AccessToken = {
   redirect_uri?: string
 }
 
-export type OneDriveLegacy = Array<Account>
-
-export type DriveItem = {
+export type OneriveItem = {
   id: string
   name: string
   folder?: {
@@ -26,26 +24,9 @@ export type DriveItem = {
   }
 }
 
-export type FrontItem = {
-  '@type': 'file' | 'folder'
-  date: string
-  name: string
-  size: string
-}
-
-export type DriveItemChildren = {
+export type OnedriveItemChildren = {
   '@odata.context': string
-  value: Array<DriveItem>
-}
-
-export type Account = {
-  ONEDRIVE_NAME: string
-  ONEDRIVE_REFRESHTOKEN: string
-  clientId: string
-  clientSecret: string
-  loginHost: string
-  apiHost: string
-  redirectUri: string
+  value: Array<OneriveItem>
 }
 
 export type OauthDrive = {

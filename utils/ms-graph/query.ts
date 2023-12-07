@@ -1,11 +1,11 @@
-import { OauthDrive } from '@/types/downloadtype'
+import { OauthDrive } from '@/types/onedrive'
 import { getContentWithHeaders } from '@net'
 import fetchAccessToken from './fetchAccessToken'
 
 export default async function query_one(
   oauth_drive: OauthDrive,
   path: string,
-  params?: string,
+  params = 'top=10000&select=id,name,size,folder,lastModifiedDateTime,file',
 ): Promise<Headers> {
   const accessToken = await fetchAccessToken(oauth_drive)
 

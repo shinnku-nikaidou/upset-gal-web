@@ -6,3 +6,10 @@ export type Audio = {
   lrc?: string
   theme?: string
 }
+
+export type FrontItem = {
+  '@type': 'file' | 'folder'
+  date: string
+  name: string
+  size: string
+}

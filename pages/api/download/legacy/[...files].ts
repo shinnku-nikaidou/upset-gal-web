@@ -2,13 +2,13 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import path from 'path'
 import { promises as fs } from 'fs'
 import fileandfolder from '@ms-graph/fileandfolder'
-import { DriveItemChildren } from '@/types/downloadtype'
-import config, { LEGACY_ONECRIVE_OAUTH, LEGACY_ONECRIVE } from '@/config'
+import { OnedriveItemChildren } from '@/types/onedrive'
+import config, { LEGACY_ONECRIVE_OAUTH } from '@/config'
 import corsControl from '@utils/corsControl'
 import { getAccount } from '@/utils/algorithms'
 import url from 'url'
 
-const users = LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
+const users = config.LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const filenotfound = "error, can't find this file"
 
 interface FilesApiRequest extends NextApiRequest {
@@ -41,7 +41,7 @@ export default async function handler(
           encoding: 'utf8',
         },
       ),
-    ) as DriveItemChildren
+    ) as OnedriveItemChildren
 
     const ans = await fileandfolder(
       LEGACY_ONECRIVE_OAUTH[i],
