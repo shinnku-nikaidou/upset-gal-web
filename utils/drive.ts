@@ -1,8 +1,8 @@
 import { account } from '@/config'
-import { DriveItem } from '@/types'
+import { Account, DriveItem, DriveType, FolderItem } from '@/types'
 import fs from 'fs'
 import query_one from './ms-graph/query'
-import { OauthDrive, OneriveItem } from '@/types/onedrive'
+import { OauthDrive, OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
 
 const root: DriveItem = (() => {
   try {
@@ -23,8 +23,10 @@ export async function dom(): Promise<DriveItem> {
   }
   for (let i = 0; i < account.length; i++) {
     const a = account[i]
-    const oauth = a.oauth
-    const account_root_info = (await query_one(oauth, 'root')) as OneriveItem
+    const account_root_info = (await query_one(
+      account[i].oauth,
+      'root',
+    )) as OneriveItem
     root.childrens.push({
       '@type': 'folder',
       date: account_root_info.lastModifiedDateTime,
@@ -35,16 +37,49 @@ export async function dom(): Promise<DriveItem> {
       name: a.point,
       childrens: [],
     })
-    await dfsonedrive(oauth, root.childrens[i])
   }
+
+  for (let i = 0; i < root.childrens.length; i++) {
+    await dfsonedrive(root.childrens[i] as FolderItem, account[i])
+  }
+
   return root
 }
 
-async function dfsonedrive(oauth: OauthDrive, item: DriveItem) {
+async function dfsonedrive(item: FolderItem, a: Account) {
   const id = item.sources[0].item.id
-  const onedrive_item = await query_one(oauth, id + '/children')
-  if (item['@type'] == 'folder') {
-    item.childrens
+  const childrens = (await query_one(
+    a.oauth,
+    id + '/children',
+  )) as OnedriveItemChildren
+  console.log(JSON.stringify(childrens.value))
+  for (let i = 0; i < childrens.value.length; i++) {
+    const onedrive = childrens.value[i]
+    const base = {
+      date: onedrive.lastModifiedDateTime,
+      name: onedrive.name,
+      size: onedrive.size,
+      sources: [
+        {
+          accountid: a.accountID,
+          system: DriveType.OneDrive,
+          item: onedrive,
+        },
+      ],
+    }
+    if (onedrive.hasOwnProperty('folder')) {
+      item.childrens.push({
+        '@type': 'folder',
+        childrens: [],
+        ...base,
+      })
+      await dfsonedrive(item.childrens[i] as FolderItem, a)
+    } else if (onedrive.hasOwnProperty('file')) {
+      item.childrens.push({
+        '@type': 'file',
+        ...base,
+      })
+    }
   }
 }
 

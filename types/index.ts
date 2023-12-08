@@ -36,11 +36,13 @@ export enum DriveType {
 
 export type FileItem = Item & {
   '@type': 'file'
+  sources: Array<Drive>
 }
 
 export type FolderItem = Item & {
   '@type': 'folder'
   childrens: Array<DriveItem>
+  sources: Array<Drive>
 }
 
 export type DriveBase = {
@@ -50,15 +52,13 @@ export type DriveBase = {
 }
 
 export type OnedriveBase = DriveBase & {
-  system: DriveType.OneDrive
+  accountid: string
   item: OneriveItem
 }
 
 export type Drive = OnedriveBase
 
-export type DriveItem = (FileItem | FolderItem) & {
-  sources: Array<Drive>
-}
+export type DriveItem = FileItem | FolderItem
 
 export type RawAccount = Array<AccountItem>
 
