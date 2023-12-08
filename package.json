@@ -15,7 +15,7 @@
     "prebuild": "cross-env NODE_ENV=production ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.17.5",
+    "@ant-design/cssinjs": "^1.18.0",
     "@ant-design/icons": "^5.2.6",
     "@ant-design/static-style-extract": "^1.0.2",
     "@chakra-ui/icons": "^2.1.1",
@@ -24,14 +24,14 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@marsidev/react-turnstile": "^0.4.0",
-    "@mui/icons-material": "^5.14.18",
-    "@mui/material": "^5.14.18",
-    "antd": "^5.11.3",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/material": "^5.14.20",
+    "antd": "^5.12.1",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "form-data": "^4.0.0",
-    "framer-motion": "^10.16.5",
-    "fs-extra": "^11.1.1",
+    "framer-motion": "^10.16.14",
+    "fs-extra": "^11.2.0",
     "highlight-words-core": "^1.2.2",
     "isomorphic-fetch": "^3.0.0",
     "localforage": "^1.10.0",
@@ -50,15 +50,15 @@
     "rocksdb": "^5.2.1",
     "sharp": "^0.32.6",
     "yaml": "^2.3.4",
-    "zustand": "^4.4.6"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/highlight-words-core": "^1.2.3",
     "@types/isomorphic-fetch": "^0.0.36",
     "@types/lodash": "^4.14.202",
-    "@types/node": "^20.9.4",
-    "@types/react": "^18.2.38",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.42",
     "@types/react-color": "^3.0.10",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -74,12 +74,12 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.22",
-    "postcss": "^8.4.31",
+    "postcss": "^8.4.32",
     "prettier": "^2.8.8",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "^3.3.6",
     "ts-node": "^10.9.1",
     "tslib": "^2.6.2",
     "tsx": "^3.14.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.3.3"
   }
 }
