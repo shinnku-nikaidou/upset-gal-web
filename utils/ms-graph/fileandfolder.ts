@@ -74,7 +74,7 @@ export default async function fileandfolder(
       body = c.body
       console.log(`cache ${child.id}`)
     } else {
-      body = await query_one(oauth_drive, child.id)
+      body = await query_one(oauth_drive, child.id, '')
       cache.set(child.id, {
         body: body,
         timestamp: Date.now(),
