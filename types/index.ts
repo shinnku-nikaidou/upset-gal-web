@@ -1,4 +1,4 @@
-import { OneriveItem, OnedriveAccount } from './onedrive'
+import { OneriveItem, OnedriveAccount, OauthDrive } from './onedrive'
 
 export type Audio = {
   name: string
@@ -46,7 +46,7 @@ export type FolderItem = Item & {
 export type DriveBase = {
   accountid: string
   system: DriveType
-  item: any
+  item: OneriveItem
 }
 
 export type OnedriveBase = DriveBase & {
@@ -60,7 +60,14 @@ export type DriveItem = (FileItem | FolderItem) & {
   sources: Array<Drive>
 }
 
-export type Account = Array<AccountItem>
+export type RawAccount = Array<AccountItem>
+
+export type Account = {
+  accountID: string
+  type: DriveType
+  point: string
+  oauth: OauthDrive
+}
 
 export type AccountItemBase = {
   name: string

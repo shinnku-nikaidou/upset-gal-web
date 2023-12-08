@@ -20,7 +20,8 @@ export async function initLegacyConfig() {
       { encoding: 'utf8' },
     )
 
-    await query_one(onedrive_oauth, 'root').then(async (body) => {
+    await query_one(onedrive_oauth, 'root').then(async (_body) => {
+      const body = _body as OneriveItem
       fs.writeFileSync(
         `data/_legacy/${ONEDRIVE_NAME}/root.json`,
         JSON.stringify(body),
@@ -43,17 +44,16 @@ export async function recursive_get_children(
   path = PATH.join(path, body.name)
   fs.mkdirSync(path)
   const children_path = PATH.join(path, 'child.json')
-  await query_one(oauth_drive, `${body.id}/children`).then(
-    async (childs: OneriveItem) => {
-      fs.writeFileSync(children_path, JSON.stringify(childs), {
-        encoding: 'utf8',
+  await query_one(oauth_drive, `${body.id}/children`).then(async (_childs) => {
+    const childs = _childs as OnedriveItemChildren
+    fs.writeFileSync(children_path, JSON.stringify(childs), {
+      encoding: 'utf8',
+    })
+    const value = (childs as unknown as OnedriveItemChildren).value
+    value
+      .filter((item) => item.hasOwnProperty('folder'))
+      .forEach(async (item) => {
+        await recursive_get_children(item, path, oauth_drive)
       })
-      const value = (childs as unknown as OnedriveItemChildren).value
-      value
-        .filter((item) => item.hasOwnProperty('folder'))
-        .forEach(async (item) => {
-          await recursive_get_children(item, path, oauth_drive)
-        })
-    },
-  )
+  })
 }

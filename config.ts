@@ -3,7 +3,7 @@ import YAML from 'yaml'
 import { OauthDrive } from '@/types/onedrive'
 import { CloudFlare } from '@/types/cloudflare'
 import { LegacyOneDrive } from '@/types/onedrivelegacy'
-import { Account, AccountItem, DriveType } from './types'
+import { RawAccount, AccountItem, DriveType } from './types'
 import { onedriveTransAccount } from './utils/ms-graph'
 
 export type Config = {
@@ -11,7 +11,7 @@ export type Config = {
   PORT: number
   LEGACY_ONECRIVE: LegacyOneDrive
   CLOUDFLARE: CloudFlare
-  ACCOUNT: Account
+  ACCOUNT: RawAccount
 }
 
 const file = fs.readFileSync('config.yaml', 'utf8')

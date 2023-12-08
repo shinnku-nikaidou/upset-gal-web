@@ -22,6 +22,7 @@ export type OneriveItem = {
       quickXorHash: string
     }
   }
+  '@microsoft.graph.downloadUrl'?: string
 }
 
 export type OnedriveAccount = {

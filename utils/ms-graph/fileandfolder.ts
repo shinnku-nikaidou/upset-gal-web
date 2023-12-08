@@ -69,20 +69,18 @@ export default async function fileandfolder(
     }
 
     const c = cache.get(child.id)
-    let body: OneriveItem
+    let item: OneriveItem
     if (c && isvalidcache(c)) {
-      body = c.body
+      item = c.body
       console.log(`cache ${child.id}`)
     } else {
-      body = await query_one(oauth_drive, child.id, '')
+      item = (await query_one(oauth_drive, child.id, '')) as OneriveItem
       cache.set(child.id, {
-        body: body,
+        body: item,
         timestamp: Date.now(),
       })
-      console.log(`query_one ${child.id}`)
+      console.log(`query_one ${child.name} ${child.id}`)
     }
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    const downloadUrl: string = (body as any)['@microsoft.graph.downloadUrl']!
-    return downloadUrl
+    return item['@microsoft.graph.downloadUrl']
   }
 }
