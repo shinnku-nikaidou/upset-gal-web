@@ -4,6 +4,7 @@ export const onedriveTransAccount = (account: AccountOnedriveItem) => {
   return {
     accountID: account.name,
     type: account.type,
+    point: account.point,
     oauth: {
       refreshToken: account.onedrive.onedriveRefeshtoken,
       clientId: account.onedrive.clientId,

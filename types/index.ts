@@ -13,7 +13,7 @@ export type Item = {
   '@type': 'file' | 'folder'
   date: string
   name: string
-  size: string
+  size: number
 }
 
 export enum DriveType {
@@ -58,6 +58,7 @@ export type Account = Array<AccountItem>
 export type AccountItemBase = {
   name: string
   type: DriveType
+  point: string
 }
 
 export type AccountOnedriveItem = AccountItemBase & {

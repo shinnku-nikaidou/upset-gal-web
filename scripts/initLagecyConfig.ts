@@ -27,7 +27,7 @@ export async function initLegacyConfig() {
         { encoding: 'utf8' },
       )
       await recursive_get_children(
-        body as unknown as OneriveItem,
+        body,
         `data/_legacy/${ONEDRIVE_NAME}`,
         onedrive_oauth,
       )
@@ -44,7 +44,7 @@ export async function recursive_get_children(
   fs.mkdirSync(path)
   const children_path = PATH.join(path, 'child.json')
   await query_one(oauth_drive, `${body.id}/children`).then(
-    async (childs: Headers) => {
+    async (childs: OneriveItem) => {
       fs.writeFileSync(children_path, JSON.stringify(childs), {
         encoding: 'utf8',
       })
