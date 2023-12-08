@@ -30,11 +30,9 @@ export type OnedriveItemChildren = {
 }
 
 export type OauthDrive = {
-  redirectUri: string
   refreshToken: string
   clientId: string
   clientSecret: string
   oauthUrl: string
   apiUrl: string
-  scope: string
 }

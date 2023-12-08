@@ -18,11 +18,9 @@ export default config
 
 export const LEGACY_ONECRIVE_OAUTH: Array<OauthDrive> =
   config.LEGACY_ONECRIVE.map((account) => ({
-    redirectUri: account.redirectUri,
     refreshToken: account.ONEDRIVE_REFRESHTOKEN,
     clientId: account.clientId,
     clientSecret: account.clientSecret,
     oauthUrl: account.loginHost + '/common/oauth2/v2.0/',
     apiUrl: account.apiHost + '/v1.0/me/drive/items/',
-    scope: account.apiHost + '/Files.ReadWrite.All offline_access',
   }))
