@@ -22,10 +22,3 @@ export type KeyMap = {
 }
 
 export type TKey = keyof KeyMap | '10' | null
-
-export type Item = {
-  '@type': 'folder' | 'file'
-  date: string
-  name: string
-  size: string
-}

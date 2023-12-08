@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react'
 import { Dropdown, Input, MenuProps, Pagination } from 'antd/lib'
-import { Item } from '@/types/onedrivelegacy'
+import { Item } from '@/types'
 import { searchEngine, shuffleArray } from '@algorithm'
 import { GenerateRightClickMenu } from './RightClick'
 import { create } from 'zustand'

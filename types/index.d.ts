@@ -7,9 +7,14 @@ export type Audio = {
   theme?: string
 }
 
-export type FrontItem = {
+export type Item = {
   '@type': 'file' | 'folder'
   date: string
   name: string
   size: string
+}
+
+export type DriveItem = Item & {
+
+  childrens: Array<DriveItem>
 }
