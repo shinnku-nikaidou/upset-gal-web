@@ -16,6 +16,13 @@ export type Item = {
   size: number
 }
 
+export type FrontItem = {
+  '@type': 'file' | 'folder'
+  date: string
+  name: string
+  size: string
+}
+
 export enum DriveType {
   OneDrive = 'onedrive',
   OnedriveCn = 'onedrive cn',
