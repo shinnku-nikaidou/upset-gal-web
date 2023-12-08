@@ -1,3 +1,5 @@
+import { OneriveItem } from './onedrive'
+
 export type Audio = {
   name: string
   artist?: string
@@ -14,7 +16,38 @@ export type Item = {
   size: string
 }
 
-export type DriveItem = Item & {
+export enum DriveType {
+  OneDrive = 'onedrive',
+  OnedriveCn = 'onedrive cn',
+  GoogleDrive = 'google drive',
+  Mega = 'mega',
+  DropBox = 'dropbox',
+  S3 = 's3',
+  FS = 'filesystem',
+  unknown,
+}
 
+export type FileItem = Item & {
+  '@type': 'file'
+}
+
+export type FolderItem = Item & {
+  '@type': 'folder'
   childrens: Array<DriveItem>
+}
+
+export type DriveBase = {
+  system: DriveType
+  item: any
+}
+
+export type OnedriveBase = DriveBase & {
+  system: DriveType.OneDrive
+  item: OneriveItem
+}
+
+export type Drive = OnedriveBase
+
+export type DriveItem = (FileItem | FolderItem) & {
+  sources: Array<Drive>
 }
