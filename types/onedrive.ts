@@ -24,6 +24,12 @@ export type OneriveItem = {
   }
 }
 
+export type OnedriveAccount = {
+  clientId: string
+  clientSecret: string
+  onedriveRefeshtoken: string
+}
+
 export type OnedriveItemChildren = {
   '@odata.context': string
   value: Array<OneriveItem>

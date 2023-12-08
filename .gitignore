@@ -44,3 +44,5 @@ start.sh
 
 antd.min.css
 *.db
+
+tmp.*

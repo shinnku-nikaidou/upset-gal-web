@@ -59,25 +59,6 @@ export async function netease_id(name: string) {
   return id
 }
 
-// export default async function initmusic() {
-//   const file = MUSIC_FILES_V1[0]
-//   console.log(file)
-
-//   let name
-//   // const musicFilePath = `${musicbase}${file}`
-//   if (file.endsWith('.mp3')) {
-//     name = file.substring(0, file.length - 4)
-//   } else if (file.endsWith('.flac')) {
-//     name = file.substring(0, file.length - 5)
-//   } else {
-//     name = ''
-//   }
-//   const jpgOutputPath = `${coverbase}${name}.jpg`
-//   const id = await netease_id(name)
-//   const pic_url = await netease_pic(id)
-//   await downloadFile(pic_url, jpgOutputPath)
-// }
-
 export default async function initmusic() {
   for (let i = 0; i < MUSIC_FILES_V1.length; i++) {
     const file = MUSIC_FILES_V1[i]

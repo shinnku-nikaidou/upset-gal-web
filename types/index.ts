@@ -1,4 +1,4 @@
-import { OneriveItem } from './onedrive'
+import { OneriveItem, OnedriveAccount } from './onedrive'
 
 export type Audio = {
   name: string
@@ -24,7 +24,7 @@ export enum DriveType {
   DropBox = 'dropbox',
   S3 = 's3',
   FS = 'filesystem',
-  unknown,
+  unknown = 'unknown',
 }
 
 export type FileItem = Item & {
@@ -37,6 +37,7 @@ export type FolderItem = Item & {
 }
 
 export type DriveBase = {
+  accountid: string
   system: DriveType
   item: any
 }
@@ -51,3 +52,17 @@ export type Drive = OnedriveBase
 export type DriveItem = (FileItem | FolderItem) & {
   sources: Array<Drive>
 }
+
+export type Account = Array<AccountItem>
+
+export type AccountItemBase = {
+  name: string
+  type: DriveType
+}
+
+export type AccountOnedriveItem = AccountItemBase & {
+  type: DriveType.OneDrive
+  onedrive: OnedriveAccount
+}
+
+export type AccountItem = AccountOnedriveItem
