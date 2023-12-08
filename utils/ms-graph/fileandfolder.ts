@@ -1,13 +1,13 @@
 import PATH from 'path'
 import fs from 'fs'
-import { OauthDrive, OnedriveItemChildren } from '@/types/onedrive'
+import { OauthDrive, OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
 import query_one from './query'
 import config from '@/config'
 import { cfVerifyEndpoint } from '@/const'
 import { showfiles } from '@utils/algorithms/showfile'
 
 type BodyCacheItem = {
-  body: Headers
+  body: OneriveItem
   timestamp: number
 }
 
@@ -69,7 +69,7 @@ export default async function fileandfolder(
     }
 
     const c = cache.get(child.id)
-    let body: Headers
+    let body: OneriveItem
     if (c && isvalidcache(c)) {
       body = c.body
       console.log(`cache ${child.id}`)
