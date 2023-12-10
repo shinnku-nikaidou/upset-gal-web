@@ -1,10 +1,10 @@
 import { account } from '@/config'
-import { Account, DriveItem, DriveType, FolderItem } from '@/types'
+import { Account, DriveType, FolderItem } from '@/types'
 import fs from 'fs'
 import query_one from './ms-graph/query'
-import { OauthDrive, OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
+import { OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
 
-const root: DriveItem = (() => {
+const root: FolderItem = (() => {
   try {
     return JSON.parse(fs.readFileSync('data/root.json', { encoding: 'utf8' }))
   } catch {
@@ -12,8 +12,8 @@ const root: DriveItem = (() => {
   }
 })()
 
-export async function dom(): Promise<DriveItem> {
-  const root: DriveItem = {
+export async function dom(): Promise<FolderItem> {
+  const root: FolderItem = {
     '@type': 'folder',
     date: '2023-12-31',
     size: 0,

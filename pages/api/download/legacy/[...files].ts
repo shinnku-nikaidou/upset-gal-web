@@ -9,7 +9,8 @@ import { getAccount } from '@/utils/algorithms'
 import url from 'url'
 
 const users = config.LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
-const filenotfound = "error, can't find this file"
+const wrong =
+  "Something goes wrong, But it's not your fault, please report to \u771f\u7ea2."
 
 interface FilesApiRequest extends NextApiRequest {
   query: {
@@ -69,7 +70,7 @@ export default async function handler(
         res.send(ans)
       }
     } else {
-      res.send(filenotfound)
+      res.send(wrong)
     }
   } catch (e) {
     res.status(500).send(e)
