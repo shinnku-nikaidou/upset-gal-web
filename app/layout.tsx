@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
-import './globals.css'
 import { Providers } from '@/app/providers'
-import './murasame-background.css'
 
 export const metadata: Metadata = {
   title: '失落小站 - galgame资源站',
