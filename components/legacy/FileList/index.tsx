@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from 'react'
 import { Dropdown, Input, MenuProps, Pagination } from 'antd/lib'
-import { Item } from '@/types'
+import { FrontItem, Item } from '@/types'
 import { searchEngine, shuffleArray } from '@algorithm'
 import { GenerateRightClickMenu } from './RightClick'
 import { create } from 'zustand'
@@ -21,7 +21,7 @@ import { useFileListStore } from '../LegacyContent'
 import DefaultInfoProp from '@/utils/userDefaultInfoProp'
 
 interface IFileItemProps {
-  item: Item
+  item: FrontItem
   lang: string
 }
 
@@ -49,7 +49,7 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
   )
 }
 
-const FolderItem = ({ item }: { item: Item }) => {
+const FolderItem = ({ item }: { item: FrontItem }) => {
   const { url, setUrl, setPage } = useFileListStore()
   return (
     <Box
@@ -70,24 +70,24 @@ const FolderItem = ({ item }: { item: Item }) => {
 }
 
 interface FileState {
-  files: Item[]
+  files: FrontItem[]
   cacheURL: string | null
   removeAllFiles: () => void
-  setFiles: (newFiles: Item[], url: string) => void
+  setFiles: (newFiles: FrontItem[], url: string) => void
 }
 
 const useFileStore = create<FileState>((set) => ({
   files: [],
   cacheURL: null,
   removeAllFiles: () => set({ files: [], cacheURL: null }),
-  setFiles: (newFiles: Item[], url: string) =>
+  setFiles: (newFiles: FrontItem[], url: string) =>
     set({ files: newFiles, cacheURL: url }),
 }))
 
 export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
   const { files, setFiles, cacheURL } = useFileStore()
   const url = useFileListStore().url
-  const [dispFiles, setDispFiles] = useState<Item[]>([])
+  const [dispFiles, setDispFiles] = useState<FrontItem[]>([])
 
   useEffect(() => {
     console.log(`url is ${url}`)
@@ -95,7 +95,7 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
       console.log(`cache miss, now fetching`)
       fetch(`${window.location.origin}/${url}`)
         .then((res) => res.json())
-        .then((data: Item[]) => {
+        .then((data: FrontItem[]) => {
           shuffleArray(data)
           setFiles(data, url)
           setDispFiles(data)
@@ -135,7 +135,7 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
         <Stack divider={<StackDivider />} spacing='4'>
           {dispFiles
             .slice((page - 1) * 6, page * 6)
-            .map((item: Item, key: number) => {
+            .map((item: FrontItem, key: number) => {
               if (item['@type'] === 'file') {
                 return <FileItem key={key} item={item} lang={lang} />
               } else {

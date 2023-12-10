@@ -4,7 +4,8 @@ import fs from 'fs'
 import query_one from './ms-graph/query'
 import { OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
 
-const root: FolderItem = (() => {
+// eslint-disable-next-line prefer-const
+let root: FolderItem = (() => {
   try {
     return JSON.parse(fs.readFileSync('data/root.json', { encoding: 'utf8' }))
   } catch {
@@ -84,3 +85,24 @@ async function dfsonedrive(item: FolderItem, a: Account) {
 }
 
 export default root
+
+export function renewFiles() {
+  const ans: Array<string> = []
+  function dfs(r: FolderItem, path: string) {
+    r.childrens.forEach((c) => {
+      const p = path + '/' + c.name
+      if (c['@type'] === 'file') {
+        ans.push(p)
+      } else {
+        dfs(c, p)
+      }
+    })
+  }
+  dfs(root, '')
+  return ans
+}
+
+// eslint-disable-next-line prefer-const
+let files = renewFiles()
+
+export { files }

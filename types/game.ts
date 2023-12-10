@@ -11,12 +11,6 @@ export type GameItem = {
   links: GalLink[]
 }
 
-export type FrontItem = {
-  date: string
-  name: string
-  size: string
-}
-
 export type Game = {
   key: number
   backgroundImage?: string

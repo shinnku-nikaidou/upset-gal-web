@@ -1,9 +1,9 @@
-import { Item } from '@/types'
+import { FrontItem } from '@/types'
 
-export const searchEngine = (value: string, files: Item[]) => {
+export const searchEngine = (value: string, files: FrontItem[]) => {
   value = value.toLowerCase()
-  const arrayFile: Item[] = files
-  const newArrayFile: Array<[Item, number]> = arrayFile.map((v) => [v, 0])
+  const arrayFile: FrontItem[] = files
+  const newArrayFile: Array<[FrontItem, number]> = arrayFile.map((v) => [v, 0])
   for (let x = 0; x < arrayFile.length; x++) {
     for (let y = 0; y < value.length; y++) {
       try {
