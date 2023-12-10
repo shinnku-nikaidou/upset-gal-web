@@ -18,7 +18,7 @@ const App = (props: { isMobile: boolean; lang: string }) => {
       <Search isMobile={props.isMobile} lang={props.lang} />
       <Box minH={'80px'} />
 
-      <Center>
+      {/* <Center>
         <Box>
           <iframe
             width='640'
@@ -29,7 +29,7 @@ const App = (props: { isMobile: boolean; lang: string }) => {
             allowFullScreen
           ></iframe>
         </Box>
-      </Center>
+      </Center> */}
     </>
   )
 }

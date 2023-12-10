@@ -38,10 +38,15 @@ const Download: NextPage<DefaultInfoProp> = ({ isMobile, lang }) => {
           gtag('config', 'G-61P3NL510C');
         `}
       </Script>
+      <Script
+        defer
+        src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "65325546c71740a78ecc6e8fa7815010"}'
+      ></Script>
       <Head>
         <meta charSet='UTF-8' />
         <title>{t('Title', lang)}</title>
-        <link rel='icon' type='image/svg+xml' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.ico' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta name='description' content="shinnku's galgame site" />
         <link rel='manifest' href='/manifest.json' />

@@ -91,14 +91,12 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
           type: 'lv1',
           id: '114514',
           content: 'this is google',
-          hierarchy: { lvl1: '100' },
         },
         {
           url: 'https://www.bing.com/',
           type: 'lv2',
           id: '1919',
           content: 'this is bing, no head',
-          hierarchy: {},
         },
       ]
     },
@@ -221,66 +219,54 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 <Box as='ul' role='listbox' borderTopWidth='1px' pt={2} pb={4}>
                   {results.map((item, index) => {
                     const selected = index === active
-                    const isLvl1 = item.type === 'lvl1'
 
                     return (
                       <Link key={item.id} href={item.url} passHref>
-                        <a>
-                          <Box
-                            id={`search-item-${index}`}
-                            as='li'
-                            aria-selected={selected ? true : undefined}
-                            onMouseEnter={() => {
-                              setActive(index)
-                              eventRef.current = 'mouse'
-                            }}
-                            onClick={() => {
-                              if (shouldCloseModal) {
-                                modal.onClose()
-                              }
-                            }}
-                            ref={menuNodes.ref(index)}
-                            role='option'
-                            key={item.id}
-                            sx={{
-                              display: 'flex',
-                              alignItems: 'center',
-                              minH: 12,
-                              mt: 2,
-                              px: 4,
-                              py: 2,
-                              rounded: 'lg',
-                              bg: 'gray.100',
-                              '.chakra-ui-dark &': { bg: 'gray.600' },
-                              _selected: {
-                                bg: 'teal.400',
+                        <Box
+                          id={`search-item-${index}`}
+                          as='li'
+                          aria-selected={selected ? true : undefined}
+                          onMouseEnter={() => {
+                            setActive(index)
+                            eventRef.current = 'mouse'
+                          }}
+                          onClick={() => {
+                            if (shouldCloseModal) {
+                              modal.onClose()
+                            }
+                          }}
+                          ref={menuNodes.ref(index)}
+                          role='option'
+                          key={item.id}
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            minH: 12,
+                            mt: 2,
+                            px: 4,
+                            py: 2,
+                            rounded: 'lg',
+                            bg: 'gray.100',
+                            '.chakra-ui-dark &': { bg: 'gray.600' },
+                            _selected: {
+                              bg: 'teal.400',
+                              color: 'white',
+                              mark: {
                                 color: 'white',
-                                mark: {
-                                  color: 'white',
-                                  textDecoration: 'underline',
-                                },
+                                textDecoration: 'underline',
                               },
-                            }}
-                          >
-                            <Box flex='1' ml='4'>
-                              {!isLvl1 && (
-                                <Box
-                                  fontWeight='medium'
-                                  fontSize='xs'
-                                  opacity={0.7}
-                                >
-                                  {item.hierarchy.lvl1}
-                                </Box>
-                              )}
-                              <Box fontWeight='semibold'>
-                                <OptionText
-                                  searchWords={[query]}
-                                  textToHighlight={item.content}
-                                />
-                              </Box>
+                            },
+                          }}
+                        >
+                          <Box flex='1' ml='4'>
+                            <Box fontWeight='semibold'>
+                              <OptionText
+                                searchWords={[query]}
+                                textToHighlight={item.content}
+                              />
                             </Box>
                           </Box>
-                        </a>
+                        </Box>
                       </Link>
                     )
                   })}
