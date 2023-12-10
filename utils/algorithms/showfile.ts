@@ -1,4 +1,4 @@
-import { DriveItem, FolderItem, FrontItem } from '@/types'
+import { FolderItem, FrontItem } from '@/types'
 import { OnedriveItemChildren } from '@/types/onedrive'
 
 export const sizeUnit = [

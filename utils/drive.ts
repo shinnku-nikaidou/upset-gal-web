@@ -1,8 +1,9 @@
 import { account } from '@/config'
-import { Account, DriveType, FolderItem } from '@/types'
+import { Account, DriveType, FolderItem, FrontItem } from '@/types'
 import fs from 'fs'
 import query_one from './ms-graph/query'
 import { OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
+import { num2size } from './algorithms/showfile'
 
 // eslint-disable-next-line prefer-const
 let root: FolderItem = (() => {
@@ -87,12 +88,17 @@ async function dfsonedrive(item: FolderItem, a: Account) {
 export default root
 
 export function renewFiles() {
-  const ans: Array<string> = []
+  const ans: Array<FrontItem> = []
   function dfs(r: FolderItem, path: string) {
     r.childrens.forEach((c) => {
       const p = path + '/' + c.name
       if (c['@type'] === 'file') {
-        ans.push(p)
+        ans.push({
+          '@type': 'file',
+          date: c.date,
+          name: p,
+          size: num2size(c.size),
+        })
       } else {
         dfs(c, p)
       }

@@ -10,6 +10,5 @@ export default async function handler(
     res.send(files)
   }
 
-  console.log(q)
-  res.status(200).send(q)
+  res.status(200).send(files.slice(0, 15))
 }

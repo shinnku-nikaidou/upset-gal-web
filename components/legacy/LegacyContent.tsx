@@ -9,6 +9,7 @@ import { TKey } from '@/types/onedrivelegacy'
 import { Box, Flex } from '@chakra-ui/react'
 import ExtendIntro from './ExtendIntro'
 import useGlobalTheme from '@/utils/persist/theme'
+import Search from '../search'
 
 interface FileListState {
   url: string
@@ -46,7 +47,10 @@ const LegacyContent = (props: DefaultInfoProp) => {
           return (
             <Flex flexDirection={'column'}>
               <Box flex='1'>
-                <Readme isMobile={props.isMobile} lang={props.lang} />
+                <Search {...props} />
+              </Box>
+              <Box flex='1'>
+                <Readme {...props} />
               </Box>
               <Box pt='10' flex='1'>
                 {articleOpen && <ExtendIntro />}
@@ -54,11 +58,9 @@ const LegacyContent = (props: DefaultInfoProp) => {
             </Flex>
           )
         } else if (key === '10') {
-          return (
-            <ThemeProviderMenu isMobile={props.isMobile} lang={props.lang} />
-          )
+          return <ThemeProviderMenu {...props} />
         } else {
-          return <FileList isMobile={props.isMobile} lang={props.lang} />
+          return <FileList {...props} />
         }
       })()}
     </div>

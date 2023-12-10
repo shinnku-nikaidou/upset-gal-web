@@ -9,13 +9,14 @@ import {
   useEventListener,
   useUpdateEffect,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import { findAll } from 'highlight-words-core'
+import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
 
 import Link from 'next/link'
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MultiRef from 'react-multi-ref'
+import { FrontItem } from '@/types'
 
 interface OptionTextProps {
   searchWords: string[]
@@ -47,7 +48,7 @@ function OptionText({ searchWords, textToHighlight }: OptionTextProps) {
 }
 
 const Search = (props: { isMobile: boolean; lang: string }) => {
-  const router = useRouter()
+  const [trueQuery, setTrueQuery] = useState('')
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const [shouldCloseModal, setShouldCloseModal] = useState(true)
@@ -57,13 +58,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
   const menuRef = useRef<HTMLDivElement>(null)
   const eventRef = useRef<'mouse' | 'keyboard' | null>(null)
 
-  useEffect(() => {
-    router.events.on('routeChangeComplete', modal.onClose)
-    return () => {
-      router.events.off('routeChangeComplete', modal.onClose)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const [results, setResults] = useState<Array<FrontItem>>([])
 
   useEventListener('keydown', (event) => {
     const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
@@ -81,29 +76,41 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modal.isOpen])
 
-  const results = useMemo(
-    function getResults() {
-      console.log(query)
-      if (query.length < 2) return []
-      return [
-        {
-          url: 'https://www.google.com/',
-          type: 'lv1',
-          id: '114514',
-          content: 'this is google',
-        },
-        {
-          url: 'https://www.bing.com/',
-          type: 'lv2',
-          id: '1919',
-          content: 'this is bing, no head',
-        },
-      ]
-    },
-    [query],
-  )
+  useEffect(() => {
+    async function foobar() {
+      if (trueQuery.length < 1) return []
+      console.log(trueQuery)
+
+      fetch(window.location.origin + '/api/search?q=' + trueQuery)
+        .then((res) => res.json())
+        .then((res) => {
+          setResults(res as Array<FrontItem>)
+        })
+    }
+    foobar()
+  }, [trueQuery])
 
   const open = menu.isOpen && results.length > 0
+
+  const item_sx = {
+    display: 'flex',
+    alignItems: 'center',
+    minH: 12,
+    mt: 2,
+    px: 4,
+    py: 2,
+    rounded: 'lg',
+    bg: 'gray.100',
+    '.chakra-ui-dark &': { bg: 'gray.600' },
+    _selected: {
+      bg: 'teal.400',
+      color: 'white',
+      mark: {
+        color: 'white',
+        textDecoration: 'underline',
+      },
+    },
+  }
 
   const onKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -130,18 +137,9 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
           setShouldCloseModal(true)
           break
         }
-        case 'Enter': {
-          if (results?.length <= 0) {
-            break
-          }
-
-          modal.onClose()
-          router.push(results[active].url)
-          break
-        }
       }
     },
-    [active, modal, results, router],
+    [active, results],
   )
 
   const onKeyUp = useCallback((e: React.KeyboardEvent) => {
@@ -194,7 +192,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 bg: 'white',
                 '.chakra-ui-dark &': { bg: 'gray.700' },
               }}
-              placeholder='Search the visual novel'
+              placeholder='输入完成后请点击左侧查询按钮 (实验性功能)'
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value)
@@ -204,10 +202,17 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
               onKeyUp={onKeyUp}
             />
             <Center pos='absolute' left={7} h='48px'>
-              <SearchIcon color='teal.500' boxSize='20px' />
+              <a
+                onClick={() => {
+                  setTrueQuery(query)
+                }}
+              >
+                <SearchIcon color='teal.500' boxSize='20px' />
+              </a>
             </Center>
           </Flex>
-          <Box maxH='60vh' maxW='520px' p='0' ref={menuRef}>
+          <Box  p='0' ref={menuRef}>
+            {/* maxH='60vh' maxW='520px' */}
             {open && (
               <Box
                 sx={{
@@ -221,7 +226,12 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                     const selected = index === active
 
                     return (
-                      <Link key={item.id} href={item.url} passHref>
+                      <Link
+                        key={index}
+                        href={'/api/download' + item.name}
+                        target='_blank'
+                        passHref
+                      >
                         <Box
                           id={`search-item-${index}`}
                           as='li'
@@ -237,32 +247,15 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                           }}
                           ref={menuNodes.ref(index)}
                           role='option'
-                          key={item.id}
-                          sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            minH: 12,
-                            mt: 2,
-                            px: 4,
-                            py: 2,
-                            rounded: 'lg',
-                            bg: 'gray.100',
-                            '.chakra-ui-dark &': { bg: 'gray.600' },
-                            _selected: {
-                              bg: 'teal.400',
-                              color: 'white',
-                              mark: {
-                                color: 'white',
-                                textDecoration: 'underline',
-                              },
-                            },
-                          }}
+                          key={index}
+                          sx={item_sx}
                         >
                           <Box flex='1' ml='4'>
                             <Box fontWeight='semibold'>
+                              <FolderZipOutlinedIcon /> {'  '}
                               <OptionText
                                 searchWords={[query]}
-                                textToHighlight={item.content}
+                                textToHighlight={item.name}
                               />
                             </Box>
                           </Box>
