@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import path from 'path'
-import config from '@/config'
+import { account } from '@/config'
 import corsControl from '@utils/corsControl'
-import url from 'url'
 import root from '@utils/drive'
 import { DriveItem } from '@/types'
+import { showfiles } from '@/utils/algorithms/showfile'
+import query_one from '@/utils/ms-graph/query'
+import { OneriveItem } from '@/types/onedrive'
 
-const users = config.LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const wrong =
   "Something goes wrong, But it's not your fault, please report to \u771f\u7ea2."
 
@@ -43,5 +43,13 @@ export default async function handler(
     }
   }
 
-  res.send({ a: '真红' })
+  if (item['@type'] === 'folder') {
+    res.send(showfiles(item))
+  } else {
+    const accountID = item.sources[0].accountid
+    const id = item.sources[0].item.id
+    const a = account.find((a) => a.accountID === accountID)!
+    const body = (await query_one(a.oauth, id, '')) as OneriveItem
+    res.redirect(302, body['@microsoft.graph.downloadUrl']!)
+  }
 }

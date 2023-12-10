@@ -4,7 +4,7 @@ import { OauthDrive, OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
 import query_one from './query'
 import config from '@/config'
 import { cfVerifyEndpoint } from '@/const'
-import { showfiles } from '@utils/algorithms/showfile'
+import { showfileslegacy } from '@utils/algorithms/showfile'
 
 type BodyCacheItem = {
   body: OneriveItem
@@ -41,7 +41,7 @@ export default async function fileandfolder(
         },
       ),
     ) as OnedriveItemChildren
-    return showfiles(child_childs)
+    return showfileslegacy(child_childs)
   } else if (child.hasOwnProperty('file')) {
     if (!cf) {
       return 'cf'
@@ -79,7 +79,7 @@ export default async function fileandfolder(
         body: item,
         timestamp: Date.now(),
       })
-      console.log(`query_one ${child.name} ${child.id}`)
+      console.log(`query one ${child.name} ${child.id}`)
     }
     return item['@microsoft.graph.downloadUrl']
   }

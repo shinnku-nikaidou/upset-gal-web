@@ -1,4 +1,4 @@
-import { FrontItem } from '@/types'
+import { DriveItem, FolderItem, FrontItem } from '@/types'
 import { OnedriveItemChildren } from '@/types/onedrive'
 
 export const sizeUnit = [
@@ -25,12 +25,25 @@ export function num2size(num: number): string {
   return `${size.toFixed(2)} ${sizeUnit[i - 1][0]}`
 }
 
-export function showfiles(childs: OnedriveItemChildren) {
+export function showfileslegacy(childs: OnedriveItemChildren) {
   const frontItems: Array<FrontItem> = []
   childs.value.forEach((child) =>
     frontItems.push({
       '@type': child.hasOwnProperty('folder') ? 'folder' : 'file',
       date: child.lastModifiedDateTime,
+      name: child.name,
+      size: num2size(child.size),
+    }),
+  )
+  return frontItems
+}
+
+export function showfiles(item: FolderItem) {
+  const frontItems: Array<FrontItem> = []
+  item.childrens.forEach((child) =>
+    frontItems.push({
+      '@type': child.hasOwnProperty('folder') ? 'folder' : 'file',
+      date: child.date,
       name: child.name,
       size: num2size(child.size),
     }),
