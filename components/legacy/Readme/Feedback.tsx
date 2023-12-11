@@ -16,20 +16,19 @@ export const Feedback = ({ lang }: { lang: string }) => (
       </Text>
       <Text>
         <span>
-          如果发现网站进不去加载慢，或者下载速度慢，或者想来telegram聊却进不去?
-          说明被当地运营商掐网络了，这里推荐
+          如果发现下载速度慢，或者想来telegram聊却进不去?
+          说明被当地运营商掐网络了，真红姐姐推荐使用
         </span>
         <Link
           target='_blank'
           rel='noreferrer'
           href='https://congyu.moe/auth/register?code=e30dc2bc97'
         >
-          丛雨vpn/加速器: 丛雨云
+          丛雨vpn: 丛雨云
         </Link>
         <span>
-          （柚子厨专属vpn, 中转高速流量, 延迟25ms内, 垃圾网络也能秒开油管4k,
-          流媒体全解锁, 又有 0.1低倍率流量9元1tb, 性价比之神,
-          本站专属循环10%off优惠码:shinnku）。
+          （柚子厨专属vpn, 中转高速流量, 低延迟, 垃圾网络也能秒开油管4k,
+          流媒体全解锁, 又有 0.1低倍率流量9元1tb）。
         </span>
         <span>
           或者使用
@@ -40,7 +39,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             Alori
           </Link>
-          , 也是全中转, 高性价比
+          , 也是全中转, 高性价比, 和上面一样介绍.
         </span>
       </Text>
     </Space>
