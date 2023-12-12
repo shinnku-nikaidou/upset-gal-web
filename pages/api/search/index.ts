@@ -13,7 +13,7 @@ const options: IFuseOptions<NewFrontItem> = {
   includeScore: true,
   ignoreLocation: true,
   ignoreFieldNorm: true,
-  threshold: 0.6,
+  threshold: 0.75,
   keys: ['name'],
 }
 
@@ -39,6 +39,6 @@ export default async function handler(
   const queryjp = cn2jp(q)
   const query = removeDuplicateCharacters(q + queryjp)
   console.log(query)
-  const results = runsearch(query) // .slice(0, 150)
+  const results = runsearch(query).slice(0, 100)
   res.status(200).send(results)
 }
