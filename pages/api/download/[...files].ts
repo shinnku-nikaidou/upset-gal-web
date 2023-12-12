@@ -1,14 +1,18 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { account } from '@/config'
+import config, { account } from '@/config'
+import url from 'url'
 import corsControl from '@utils/corsControl'
 import root from '@utils/drive'
 import { DriveItem } from '@/types'
 import { showfiles } from '@/utils/algorithms/showfile'
 import query_one from '@/utils/ms-graph/query'
 import { OneriveItem } from '@/types/onedrive'
+import { cfVerifyEndpoint } from '@/const'
 
 const wrong =
   "Something goes wrong, But it's not your fault, please report to \u771f\u7ea2."
+
+const secret = config.CLOUDFLARE.Turnstile.SecretKey
 
 interface FilesApiRequest extends NextApiRequest {
   query: {
@@ -22,6 +26,7 @@ export default async function handler(
   res: NextApiResponse<any>,
 ) {
   res = corsControl(req, res)
+  const { cf } = req.query
 
   const fullUrl = req.url
   console.log(fullUrl)
@@ -46,10 +51,31 @@ export default async function handler(
   if (item['@type'] === 'folder') {
     res.send(showfiles(item))
   } else {
-    const accountID = item.sources[0].accountid
-    const id = item.sources[0].item.id
-    const a = account.find((a) => a.accountID === accountID)!
-    const body = (await query_one(a.oauth, id, '')) as OneriveItem
-    res.redirect(302, body['@microsoft.graph.downloadUrl']!)
+    if (!cf) {
+      const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
+      res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
+    } else {
+      const cfres = await fetch(cfVerifyEndpoint, {
+        method: 'POST',
+        body: `secret=${encodeURIComponent(
+          secret,
+        )}&response=${encodeURIComponent(cf)}`,
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+      })
+
+      const data = await cfres.json()
+
+      if (!data.success) {
+        res.status(400).send(data)
+      }
+
+      const accountID = item.sources[0].accountid
+      const id = item.sources[0].item.id
+      const a = account.find((a) => a.accountID === accountID)!
+      const body = (await query_one(a.oauth, id, '')) as OneriveItem
+      res.redirect(302, body['@microsoft.graph.downloadUrl']!)
+    }
   }
 }

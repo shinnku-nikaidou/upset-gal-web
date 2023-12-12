@@ -2,7 +2,6 @@ import { SearchIcon } from '@chakra-ui/icons'
 import {
   Box,
   Button,
-  ButtonGroup,
   Center,
   chakra,
   Flex,
@@ -12,7 +11,6 @@ import {
   PopoverBody,
   PopoverCloseButton,
   PopoverContent,
-  PopoverFooter,
   PopoverHeader,
   PopoverTrigger,
   Text,
