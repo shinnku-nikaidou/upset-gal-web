@@ -115,9 +115,14 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
           setShouldCloseModal(true)
           break
         }
+        case 'Enter': {
+          e.preventDefault()
+          setTrueQuery(query)
+          break
+        }
       }
     },
-    [active, results],
+    [active, results, query],
   )
 
   const onKeyUp = useCallback((e: React.KeyboardEvent) => {
