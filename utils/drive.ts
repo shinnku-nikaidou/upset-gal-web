@@ -1,5 +1,11 @@
 import { account } from '@/config'
-import { Account, DriveType, FolderItem, FrontItem } from '@/types'
+import {
+  Account,
+  DriveType,
+  FolderItem,
+  FrontItem,
+  NewFrontItem,
+} from '@/types'
 import fs from 'fs'
 import query_one from './ms-graph/query'
 import { OnedriveItemChildren, OneriveItem } from '@/types/onedrive'
@@ -88,14 +94,12 @@ async function dfsonedrive(item: FolderItem, a: Account) {
 export default root
 
 export function renewFiles() {
-  const ans: Array<FrontItem> = []
+  const ans: Array<NewFrontItem> = []
   function dfs(r: FolderItem, path: string) {
     r.childrens.forEach((c) => {
       const p = path + '/' + c.name
       if (c['@type'] === 'file') {
         ans.push({
-          '@type': 'file',
-          date: c.date,
           name: p,
           size: num2size(c.size),
         })

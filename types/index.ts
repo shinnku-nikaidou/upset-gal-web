@@ -23,6 +23,11 @@ export type FrontItem = {
   size: string
 }
 
+export type NewFrontItem = {
+  name: string
+  size: string
+}
+
 export enum DriveType {
   OneDrive = 'onedrive',
   OnedriveCn = 'onedrive cn',

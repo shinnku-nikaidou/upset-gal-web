@@ -1,51 +1,31 @@
 import { SearchIcon } from '@chakra-ui/icons'
 import {
   Box,
+  Button,
+  ButtonGroup,
   Center,
   chakra,
   Flex,
   LinkBox,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
+  Text,
   useDisclosure,
   useEventListener,
   useUpdateEffect,
 } from '@chakra-ui/react'
-import { findAll } from 'highlight-words-core'
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
-
-import Link from 'next/link'
 
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MultiRef from 'react-multi-ref'
-import { FrontItem } from '@/types'
-
-interface OptionTextProps {
-  searchWords: string[]
-  textToHighlight: string
-}
-
-function OptionText({ searchWords, textToHighlight }: OptionTextProps) {
-  const chunks = findAll({
-    searchWords,
-    textToHighlight,
-    autoEscape: true,
-  })
-
-  const highlightedText = chunks.map((chunk) => {
-    const { end, highlight, start } = chunk
-    const text = textToHighlight.substring(start, end - start)
-    if (highlight) {
-      return (
-        <Box key={chunk.start} as='mark' bg='transparent' color='teal.500'>
-          {text}
-        </Box>
-      )
-    } else {
-      return text
-    }
-  })
-
-  return <>{highlightedText}</>
-}
+import { NewFrontItem } from '@/types'
+import Link from 'next/link'
 
 const Search = (props: { isMobile: boolean; lang: string }) => {
   const [trueQuery, setTrueQuery] = useState('')
@@ -58,7 +38,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
   const menuRef = useRef<HTMLDivElement>(null)
   const eventRef = useRef<'mouse' | 'keyboard' | null>(null)
 
-  const [results, setResults] = useState<Array<FrontItem>>([])
+  const [results, setResults] = useState<Array<NewFrontItem>>([])
 
   useEventListener('keydown', (event) => {
     const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
@@ -84,7 +64,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
       fetch(window.location.origin + '/api/search?q=' + trueQuery)
         .then((res) => res.json())
         .then((res) => {
-          setResults(res as Array<FrontItem>)
+          setResults(res as Array<NewFrontItem>)
         })
     }
     foobar()
@@ -166,7 +146,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
 
   return (
     <Center display='flex'>
-      <Box minW={props.isMobile ? '' : '520px'}>
+      <Box minW={props.isMobile ? '' : '520px'} paddingBottom={'20px'}>
         <LinkBox
           as='article'
           borderWidth='1px'
@@ -192,7 +172,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 bg: 'white',
                 '.chakra-ui-dark &': { bg: 'gray.700' },
               }}
-              placeholder='输入完成后请点击左侧查询按钮 (实验性功能)'
+              placeholder='点击左侧按钮查询 (实验性功能)'
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value)
@@ -211,7 +191,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
               </a>
             </Center>
           </Flex>
-          <Box  p='0' ref={menuRef}>
+          <Box p='0' ref={menuRef}>
             {/* maxH='60vh' maxW='520px' */}
             {open && (
               <Box
@@ -224,43 +204,61 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 <Box as='ul' role='listbox' borderTopWidth='1px' pt={2} pb={4}>
                   {results.map((item, index) => {
                     const selected = index === active
-
                     return (
-                      <Link
-                        key={index}
-                        href={'/api/download' + item.name}
-                        target='_blank'
-                        passHref
-                      >
-                        <Box
-                          id={`search-item-${index}`}
-                          as='li'
-                          aria-selected={selected ? true : undefined}
-                          onMouseEnter={() => {
-                            setActive(index)
-                            eventRef.current = 'mouse'
-                          }}
-                          onClick={() => {
-                            if (shouldCloseModal) {
-                              modal.onClose()
-                            }
-                          }}
-                          ref={menuNodes.ref(index)}
-                          role='option'
-                          key={index}
-                          sx={item_sx}
-                        >
-                          <Box flex='1' ml='4'>
-                            <Box fontWeight='semibold'>
-                              <FolderZipOutlinedIcon /> {'  '}
-                              <OptionText
-                                searchWords={[query]}
-                                textToHighlight={item.name}
-                              />
+                      <Popover key={index}>
+                        <PopoverTrigger>
+                          <Box
+                            id={`search-item-${index}`}
+                            as='li'
+                            aria-selected={selected ? true : undefined}
+                            onMouseEnter={() => {
+                              setActive(index)
+                              eventRef.current = 'mouse'
+                            }}
+                            onClick={() => {
+                              if (shouldCloseModal) {
+                                modal.onClose()
+                              }
+                            }}
+                            ref={menuNodes.ref(index)}
+                            role='option'
+                            key={index}
+                            sx={item_sx}
+                          >
+                            <Box flex='1' ml='4'>
+                              <Box fontWeight='semibold'>
+                                <FolderZipOutlinedIcon /> {'  '}
+                                <Box
+                                  as='mark'
+                                  bg='transparent'
+                                  color='teal.500'
+                                >
+                                  {item.name}
+                                </Box>
+                                <Box>
+                                  <Text pt='2' fontSize='sm'>
+                                    {`Size: ${item.size}`}
+                                  </Text>
+                                </Box>
+                              </Box>
                             </Box>
                           </Box>
-                        </Box>
-                      </Link>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <PopoverArrow />
+                          <PopoverCloseButton />
+                          <PopoverHeader>下载确认</PopoverHeader>
+                          <PopoverBody>
+                            你确定要下载吗? {'  '}
+                            <Link
+                              href={'api/download' + item.name}
+                              target='_blank'
+                            >
+                              <Button bgColor={'deeppink'}>确认✅</Button>
+                            </Link>
+                          </PopoverBody>
+                        </PopoverContent>
+                      </Popover>
                     )
                   })}
                 </Box>
