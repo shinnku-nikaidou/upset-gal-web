@@ -79,7 +79,12 @@ const Card2 = () => {
             这时候就可以使用winlator。
           </Text>
 
-          <Link href={'extend/blog/2023/11/06/win-lator'} target='_blank'>
+          <Link
+            href={
+              'https://bbs.shinnku.com/topic/37/手机游玩-galgame-模拟器的终极解决方案-winlator'
+            }
+            target='_blank'
+          >
             <Button fontWeight='bold' variant='outline'>
               查看原文
             </Button>
@@ -158,7 +163,9 @@ const Card4 = () => {
           <Text py='2'>本文提到的手机若无特殊说明为 Android系统</Text>
 
           <Link
-            href={'extend/blog/open-android-galgame-blog-post'}
+            href={
+              'https://bbs.shinnku.com/topic/35/萌新向-你爷爷奶奶都能上手的手机galgame游玩教程'
+            }
             target='_blank'
           >
             <Button fontWeight='bold' variant='outline'>

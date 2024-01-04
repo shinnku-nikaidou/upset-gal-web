@@ -4,6 +4,7 @@ import {
   AndroidOutlined,
   AppstoreAddOutlined,
   CodeOutlined,
+  GlobalOutlined,
   LaptopOutlined,
   MobileOutlined,
   SettingOutlined,
@@ -13,6 +14,7 @@ import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined
 import t from '@lang'
 import { KRKROutlined } from '../icons/kirikiri'
 import { TKey } from '@/types/onedrivelegacy'
+import Link from 'next/link'
 
 const { SubMenu, Item } = Menu
 
@@ -37,6 +39,9 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
       defaultOpenKeys={isMobile ? [] : ['sub1', 'sub2', 'sub3', 'sub4']}
       mode='inline'
     >
+      <Link target='_blank' href={'https://bbs.shinnku.com/'}>
+        <SubMenu key='bbs' icon={<GlobalOutlined />} title={'论坛'}></SubMenu>
+      </Link>
       <SubMenu key='sub1' icon={<LaptopOutlined />} title={t('Laptop', lang)}>
         <Item key='win'>
           <WindowsOutlined /> {t('Windows', lang)}
