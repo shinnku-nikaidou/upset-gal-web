@@ -11,7 +11,7 @@ export const Intro = ({ lang }: { lang: string }) => (
       <Text>
         史上最好最棒的galgame论坛来咯, 暨终点死亡一个月后, 大家们的新家,
         欢迎来到{' '}
-        <Link target='_blank' href={'https://bbs.shinnku.com'}>
+        <Link target='_blank' href={'https://galgame.dev'}>
           真紅の資源討論組
         </Link>
       </Text>

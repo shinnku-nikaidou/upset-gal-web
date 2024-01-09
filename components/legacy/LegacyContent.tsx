@@ -58,7 +58,7 @@ const LegacyContent = (props: DefaultInfoProp) => {
               欢迎前往最新开设的{' '}
               <Link
                 target='_blank'
-                href={'https://bbs.shinnku.com/'}
+                href={'https://galgame.dev/'}
                 style={{
                   color: 'blue',
                 }}

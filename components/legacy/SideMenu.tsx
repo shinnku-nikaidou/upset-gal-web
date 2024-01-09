@@ -39,7 +39,7 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
       defaultOpenKeys={isMobile ? [] : ['sub1', 'sub2', 'sub3', 'sub4']}
       mode='inline'
     >
-      <Link target='_blank' href={'https://bbs.shinnku.com/'}>
+      <Link target='_blank' href={'https://galgame.dev/'}>
         <SubMenu key='bbs' icon={<GlobalOutlined />} title={'论坛'}></SubMenu>
       </Link>
       <SubMenu key='sub1' icon={<LaptopOutlined />} title={t('Laptop', lang)}>

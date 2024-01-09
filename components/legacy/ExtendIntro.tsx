@@ -81,7 +81,7 @@ const Card2 = () => {
 
           <Link
             href={
-              'https://bbs.shinnku.com/topic/37/手机游玩-galgame-模拟器的终极解决方案-winlator'
+              'https://galgame.dev/topic/37/手机游玩-galgame-模拟器的终极解决方案-winlator'
             }
             target='_blank'
           >
@@ -164,7 +164,7 @@ const Card4 = () => {
 
           <Link
             href={
-              'https://bbs.shinnku.com/topic/35/萌新向-你爷爷奶奶都能上手的手机galgame游玩教程'
+              'https://galgame.dev/topic/35/萌新向-你爷爷奶奶都能上手的手机galgame游玩教程'
             }
             target='_blank'
           >
