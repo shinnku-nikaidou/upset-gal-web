@@ -14,6 +14,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
         </Link>
         <span>{t('Feedback-last', lang)}</span>
       </Text>
+      <Text>搜索不到请到主页使用日文搜索.</Text>
       <Text>
         <span>
           如果发现下载速度慢，或者想来telegram聊却进不去?
