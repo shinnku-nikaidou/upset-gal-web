@@ -16,8 +16,14 @@ export const Feedback = ({ lang }: { lang: string }) => (
       </Text>
       <Text>搜索不到请到主页使用日文搜索.</Text>
       <Text>
+        史上最好最棒的galgame论坛来咯, 欢迎来到{' '}
+        <Link target='_blank' href={'https://galgame.dev'}>
+          真紅の資源討論組
+        </Link>
+      </Text>
+      <Text>
         <span>
-          如果发现下载速度慢，或者想来telegram聊却进不去?
+          如果发现下载速度慢，或者想来telegram聊天却进不去?
           说明被当地运营商掐网络了，真红姐姐推荐使用
         </span>
         <Link
