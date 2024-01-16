@@ -7,15 +7,16 @@ const ALLOWED_ORIGINS = [
   'shinku.life',
   'localhost',
   '127.0.0.1',
-  'shinnku.plr.moe'
+  'shinnku.plr.moe',
+  'shinku.pages.dev',
 ]
 
 export function extractOrigin(referer: string) {
   try {
-    const url = new URL(referer);
-    return url.origin;
+    const url = new URL(referer)
+    return url.origin
   } catch (e) {
-    console.error(e);
+    console.error(e)
     return ''
   }
 }
