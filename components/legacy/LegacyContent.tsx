@@ -47,9 +47,9 @@ const LegacyContent = (props: DefaultInfoProp) => {
           borderRadius='lg'
           p={3}
           color='black'
-          bg='rgba(255, 255, 255, 0.6)' // 设置半透明的奶白色背景
-          backdropFilter='blur(10px)' // 应用磨砂效果
-          boxShadow='lg' // 可选，为Toast添加阴影，增加立体感
+          bg='rgba(255, 255, 255, 0.6)'
+          backdropFilter='blur(10px)'
+          boxShadow='lg'
         >
           <Text size='sm'>最新资源更新公告</Text>
           <Text size='sm'>
