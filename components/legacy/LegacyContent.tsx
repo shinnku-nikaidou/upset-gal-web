@@ -6,14 +6,7 @@ import { FileList } from './FileList'
 
 import { create } from 'zustand'
 import { TKey } from '@/types/onedrivelegacy'
-import {
-  Box,
-  Card,
-  CardBody,
-  Flex,
-  useToast,
-  Text
-} from '@chakra-ui/react'
+import { Box, Flex, useToast, Text } from '@chakra-ui/react'
 import ExtendIntro from './ExtendIntro'
 import useGlobalTheme from '@/utils/persist/theme'
 import Search from '../search'
@@ -49,23 +42,28 @@ const LegacyContent = (props: DefaultInfoProp) => {
   useEffect(() => {
     toast({
       title: '公告',
-      description: (
-        <Card>
-          <CardBody>
-            <Text>最新资源更新公告</Text>
-            <Text>
-              1. psp模拟器总计3600部游戏(iso镜像形式) (20231228) (3.6tb)
-            </Text>
-            <Text>
-              2. 冷狐总计2540部android apk形式直装galgame(小黄油) (20240214)
-              (610gb)
-            </Text>
-            <Text>
-              3. 抜きゲーみたいな島に住んでる貧乳はどうすりゃいいですか
-              第二部steam多语言版本 (20240216) (5.2gb)
-            </Text>
-          </CardBody>
-        </Card>
+      render: () => (
+        <Box
+          borderRadius='lg'
+          p={3}
+          color='black'
+          bg='rgba(255, 255, 255, 0.6)' // 设置半透明的奶白色背景
+          backdropFilter='blur(10px)' // 应用磨砂效果
+          boxShadow='lg' // 可选，为Toast添加阴影，增加立体感
+        >
+          <Text size='sm'>最新资源更新公告</Text>
+          <Text size='sm'>
+            1. psp模拟器总计3600部游戏(iso镜像形式) (20231228) (3.6tb)
+          </Text>
+          <Text size='sm'>
+            2. 冷狐总计2540部android apk形式直装galgame(小黄油) (20240214)
+            (610gb)
+          </Text>
+          <Text size='sm'>
+            3. 抜きゲーみたいな島に住んでる貧乳はどうすりゃいいですか
+            第二部steam多语言版本 (20240216) (5.2gb)
+          </Text>
+        </Box>
       ),
       status: 'success',
       duration: 5000,
