@@ -10,7 +10,7 @@ import url from 'url'
 
 const users = config.LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const wrong =
-  "Something goes wrong, But it's not your fault, please report to \u771f\u7ea2."
+  "Something goes wrong, But it's not your fault, please report to shinnku."
 
 interface FilesApiRequest extends NextApiRequest {
   query: {

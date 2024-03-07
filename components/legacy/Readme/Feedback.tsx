@@ -42,7 +42,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           <Link
             target='_blank'
             rel='noreferrer'
-            href='https://alori.moe/index.php#/register?code=N81fWyCw'
+            href='https://alori.top/index.php#/register?code=N81fWyCw'
           >
             Alori
           </Link>

@@ -10,7 +10,7 @@ import { OneriveItem } from '@/types/onedrive'
 import { cfVerifyEndpoint } from '@/const'
 
 const wrong =
-  "Something goes wrong, But it's not your fault, please report to \u771f\u7ea2."
+  "Something goes wrong, But it's not your fault, please report to shinnku."
 
 const secret = config.CLOUDFLARE.Turnstile.SecretKey
 
