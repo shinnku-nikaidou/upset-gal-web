@@ -34,8 +34,8 @@ export const Feedback = ({ lang }: { lang: string }) => (
           丛雨vpn: 丛雨云
         </Link>
         <span>
-          （柚子厨专属vpn, 中转高速流量, 低延迟, 垃圾网络也能秒开油管4k,
-          流媒体全解锁, 又有 0.1低倍率流量9元1tb）。
+          （柚子厨专属vpn, 高速隧道流量, 低延迟, 垃圾网络也能秒开油管4k, 又有
+          0.1低倍率流量9元1tb）。
         </span>
         <span>
           或者使用
@@ -46,7 +46,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
           >
             Alori
           </Link>
-          , 也是全中转, 高性价比, 和上面一样介绍.
+          , 也是全中转, 高性价比.
         </span>
       </Text>
     </Space>
