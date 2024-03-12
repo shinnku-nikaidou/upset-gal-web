@@ -44,7 +44,7 @@ export const GenerateRightClickMenu = ({
       label: (
         <Link
           target='_blank'
-          href={'https://congyu.moe/auth/register?invite=e30dc2bc97'}
+          href={'https://01.congyu.moe/auth/register?invite=e30dc2bc97'}
         >
           下载慢? 说明被运营商掐网络了, 试试丛雨vpn
         </Link>
