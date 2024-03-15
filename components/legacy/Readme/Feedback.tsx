@@ -29,14 +29,25 @@ export const Feedback = ({ lang }: { lang: string }) => (
         <Link
           target='_blank'
           rel='noreferrer'
-          href='https://01.congyu.moe/auth/register?code=e30dc2bc97'
+          href='https://congyu01.top/auth/register?code=e30dc2bc97'
         >
           丛雨vpn: 丛雨云
         </Link>
         <span>
           （柚子厨专属vpn, 高速隧道流量, 低延迟, 垃圾网络也能秒开油管4k, 又有
-          0.1低倍率流量9元1tb, 注意: congyu.moe 主网址已被墙, 请使用
-          cn.congyu.moe ）。
+          0.1低倍率流量9元1tb, 注意:{' '}
+          <Link
+            target='_blank'
+            rel='noreferrer'
+            href='https://congyu.moe/auth/register?code=e30dc2bc97'
+          >
+            congyu.moe
+          </Link>{' '}
+          主网址已被墙, 请使用并收藏最新发布页{' '}
+          <Link target='_blank' rel='noreferrer' href='https://congyu.org/'>
+            congyu.org
+          </Link>{' '}
+          ）。
         </span>
         <span>
           或者使用
