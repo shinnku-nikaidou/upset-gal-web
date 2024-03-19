@@ -8,6 +8,7 @@ import { showfiles } from '@/utils/algorithms/showfile'
 import query_one from '@/utils/ms-graph/query'
 import { OneriveItem } from '@/types/onedrive'
 import { cfVerifyEndpoint } from '@/const'
+import CryptoJS from "crypto-js";
 
 const wrong =
   "Something goes wrong, But it's not your fault, please report to shinnku."
