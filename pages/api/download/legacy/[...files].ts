@@ -12,6 +12,8 @@ const users = config.LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const wrong =
   "Something goes wrong, But it's not your fault, please report to shinnku."
 
+const proxySecretKey = config.proxySecretKey
+
 interface FilesApiRequest extends NextApiRequest {
   query: {
     files: Array<string>
@@ -57,7 +59,22 @@ export default async function handler(
           const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
           res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
         }
-        res.redirect(302, ans)
+
+        const _url = ans
+        const randomNumber = Math.random()
+        if (randomNumber <= 1 / 20) {
+          const encrypted = CryptoJS.AES.encrypt(
+            _url,
+            proxySecretKey,
+          ).toString()
+          const encoded = encodeURIComponent(encrypted)
+          const newUrl = `https://oo.oo0o.ooo/proxy?&proxyUrl=${encoded}`
+          console.log(newUrl)
+          res.redirect(302, newUrl)
+        } else {
+          console.log(_url)
+          res.redirect(302, _url)
+        }
       } else if (ans instanceof Response) {
         const headers = Object.fromEntries(ans.headers.entries())
         res.status(ans.status)
