@@ -7,6 +7,7 @@ import config, { LEGACY_ONECRIVE_OAUTH } from '@/config'
 import corsControl from '@utils/corsControl'
 import { getAccount } from '@/utils/algorithms'
 import url from 'url'
+import CryptoJS from 'crypto-js'
 
 const users = config.LEGACY_ONECRIVE.map((user) => user.ONEDRIVE_NAME)
 const wrong =
@@ -58,22 +59,23 @@ export default async function handler(
         if (ans == 'cf') {
           const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
           res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
-        }
-
-        const _url = ans
-        const randomNumber = Math.random()
-        if (randomNumber <= 0) {
-          const encrypted = CryptoJS.AES.encrypt(
-            _url,
-            proxySecretKey,
-          ).toString()
-          const encoded = encodeURIComponent(encrypted)
-          const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
-          console.log(newUrl)
-          res.redirect(302, newUrl)
         } else {
-          console.log(_url)
-          res.redirect(302, _url)
+          console.log('ans=', ans)
+          const _url = ans
+          const randomNumber = Math.random()
+          if (randomNumber <= 1 / 20) {
+            const encrypted = CryptoJS.AES.encrypt(
+              _url,
+              proxySecretKey,
+            ).toString()
+            const encoded = encodeURIComponent(encrypted)
+            const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
+            console.log(newUrl)
+            res.redirect(302, newUrl)
+          } else {
+            console.log(_url)
+            res.redirect(302, _url)
+          }
         }
       } else if (ans instanceof Response) {
         const headers = Object.fromEntries(ans.headers.entries())
