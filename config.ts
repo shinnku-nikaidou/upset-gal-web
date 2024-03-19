@@ -12,6 +12,7 @@ export type Config = {
   LEGACY_ONECRIVE: LegacyOneDrive
   CLOUDFLARE: CloudFlare
   ACCOUNT: RawAccount
+  proxySecretKey: string
 }
 
 const file = fs.readFileSync('config.yaml', 'utf8')

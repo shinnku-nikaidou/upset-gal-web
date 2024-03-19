@@ -8,12 +8,14 @@ import { showfiles } from '@/utils/algorithms/showfile'
 import query_one from '@/utils/ms-graph/query'
 import { OneriveItem } from '@/types/onedrive'
 import { cfVerifyEndpoint } from '@/const'
-import CryptoJS from "crypto-js";
+import CryptoJS from 'crypto-js'
 
 const wrong =
   "Something goes wrong, But it's not your fault, please report to shinnku."
 
 const secret = config.CLOUDFLARE.Turnstile.SecretKey
+
+const proxySecretKey = config.proxySecretKey
 
 interface FilesApiRequest extends NextApiRequest {
   query: {
@@ -76,7 +78,18 @@ export default async function handler(
       const id = item.sources[0].item.id
       const a = account.find((a) => a.accountID === accountID)!
       const body = (await query_one(a.oauth, id, '')) as OneriveItem
-      res.redirect(302, body['@microsoft.graph.downloadUrl']!)
+      const _url = body['@microsoft.graph.downloadUrl']!
+      const randomNumber = Math.random()
+      if (randomNumber <= 1 / 20) {
+        const encrypted = CryptoJS.AES.encrypt(_url, proxySecretKey).toString()
+        const encoded = encodeURIComponent(encrypted)
+        const newUrl = `https://oo.oo0o.ooo/proxy?&proxyUrl=${encoded}`
+        console.log(newUrl)
+        res.redirect(302, newUrl)
+      } else {
+        console.log(_url)
+        res.redirect(302, _url)
+      }
     }
   }
 }
