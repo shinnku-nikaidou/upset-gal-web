@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
 import type { TurnstileInstance } from '@marsidev/react-turnstile'
 import { Box, Text, Button, Container, VStack, Heading } from '@chakra-ui/react'
@@ -18,6 +18,8 @@ export async function getStaticProps() {
 
 const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
   const ref = useRef<TurnstileInstance>(null)
+  const [show, setShow] = useState(false)
+  const [url, setUrl] = useState('https://shinnku.com')
 
   const handleClick = () => {
     console.log('成功')
@@ -26,6 +28,8 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
       window.location.origin +
       window.location.search.substring(10) +
       `?cf=${cfValidation}`
+    setShow(true)
+    setUrl(url)
     window.open(url)
   }
 
@@ -37,8 +41,9 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
         </Heading>
         <Box borderWidth='1px' borderRadius='lg' padding={4} width='100%'>
           <Text fontSize='md'>
-            由于高流量以及持续不断接近9个月的ddos攻击, 我们不得不启用人机验证,
-            请等待, 勿关闭此页面
+            由于高流量以及持续不断接近11个月的ddos攻击,
+            我们不得不启用人机验证以减少流量, 请等待, 勿关闭此页面,
+            如果失败请下拉刷新, 如果人机验证框无法显示请更换网络环境
           </Text>
           <Box borderWidth='1px' borderRadius='lg' padding={4} marginY={4}>
             <Turnstile
@@ -56,6 +61,13 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
             当您验证通过✅时, 页面就会自动跳转到下载, 请给予浏览器允许弹窗权限
           </Text>
         </Box>
+        {show && (
+          <a href={url} target='_blank'>
+            <Button colorScheme='blue' size='md'>
+              手动跳转
+            </Button>
+          </a>
+        )}
       </VStack>
     </Container>
   )

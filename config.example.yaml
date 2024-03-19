@@ -1,27 +1,29 @@
 PORT: 3000
 
-SITE: "http://localhost:3000"
+SITE: 'http://localhost:3000'
+
+proxySecretKey: 'xxxxxxxxxxxxx'
 
 CLOUDFLARE:
   Turnstile:
-    SiteKey: "0x4AAAAAAAL-XXXXXXXXXXX"
-    SecretKey: "0x4AAAAAAAL-XXXXXXXXXXXXXXXXXXXXX"
+    SiteKey: '0x4AAAAAAAL-XXXXXXXXXXX'
+    SecretKey: '0x4AAAAAAAL-XXXXXXXXXXXXXXXXXXXXX'
 
 LEGACY_ONECRIVE:
-  - ONEDRIVE_NAME: "0"
-    EXPOSE_PATH: "/"
-    ONEDRIVE_REFRESHTOKEN: ""
-    clientId: ""
-    clientSecret: ""
-    loginHost: "https://login.microsoftonline.com"
-    apiHost: "https://graph.microsoft.com"
-    redirectUri: ""
+  - ONEDRIVE_NAME: '0'
+    EXPOSE_PATH: '/'
+    ONEDRIVE_REFRESHTOKEN: ''
+    clientId: ''
+    clientSecret: ''
+    loginHost: 'https://login.microsoftonline.com'
+    apiHost: 'https://graph.microsoft.com'
+    redirectUri: ''
 
-  - ONEDRIVE_NAME: "1" #
-    EXPOSE_PATH: "/galgame"
-    ONEDRIVE_REFRESHTOKEN: ""
-    clientId: ""
-    clientSecret: ""
-    loginHost: "https://login.microsoftonline.com"
-    apiHost: "https://graph.microsoft.com"
-    redirectUri: "https://www.shinnku.com/api/onedrive-login"
+  - ONEDRIVE_NAME: '1' #
+    EXPOSE_PATH: '/galgame'
+    ONEDRIVE_REFRESHTOKEN: ''
+    clientId: ''
+    clientSecret: ''
+    loginHost: 'https://login.microsoftonline.com'
+    apiHost: 'https://graph.microsoft.com'
+    redirectUri: 'https://www.shinnku.com/api/onedrive-login'
