@@ -50,7 +50,6 @@
     "react-draggable": "^4.4.6",
     "react-icons": "^4.12.0",
     "react-multi-ref": "^1.0.1",
-    "rocksdb": "^5.2.1",
     "sharp": "^0.32.6",
     "yaml": "^2.3.4",
     "zustand": "^4.5.0"
