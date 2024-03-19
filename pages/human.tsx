@@ -62,7 +62,7 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
           </Text>
         </Box>
         {show && (
-          <a href={url} target='_blank'>
+          <a href={url} target='_blank' rel='noreferrer'>
             <Button colorScheme='blue' size='md'>
               手动跳转
             </Button>
