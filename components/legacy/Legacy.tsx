@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import DefaultInfoProp, {
-  userDefaultInfoProp,
-} from '@utils/userDefaultInfoProp'
-import { Layout } from 'antd/lib'
+import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import { keyMap } from '@const'
 import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
@@ -11,20 +8,13 @@ import useGlobalTheme from '@/utils/persist/theme'
 import Music from '../music'
 import { Box, Flex, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import LegacyContent, { useFileListStore } from './LegacyContent'
-const { Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
   const { toggleColorMode: toggleMode } = useColorMode()
   const text = useColorModeValue('dark', 'light')
-  const [collapsed, setCollapsed] = useState(props.isMobile)
   const { key, setKey, setUrl, setPage } = useFileListStore()
 
   const setMode = useGlobalTheme((state) => state.setMode)
-
-  const onCollapse = useCallback(
-    (collapsed: boolean) => setCollapsed(collapsed),
-    [setCollapsed],
-  )
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -64,19 +54,19 @@ const Legacy = (props: DefaultInfoProp) => {
         <Box w='full' h='15vh'>
           <Logo isMobile={props.isMobile} lang={props.lang} />
         </Box>
-        <Flex flex='1' overflow='hidden'>
-          <Box w={props.isMobile ? '40px' : '240px'} h='100vh'>
+        <Flex flex='1'>
+          <Box w={props.isMobile ? '50px' : '240px'} paddingLeft={1}>
             <SideMenu
               setKey={setKey}
               isMobile={props.isMobile}
               lang={props.lang}
             />
           </Box>
-          <Box overflowY='auto'>
+          <Box flex='1' overflowY='scroll'>
             <LegacyContent isMobile={props.isMobile} lang={props.lang} />
           </Box>
         </Flex>
-        <Box bg='blue.500' w='full'>
+        <Box w='full'>
           <PageFooter lang={props.lang} />
         </Box>
       </Flex>

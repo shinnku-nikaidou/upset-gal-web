@@ -11,6 +11,7 @@ import t from '@lang'
 import { KRKROutlined } from '../icons/kirikiri'
 import { TKey } from '@/types/onedrivelegacy'
 import { Flex } from '@chakra-ui/react'
+import Image from 'next/image'
 import { Button, Link } from '@nextui-org/react'
 import { ONSOutlined } from '../icons/ons'
 
@@ -57,7 +58,13 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
           variant='bordered'
           onClick={() => onClick('artroid')}
         >
-          artroid
+          <Image
+            src='/assets/icon/tyranor.png'
+            alt={'artroid tyranor'}
+            width={24}
+            height={24}
+            loading='lazy'
+          ></Image>
         </Button>
         <Button
           isIconOnly
@@ -99,7 +106,14 @@ export const SideMenu = ({ setKey, isMobile, lang }: ISideMenuProps) => {
           <ONSOutlined width={20} height={20} /> ONScripter
         </Button>
         <Button variant='bordered' onClick={() => onClick('artroid')}>
-          artroid
+          <Image
+            src='/assets/icon/tyranor.png'
+            alt={'artroid tyranor'}
+            width={24}
+            height={24}
+            loading='lazy'
+          ></Image>{' '}
+          tyranor
         </Button>
         <Button variant='bordered' onClick={() => onClick('simulate')}>
           <SportsEsportsOutlinedIcon style={{ width: 16 }} />{' '}
