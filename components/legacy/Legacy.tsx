@@ -9,17 +9,15 @@ import { SideMenu } from './SideMenu'
 import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
 import Music from '../music'
-import { useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import LegacyContent, { useFileListStore } from './LegacyContent'
-const { Content, Sider } = Layout
+const { Sider } = Layout
 
 const Legacy = (props: DefaultInfoProp) => {
   const { toggleColorMode: toggleMode } = useColorMode()
   const text = useColorModeValue('dark', 'light')
   const [collapsed, setCollapsed] = useState(props.isMobile)
   const { key, setKey, setUrl, setPage } = useFileListStore()
-
-  const siderShift = collapsed ? 80 : 200
 
   const setMode = useGlobalTheme((state) => state.setMode)
 
@@ -62,32 +60,33 @@ const Legacy = (props: DefaultInfoProp) => {
   return (
     <>
       {/* <Music /> */}
-      <Sider
-        // collapsible
-        collapsed={collapsed}
-        onCollapse={onCollapse}
-        theme={useGlobalTheme((state) => state.mode)}
-        style={{
-          overflow: 'auto',
-          height: '100vh',
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          bottom: 0,
-        }}
-      >
-        <SideMenu setKey={setKey} isMobile={props.isMobile} lang={props.lang} />
-      </Sider>
-      <Layout
-        className='site-layout'
-        style={{ marginLeft: siderShift, minHeight: '100vh' }}
-      >
-        <Content style={{ margin: '0 16px' }}>
-          <Logo isMobile={props.isMobile} lang={props.lang} />
-          <LegacyContent isMobile={props.isMobile} lang={props.lang} />
-        </Content>
-        <PageFooter lang={props.lang} />
-      </Layout>
+      <Flex direction='column'>
+        <Flex flex='1' overflow='hidden'>
+          <Box w={props.isMobile ? '80px' : '240px'}>
+            <Sider
+              // collapsible
+              collapsed={collapsed}
+              onCollapse={onCollapse}
+              theme={useGlobalTheme((state) => state.mode)}
+            >
+              <SideMenu
+                setKey={setKey}
+                isMobile={props.isMobile}
+                lang={props.lang}
+              />
+            </Sider>
+          </Box>
+          <Box flex='1'>
+            <Box w='full' h='15vh' color='white'>
+              <Logo isMobile={props.isMobile} lang={props.lang} />
+            </Box>
+            <LegacyContent isMobile={props.isMobile} lang={props.lang} />
+          </Box>
+        </Flex>
+        <Box bg='blue.500' w='full'>
+          <PageFooter lang={props.lang} />
+        </Box>
+      </Flex>
     </>
   )
 }
