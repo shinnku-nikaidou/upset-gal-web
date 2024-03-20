@@ -4,6 +4,8 @@ SITE: 'http://localhost:3000'
 
 proxySecretKey: 'xxxxxxxxxxxxx'
 
+EdgePoints: ['https://dl.shinnku.com']
+
 CLOUDFLARE:
   Turnstile:
     SiteKey: '0x4AAAAAAAL-XXXXXXXXXXX'
