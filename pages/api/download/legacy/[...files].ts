@@ -60,7 +60,6 @@ export default async function handler(
           const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
           res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
         } else {
-          console.log('ans=', ans)
           const _url = ans
           const randomNumber = Math.random()
           if (randomNumber <= 1 / 20) {

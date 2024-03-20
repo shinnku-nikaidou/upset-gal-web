@@ -2,7 +2,6 @@ import { ColorModeScript, theme } from '@chakra-ui/react'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import App from '@components'
-import { userDefaultInfoProp } from '@utils/userDefaultInfoProp'
 
 function Home(props: Record<string, never>) {
   const language: string = (props as any).language
@@ -22,7 +21,5 @@ function Home(props: Record<string, never>) {
     </div>
   )
 }
-
-Home.getInitialProps = userDefaultInfoProp
 
 export default Home
