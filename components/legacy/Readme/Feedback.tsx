@@ -1,13 +1,25 @@
-import { Collapse, Space, Typography } from 'antd/lib'
 import t from '@lang'
-
-const { Panel } = Collapse
-const { Text, Link } = Typography
+import Link from 'next/link'
+import {
+  AccordionButton,
+  AccordionIcon,
+  AccordionItem,
+  AccordionPanel,
+  Box,
+  Text,
+} from '@chakra-ui/react'
 
 export const Feedback = ({ lang }: { lang: string }) => (
-  <Panel header={t('Feedback', lang)} key='2'>
-    <Space direction='vertical'>
-      <Text>网站错位? 那是没加载完, 等待久一点就好了</Text>
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box as='span' flex='1' textAlign='left'>
+          {t('Feedback', lang)}
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
       <Text>
         <span>{t('Click', lang)}</span>
         <Link target='_blank' rel='noreferrer' href='https://t.me/upsetgal'>
@@ -35,15 +47,7 @@ export const Feedback = ({ lang }: { lang: string }) => (
         </Link>
         <span>
           （柚子厨专属vpn, 高速隧道流量, 低延迟, 垃圾网络也能秒开油管4k, 又有
-          0.1低倍率流量9元1tb, 注意:{' '}
-          <Link
-            target='_blank'
-            rel='noreferrer'
-            href='https://congyu.moe/auth/register?code=e30dc2bc97'
-          >
-            congyu.moe
-          </Link>{' '}
-          主网址已被墙, 请使用并收藏最新发布页{' '}
+          0.1低倍率流量9元1tb, 注意请使用并收藏最新发布页{' '}
           <Link target='_blank' rel='noreferrer' href='https://congyu.org/'>
             congyu.org
           </Link>{' '}
@@ -61,6 +65,6 @@ export const Feedback = ({ lang }: { lang: string }) => (
           , 也是全中转, 高性价比.
         </span>
       </Text>
-    </Space>
-  </Panel>
+    </AccordionPanel>
+  </AccordionItem>
 )

@@ -1,5 +1,4 @@
 import t from '@lang'
-import Link from 'next/link'
 import {
   AccordionButton,
   AccordionIcon,

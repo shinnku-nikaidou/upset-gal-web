@@ -2,7 +2,7 @@
   "name": "upset-gal-web",
   "private": true,
   "author": "Shinnku <nikaidou@shinnku.com>",
-  "version": "6.2.0",
+  "version": "7.0.0",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
