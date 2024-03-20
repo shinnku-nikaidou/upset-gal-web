@@ -61,30 +61,19 @@ const Legacy = (props: DefaultInfoProp) => {
     <>
       {/* <Music /> */}
       <Flex direction='column'>
+        <Box w='full' h='15vh'>
+          <Logo isMobile={props.isMobile} lang={props.lang} />
+        </Box>
         <Flex flex='1' overflow='hidden'>
-          <Box w={props.isMobile ? '80px' : '240px'} h='100vh'>
-            <Box position='fixed'>
-              <Sider
-                // collapsible
-                collapsed={collapsed}
-                onCollapse={onCollapse}
-                theme={useGlobalTheme((state) => state.mode)}
-              >
-                <SideMenu
-                  setKey={setKey}
-                  isMobile={props.isMobile}
-                  lang={props.lang}
-                />
-              </Sider>
-            </Box>
+          <Box w={props.isMobile ? '40px' : '240px'} h='100vh'>
+            <SideMenu
+              setKey={setKey}
+              isMobile={props.isMobile}
+              lang={props.lang}
+            />
           </Box>
-          <Box flex='1'>
-            <Box w='full' h='15vh'>
-              <Logo isMobile={props.isMobile} lang={props.lang} />
-            </Box>
-            <Box overflowY='auto'>
-              <LegacyContent isMobile={props.isMobile} lang={props.lang} />
-            </Box>
+          <Box overflowY='auto'>
+            <LegacyContent isMobile={props.isMobile} lang={props.lang} />
           </Box>
         </Flex>
         <Box bg='blue.500' w='full'>
