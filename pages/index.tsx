@@ -3,43 +3,31 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import t from '@lang'
 import Home from '@components/legacy'
-import DefaultInfoProp from '@utils/userDefaultInfoProp'
+import DefaultInfoProp, {
+  userDefaultInfoProp,
+} from '@utils/userDefaultInfoProp'
 import Script from 'next/script'
 import useBackGroundNode, {
   setBackgroundImage,
 } from '@utils/persist/background'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import useGlobalTheme from '@/utils/persist/theme'
 
 // now is Legacy Download Pages
-const Download: NextPage = () => {
+const Download: NextPage<DefaultInfoProp> = ({
+  isMobile,
+  lang,
+}: {
+  isMobile: boolean
+  lang: string
+}) => {
   const node = useRef<HTMLDivElement>(null)
   const url = useGlobalTheme((s) => s.url)
   const setNode = useBackGroundNode((s) => s.setNode)
 
-  const [defaultInfo, setDefaultInfo] = useState<DefaultInfoProp>({
-    isMobile: false,
-    lang: 'en',
-  })
-
-  useEffect(() => {
-    let language = navigator.language || 'en'
-    language = language.substring(0, language.indexOf(',')) || language
-
-    const isMobileView = navigator.userAgent.match(
-      /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
-    )
-    const isMobile = Boolean(isMobileView)
-
-    setDefaultInfo({
-      isMobile: isMobile,
-      lang: language,
-    })
-  }, [])
-
   useEffect(() => {
     setNode(node.current)
-    setBackgroundImage(url, defaultInfo.isMobile, node.current)
+    setBackgroundImage(url, isMobile, node.current)
   })
 
   return (
@@ -63,7 +51,7 @@ const Download: NextPage = () => {
       ></Script>
       <Head>
         <meta charSet='UTF-8' />
-        <title>{t('Title', defaultInfo.lang)}</title>
+        <title>{t('Title', lang)}</title>
         <link rel='icon' href='/favicon.ico' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta name='description' content="shinnku's galgame site" />
@@ -72,10 +60,12 @@ const Download: NextPage = () => {
 
       <main className={styles.main}>
         <div className='box' ref={node}></div>
-        <Home isMobile={defaultInfo.isMobile} lang={defaultInfo.lang} />
+        <Home isMobile={isMobile} lang={lang} />
       </main>
     </div>
   )
 }
+
+Download.getInitialProps = userDefaultInfoProp
 
 export default Download

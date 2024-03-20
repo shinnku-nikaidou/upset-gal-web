@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import DefaultInfoProp from '@utils/userDefaultInfoProp'
+import DefaultInfoProp, {
+  userDefaultInfoProp,
+} from '@utils/userDefaultInfoProp'
 import { Layout } from 'antd/lib'
 import { keyMap } from '@const'
 import { PageFooter } from './PageFooter'
