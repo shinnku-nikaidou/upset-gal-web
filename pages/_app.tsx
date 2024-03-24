@@ -1,8 +1,6 @@
 import type { AppProps } from 'next/app'
-import { StyleProvider as AntdProvider } from '@ant-design/cssinjs'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import '../styles/globals.css'
-import '../styles/antd.min.css'
 
 const colors = {
   brand: {
@@ -15,11 +13,9 @@ const colors = {
 const theme = extendTheme({ colors })
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <AntdProvider hashPriority='low'>
-    <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
-    </ChakraProvider>
-  </AntdProvider>
+  <ChakraProvider theme={theme}>
+    <Component {...pageProps} />
+  </ChakraProvider>
 )
 
 export default MyApp

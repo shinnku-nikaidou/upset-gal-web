@@ -1,11 +1,8 @@
 import { useCallback } from 'react'
-import { Typography } from 'antd/lib'
-import type { MenuProps } from 'antd/lib'
 import t from '@lang'
 import { nginxTransChar } from '@algorithm'
 import { FrontItem } from '@/types'
-
-const { Text, Link } = Typography
+import { Link, Text } from '@chakra-ui/react'
 
 interface IRightClickMenuProps {
   item: FrontItem
@@ -17,7 +14,7 @@ export const GenerateRightClickMenu = ({
   item,
   url,
   lang,
-}: IRightClickMenuProps): MenuProps['items'] => {
+}: IRightClickMenuProps) => {
   const downloadLink = `${window.location.origin}/${url}/${nginxTransChar(
     item.name,
   )}`

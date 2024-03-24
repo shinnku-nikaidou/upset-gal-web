@@ -1,6 +1,5 @@
 'use client'
 
-import { StyleProvider as AntdProvider } from '@ant-design/cssinjs'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 
 const colors = {
@@ -14,9 +13,5 @@ const colors = {
 const theme = extendTheme({ colors })
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  return (
-    <AntdProvider hashPriority='low'>
-      <ChakraProvider theme={theme}>{children}</ChakraProvider>
-    </AntdProvider>
-  )
+  return <ChakraProvider theme={theme}>{children}</ChakraProvider>
 }

@@ -1,5 +1,4 @@
 import { useCallback, useState, useEffect } from 'react'
-import { Dropdown, Input, MenuProps, Pagination } from 'antd/lib'
 import { FrontItem } from '@/types'
 import { searchEngine, shuffleArray } from '@algorithm'
 import { GenerateRightClickMenu } from './RightClick'
@@ -19,6 +18,8 @@ import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
 import { useFileListStore } from '../LegacyContent'
 import DefaultInfoProp from '@/utils/userDefaultInfoProp'
+import { Pagination, PaginationItem, PaginationCursor } from '@nextui-org/react'
+import SearchInput from './SearchInput'
 
 interface IFileItemProps {
   item: FrontItem
@@ -27,24 +28,20 @@ interface IFileItemProps {
 
 const FileItem = ({ item, lang }: IFileItemProps) => {
   const url = useFileListStore().url
-  const items: MenuProps['items'] = GenerateRightClickMenu({
+  const items = GenerateRightClickMenu({
     item: item,
     url: url,
     lang: lang,
   })
   return (
     <Box>
-      <Dropdown menu={{ items }} trigger={['contextMenu', 'click']}>
-        <span>
-          <Heading as='h6' size='xs'>
-            <FolderZipOutlinedIcon /> {'  '}
-            {item.name}
-          </Heading>
-          <Text pt='2' fontSize='sm'>
-            {`Size: ${item.size}`}
-          </Text>
-        </span>
-      </Dropdown>
+      <Heading as='h6' size='xs'>
+        <FolderZipOutlinedIcon /> {'  '}
+        {item.name}
+      </Heading>
+      <Text pt='2' fontSize='sm'>
+        {`Size: ${item.size}`}
+      </Text>
     </Box>
   )
 }
@@ -123,12 +120,7 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
   return (
     <Card>
       <CardHeader>
-        <Input.Search
-          placeholder='Input search text'
-          enterButton='Search'
-          size='large'
-          onSearch={onSearch}
-        />
+        <SearchInput onSearch={onSearch} />
       </CardHeader>
 
       <CardBody>
@@ -146,11 +138,9 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
       </CardBody>
       <CardFooter>
         <Pagination
-          size={isMobile ? 'small' : 'default'}
+          size={isMobile ? 'sm' : 'lg'}
           total={dispFiles.length}
-          current={page}
-          showQuickJumper
-          hideOnSinglePage
+          initialPage={page}
           onChange={onPaginationChange}
         />
       </CardFooter>
