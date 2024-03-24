@@ -1,47 +1,24 @@
 import useGlobalTheme from '@utils/persist/theme'
-import { Button, Divider, Radio, RadioChangeEvent, Typography } from 'antd/lib'
 import { SketchPicker } from 'react-color'
 import ImageUploader from './ImageUploader'
 import { useEffect } from 'react'
 import { getFile } from '@utils/persist/blob'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
-import Search, { SearchProps } from 'antd/lib/input/Search'
-import { PlusOutlined } from '@ant-design/icons'
 import useBackGroundNode, {
   setBackgroundImage,
 } from '@utils/persist/background'
-import { isValidURL } from '@utils/algorithms/isValidURL'
-const { Text } = Typography
+import { Button, ButtonGroup, Divider } from '@nextui-org/react'
+import { Text } from '@chakra-ui/react'
 
 const ThemeProviderMenu = (props: DefaultInfoProp) => {
-  const setDirection = useGlobalTheme((state) => state.changeDirection)
-  const changeDirection = (e: RadioChangeEvent) => setDirection(e.target.value)
-  const { color, setColor, url, changeURL, articleOpen, changeArticleOpen } =
-    useGlobalTheme()
+  const { color, setColor, changeURL } = useGlobalTheme()
   const node = useBackGroundNode((s) => s.node)
 
   useEffect(() => {
     console.log(getFile('backgroundimage'))
   })
 
-  const onSearch: SearchProps['onSearch'] = (value) => {
-    const uri = `https://${value}`
-    console.log(uri)
-    if (isValidURL(uri)) {
-      console.log('Looks like a valid URI')
-      changeURL(uri)
-      setBackgroundImage(uri, props.isMobile, node)
-    } else {
-      console.log('Not a URI')
-    }
-  }
-
-  const onChangeArticleOpen = (e: RadioChangeEvent) => {
-    changeArticleOpen(e.target.value)
-  }
-
-  const onChangeBGIButtun = (e: RadioChangeEvent) => {
-    const v: string = e.target.value
+  const onChangeBGIButtun = (v: string) => {
     console.log(v)
     changeURL(v)
     setBackgroundImage(v, props.isMobile, node)
@@ -49,49 +26,14 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
 
   return (
     <div>
-      <div style={{ marginBottom: 16 }}>
-        <Text style={{ marginRight: 16 }}>
-          Change direction of components / 改变方向
-        </Text>
-        <Radio.Group
-          defaultValue={useGlobalTheme((s) => s.direction)}
-          onChange={changeDirection}
-        >
-          <Radio.Button key='ltr' value='ltr'>
-            LTR
-          </Radio.Button>
-          <Radio.Button key='rtl' value='rtl'>
-            RTL
-          </Radio.Button>
-        </Radio.Group>
-      </div>
-      <Divider dashed />
-      <Radio.Group value={articleOpen} onChange={onChangeArticleOpen}>
-        <Radio.Button value={false}>关闭文章</Radio.Button>
-        <Radio.Button value={true}>打开文章</Radio.Button>
-      </Radio.Group>
-      <Divider dashed />
       <ImageUploader isMobile={props.isMobile} lang={props.lang} />
-      <Divider dashed />
-      <Search
-        addonBefore='https://'
-        placeholder={
-          isValidURL(url)
-            ? url.substring(8)
-            : '自定义网站背景网址, 请勿重复添加 https:// 头'
-        }
-        allowClear
-        onSearch={onSearch}
-        style={{ width: '100%' }}
-        enterButton={<PlusOutlined />}
-      />
-      <Divider dashed />
-      <Radio.Group value={url} onChange={onChangeBGIButtun}>
-        <Radio.Button value='default'>默认背景</Radio.Button>
-        <Radio.Button value='local'>自行上传</Radio.Button>
-        <Radio.Button value=''>清除背景</Radio.Button>
-      </Radio.Group>
-      <Divider dashed />
+      <Divider />
+      <ButtonGroup color='primary'>
+        <Button onClick={() => onChangeBGIButtun('default')}>默认背景</Button>
+        <Button onClick={() => onChangeBGIButtun('local')}>自行上传</Button>
+        <Button onClick={() => onChangeBGIButtun('')}>清除背景</Button>
+      </ButtonGroup>
+      <Divider />
       <div style={{ marginBottom: 16 }}>
         <SketchPicker
           presetColors={['#1890ff', '#25b864', '#ff6f00']}
@@ -100,9 +42,8 @@ const ThemeProviderMenu = (props: DefaultInfoProp) => {
         />
         <Text style={{ color: color, marginRight: 16 }}>网站色调</Text>
       </div>
-      <Divider dashed />
+      <Divider />
       <Button
-        danger
         onClick={() => {
           localStorage.clear()
           window.location.reload()

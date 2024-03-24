@@ -37,7 +37,6 @@ export { useFileListStore }
 const LegacyContent = (props: DefaultInfoProp) => {
   const toast = useToast()
   const { key } = useFileListStore()
-  const articleOpen = useGlobalTheme((s) => s.articleOpen)
 
   // useEffect(() => {
   //   toast({
@@ -87,7 +86,7 @@ const LegacyContent = (props: DefaultInfoProp) => {
                 <Readme {...props} />
               </Box>
               <Box pt='10' flex='1'>
-                {articleOpen && <ExtendIntro />}
+                <ExtendIntro />
               </Box>
             </Flex>
           )
