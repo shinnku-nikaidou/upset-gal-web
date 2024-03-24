@@ -13,7 +13,6 @@ import useBackGroundNode, {
 import { useEffect, useRef } from 'react'
 import useGlobalTheme from '@/utils/persist/theme'
 
-// now is Legacy Download Pages
 const Download: NextPage<DefaultInfoProp> = ({
   isMobile,
   lang,

@@ -1,7 +1,15 @@
 import { useCallback, useState, useEffect } from 'react'
 import { FrontItem } from '@/types'
-import { searchEngine, shuffleArray } from '@algorithm'
-import { GenerateRightClickMenu } from './RightClick'
+import { nginxTransChar, searchEngine, shuffleArray } from '@algorithm'
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem,
+  Pagination,
+} from '@nextui-org/react'
+
 import { create } from 'zustand'
 import {
   Box,
@@ -15,34 +23,88 @@ import {
   Text,
 } from '@chakra-ui/react'
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined'
+import FileDownloadIcon from '@mui/icons-material/FileDownload'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
 import { useFileListStore } from '../LegacyContent'
 import DefaultInfoProp from '@/utils/userDefaultInfoProp'
-import { Pagination, PaginationItem, PaginationCursor } from '@nextui-org/react'
 import SearchInput from './SearchInput'
+import t from '@/lang'
 
 interface IFileItemProps {
   item: FrontItem
   lang: string
 }
+const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0'
 
 const FileItem = ({ item, lang }: IFileItemProps) => {
   const url = useFileListStore().url
-  const items = GenerateRightClickMenu({
-    item: item,
-    url: url,
-    lang: lang,
-  })
+
+  const downloadLink = `${window.location.origin}/${url}/${nginxTransChar(
+    item.name,
+  )}`
+
+  const copyLink = useCallback(
+    () => navigator.clipboard.writeText(downloadLink),
+    [downloadLink],
+  )
+
   return (
-    <Box>
-      <Heading as='h6' size='xs'>
-        <FolderZipOutlinedIcon /> {'  '}
-        {item.name}
-      </Heading>
-      <Text pt='2' fontSize='sm'>
-        {`Size: ${item.size}`}
-      </Text>
-    </Box>
+    <>
+      <Dropdown>
+        <DropdownTrigger>
+          <Box>
+            <Heading as='h6' size='xs'>
+              <FolderZipOutlinedIcon /> {'  '}
+              {item.name}
+            </Heading>
+            <Text pt='2' fontSize='sm'>
+              {`Size: ${item.size}`}
+            </Text>
+          </Box>
+        </DropdownTrigger>
+        <DropdownMenu
+          variant='faded'
+          aria-label='Dropdown menu with description'
+          disabledKeys={['discription']}
+        >
+          <DropdownSection title='Actions' showDivider>
+            <DropdownItem
+              key='download'
+              description='download'
+              href={downloadLink}
+              target='_blank'
+              rel='noreferrer'
+              startContent={<FileDownloadIcon className={iconClasses} />}
+            >
+              {t('Download1', lang) + item.name}
+            </DropdownItem>
+            <DropdownItem
+              key='copy'
+              shortcut='⌘C'
+              description='Copy the file link'
+              startContent={<ContentCopyIcon className={iconClasses} />}
+              onClick={copyLink}
+            >
+              {t('Download2', lang)}
+            </DropdownItem>
+            <DropdownItem key='discription' description='游戏简介'>
+              查看游戏简介
+            </DropdownItem>
+          </DropdownSection>
+          <DropdownSection title='AD'>
+            <DropdownItem
+              href={'https://congyu01.top/auth/register?invite=e30dc2bc97'}
+              target='_blank'
+              rel='noreferrer'
+              description='丛雨云 congyu.moe'
+            >
+              下载慢? 说明被运营商掐网络了, 试试丛雨vpn
+            </DropdownItem>
+          </DropdownSection>
+        </DropdownMenu>
+      </Dropdown>
+    </>
   )
 }
 
