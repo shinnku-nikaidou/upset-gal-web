@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import { keyMap } from '@const'
 import { PageFooter } from './PageFooter'
 import { SideMenu } from './SideMenu'
 import Logo from './Logo'
 import useGlobalTheme from '@/utils/persist/theme'
-import Music from '../music'
 import { Box, Flex, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import LegacyContent, { useFileListStore } from './LegacyContent'
 
@@ -66,9 +65,7 @@ const Legacy = (props: DefaultInfoProp) => {
             <LegacyContent isMobile={props.isMobile} lang={props.lang} />
           </Box>
         </Flex>
-        <Box w='full'>
-          <PageFooter lang={props.lang} />
-        </Box>
+        <PageFooter lang={props.lang} />
       </Flex>
     </>
   )

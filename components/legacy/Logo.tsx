@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import DefaultInfoProp from '@utils/userDefaultInfoProp'
 import { useFileListStore } from './LegacyContent'
+import { Box } from '@chakra-ui/react'
 
 const Logo = (props: DefaultInfoProp) => {
   const setKey = useFileListStore().setKey
@@ -14,7 +15,7 @@ const Logo = (props: DefaultInfoProp) => {
       alignItems: 'center',
       justifyContent: 'center',
       // width: '100%',
-      height: '100%'
+      height: '100%',
     },
     responsiveImage: {
       display: 'flex',
@@ -25,7 +26,7 @@ const Logo = (props: DefaultInfoProp) => {
   }
 
   return (
-    <div style={styles.imageContainer}>
+    <Box as='header' style={styles.imageContainer}>
       <Link href={'/'} onClick={() => setKey(null)}>
         <Image
           src='/assets/upsetgal-logo.png'
@@ -36,7 +37,7 @@ const Logo = (props: DefaultInfoProp) => {
           style={styles.responsiveImage}
         ></Image>
       </Link>
-    </div>
+    </Box>
   )
 }
 

@@ -1,32 +1,28 @@
-import { Layout, Typography } from 'antd/lib'
 import { VERSION } from '@const'
 import t from '@lang'
-
-const { Footer } = Layout
-const { Text, Link } = Typography
+import { Box, Text, Link } from '@chakra-ui/react'
 
 export const PageFooter = (props: { lang: string }) => (
-  <Footer style={{ textAlign: 'center' }}>
-    <Text type='secondary'>
-      <div>Powered by shinnku</div>
-      <div>
-        <Text>
-          {t('Version', props.lang)}
-          <Text code>{VERSION}</Text>
-        </Text>
-      </div>
-      <div>
-        <span>
-          注：
-          <Link
-            target='_blank'
-            href='https://github.com/shinnku-nikaidou/upset-gal-web'
-          >
-            源码
-          </Link>
-          展示出来仅供参考
-        </span>
-      </div>
-    </Text>
-  </Footer>
+  <Box as='footer' textAlign='center' color='gray.500'>
+    <Box>Powered by shinnku</Box>
+    <Box>
+      <Text as='span'>{t('Version', props.lang)}</Text>
+      <Text as='span' color='gray.700'>
+        {VERSION}
+      </Text>
+    </Box>
+    <Box>
+      <Text>
+        注：
+        <Link
+          isExternal
+          href='https://github.com/shinnku-nikaidou/upset-gal-web'
+          color='teal.500'
+        >
+          源码
+        </Link>
+        展示出来仅供参考
+      </Text>
+    </Box>
+  </Box>
 )
