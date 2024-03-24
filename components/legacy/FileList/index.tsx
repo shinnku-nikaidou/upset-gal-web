@@ -120,7 +120,7 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
   return (
     <Card>
       <CardHeader>
-        <SearchInput onSearch={onSearch} />
+        <SearchInput onSearch={onSearch} isMobile={isMobile} />
       </CardHeader>
 
       <CardBody>
@@ -139,8 +139,8 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
       <CardFooter>
         <Pagination
           size={isMobile ? 'sm' : 'lg'}
-          total={dispFiles.length}
-          initialPage={page}
+          total={Math.ceil(dispFiles.length / 6)}
+          initialPage={1}
           onChange={onPaginationChange}
         />
       </CardFooter>
