@@ -73,8 +73,6 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
               key='download'
               description='download'
               href={downloadLink}
-              target='_blank'
-              rel='noreferrer'
               startContent={<FileDownloadIcon className={iconClasses} />}
             >
               {t('Download1', lang) + item.name}
@@ -95,8 +93,6 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
           <DropdownSection title='AD'>
             <DropdownItem
               href={'https://congyu01.top/auth/register?invite=e30dc2bc97'}
-              target='_blank'
-              rel='noreferrer'
               description='丛雨云 congyu.moe'
             >
               下载慢? 说明被运营商掐网络了, 试试丛雨vpn
