@@ -21,4 +21,4 @@ export type KeyMap = {
   simulate: string
 }
 
-export type TKey = keyof KeyMap | '10' | null
+export type TKey = 0 | keyof KeyMap | '10' | null

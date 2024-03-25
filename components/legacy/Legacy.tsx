@@ -40,7 +40,7 @@ const Legacy = (props: DefaultInfoProp) => {
 
   useEffect(() => {
     console.log(key)
-    if (key !== null && key !== '10') {
+    if (key !== null && key !== '10' && key !== 0) {
       setUrl(`api/download/legacy/${keyMap[key]}`)
       setPage(1)
     }

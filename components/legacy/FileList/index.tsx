@@ -109,12 +109,13 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
 }
 
 const FolderItem = ({ item }: { item: FrontItem }) => {
-  const { url, setUrl, setPage } = useFileListStore()
+  const { url, setUrl, setPage, setKey } = useFileListStore()
   return (
     <Box
       onClick={() => {
         setUrl(url + '/' + item.name)
         setPage(1)
+        setKey(0)
       }}
     >
       <Heading as='h6' size='xs'>
@@ -186,7 +187,7 @@ export const FileList = ({ lang, isMobile }: DefaultInfoProp) => {
       </CardHeader>
 
       <CardBody>
-        <Stack divider={<StackDivider />} spacing='4'>
+        <Stack divider={<StackDivider />} spacing='2'>
           {dispFiles
             .slice((page - 1) * 6, page * 6)
             .map((item: FrontItem, key: number) => {

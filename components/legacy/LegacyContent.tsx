@@ -78,7 +78,7 @@ const LegacyContent = (props: DefaultInfoProp) => {
       {(() => {
         if (key === null) {
           return (
-            <Flex flexDirection={'column'}>
+            <Flex flexDirection='column'>
               <Box flex='1'>
                 <Search {...props} />
               </Box>

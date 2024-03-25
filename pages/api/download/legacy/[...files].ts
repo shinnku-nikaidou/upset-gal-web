@@ -62,7 +62,7 @@ export default async function handler(
         } else {
           const _url = ans
           const randomNumber = Math.random()
-          if (randomNumber <= 1 / 20) {
+          if (randomNumber <= 1) {
             const encrypted = CryptoJS.AES.encrypt(
               _url,
               proxySecretKey,
