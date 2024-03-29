@@ -7,13 +7,6 @@ export const Feedback = ({ lang }: { lang: string }) => {
   const color = useGlobalTheme((s) => s.color)
   return (
     <AccordionItem key='2' title={t('Feedback', lang)}>
-      <Text>
-        <span>{t('Click', lang)}</span>
-        <Link target='_blank' rel='noreferrer' href='https://t.me/upsetgal'>
-          {t('Telegram', lang)}
-        </Link>
-        <span>{t('Feedback-last', lang)}</span>
-      </Text>
       <Text>搜索不到请到主页使用日文搜索.</Text>
       <Text>
         最先进的galgame资源论坛, 这里找不到的资源就去那里问, 欢迎来到{' '}
