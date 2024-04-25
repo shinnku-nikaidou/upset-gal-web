@@ -12,3 +12,7 @@ export const rewriteUrl = (url: string, proxy: string | undefined) => {
 
   return url.replace(/https:\/\/\w+\.sharepoint\.com/, proxy)
 }
+
+export function removeFileExtension(filename: string) {
+  return filename.split('.').slice(0, -1).join('.')
+}

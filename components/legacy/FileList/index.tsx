@@ -30,6 +30,7 @@ import { useFileListStore } from '../LegacyContent'
 import DefaultInfoProp from '@/utils/userDefaultInfoProp'
 import SearchInput from './SearchInput'
 import t from '@/lang'
+import { removeFileExtension } from '@/utils/algorithms/urlChange'
 
 interface IFileItemProps {
   item: FrontItem
@@ -47,6 +48,11 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
   const copyLink = useCallback(
     () => navigator.clipboard.writeText(downloadLink),
     [downloadLink],
+  )
+
+  const copyFile = useCallback(
+    () => navigator.clipboard.writeText(removeFileExtension(item.name)),
+    [item.name],
   )
 
   return (
@@ -85,6 +91,15 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
               onClick={copyLink}
             >
               {t('Download2', lang)}
+            </DropdownItem>
+            <DropdownItem
+              key='copy'
+              shortcut='⌘C'
+              description='Copy file name'
+              startContent={<ContentCopyIcon className={iconClasses} />}
+              onClick={copyFile}
+            >
+              {t('Download3', lang)}
             </DropdownItem>
             <DropdownItem key='discription' description='游戏简介'>
               查看游戏简介

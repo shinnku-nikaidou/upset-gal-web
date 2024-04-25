@@ -36,6 +36,7 @@ const res = {
 
   Download1: 'click to download',
   Download2: 'Copy download link',
+  Download3: 'Copy file name',
   Version: 'version is:',
 }
 

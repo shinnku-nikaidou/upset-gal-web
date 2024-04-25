@@ -34,6 +34,7 @@ const res = {
 
   Download1: '點擊下載',
   Download2: '複製下載鏈接',
+  Download3: '複製遊戲名字',
   Version: '版本號：',
 }
 
