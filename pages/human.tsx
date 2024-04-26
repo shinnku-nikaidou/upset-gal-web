@@ -1,7 +1,15 @@
 import React, { useRef, useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
 import type { TurnstileInstance } from '@marsidev/react-turnstile'
-import { Box, Text, Button, Container, VStack, Heading } from '@chakra-ui/react'
+import {
+  Box,
+  Text,
+  Button,
+  Container,
+  Image,
+  VStack,
+  Heading,
+} from '@chakra-ui/react'
 import config from '@/config'
 
 export async function getStaticProps() {
@@ -41,7 +49,7 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
         </Heading>
         <Box borderWidth='1px' borderRadius='lg' padding={4} width='100%'>
           <Text fontSize='md'>
-            由于高流量以及持续不断接近11个月的ddos攻击,
+            由于高流量以及持续不断12个月的ddos攻击,
             我们不得不启用人机验证以减少流量, 请等待, 勿关闭此页面,
             如果失败请下拉刷新, 如果人机验证框无法显示请更换网络环境
           </Text>
@@ -68,6 +76,22 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
             </Button>
           </a>
         )}
+        <Box marginTop={8}>
+          <a
+            href='https://pages.tmall.com/wow/a/act/tmall/dailygroup/16355/16802/wupr?wh_pid=daily-465056&disableNav=YES&status_bar_transparent=true&sellerId=1731640362&activityId=0d5aa047aef44254b970cae5535b2df0&toolName=itemCoupon'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Image
+              src='/assets/ad-vagina.jpg'
+              alt='Advertisement'
+              width='100%'
+              height='auto'
+              objectFit='cover'
+              borderRadius='lg'
+            />
+          </a>
+        </Box>
       </VStack>
     </Container>
   )
