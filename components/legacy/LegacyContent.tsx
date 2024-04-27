@@ -51,8 +51,11 @@ const LegacyContent = (props: DefaultInfoProp) => {
           backdropFilter='blur(10px)'
           boxShadow='lg'
         >
-          <Text size='sm'>加入最新telegram群组</Text>
           <Text size='sm'>
+            搜索不到请到首页使用 日文原文 搜索, 还没有就是不存在, 请另寻他处
+          </Text>
+          <Text size='sm'>
+            加入最新telegram群组{' '}
             <Link href={'https://t.me/upsetgal'} target='_blank'>
               https://t.me/upsetgal
             </Link>
