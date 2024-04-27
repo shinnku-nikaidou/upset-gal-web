@@ -2,6 +2,7 @@ import t from '@lang'
 import { Text, Link } from '@chakra-ui/react'
 import useGlobalTheme from '@/utils/persist/theme'
 import { AccordionItem } from '@nextui-org/react'
+import { adUrl } from '@/const'
 
 export const Feedback = ({ lang }: { lang: string }) => {
   const color = useGlobalTheme((s) => s.color)
@@ -38,17 +39,23 @@ export const Feedback = ({ lang }: { lang: string }) => {
           </Link>{' '}
           ）。
         </span>
+      </Text>
+      <Text>
         <span>
-          或者使用
+          {' '}
+          极上野萝莉飞机杯, 萝莉的极致体验, 领取
           <Link
             target='_blank'
             rel='noreferrer'
-            href='https://alori.top/index.php#/register?code=N81fWyCw'
+            href={adUrl}
+            style={{ color: color }}
           >
-            Alori
+            {' '}
+            优惠券{' '}
           </Link>
-          , 也是全中转, 高性价比.
+          购买
         </span>
+        。
       </Text>
     </AccordionItem>
   )
