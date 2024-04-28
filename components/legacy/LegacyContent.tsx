@@ -8,7 +8,6 @@ import { create } from 'zustand'
 import { TKey } from '@/types/onedrivelegacy'
 import { Box, Flex, useToast, Text } from '@chakra-ui/react'
 import ExtendIntro from './ExtendIntro'
-import useGlobalTheme from '@/utils/persist/theme'
 import Search from '../search'
 import { useEffect } from 'react'
 import Link from 'next/link'
@@ -29,7 +28,6 @@ const useFileListStore = create<FileListState>((set) => ({
 
   setUrl: (url: string) => set(() => ({ url: url })),
   setKey: (key: TKey) => set(() => ({ key: key })),
-
   setPage: (page: number) => set(() => ({ page: page })),
 }))
 
@@ -58,6 +56,12 @@ const LegacyContent = (props: DefaultInfoProp) => {
             加入最新telegram群组{' '}
             <Link href={'https://t.me/upsetgal'} target='_blank'>
               https://t.me/upsetgal
+            </Link>
+          </Text>
+          <Text size='sm'>
+            加入自建聊天室直接在线聊天(注册需要梯子, 之后不需要){' '}
+            <Link href={'https://chat.galgame.dev'} target='_blank'>
+              https://chat.galgame.dev
             </Link>
           </Text>
         </Box>

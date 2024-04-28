@@ -8,6 +8,7 @@ export const musictheme = '#F57F17'
 const Music = () => {
   const [beforeSSR, setBeforeSSR] = useState(false)
   const [audios, setAudios] = useState([])
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMini, _setIsMini] = useState(true)
 
   let ReactAplayer
