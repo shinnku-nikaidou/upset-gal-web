@@ -11,7 +11,7 @@ import {
   Heading,
 } from '@chakra-ui/react'
 import config from '@/config'
-import { adUrl } from '@/const'
+import { ad2Url, adUrl } from '@/const'
 
 export async function getStaticProps() {
   // Call an external API endpoint to get posts
@@ -80,12 +80,12 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
         <a href={adUrl} target='_blank' rel='noreferrer'>
           <Box borderWidth='1px' borderRadius='lg' padding={4} marginY={4}>
             <Text fontSize='md'>
-              极上野萝莉飞机杯, 萝莉的极致体验, 领取优惠券购买
+              极上野萝莉飞机杯, 萝莉的极致体验, 点击此处购买, 点击下图抽奖
             </Text>
           </Box>
         </a>
         <Box>
-          <a href={adUrl} target='_blank' rel='noopener noreferrer'>
+          <a href={ad2Url} target='_blank' rel='noopener noreferrer'>
             <Image
               src='/assets/ad-vagina.jpg'
               alt='Advertisement'

@@ -58,12 +58,6 @@ const LegacyContent = (props: DefaultInfoProp) => {
               https://t.me/upsetgal
             </Link>
           </Text>
-          <Text size='sm'>
-            加入自建matrix聊天室直接在线聊天(注册需要梯子, 之后不需要){' '}
-            <Link href={'https://chat.galgame.dev'} target='_blank'>
-              https://chat.galgame.dev
-            </Link>
-          </Text>
           <Text size='sm'>qq群暂不开放</Text>
         </Box>
       ),

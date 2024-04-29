@@ -40,3 +40,5 @@ export const mobgurl =
 
 export const adUrl =
   'https://pages.tmall.com/wow/a/act/tmall/dailygroup/16355/16802/wupr?wh_pid=daily-465056&disableNav=YES&status_bar_transparent=true&sellerId=1731640362&activityId=0d5aa047aef44254b970cae5535b2df0&toolName=itemCoupon'
+
+export const ad2Url = 'https://galgame.dev/topic/1933'

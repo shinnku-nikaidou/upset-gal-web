@@ -2,7 +2,7 @@ import t from '@lang'
 import { Text, Link } from '@chakra-ui/react'
 import useGlobalTheme from '@/utils/persist/theme'
 import { AccordionItem } from '@nextui-org/react'
-import { adUrl } from '@/const'
+import { ad2Url, adUrl } from '@/const'
 
 export const Feedback = ({ lang }: { lang: string }) => {
   const color = useGlobalTheme((s) => s.color)
@@ -53,7 +53,10 @@ export const Feedback = ({ lang }: { lang: string }) => {
             {' '}
             优惠券{' '}
           </Link>
-          购买
+          购买,{' '}
+          <Link target='_blank' rel='noreferrer' href={ad2Url}>
+            点击抽奖
+          </Link>
         </span>
         。
       </Text>
