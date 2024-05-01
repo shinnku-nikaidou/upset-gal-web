@@ -73,13 +73,25 @@ export default async function handler(
       if (!data.success) {
         res.status(400).send(data)
       }
+      const randomNumber = Math.random()
+      if (
+        randomNumber <= 1.0 &&
+        files &&
+        files.length > 0 &&
+        files[0] === '0'
+      ) {
+        const encodedFiles = files.map(encodeURIComponent)
+        const newPath = encodedFiles.join('/')
+        const newUrl = `https://dl.oo0o.ooo/file/shinnku/${newPath}`
+        res.redirect(302, newUrl)
+      }
 
       const accountID = item.sources[0].accountid
       const id = item.sources[0].item.id
       const a = account.find((a) => a.accountID === accountID)!
       const body = (await query_one(a.oauth, id, '')) as OneriveItem
       const _url = body['@microsoft.graph.downloadUrl']!
-      const randomNumber = Math.random()
+
       if (randomNumber <= 0.1) {
         const encrypted = CryptoJS.AES.encrypt(_url, proxySecretKey).toString()
         const encoded = encodeURIComponent(encrypted)
