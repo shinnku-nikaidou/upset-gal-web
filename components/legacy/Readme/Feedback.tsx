@@ -26,19 +26,29 @@ export const Feedback = ({ lang }: { lang: string }) => {
         <Link
           target='_blank'
           rel='noreferrer'
-          href='https://congyu01.top/auth/register?code=e30dc2bc97'
+          href='https://congyu.moe/auth/register?code=e30dc2bc97'
           style={{ color: color }}
         >
           丛雨vpn: 丛雨云
         </Link>
         <span>
-          （柚子厨专属vpn, 高速隧道流量, 低延迟, 垃圾网络也能秒开油管4k, 又有
-          0.1低倍率流量9元1tb, 注意请使用并收藏最新发布页{' '}
+          （柚子厨专属vpn, 高速隧道流量, 低延迟, 垃圾网络也能秒开油管4k,
+          注意请使用并收藏最新发布页{' '}
           <Link target='_blank' rel='noreferrer' href='https://congyu.org/'>
             congyu.org
           </Link>{' '}
           ）。
-        </span>
+        </span>{' '}
+        当然也推荐
+        <Link
+          target='_blank'
+          rel='noreferrer'
+          href='https://aa.tutucloud.uk/?path=register&code=p89XrEU5'
+          style={{ color: color }}
+        >
+          兔兔云
+        </Link>
+        ，专业vpn, 内含唯云专线, 新疆可用, 依旧性价比高到可怕。
       </Text>
       <Text>
         <span>
