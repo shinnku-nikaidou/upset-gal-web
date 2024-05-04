@@ -48,7 +48,7 @@ export const Feedback = ({ lang }: { lang: string }) => {
         >
           兔兔云
         </Link>
-        ，专业vpn, 内含唯云专线, 新疆可用, 依旧性价比高到可怕。
+        ，专业vpn, 内含唯云专线, 依旧性价比高到可怕。
       </Text>
       <Text>
         <span>
