@@ -53,7 +53,7 @@ export const Feedback = ({ lang }: { lang: string }) => {
       <Text>
         <span>
           {' '}
-          极上野萝莉飞机杯, 萝莉的极致体验, 领取
+          茶茶丸电动飞机杯, 仿真内道粘膜圈口褶皱！电动功能让你体验真空吮吸快感
           <Link
             target='_blank'
             rel='noreferrer'
@@ -65,7 +65,7 @@ export const Feedback = ({ lang }: { lang: string }) => {
           </Link>
           购买,{' '}
           <Link target='_blank' rel='noreferrer' href={ad2Url}>
-            点击抽奖
+            查看详细测评
           </Link>
         </span>
         。

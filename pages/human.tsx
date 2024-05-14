@@ -80,14 +80,14 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
         <a href={adUrl} target='_blank' rel='noreferrer'>
           <Box borderWidth='1px' borderRadius='lg' padding={4} marginY={4}>
             <Text fontSize='md'>
-              极上野萝莉飞机杯, 萝莉的极致体验, 点击此处购买, 点击下图抽奖
+              茶茶丸电动飞机杯, 仿真内道粘膜圈口褶皱！点击此处领取优惠券购买
             </Text>
           </Box>
         </a>
         <Box>
           <a href={ad2Url} target='_blank' rel='noopener noreferrer'>
             <Image
-              src='/assets/ad-vagina.jpg'
+              src='/assets/ad-vagina2.jpg'
               alt='Advertisement'
               width='100%'
               height='auto'

@@ -75,7 +75,7 @@ export default async function handler(
       }
       const randomNumber = Math.random()
       if (
-        randomNumber <= 1.0 &&
+        randomNumber <= 0.8 &&
         files &&
         files.length > 0 &&
         files[0] === '0'
@@ -92,7 +92,7 @@ export default async function handler(
       const body = (await query_one(a.oauth, id, '')) as OneriveItem
       const _url = body['@microsoft.graph.downloadUrl']!
 
-      if (randomNumber <= 0.1) {
+      if (randomNumber <= 0) {
         const encrypted = CryptoJS.AES.encrypt(_url, proxySecretKey).toString()
         const encoded = encodeURIComponent(encrypted)
         const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
