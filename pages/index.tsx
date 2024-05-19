@@ -3,23 +3,20 @@ import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import t from '@lang'
 import Home from '@components/legacy'
-import DefaultInfoProp, {
-  userDefaultInfoProp,
-} from '@utils/userDefaultInfoProp'
+// import DefaultInfoProp from '@utils/userDefaultInfoProp'
+// import DefaultInfoProp, {
+//   userDefaultInfoProp,
+// } from '@utils/userDefaultInfoProp'
 import Script from 'next/script'
 import useBackGroundNode, {
   setBackgroundImage,
 } from '@utils/persist/background'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import useGlobalTheme from '@/utils/persist/theme'
 
-const Download: NextPage<DefaultInfoProp> = ({
-  isMobile,
-  lang,
-}: {
-  isMobile: boolean
-  lang: string
-}) => {
+const Download: NextPage = () => {
+  const lang = 'en'
+  const [isMobile, setIsMobile] = useState(true)
   const node = useRef<HTMLDivElement>(null)
   const url = useGlobalTheme((s) => s.url)
   const setNode = useBackGroundNode((s) => s.setNode)
@@ -28,6 +25,17 @@ const Download: NextPage<DefaultInfoProp> = ({
     setNode(node.current)
     setBackgroundImage(url, isMobile, node.current)
   })
+
+  useEffect(() => {
+    const userAgent =
+      typeof window.navigator === 'undefined' ? '' : navigator.userAgent
+    const isMobileView = Boolean(
+      userAgent.match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i,
+      ),
+    )
+    setIsMobile(isMobileView)
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -65,6 +73,6 @@ const Download: NextPage<DefaultInfoProp> = ({
   )
 }
 
-Download.getInitialProps = userDefaultInfoProp
+// Download.getInitialProps = userDefaultInfoProp
 
 export default Download
