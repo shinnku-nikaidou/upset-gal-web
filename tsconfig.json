@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -20,45 +16,19 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@": [
-        "."
-      ],
-      "@/*": [
-        "./*"
-      ],
-      "@components": [
-        "components/index"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@utils": [
-        "utils"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@const": [
-        "const/index"
-      ],
-      "@const/*": [
-        "const/*"
-      ],
-      "@lang": [
-        "lang/index"
-      ],
-      "@net": [
-        "utils/net/index"
-      ],
-      "@algorithm": [
-        "utils/algorithms/index"
-      ],
-      "@ms-graph": [
-        "utils/ms-graph/index"
-      ],
-      "@ms-graph/*": [
-        "utils/ms-graph/*"
-      ]
+      "@": ["."],
+      "@/*": ["./*"],
+      "@components": ["components/index"],
+      "@components/*": ["components/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"],
+      "@const": ["const/index"],
+      "@const/*": ["const/*"],
+      "@lang": ["lang/index"],
+      "@net": ["utils/net/index"],
+      "@algorithm": ["utils/algorithms/index"],
+      "@ms-graph": ["utils/ms-graph/index"],
+      "@ms-graph/*": ["utils/ms-graph/*"]
     },
     "plugins": [
       {
@@ -73,7 +43,5 @@
     "components/music.jsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
