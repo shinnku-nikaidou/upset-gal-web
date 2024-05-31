@@ -194,6 +194,20 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                   {results.map((item, index) => {
                     const selected = index === active
                     const parts = item.name.split('/').slice(1)
+                    let showstring = item.name
+                    if (parts[0].startsWith('raw')) {
+                      showstring = `(生肉) 文件路径是: ${item.name}`
+                    } else if (parts[0].startsWith('psp')) {
+                      showstring = `(psp模拟器) 文件路径是: ${item.name}`
+                    } else if (parts[0].startsWith('zd')) {
+                      showstring = `(汉化硬盘) 文件路径是: ${item.name}`
+                    } else if (parts[0].startsWith('0')) {
+                      showstring = `文件路径是: ${item.name}`
+                      if (parts[1].startsWith('krkr')) {
+                        showstring = `(手机krkr模拟器) 文件路径是: ${item.name}`
+                      }
+                    }
+
                     const downloadLink = `${
                       window.location.origin
                     }/api/download${nginxTransChar(item.name)}`
@@ -215,7 +229,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                         <ItemsMeta
                           lang={props.lang}
                           filename={filename}
-                          showstring={item.name}
+                          showstring={showstring}
                           downloadLink={downloadLink}
                           size={item.size}
                           key={index}
