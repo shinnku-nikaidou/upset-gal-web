@@ -37,6 +37,3 @@ export const pcbgurls = [
 
 export const mobgurl =
   'https://www.shinnku.com/img-original/img/2021/06/18/19/34/21/90638095_p0.jpg'
-
-export const adUrl = 'https://s.tb.cn/c.0EiMPU'
-export const ad2Url = 'https://galgame.dev/topic/2271'

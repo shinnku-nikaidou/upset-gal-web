@@ -59,7 +59,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch, isMobile }) => {
                 bg: 'white',
                 '.chakra-ui-dark &': { bg: 'gray.700' },
               }}
-              placeholder='点击左侧按钮查询'
+              placeholder='推荐主页面搜索更多更全'
               value={value}
               onChange={handleChange}
               onKeyDown={onKeyDown}

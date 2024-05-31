@@ -16,9 +16,11 @@ const res = {
 
   Intro: '简介',
   Intro1:
-    '这是失落小站, 一个galgame资源站, (包括visual novel, 黄油, psp, krkr, ons gal资源 等), 收录了大部分的汉化galgame，全部压缩包都没有解压密码, 均可直接下载, 站长是失落和真红。',
+    '这是失落小站, 一个galgame资源站, (包括visual novel, 黄油, psp, krkr, ons gal资源 等), 收录了大部分的汉化galgame, 大部分的生肉galgame资源。',
   Intro2:
     '有在 Windows 电脑上面运行的，krkr 和 ons 是手机版，需要进入模拟器页面下载专属的模拟器解压再运行。',
+  Intro3:
+    '如果没有汉化版本, 可以先下载生肉, 之后在 vndb.org 等网站寻找汉化补丁',
   Feedback: '有关反馈',
   Click: '点击此处加入',
   Telegram: 'Telegram 群组',

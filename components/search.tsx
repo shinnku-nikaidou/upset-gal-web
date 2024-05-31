@@ -162,7 +162,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 bg: 'white',
                 '.chakra-ui-dark &': { bg: 'gray.700' },
               }}
-              placeholder='点击左侧按钮查询'
+              placeholder='请输入中文或者日文'
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value)

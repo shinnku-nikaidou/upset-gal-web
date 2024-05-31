@@ -1,23 +1,10 @@
 import React, { useRef, useState } from 'react'
 import { Turnstile } from '@marsidev/react-turnstile'
 import type { TurnstileInstance } from '@marsidev/react-turnstile'
-import {
-  Box,
-  Text,
-  Button,
-  Container,
-  Image,
-  VStack,
-  Heading,
-} from '@chakra-ui/react'
+import { Box, Text, Button, Container, VStack, Heading } from '@chakra-ui/react'
 import config from '@/config'
-import { ad2Url, adUrl } from '@/const'
 
 export async function getStaticProps() {
-  // Call an external API endpoint to get posts
-
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
   return {
     props: {
       sitekey: config.CLOUDFLARE.Turnstile.SiteKey,
@@ -77,25 +64,6 @@ const CaptchaVerification = ({ sitekey }: { sitekey: string }) => {
             </Button>
           </a>
         )}
-        <a href={adUrl} target='_blank' rel='noreferrer'>
-          <Box borderWidth='1px' borderRadius='lg' padding={4} marginY={4}>
-            <Text fontSize='md'>
-              茶茶丸电动飞机杯, 仿真内道粘膜圈口褶皱！点击此处领取优惠券购买
-            </Text>
-          </Box>
-        </a>
-        <Box>
-          <a href={ad2Url} target='_blank' rel='noopener noreferrer'>
-            <Image
-              src='/assets/ad-vagina2.jpg'
-              alt='Advertisement'
-              width='100%'
-              height='auto'
-              objectFit='cover'
-              borderRadius='lg'
-            />
-          </a>
-        </Box>
       </VStack>
     </Container>
   )

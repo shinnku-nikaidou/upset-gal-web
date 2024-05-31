@@ -2,7 +2,6 @@ import t from '@lang'
 import { Text, Link } from '@chakra-ui/react'
 import useGlobalTheme from '@/utils/persist/theme'
 import { AccordionItem } from '@nextui-org/react'
-import { ad2Url, adUrl } from '@/const'
 
 export const Feedback = ({ lang }: { lang: string }) => {
   const color = useGlobalTheme((s) => s.color)
@@ -48,27 +47,7 @@ export const Feedback = ({ lang }: { lang: string }) => {
         >
           兔兔云
         </Link>
-        ，专业vpn, 内含唯云专线, 依旧性价比高到可怕。
-      </Text>
-      <Text>
-        <span>
-          {' '}
-          茶茶丸电动飞机杯, 仿真内道粘膜圈口褶皱！电动功能让你体验真空吮吸快感
-          <Link
-            target='_blank'
-            rel='noreferrer'
-            href={adUrl}
-            style={{ color: color }}
-          >
-            {' '}
-            优惠券{' '}
-          </Link>
-          购买,{' '}
-          <Link target='_blank' rel='noreferrer' href={ad2Url}>
-            查看详细测评
-          </Link>
-        </span>
-        。
+        ，专业vpn.
       </Text>
     </AccordionItem>
   )

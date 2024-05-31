@@ -20,6 +20,8 @@ const res = {
     'Most of the Chinese version visual novel are included here (you can also only run the original Japanese version, btw all of them have been cracked), and all zip/7z files have no decompression password.',
   Intro2:
     'Most of them run on Windows computers, also KRKR and ONS are mobile versions. You need to go to the simulator download page then download the corresponding simulator and decompress before running it.',
+  Intro3:
+    'If there is no Chinese localized version available, you can first download the origin one, and then search for Chinese translation patches on websites such as vndb.org.',
   Feedback: 'Feedback',
   Click: 'Click here to join ',
   Telegram: 'Telegram group',

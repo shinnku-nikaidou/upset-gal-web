@@ -49,11 +49,12 @@ const LegacyContent = (props: DefaultInfoProp) => {
           backdropFilter='blur(10px)'
           boxShadow='lg'
         >
+          <Text size='sm'>新增 23tb 生肉资源, 请在主页直接搜索得到</Text>
           <Text size='sm'>
             搜索不到请到首页使用 日文原文 搜索, 还没有就是不存在, 请另寻他处
           </Text>
           <Text size='sm'>
-            加入最新telegram群组{' '}
+            加入最新telegram频道{' '}
             <Link href={'https://t.me/upsetgal'} target='_blank'>
               https://t.me/upsetgal
             </Link>
@@ -62,7 +63,7 @@ const LegacyContent = (props: DefaultInfoProp) => {
         </Box>
       ),
       status: 'success',
-      duration: 5000,
+      duration: 12000,
       isClosable: true,
     })
   }, [toast])
