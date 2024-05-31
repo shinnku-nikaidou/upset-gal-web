@@ -1,35 +1,24 @@
 import { SearchIcon } from '@chakra-ui/icons'
 import {
   Box,
-  Button,
   Center,
   chakra,
   Flex,
   LinkBox,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-  Text,
   useDisclosure,
   useEventListener,
   useUpdateEffect,
 } from '@chakra-ui/react'
-import FolderZipOutlinedIcon from '@mui/icons-material/FolderZipOutlined'
-
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MultiRef from 'react-multi-ref'
 import { NewFrontItem } from '@/types'
-import Link from 'next/link'
+import { nginxTransChar } from '@algorithm'
+import { ItemsMeta } from './legacy/FileList'
 
 const Search = (props: { isMobile: boolean; lang: string }) => {
   const [trueQuery, setTrueQuery] = useState('')
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
-  const [shouldCloseModal, setShouldCloseModal] = useState(true)
   const menu = useDisclosure()
   const modal = useDisclosure()
   const [menuNodes] = useState(() => new MultiRef<number, HTMLElement>())
@@ -112,7 +101,6 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
         case 'Alt':
         case 'Shift': {
           e.preventDefault()
-          setShouldCloseModal(true)
           break
         }
         case 'Enter': {
@@ -132,7 +120,6 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
       case 'Alt':
       case 'Shift': {
         e.preventDefault()
-        setShouldCloseModal(false)
       }
     }
   }, [])
@@ -195,7 +182,6 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
             </Center>
           </Flex>
           <Box p='0' ref={menuRef}>
-            {/* maxH='60vh' maxW='520px' */}
             {open && (
               <Box
                 sx={{
@@ -207,61 +193,34 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 <Box as='ul' role='listbox' borderTopWidth='1px' pt={2} pb={4}>
                   {results.map((item, index) => {
                     const selected = index === active
+                    const parts = item.name.split('/').slice(1)
+                    const downloadLink = `${
+                      window.location.origin
+                    }/api/download${nginxTransChar(item.name)}`
+                    const filename = parts[parts.length - 1]
                     return (
-                      <Popover key={index}>
-                        <PopoverTrigger>
-                          <Box
-                            id={`search-item-${index}`}
-                            as='li'
-                            aria-selected={selected ? true : undefined}
-                            onMouseEnter={() => {
-                              setActive(index)
-                              eventRef.current = 'mouse'
-                            }}
-                            onClick={() => {
-                              if (shouldCloseModal) {
-                                modal.onClose()
-                              }
-                            }}
-                            ref={menuNodes.ref(index)}
-                            role='option'
-                            key={index}
-                            sx={item_sx}
-                          >
-                            <Box flex='1' ml='4'>
-                              <Box fontWeight='semibold'>
-                                <FolderZipOutlinedIcon /> {'  '}
-                                <Box
-                                  as='mark'
-                                  bg='transparent'
-                                  color='teal.500'
-                                >
-                                  {item.name}
-                                </Box>
-                                <Box>
-                                  <Text pt='2' fontSize='sm'>
-                                    {`Size: ${item.size}`}
-                                  </Text>
-                                </Box>
-                              </Box>
-                            </Box>
-                          </Box>
-                        </PopoverTrigger>
-                        <PopoverContent>
-                          <PopoverArrow />
-                          <PopoverCloseButton />
-                          <PopoverHeader>下载确认</PopoverHeader>
-                          <PopoverBody>
-                            你确定要下载吗? {'  '}
-                            <Link
-                              href={'api/download' + item.name}
-                              target='_blank'
-                            >
-                              <Button bgColor={'deeppink'}>确认✅</Button>
-                            </Link>
-                          </PopoverBody>
-                        </PopoverContent>
-                      </Popover>
+                      <Box
+                        id={`search-item-${index}`}
+                        as='li'
+                        aria-selected={selected ? true : undefined}
+                        onMouseEnter={() => {
+                          setActive(index)
+                          eventRef.current = 'mouse'
+                        }}
+                        ref={menuNodes.ref(index)}
+                        role='option'
+                        key={index}
+                        sx={item_sx}
+                      >
+                        <ItemsMeta
+                          lang={props.lang}
+                          filename={filename}
+                          showstring={item.name}
+                          downloadLink={downloadLink}
+                          size={item.size}
+                          key={index}
+                        />
+                      </Box>
                     )
                   })}
                 </Box>

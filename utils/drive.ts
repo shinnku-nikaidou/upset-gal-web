@@ -106,7 +106,13 @@ export function renewFiles() {
   return ans
 }
 
-// eslint-disable-next-line prefer-const
-let files = renewFiles()
+const files = renewFiles()
 
-export { files }
+const fileswithoutpsp = files.filter((a) => !a.name.startsWith('/psp'))
+const fileswithoutraw = files.filter((a) => !a.name.startsWith('/raw'))
+
+const fileswithoutpspandraw = fileswithoutpsp.filter(
+  (a) => !a.name.startsWith('/raw'),
+)
+
+export { files, fileswithoutpsp, fileswithoutraw, fileswithoutpspandraw }

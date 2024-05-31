@@ -1,4 +1,9 @@
-import { files } from '@/utils/drive'
+import {
+  files,
+  fileswithoutpsp,
+  fileswithoutraw,
+  fileswithoutpspandraw,
+} from '@/utils/drive'
 import { NextApiRequest, NextApiResponse } from 'next'
 import Fuse, { IFuseOptions } from 'fuse.js'
 import { NewFrontItem } from '@/types'
@@ -17,9 +22,8 @@ const options: IFuseOptions<NewFrontItem> = {
   keys: ['name'],
 }
 
-const fuse = new Fuse(files, options)
-
-function runsearch(query: string): NewFrontItem[] {
+function runsearch(query: string, files: NewFrontItem[]): NewFrontItem[] {
+  const fuse = new Fuse(files, options)
   const tmp = fuse.search(query)
   return tmp.map((result) => result.item)
 }
@@ -32,13 +36,29 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>,
 ) {
-  const { q } = req.query as { q: string }
+  const {
+    q,
+    psp = '1',
+    raw = '1',
+  } = req.query as { q: string; psp?: string; raw?: string }
   if (q === 'files') {
     res.send(files)
   }
+
+  let f = files
+  if (psp === '0' && raw === '0') {
+    f = fileswithoutpspandraw
+  } else if (psp !== '0' && raw !== '0') {
+    f = files
+  } else if (psp === '0' && raw !== '0') {
+    f = fileswithoutpsp
+  } else if (psp !== '0' && raw === '0') {
+    f = fileswithoutraw
+  }
+
   const queryjp = cn2jp(q)
   const query = removeDuplicateCharacters(q + queryjp)
   console.log(query)
-  const results = runsearch(query).slice(0, 100)
+  const results = runsearch(query, f)
   res.status(200).send(results)
 }

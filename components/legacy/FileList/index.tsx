@@ -36,36 +36,50 @@ interface IFileItemProps {
   item: FrontItem
   lang: string
 }
+
 const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0'
 
-const FileItem = ({ item, lang }: IFileItemProps) => {
-  const url = useFileListStore().url
+interface IItemsMetaProps {
+  filename: string
+  showstring: string
+  lang: string
+  downloadLink: string
+  size: string
+}
 
-  const downloadLink = `${window.location.origin}/${url}/${nginxTransChar(
-    item.name,
-  )}`
-
+export const ItemsMeta = ({
+  filename,
+  showstring,
+  lang,
+  downloadLink,
+  size,
+}: IItemsMetaProps) => {
   const copyLink = useCallback(
-    () => navigator.clipboard.writeText(downloadLink),
+    () =>
+      navigator.clipboard
+        ? navigator.clipboard.writeText(downloadLink)
+        : console.log(downloadLink),
     [downloadLink],
   )
 
   const copyFile = useCallback(
-    () => navigator.clipboard.writeText(removeFileExtension(item.name)),
-    [item.name],
+    () =>
+      navigator.clipboard
+        ? navigator.clipboard.writeText(filename)
+        : console.log(filename),
+    [filename],
   )
-
   return (
     <>
       <Dropdown>
         <DropdownTrigger>
-          <Box>
+          <Box style={{ width: '100%', height: '100%' }}>
             <Heading as='h6' size='xs'>
               <FolderZipOutlinedIcon /> {'  '}
-              {item.name}
+              {showstring}
             </Heading>
             <Text pt='2' fontSize='sm'>
-              {`Size: ${item.size}`}
+              {`Size: ${size}`}
             </Text>
           </Box>
         </DropdownTrigger>
@@ -81,7 +95,7 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
               href={downloadLink}
               startContent={<FileDownloadIcon className={iconClasses} />}
             >
-              {t('Download1', lang) + item.name}
+              {t('Download1', lang) + filename}
             </DropdownItem>
             <DropdownItem
               key='copy'
@@ -119,7 +133,27 @@ const FileItem = ({ item, lang }: IFileItemProps) => {
   )
 }
 
-const FolderItem = ({ item }: { item: FrontItem }) => {
+export const FileItem = ({ item, lang }: IFileItemProps) => {
+  const url = useFileListStore().url
+
+  const downloadLink = `${window.location.origin}/${url}/${nginxTransChar(
+    item.name,
+  )}`
+
+  const filename = removeFileExtension(item.name)
+
+  return (
+    <ItemsMeta
+      filename={filename}
+      showstring={item.name}
+      lang={lang}
+      downloadLink={downloadLink}
+      size={item.size}
+    />
+  )
+}
+
+export const FolderItem = ({ item }: { item: FrontItem }) => {
   const { url, setUrl, setPage, setKey } = useFileListStore()
   return (
     <Box
