@@ -11,6 +11,16 @@ import ExtendIntro from './ExtendIntro'
 import Search from '../search'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Card,
+  CardFooter,
+  Image,
+  Button,
+  Spacer,
+} from '@nextui-org/react'
 
 interface FileListState {
   url: string
@@ -53,17 +63,45 @@ const LegacyContent = (props: DefaultInfoProp) => {
           <Text size='sm'>
             搜索不到请到首页使用 日文原文 搜索, 还没有就是不存在, 请另寻他处
           </Text>
-          <Text size='sm'>
-            加入最新telegram频道{' '}
-            <Link href={'https://t.me/upsetgal'} target='_blank'>
-              https://t.me/upsetgal
-            </Link>
-          </Text>
-          <Text size='sm'>qq群暂不开放</Text>
+          <div className='flex gap-4 items-center'>
+            <Popover placement='bottom' showArrow={true}>
+              <PopoverTrigger>
+                <Button>加入qq群</Button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <Card isFooterBlurred radius='lg' className='border-none'>
+                  <Image
+                    alt='Woman listing to music'
+                    className='object-cover'
+                    height={200}
+                    src='/assets/qq.jpg'
+                    width={200}
+                  />
+                  <CardFooter className='justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10'>
+                    <Link
+                      className='text-tiny text-white/80'
+                      href='https://qm.qq.com/q/5VSFae9HTW'
+                      target='_blank'
+                    >
+                      入群链接
+                    </Link>
+                  </CardFooter>
+                </Card>
+              </PopoverContent>
+            </Popover>
+            <Button
+              as='a'
+              href='https://t.me/upsetgal'
+              target='_blank'
+              variant='ghost'
+            >
+              加入telegram频道
+            </Button>
+          </div>
         </Box>
       ),
       status: 'success',
-      duration: 12000,
+      duration: 20000,
       isClosable: true,
     })
   }, [toast])
