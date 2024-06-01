@@ -59,6 +59,6 @@ export default async function handler(
   const queryjp = cn2jp(q)
   const query = removeDuplicateCharacters(q + queryjp)
   console.log(query)
-  const results = runsearch(query, f)
+  const results = runsearch(query, f).slice(0, 200)
   res.status(200).send(results)
 }
