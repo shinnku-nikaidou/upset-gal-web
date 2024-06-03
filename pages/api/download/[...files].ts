@@ -28,7 +28,7 @@ export default async function handler(
   req: FilesApiRequest,
   res: NextApiResponse<any>,
 ) {
-  res = corsControl(req, res)
+  // res = corsControl(req, res)
   const { cf } = req.query
 
   const fullUrl = req.url

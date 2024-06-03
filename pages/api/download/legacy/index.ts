@@ -16,7 +16,7 @@ export default async function handler(
   req: UserApiRequest,
   res: NextApiResponse<any>,
 ) {
-  res = corsControl(req, res)
+  // res = corsControl(req, res)
 
   let user = req.query.user
   if (user === 'legacy') {
