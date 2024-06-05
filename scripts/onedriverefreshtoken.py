@@ -7,13 +7,16 @@ clientId = ""
 clientSecret = ""
 redirectUri = "https://www.shinnku.com/api/onedrive-login"
 
-res = requests.post(url=url, data={
-    'code': code,
-    'client_id': clientId,
-    'client_secret': clientSecret,
-    'redirect_uri': redirectUri,
-    'grant_type': 'authorization_code'
-})
+res = requests.post(
+    url=url,
+    data={
+        "code": code,
+        "client_id": clientId,
+        "client_secret": clientSecret,
+        "redirect_uri": redirectUri,
+        "grant_type": "authorization_code",
+    },
+)
 
 j = json.loads(res.text)
 
