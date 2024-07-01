@@ -82,7 +82,7 @@ export default async function handler(
       ) {
         const encodedFiles = files.map(encodeURIComponent)
         const newPath = encodedFiles.join('/')
-        const newUrl = `https://dl.oo0o.ooo/file/shinnku/${newPath}`
+        const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
         res.redirect(302, newUrl)
       }
 
