@@ -32,7 +32,14 @@ export default async function handler(
 
   try {
     const { cf } = req.query
+    if (!cf) {
+      const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
+      res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
+      return
+    }
     const files = req.query.files
+    const a_files = ['0', ...files]
+    console.log(a_files)
     const user = getAccount()
     const i = users.indexOf(user)
     const lastfileorfolder = files[files.length - 1]
@@ -47,6 +54,13 @@ export default async function handler(
       ),
     ) as OnedriveItemChildren
 
+    const randomNumber = Math.random()
+    if (randomNumber <= 0.5 && a_files && a_files.length > 0) {
+      const encodedFiles = a_files.map(encodeURIComponent)
+      const newPath = encodedFiles.join('/')
+      const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
+      res.redirect(302, newUrl)
+    }
     const ans = await fileandfolder(
       LEGACY_ONECRIVE_OAUTH[i],
       childs,
@@ -54,27 +68,22 @@ export default async function handler(
       [user, 'root', ...files],
       cf,
     )
+
     if (ans) {
       if (typeof ans === 'string') {
-        if (ans == 'cf') {
-          const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
-          res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
+        const _url = ans
+        if (randomNumber <= 0) {
+          const encrypted = CryptoJS.AES.encrypt(
+            _url,
+            proxySecretKey,
+          ).toString()
+          const encoded = encodeURIComponent(encrypted)
+          const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
+          console.log(newUrl)
+          res.redirect(302, newUrl)
         } else {
-          const _url = ans
-          const randomNumber = Math.random()
-          if (randomNumber <= 0) {
-            const encrypted = CryptoJS.AES.encrypt(
-              _url,
-              proxySecretKey,
-            ).toString()
-            const encoded = encodeURIComponent(encrypted)
-            const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
-            console.log(newUrl)
-            res.redirect(302, newUrl)
-          } else {
-            console.log(_url)
-            res.redirect(302, _url)
-          }
+          console.log(_url)
+          res.redirect(302, _url)
         }
       } else if (ans instanceof Response) {
         const headers = Object.fromEntries(ans.headers.entries())

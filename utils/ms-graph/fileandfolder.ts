@@ -26,7 +26,7 @@ export default async function fileandfolder(
   childs: OnedriveItemChildren,
   node: string,
   path: Array<string>,
-  cf?: string,
+  cf: string,
 ) {
   const child = childs.value.find(({ name }) => name == node)
   if (!child) {
@@ -43,29 +43,25 @@ export default async function fileandfolder(
     ) as OnedriveItemChildren
     return showfileslegacy(child_childs)
   } else if (child.hasOwnProperty('file')) {
-    if (!cf) {
-      return 'cf'
-    } else {
-      const res = await fetch(cfVerifyEndpoint, {
-        method: 'POST',
-        body: `secret=${encodeURIComponent(
-          secret,
-        )}&response=${encodeURIComponent(cf)}`,
+    const res = await fetch(cfVerifyEndpoint, {
+      method: 'POST',
+      body: `secret=${encodeURIComponent(secret)}&response=${encodeURIComponent(
+        cf,
+      )}`,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+    })
+
+    const data = await res.json()
+
+    if (!data.success) {
+      return new Response(JSON.stringify(data), {
+        status: 400,
         headers: {
-          'content-type': 'application/x-www-form-urlencoded',
+          'content-type': 'application/json',
         },
       })
-
-      const data = await res.json()
-
-      if (!data.success) {
-        return new Response(JSON.stringify(data), {
-          status: 400,
-          headers: {
-            'content-type': 'application/json',
-          },
-        })
-      }
     }
 
     const c = cache.get(child.id)
