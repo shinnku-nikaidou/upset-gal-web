@@ -19,7 +19,6 @@ import {
   CardFooter,
   Image,
   Button,
-  Spacer,
 } from '@nextui-org/react'
 
 interface FileListState {
