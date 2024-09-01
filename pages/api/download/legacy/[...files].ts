@@ -58,22 +58,22 @@ export default async function handler(
 
       const randomNumber = Math.random()
 
-      if (randomNumber <= 0.5 && a_files && a_files.length > 0) {
+      if (randomNumber <= 0.3 && a_files && a_files.length > 0) {
         const encodedFiles = a_files.map(encodeURIComponent)
         const newPath = encodedFiles.join('/')
         const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
         res.redirect(302, newUrl)
       }
-      if (randomNumber <= 0) {
-        const encrypted = CryptoJS.AES.encrypt(_url, proxySecretKey).toString()
-        const encoded = encodeURIComponent(encrypted)
-        const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
-        console.log(newUrl)
-        res.redirect(302, newUrl)
-      } else {
-        console.log(_url)
-        res.redirect(302, _url)
-      }
+      // if (randomNumber <= 0) {
+      //   const encrypted = CryptoJS.AES.encrypt(_url, proxySecretKey).toString()
+      //   const encoded = encodeURIComponent(encrypted)
+      //   const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
+      //   console.log(newUrl)
+      //   res.redirect(302, newUrl)
+      // } else {
+      console.log(_url)
+      res.redirect(302, _url)
+      // }
     } else if (ans instanceof Response) {
       const headers = Object.fromEntries(ans.headers.entries())
       res.status(ans.status)

@@ -30,6 +30,13 @@ export default async function handler(
 ) {
   // res = corsControl(req, res)
   const { cf } = req.query
+  let origin = 'https://www.shinnku.com'
+  if (req.headers.origin) {
+    origin = req.headers.origin
+  } else if (req.headers.host) {
+    const protocol = req.headers['x-forwarded-proto'] || 'http'
+    origin = `${protocol}://${req.headers.host}`
+  }
 
   const fullUrl = req.url
   console.log(fullUrl)
@@ -56,7 +63,7 @@ export default async function handler(
   } else {
     if (!cf) {
       const pathname = fullUrl ? url.parse(fullUrl).pathname : ''
-      res.redirect(302, config.SITE + `/human?redirect=${pathname}`)
+      res.redirect(302, origin + `/human?redirect=${pathname}`)
     } else {
       const cfres = await fetch(cfVerifyEndpoint, {
         method: 'POST',

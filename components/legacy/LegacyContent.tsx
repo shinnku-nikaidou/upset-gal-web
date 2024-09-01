@@ -58,12 +58,20 @@ const LegacyContent = (props: DefaultInfoProp) => {
           backdropFilter='blur(10px)'
           boxShadow='lg'
         >
-          <Text size='sm'>新增 23tb 生肉资源, 请在主页直接搜索得到</Text>
+          {/* <Text size='sm'>新增 23tb 生肉资源, 请在主页直接搜索得到</Text> */}
           <Text size='sm'>
-            搜索不到请到首页使用 日文原文 搜索, 还没有就是不存在, 请另寻他处
+            备用站点{' '}
+            <Link
+              className='text-tiny'
+              href='https://www.shinnku.org/'
+              target='_blank'
+            >
+              https://www.shinnku.org/
+            </Link>
+            请收藏以防失联
           </Text>
           <div className='flex gap-4 items-center'>
-            <Popover placement='bottom' showArrow={true}>
+            {/* <Popover placement='bottom' showArrow={true}>
               <PopoverTrigger>
                 <Button>加入qq群</Button>
               </PopoverTrigger>
@@ -87,7 +95,7 @@ const LegacyContent = (props: DefaultInfoProp) => {
                   </CardFooter>
                 </Card>
               </PopoverContent>
-            </Popover>
+            </Popover> */}
             <Button
               as='a'
               href='https://t.me/upsetgal'
