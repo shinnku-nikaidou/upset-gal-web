@@ -42,19 +42,20 @@ export default async function fileandfolder(
     ) as OnedriveItemChildren
     return showfileslegacy(child_childs)
   } else if (child.hasOwnProperty('file')) {
-    const c = cache.get(child.id)
-    let item: OneriveItem
-    if (c && isvalidcache(c)) {
-      item = c.body
-      console.log(`cache ${child.id}`)
-    } else {
-      item = (await query_one(oauth_drive, child.id, '')) as OneriveItem
-      cache.set(child.id, {
-        body: item,
-        timestamp: Date.now(),
-      })
-      console.log(`query one ${child.name} ${child.id}`)
-    }
-    return item['@microsoft.graph.downloadUrl']
+    return 'file'
+    // const c = cache.get(child.id)
+    // let item: OneriveItem
+    // if (c && isvalidcache(c)) {
+    //   item = c.body
+    //   console.log(`cache ${child.id}`)
+    // } else {
+    //   item = (await query_one(oauth_drive, child.id, '')) as OneriveItem
+    //   cache.set(child.id, {
+    //     body: item,
+    //     timestamp: Date.now(),
+    //   })
+    //   console.log(`query one ${child.name} ${child.id}`)
+    // }
+    // return item['@microsoft.graph.downloadUrl']
   }
 }
