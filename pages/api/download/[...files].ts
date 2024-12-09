@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import config, { account } from '@/config'
 import url from 'url'
-import corsControl from '@utils/corsControl'
+// import corsControl from '@utils/corsControl'
 import root from '@utils/drive'
 import { DriveItem } from '@/types'
 import { showfiles } from '@/utils/algorithms/showfile'

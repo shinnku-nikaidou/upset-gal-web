@@ -27,15 +27,6 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
 
   const [results, setResults] = useState<Array<NewFrontItem>>([])
 
-  useEventListener('keydown', (event) => {
-    const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator?.platform)
-    const hotkey = isMac ? 'metaKey' : 'ctrlKey'
-    if (event?.key?.toLowerCase() === 'k' && event[hotkey]) {
-      event.preventDefault()
-      modal.isOpen ? modal.onClose() : modal.onOpen()
-    }
-  })
-
   useEffect(() => {
     if (modal.isOpen && query.length > 0) {
       setQuery('')
@@ -164,7 +155,7 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
               }}
               placeholder='请输入中文或者日文'
               value={query}
-              onChange={(e) => {
+              onChange={(e: { target: { value: any } }) => {
                 setQuery(e.target.value)
                 menu.onOpen()
               }}
@@ -191,52 +182,54 @@ const Search = (props: { isMobile: boolean; lang: string }) => {
                 }}
               >
                 <Box as='ul' role='listbox' borderTopWidth='1px' pt={2} pb={4}>
-                  {results.map((item, index) => {
-                    const selected = index === active
-                    const parts = item.name.split('/').slice(1)
-                    let showstring = item.name
-                    if (parts[0].startsWith('raw')) {
-                      showstring = `(生肉) 文件路径是: ${item.name}`
-                    } else if (parts[0].startsWith('psp')) {
-                      showstring = `(psp模拟器) 文件路径是: ${item.name}`
-                    } else if (parts[0].startsWith('zd')) {
-                      showstring = `(汉化硬盘) 文件路径是: ${item.name}`
-                    } else if (parts[0].startsWith('0')) {
-                      showstring = `文件路径是: ${item.name}`
-                      if (parts[1].startsWith('krkr')) {
-                        showstring = `(手机krkr模拟器) 文件路径是: ${item.name}`
+                  {results.map(
+                    (item: { name: string; size: string }, index: number) => {
+                      const selected = index === active
+                      const parts = item.name.split('/').slice(1)
+                      let showstring = item.name
+                      if (parts[0].startsWith('raw')) {
+                        showstring = `(生肉) 文件路径是: ${item.name}`
+                      } else if (parts[0].startsWith('psp')) {
+                        showstring = `(psp模拟器) 文件路径是: ${item.name}`
+                      } else if (parts[0].startsWith('zd')) {
+                        showstring = `(汉化硬盘) 文件路径是: ${item.name}`
+                      } else if (parts[0].startsWith('0')) {
+                        showstring = `文件路径是: ${item.name}`
+                        if (parts[1].startsWith('krkr')) {
+                          showstring = `(手机krkr模拟器) 文件路径是: ${item.name}`
+                        }
                       }
-                    }
 
-                    const downloadLink = `${
-                      window.location.origin
-                    }/api/download${nginxTransChar(item.name)}`
-                    const filename = parts[parts.length - 1]
-                    return (
-                      <Box
-                        id={`search-item-${index}`}
-                        as='li'
-                        aria-selected={selected ? true : undefined}
-                        onMouseEnter={() => {
-                          setActive(index)
-                          eventRef.current = 'mouse'
-                        }}
-                        ref={menuNodes.ref(index)}
-                        role='option'
-                        key={index}
-                        sx={item_sx}
-                      >
-                        <ItemsMeta
-                          lang={props.lang}
-                          filename={filename}
-                          showstring={showstring}
-                          downloadLink={downloadLink}
-                          size={item.size}
+                      const downloadLink = `${
+                        window.location.origin
+                      }/api/download${nginxTransChar(item.name)}`
+                      const filename = parts[parts.length - 1]
+                      return (
+                        <Box
+                          id={`search-item-${index}`}
+                          as='li'
+                          aria-selected={selected ? true : undefined}
+                          onMouseEnter={() => {
+                            setActive(index)
+                            eventRef.current = 'mouse'
+                          }}
+                          ref={menuNodes.ref(index)}
+                          role='option'
                           key={index}
-                        />
-                      </Box>
-                    )
-                  })}
+                          sx={item_sx}
+                        >
+                          <ItemsMeta
+                            lang={props.lang}
+                            filename={filename}
+                            showstring={showstring}
+                            downloadLink={downloadLink}
+                            size={item.size}
+                            key={index}
+                          />
+                        </Box>
+                      )
+                    },
+                  )}
                 </Box>
               </Box>
             )}

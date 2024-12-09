@@ -21,18 +21,18 @@ export function extractOrigin(referer: string) {
   }
 }
 
-export default function corsControl(req: NextApiRequest, res: NextApiResponse) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const referer = req.headers.referer!
-  console.log(formattedTimeStamp(), referer)
+// export default function corsControl(req: NextApiRequest, res: NextApiResponse) {
+//   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+//   const referer = req.headers.referer!
+//   console.log(formattedTimeStamp(), referer)
 
-  ALLOWED_ORIGINS.forEach((allowed_origin) => {
-    if (referer && referer.includes(allowed_origin)) {
-      const origin = extractOrigin(referer)
-      res.setHeader('Access-Control-Allow-Origin', origin)
-      return res
-    }
-  })
+//   ALLOWED_ORIGINS.forEach((allowed_origin) => {
+//     if (referer && referer.includes(allowed_origin)) {
+//       const origin = extractOrigin(referer)
+//       res.setHeader('Access-Control-Allow-Origin', origin)
+//       return res
+//     }
+//   })
 
-  return res
-}
+//   return res
+// }
