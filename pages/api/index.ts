@@ -10,5 +10,10 @@ export default function handler(
   _req: NextApiRequest,
   res: NextApiResponse<Data>,
 ) {
-  res.status(200).json({ name: 'shinnku', data: 'hello, my old dear friend' })
+  res
+    .status(200)
+    .json({
+      name: 'shinnku',
+      data: 'hello, my old dear friend, the server is successful running',
+    })
 }
