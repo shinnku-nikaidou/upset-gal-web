@@ -82,10 +82,9 @@ export default async function handler(
       }
       const randomNumber = Math.random()
       if (
-        randomNumber <= 0.8 &&
         files &&
         files.length > 0 &&
-        files[0] === '0'
+        (files[0] === '0' || files[0] === 'zd')
       ) {
         const encodedFiles = files.map(encodeURIComponent)
         const newPath = encodedFiles.join('/')

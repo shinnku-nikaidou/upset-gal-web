@@ -45,16 +45,16 @@ export default async function handler(
     res.send(files)
   }
 
-  let f = files
-  if (psp === '0' && raw === '0') {
-    f = fileswithoutpspandraw
-  } else if (psp !== '0' && raw !== '0') {
-    f = files
-  } else if (psp === '0' && raw !== '0') {
-    f = fileswithoutpsp
-  } else if (psp !== '0' && raw === '0') {
-    f = fileswithoutraw
-  }
+  const f = fileswithoutpsp
+  // if (psp === '0' && raw === '0') {
+  //   f = fileswithoutpspandraw
+  // } else if (psp !== '0' && raw !== '0') {
+  //   f = files
+  // } else if (psp === '0' && raw !== '0') {
+  //   f = fileswithoutpsp
+  // } else if (psp !== '0' && raw === '0') {
+  //   f = fileswithoutraw
+  // }
 
   const queryjp = cn2jp(q)
   const query = removeDuplicateCharacters(q + queryjp)
