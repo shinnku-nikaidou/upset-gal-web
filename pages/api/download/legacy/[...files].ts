@@ -54,7 +54,7 @@ export default async function handler(
       // const _url = ans
 
       const encodedFiles = a_files.map(encodeURIComponent)
-      const newPath = encodedFiles.join('/')
+      const newPath = encodedFiles.join('/').replaceAll('\u201B', '') // remove ‛
       const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
       res.redirect(302, newUrl)
 

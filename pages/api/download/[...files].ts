@@ -87,7 +87,7 @@ export default async function handler(
         (files[0] === '0' || files[0] === 'zd')
       ) {
         const encodedFiles = files.map(encodeURIComponent)
-        const newPath = encodedFiles.join('/').replaceAll("\u201B", "") // remove ‛
+        const newPath = encodedFiles.join('/').replaceAll('\u201B', '') // remove ‛
         const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
         res.redirect(302, newUrl)
       }
@@ -101,7 +101,8 @@ export default async function handler(
       if (randomNumber <= 0) {
         const encrypted = CryptoJS.AES.encrypt(_url, proxySecretKey).toString()
         const encoded = encodeURIComponent(encrypted)
-        const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encoded}`
+        const encodedFiles = encoded.replaceAll('\u201B', '') // remove ‛
+        const newUrl = `https://dl.shinnku.com/proxy?&proxyUrl=${encodedFiles}`
         console.log(newUrl)
         res.redirect(302, newUrl)
       } else {
