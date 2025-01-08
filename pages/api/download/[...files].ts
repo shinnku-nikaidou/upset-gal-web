@@ -87,8 +87,9 @@ export default async function handler(
         (files[0] === '0' || files[0] === 'zd')
       ) {
         const encodedFiles = files.map(encodeURIComponent)
-        const newPath = encodedFiles.join('/').replaceAll('\u201B', '') // remove ‛
-        const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
+        const newUrl = `https://dl.shinnku.org/file/shinnku/${encodedFiles.join(
+          '/',
+        )}`.replaceAll('%E2%80%9B', '')
         res.redirect(302, newUrl)
       }
 

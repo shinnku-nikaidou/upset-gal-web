@@ -54,20 +54,13 @@ export default async function handler(
       // const _url = ans
 
       const encodedFiles = a_files.map(encodeURIComponent)
-      const newPath = encodedFiles.join('/').replaceAll('\u201B', '') // remove ‛
-      const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
+      const newPath = encodedFiles.join('/')
+      const newUrl =
+        `https://dl.shinnku.org/file/shinnku/${newPath}`.replaceAll(
+          '%E2%80%9B',
+          '',
+        )
       res.redirect(302, newUrl)
-
-      // const randomNumber = Math.random()
-
-      // if (randomNumber <= 0.99 && a_files && a_files.length > 0) {
-      //   const encodedFiles = a_files.map(encodeURIComponent)
-      //   const newPath = encodedFiles.join('/')
-      //   const newUrl = `https://dl.shinnku.org/file/shinnku/${newPath}`
-      //   res.redirect(302, newUrl)
-      // }
-      // console.log(_url)
-      // res.redirect(302, _url)
     } else if (ans instanceof Response) {
       const headers = Object.fromEntries(ans.headers.entries())
       res.status(ans.status)
