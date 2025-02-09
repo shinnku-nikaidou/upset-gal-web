@@ -15,6 +15,9 @@ export default async function handler(
   }
 
   try {
+    if (cover.includes('..')) {
+      throw new Error('Invalid cover name: ".." sequence not allowed.');
+    }
     const jpgData = await fs.readFile(path.join(MUSIC_DIR_V1, 'cover', cover))
 
     res.setHeader('Content-Type', 'image/jpeg')
