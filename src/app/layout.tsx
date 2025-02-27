@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Script from 'next/script'
 import styles from '@/styles/Home.module.css'
 import './globals.css'
+import { Providers } from './providers'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -27,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
+    <html lang='zh-CN' suppressHydrationWarning>
       <Script
         async
         src='https://www.googletagmanager.com/gtag/js?id=G-61P3NL510C'
@@ -57,7 +58,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${styles.main}`}
       >
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   )
