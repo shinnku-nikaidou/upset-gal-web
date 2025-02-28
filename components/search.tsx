@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 import { Input } from '@heroui/input'
-import { Button } from '@heroui/button'
 import { Kbd } from '@heroui/kbd'
+
 import { SearchIcon } from './icons'
 
 interface SearchProps {
@@ -40,12 +40,13 @@ export const Search: React.FC<SearchProps> = ({
 
   return (
     <div className='flex items-center justify-center w-full'>
-      <div className='w-full max-w-2xl'>
+      <div className='w-full max-w-3xl gap-4'>
         <Input
           aria-label='Search'
           classNames={{
-            inputWrapper: 'bg-default-100',
-            input: 'text-sm',
+            inputWrapper:
+              'rounded-full bg-white shadow-md border border-gray-200 focus-within:border-blue-500', // Explicit height and vertical padding
+            input: 'text-base text-gray-700 placeholder-gray-500',
           }}
           color='primary'
           endContent={
@@ -55,6 +56,7 @@ export const Search: React.FC<SearchProps> = ({
           }
           labelPlacement='outside'
           placeholder='在此处搜索galgame，搜索不到请换日文原文'
+          radius='full'
           size='lg'
           startContent={
             <SearchIcon className='text-base text-default-400 pointer-events-none flex-shrink-0' />
