@@ -45,7 +45,7 @@ export default async function handler(
     res.send(files)
   }
 
-  const f = fileswithoutpsp
+  const f = fileswithoutpspandraw
   // if (psp === '0' && raw === '0') {
   //   f = fileswithoutpspandraw
   // } else if (psp !== '0' && raw !== '0') {

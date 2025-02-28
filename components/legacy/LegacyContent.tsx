@@ -60,7 +60,8 @@ const LegacyContent = (props: DefaultInfoProp) => {
         >
           {/* <Text size='sm'>新增 23tb 生肉资源, 请在主页直接搜索得到</Text> */}
           <Text size='sm'>
-            备用站点{' '}
+            全新真红小站正在筹备中！敬请期待！
+            {/* 备用站点{' '}
             <Link
               className='text-tiny'
               href='https://www.shinnku.org/'
@@ -68,7 +69,7 @@ const LegacyContent = (props: DefaultInfoProp) => {
             >
               https://www.shinnku.org/
             </Link>
-            请收藏以防失联
+            请收藏以防失联 */}
           </Text>
           <div className='flex gap-4 items-center'>
             {/* <Popover placement='bottom' showArrow={true}>
