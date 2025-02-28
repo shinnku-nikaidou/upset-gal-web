@@ -1,13 +1,20 @@
-/** @type {import('tailwindcss').Config} */
-import { heroui } from '@heroui/react'
+import {heroui} from "@heroui/theme"
 
-export const content = [
-  // ...
-  // make sure it's pointing to the ROOT node_module
-  './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
-]
-export const theme = {
-  extend: {},
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
+  ],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)"],
+        mono: ["var(--font-mono)"],
+      },
+    },
+  },
+  darkMode: "class",
+  plugins: [heroui()],
 }
-export const darkMode = 'class'
-plugins = [heroui()]
