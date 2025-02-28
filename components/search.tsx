@@ -39,35 +39,31 @@ export const Search: React.FC<SearchProps> = ({
   }
 
   return (
-    <div className='flex items-center justify-center w-full'>
-      <div className='w-full max-w-3xl gap-4'>
-        <Input
-          aria-label='Search'
-          classNames={{
-            inputWrapper:
-              'rounded-full bg-white shadow-md border border-gray-200 focus-within:border-blue-500', // Explicit height and vertical padding
-            input: 'text-base text-gray-700 placeholder-gray-500',
-          }}
-          color='primary'
-          endContent={
-            <Kbd className='hidden lg:inline-block' keys={['command']}>
-              K
-            </Kbd>
-          }
-          labelPlacement='outside'
-          placeholder='在此处搜索galgame，搜索不到请换日文原文'
-          radius='full'
-          size='lg'
-          startContent={
-            <SearchIcon className='text-base text-default-400 pointer-events-none flex-shrink-0' />
-          }
-          type='search'
-          value={searchTerm}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-        />
-      </div>
-    </div>
+    <Input
+      aria-label='Search'
+      classNames={{
+        inputWrapper:
+          'rounded-full bg-white dark:bg-black shadow-md border border-gray-200 focus-within:border-blue-500',
+        input: 'text-base text-gray-700 placeholder-gray-500 dark:text-white',
+      }}
+      color='primary'
+      endContent={
+        <Kbd className='hidden lg:inline-block' keys={['command']}>
+          K
+        </Kbd>
+      }
+      labelPlacement='outside'
+      placeholder='在此处搜索galgame，搜索不到请换日文原文'
+      radius='full'
+      size='lg'
+      startContent={
+        <SearchIcon className='text-base text-default-400 pointer-events-none flex-shrink-0' />
+      }
+      type='search'
+      value={searchTerm}
+      onChange={handleInputChange}
+      onKeyDown={handleKeyDown}
+    />
   )
 }
 

@@ -13,15 +13,19 @@ export default function Home() {
       <div className='inline-block max-w-xl text-center justify-center'>
         <span className={title({ color: 'pink' })}>真红&nbsp;</span>
         <span className={title()}>小站&nbsp;</span>
-        <div className={subtitle({ class: 'mt-4' })}>
+        <div className={subtitle({ class: 'mt-6' })}>
           真红小站（原 失落小站）一个galgame资源站, 收录了大部分的汉化galgame,
           大部分的生肉galgame资源。
         </div>
       </div>
 
-      <Search />
+      <div className='flex items-center justify-center w-full mt-10'>
+        <div className='w-full max-w-3xl gap-4'>
+          <Search />
+        </div>
+      </div>
 
-      <div className='flex gap-3'>
+      <div className='flex gap-3 mt-8'>
         <Link
           // isExternal
           className={buttonStyles({ variant: 'bordered', radius: 'full' })}
