@@ -1,6 +1,10 @@
+'use client'
+
 import React, { useState } from 'react'
 import { Input } from '@heroui/input'
 import { Button } from '@heroui/button'
+import { Kbd } from '@heroui/kbd'
+import { SearchIcon } from './icons'
 
 interface SearchProps {
   // Add any props your component might need here. For example:
@@ -38,20 +42,24 @@ export const Search: React.FC<SearchProps> = ({
     <div className='flex items-center justify-center w-full'>
       <div className='w-full max-w-2xl'>
         <Input
-          fullWidth
-          isClearable
           aria-label='Search'
+          classNames={{
+            inputWrapper: 'bg-default-100',
+            input: 'text-sm',
+          }}
           color='primary'
-          //   contentLeft={<SearchIcon className='text-gray-400' />}
-          //   contentRight={
-          //     searchTerm && (
-          //       <Button auto flat color='error' onClick={() => setSearchTerm('')}>
-          //         X
-          //       </Button>
-          //     )
-          //   }
-          placeholder='Search Google or type a URL'
+          endContent={
+            <Kbd className='hidden lg:inline-block' keys={['command']}>
+              K
+            </Kbd>
+          }
+          labelPlacement='outside'
+          placeholder='在此处搜索galgame，搜索不到请换日文原文'
           size='lg'
+          startContent={
+            <SearchIcon className='text-base text-default-400 pointer-events-none flex-shrink-0' />
+          }
+          type='search'
           value={searchTerm}
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}

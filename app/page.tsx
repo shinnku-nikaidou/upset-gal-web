@@ -5,6 +5,7 @@ import { button as buttonStyles } from '@heroui/theme'
 
 import { siteConfig } from '@/config/site'
 import { title, subtitle } from '@/components/primitives'
+import Search from '@/components/search'
 
 export default function Home() {
   return (
@@ -17,6 +18,8 @@ export default function Home() {
           大部分的生肉galgame资源。
         </div>
       </div>
+
+      <Search />
 
       <div className='flex gap-3'>
         <Link
