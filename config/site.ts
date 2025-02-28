@@ -5,24 +5,20 @@ export const siteConfig = {
   description: 'Make beautiful websites regardless of your design experience.',
   navItems: [
     {
-      label: 'Home',
-      href: '/',
-    },
-    {
-      label: 'Docs',
+      label: '文档',
       href: '/docs',
     },
+    // {
+    //   label: '博客',
+    //   href: '/blog',
+    // },
     {
-      label: 'Pricing',
-      href: '/pricing',
-    },
-    {
-      label: 'Blog',
-      href: '/blog',
-    },
-    {
-      label: 'About',
+      label: '关于',
       href: '/about',
+    },
+    {
+      label: '目录',
+      href: '/files',
     },
   ],
   navMenuItems: [
@@ -62,5 +58,6 @@ export const siteConfig = {
   links: {
     github: 'https://github.com/shinnku-nikaidou/upset-gal-web/tree/develop',
     docs: 'https://docs.shinnku.com',
+    files: '/files',
   },
 }

@@ -1,28 +1,36 @@
 import * as React from 'react'
-
+import Image from 'next/image'
 import { IconSvgProps } from '@/types'
+import { Link } from '@heroui/link'
 
-export const Logo: React.FC<IconSvgProps> = ({
-  size = 36,
-  width,
-  height,
-  ...props
-}) => (
-  <svg
-    fill='none'
-    height={size || height}
-    viewBox='0 0 32 32'
-    width={size || width}
-    {...props}
-  >
-    <path
-      clipRule='evenodd'
-      d='M17.6482 10.1305L15.8785 7.02583L7.02979 22.5499H10.5278L17.6482 10.1305ZM19.8798 14.0457L18.11 17.1983L19.394 19.4511H16.8453L15.1056 22.5499H24.7272L19.8798 14.0457Z'
-      fill='currentColor'
-      fillRule='evenodd'
+export const Logo = ({ size = 36, ...props }) => {
+  const styles = {
+    imageContainer: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      // width: '100%',
+      height: '100%',
+    },
+    responsiveImage: {
+      display: 'flex',
+      alignItems: 'center',
+      margin: '0 auto',
+      width: '100%',
+    },
+  }
+
+  return (
+    <Image
+      alt={`${'真红小站'}, ${'欢迎来到 galgame 分享站点'}`}
+      height={0}
+      loading='lazy'
+      src='/assets/upsetgal-logo.png'
+      style={styles.responsiveImage}
+      width={100}
     />
-  </svg>
-)
+  )
+}
 
 export const DiscordIcon: React.FC<IconSvgProps> = ({
   size = 24,
