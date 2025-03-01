@@ -51,11 +51,12 @@ export default function RootLayout({
               <Link
                 isExternal
                 className='flex items-center gap-1 text-current'
-                href='https://heroui.com?utm_source=next-app-template'
-                title='heroui.com homepage'
+                href='https://t.me/upsetgal'
+                title='join telegram'
               >
                 <span className='text-default-600'>Powered by</span>
-                <p className='text-primary'>HeroUI</p>
+                <p className='text-primary'>Shinnku; </p>
+                <span className='text-default-600'>join our telegram</span>
               </Link>
             </footer>
           </div>

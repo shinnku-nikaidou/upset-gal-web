@@ -15,37 +15,37 @@ export default function FilesPage() {
 
     {
       title: '前win汉化集合',
-      link: '/files/win',
+      link: '/files/shinnku/0/win',
       body: <></>,
     },
     {
       title: '新win汉化集合',
-      link: '/files/zd',
+      link: '/files/shinnku/zd',
       body: <></>,
     },
     {
       title: 'apk集合',
-      link: '/files/apk',
+      link: '/files/shinnku/0/apk',
       body: <></>,
     },
     {
       title: 'ons集合',
-      link: '/files/krkr',
+      link: '/files/shinnku/0/ons',
       body: <></>,
     },
     {
       title: 'krkr集合',
-      link: '/files/krkr',
+      link: '/files/shinnku/0/krkr',
       body: <></>,
     },
     {
       title: 'galgame工具',
-      link: '/files/tools',
+      link: '/files/shinnku/0/tools',
       body: <></>,
     },
     {
       title: '生肉硬盘集合',
-      link: '/files/raw',
+      link: '/files/galgame0',
       body: <></>,
     },
   ]
