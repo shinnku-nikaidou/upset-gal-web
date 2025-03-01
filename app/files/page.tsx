@@ -1,52 +1,58 @@
 'use client'
 
 import { Card, CardBody, CardFooter, Link } from '@heroui/react'
-import { GlobalOutlined } from '@ant-design/icons'
+import {
+  AndroidOutlined,
+  CodeOutlined,
+  GlobalOutlined,
+  WindowsOutlined,
+} from '@ant-design/icons'
+import Image from 'next/image'
 
 import { title } from '@/components/primitives'
+import { KRKROutlined, ONSOutlined } from '@/components/galgame-icons'
 
 export default function FilesPage() {
   const list = [
     {
       title: '真红论坛',
       link: 'https://galgame.dev/',
-      body: <GlobalOutlined />,
+      body: <GlobalOutlined className='my-icon-large' />,
     },
-
     {
       title: '前win汉化集合',
       link: '/files/shinnku/0/win',
-      body: <></>,
+      body: <WindowsOutlined className='my-icon-large' />,
     },
     {
       title: '新win汉化集合',
       link: '/files/shinnku/zd',
-      body: <></>,
+      body: <WindowsOutlined className='my-icon-large' />,
     },
     {
       title: 'apk集合',
       link: '/files/shinnku/0/apk',
-      body: <></>,
+      body: <AndroidOutlined className='my-icon-large' />,
     },
     {
       title: 'ons集合',
       link: '/files/shinnku/0/ons',
-      body: <></>,
+      body: <ONSOutlined height={60} width={60} />,
     },
     {
       title: 'krkr集合',
       link: '/files/shinnku/0/krkr',
-      body: <></>,
+      body: <KRKROutlined height={36} width={36} />,
     },
     {
       title: 'galgame工具',
       link: '/files/shinnku/0/tools',
-      body: <></>,
+      body: <CodeOutlined className='my-icon-large' />,
     },
     {
       title: '生肉硬盘集合',
       link: '/files/galgame0',
-      body: <></>,
+      body: <Image alt={'japan'} height={40} src={'/japan.svg'} width={40} />,
     },
   ]
 

@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.my-icon-small {
+  font-size: 16px;
+}
+
+.my-icon-medium {
+  font-size: 24px;
+}
+
+.my-icon-large {
+  font-size: 32px;
+}

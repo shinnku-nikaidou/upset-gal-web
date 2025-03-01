@@ -6,7 +6,7 @@ export default async function BrowserPage({
 }: {
   params: Promise<{ slug: string[] }>
 }) {
-  const slug = (await params).slug
+  const slug = (await params).slug.map(decodeURIComponent)
   let node: any = tree
 
   for (const key of slug) {
