@@ -47,7 +47,7 @@ config.yaml
 log.txt
 start.sh
 *.zip
-
+config.toml
 *.db
 
 tmp.*
