@@ -29,7 +29,7 @@ export default async function BrowserPage({
         <div className={'w-60 pl-1'}>
           <Sidebar />
         </div>
-        <div className='pl-20'>
+        <div className='pl-20 w-full'>
           <p className='text-gray-300'>{JSON.stringify(slug)}</p>
           <p>{variety}</p>
         </div>
@@ -40,12 +40,12 @@ export default async function BrowserPage({
   const inode = node2list(node)
 
   return (
-    <div className='flex flex-1'>
+    <div className='flex flex-1 min-w-max max-w-[960px] w-screen'>
       <div className={'w-60 pl-1'}>
         <Sidebar />
       </div>
-      <div className='pl-12'>
-        <FileList inode={inode} />
+      <div className='pl-12 min-w-96'>
+        <FileList inode={inode} slug={slug} />
       </div>
     </div>
   )

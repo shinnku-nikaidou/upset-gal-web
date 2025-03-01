@@ -7,7 +7,7 @@ import { IndexList } from '@/config/indexList'
 
 export default function FilesPage() {
   return (
-    <div>
+    <div className='items-center'>
       <h1 className={title()}>全部游戏</h1>
       <div className='gap-4 grid grid-cols-2 sm:grid-cols-2 mt-8'>
         {IndexList.map((item, index) => (
