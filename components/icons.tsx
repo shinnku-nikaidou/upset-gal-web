@@ -1,8 +1,9 @@
 import * as React from 'react'
 import Image from 'next/image'
-import { IconSvgProps } from '@/types'
-import { Link } from '@heroui/link'
 
+import { IconSvgProps } from '@/types'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Logo = ({ size = 36, ...props }) => {
   const styles = {
     imageContainer: {

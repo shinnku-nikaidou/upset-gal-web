@@ -51,3 +51,46 @@ export const IndexList = [
     body: <Image alt={'japan'} height={40} src={'/japan.svg'} width={40} />,
   },
 ]
+
+export const IndexListForSlog = [
+  {
+    title: '真红论坛',
+    link: 'https://galgame.dev/',
+    body: <GlobalOutlined className='my-icon-small' />,
+  },
+  {
+    title: '前win汉化',
+    link: '/files/shinnku/0/win',
+    body: <WindowsOutlined className='my-icon-small' />,
+  },
+  {
+    title: '新win汉化',
+    link: '/files/shinnku/zd',
+    body: <WindowsFilled className='my-icon-small' />,
+  },
+  {
+    title: 'apk集合',
+    link: '/files/shinnku/0/apk',
+    body: <AndroidOutlined className='my-icon-small' />,
+  },
+  {
+    title: 'ons集合',
+    link: '/files/shinnku/0/ons',
+    body: <ONSOutlined height={24} width={24} />,
+  },
+  {
+    title: 'krkr集合',
+    link: '/files/shinnku/0/krkr',
+    body: <KRKROutlined height={16} width={16} />,
+  },
+  {
+    title: 'gal工具',
+    link: '/files/shinnku/0/tools',
+    body: <CodeOutlined className='my-icon-small' />,
+  },
+  {
+    title: '生肉集合',
+    link: '/files/galgame0',
+    body: <Image alt={'japan'} height={20} src={'/japan.svg'} width={20} />,
+  },
+]
