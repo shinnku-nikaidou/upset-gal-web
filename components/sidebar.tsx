@@ -5,7 +5,7 @@ import { IndexListForSlog } from '@/config/indexList'
 
 export const Sidebar = () => {
   return (
-    <div className='flex flex-col gap-[2vh]'>
+    <div className='flex flex-col gap-[3vh]'>
       {IndexListForSlog.map((item, index) => (
         <Button
           key={index}
