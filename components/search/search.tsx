@@ -7,24 +7,15 @@ import { Kbd } from '@heroui/kbd'
 import { SearchIcon } from '../icons'
 
 interface SearchProps {
-  // Add any props your component might need here. For example:
-  // onSearch?: (term: string) => void; // Callback for when search is performed
-  initialSearchTerm?: string // Optional initial search term
+  initialSearchTerm?: string
 }
 
-export const Search: React.FC<SearchProps> = ({
-  initialSearchTerm = '' /*onSearch*/,
-}) => {
+export const Search: React.FC<SearchProps> = ({ initialSearchTerm = '' }) => {
   const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm)
 
   const handleSearch = () => {
     if (searchTerm.trim() !== '') {
-      //  if (onSearch) {
-      //     onSearch(searchTerm);
-      //  } else {
-      // Example: Redirect
       window.location.href = `/search?q=${encodeURIComponent(searchTerm)}`
-      //   }
     }
   }
 

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Search from '@/components/search/search'
 import { SearchAnswer } from '@/components/search/search-answer'
 import { default_search } from '@/algorithm/search'
+import { SearchIntro } from '@/components/search/search-intro'
 
 export default async function SearchPage({
   searchParams,
@@ -23,8 +24,7 @@ export default async function SearchPage({
             <SearchAnswer answer={answer} />
           </div>
           <div>
-            {/* Right side content */}
-            <p>This is the right side of the page.</p>
+            <SearchIntro name={q} />
           </div>
         </div>
       </div>
