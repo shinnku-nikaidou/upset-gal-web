@@ -40,7 +40,7 @@ export default async function BrowserPage({
           <div className={'w-60 pl-1'}>
             <Sidebar />
           </div>
-          <div className='pl-20 min-w-96'>
+          <div className='pl-20 min-w-96 max-w-[600px]'>
             <GameIntro info={node} />
           </div>
         </div>

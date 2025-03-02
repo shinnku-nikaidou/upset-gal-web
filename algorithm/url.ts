@@ -17,3 +17,11 @@ export function generate_download_url(file_path: string[]) {
     return `${url}${file_path.map(encodeURIComponent).join('/')}`
   }
 }
+
+export function trim_file_path(file_path: string) {
+  if (file_path.startsWith('合集系列')) {
+    return file_path.substring(20)
+  }
+
+  return file_path
+}

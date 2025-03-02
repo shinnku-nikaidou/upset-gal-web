@@ -10,6 +10,15 @@ export type FileInfo = {
   file_size: number
 }
 
+export type BucketFiles = FileInfo[]
+
+export type SearchList = SearchItem[]
+
+export type SearchItem = {
+  id: string
+  info: FileInfo
+}
+
 export type Node =
   | { type: 'file'; name: string; info: FileInfo }
   | { type: 'folder'; name: string }

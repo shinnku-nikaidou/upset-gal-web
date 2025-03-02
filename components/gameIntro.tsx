@@ -12,22 +12,14 @@ import React from 'react'
 
 import { FileInfo } from '@/types'
 import { num2size } from '@/algorithm/util'
-import { generate_download_url } from '@/algorithm/url'
+import { generate_download_url, trim_file_path } from '@/algorithm/url'
 
 export const GameIntro: React.FC<{ info: FileInfo }> = ({ info }) => {
   const s = info.file_path.split('/')
   const name = s[s.length - 1]
 
-  const hide_path = (file_path: string) => {
-    if (file_path.startsWith('合集系列')) {
-      return file_path.substring(20)
-    }
-
-    return file_path
-  }
-
   return (
-    <Card className='max-w-[400px]'>
+    <Card className=''>
       <CardHeader className='flex gap-3'>
         {/* <Image
           alt='heroui logo'
@@ -42,7 +34,7 @@ export const GameIntro: React.FC<{ info: FileInfo }> = ({ info }) => {
       </CardHeader>
       <Divider />
       <CardBody>
-        <p>路径：{hide_path(info.file_path)}</p>
+        <p>路径：{trim_file_path(info.file_path)}</p>
         <p className='text-gray-300'>大小：{num2size(info.file_size)}</p>
       </CardBody>
       <Divider />

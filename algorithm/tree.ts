@@ -1,7 +1,7 @@
-import { FileInfo, Inode, Variety } from '@/types'
+import { BucketFiles, Inode, Variety } from '@/types'
 
-export function generateTree(fileList: FileInfo[]): any {
-  const root: { [key: string]: any } = {}
+export function generateTree(fileList: BucketFiles): any {
+  const root: any = {}
 
   for (const file of fileList) {
     const filePath = file.file_path
