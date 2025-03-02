@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { search_index } from '@/config/root'
-import { cn2jp, removeDuplicateCharacters, runsearch } from '@/algorithm/search'
+import { default_search } from '@/algorithm/search'
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,10 +8,7 @@ export default async function handler(
 ) {
   const { q } = req.query as { q: string }
 
-  const queryjp = cn2jp(q)
-  const query = removeDuplicateCharacters(q + queryjp)
-
-  const results = runsearch(query, search_index).slice(0, 20)
+  const results = default_search(q, 100)
 
   res.status(200).send(results)
 }

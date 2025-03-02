@@ -5,7 +5,7 @@ import { button as buttonStyles } from '@heroui/theme'
 
 import { siteConfig } from '@/config/site'
 import { title, subtitle } from '@/components/primitives'
-import Search from '@/components/search'
+import Search from '@/components/search/search'
 
 export default function Home() {
   return (

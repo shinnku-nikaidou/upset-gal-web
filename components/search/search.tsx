@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Input } from '@heroui/input'
 import { Kbd } from '@heroui/kbd'
 
-import { SearchIcon } from './icons'
+import { SearchIcon } from '../icons'
 
 interface SearchProps {
   // Add any props your component might need here. For example:

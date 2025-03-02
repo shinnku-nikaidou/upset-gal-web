@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 
 import { title } from '@/components/primitives'
-import Search from '@/components/search'
+import Search from '@/components/search/search'
+import { SearchAnswer } from '@/components/search/search-answer'
 
 export default async function SearchPage({
   searchParams,
@@ -18,8 +19,7 @@ export default async function SearchPage({
         </div>
         <div className='grid grid-cols-2 pt-10 pl-10'>
           <div>
-            {/* Left side content */}
-            <p>This is the left side of the page.</p>
+            <SearchAnswer />
           </div>
           <div>
             {/* Right side content */}
