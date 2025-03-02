@@ -1,8 +1,8 @@
 import { notFound } from 'next/navigation'
 
-import { title } from '@/components/primitives'
 import Search from '@/components/search/search'
 import { SearchAnswer } from '@/components/search/search-answer'
+import { default_search } from '@/algorithm/search'
 
 export default async function SearchPage({
   searchParams,
@@ -10,6 +10,7 @@ export default async function SearchPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const q = (await searchParams).q as string
+  const answer = default_search(q, 40)
 
   if (q) {
     return (
@@ -18,8 +19,8 @@ export default async function SearchPage({
           <Search initialSearchTerm={q} />
         </div>
         <div className='grid grid-cols-2 pt-10 pl-10'>
-          <div>
-            <SearchAnswer />
+          <div className='pr-20'>
+            <SearchAnswer answer={answer} />
           </div>
           <div>
             {/* Right side content */}
