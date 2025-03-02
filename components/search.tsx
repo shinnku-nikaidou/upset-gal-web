@@ -47,11 +47,7 @@ export const Search: React.FC<SearchProps> = ({
         input: 'text-base text-gray-700 placeholder-gray-500 dark:text-white',
       }}
       color='primary'
-      endContent={
-        <Kbd className='hidden lg:inline-block' keys={['command']}>
-          K
-        </Kbd>
-      }
+      endContent={<Kbd className='hidden lg:inline-block' keys={['enter']} />}
       labelPlacement='outside'
       placeholder='在此处搜索galgame，搜索不到请换日文原文'
       radius='full'
