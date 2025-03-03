@@ -1,7 +1,8 @@
 'use client'
 
 import { ArrowLeftOutlined } from '@ant-design/icons'
-import { Button } from '@heroui/react'
+import { Button, Link } from '@heroui/react'
+import { useRouter } from 'next/navigation'
 
 interface RoundArrowButtonProps {
   ariaLabel?: string
@@ -10,23 +11,20 @@ interface RoundArrowButtonProps {
 export const RoundArrowButton: React.FC<RoundArrowButtonProps> = ({
   ariaLabel,
 }) => {
-  const onClick = () => {
-    const pos = location.href.lastIndexOf('/')
-
-    location.href = location.href.substring(0, pos)
-  }
+  const router = useRouter()
 
   return (
     <Button
       isIconOnly
       aria-label={ariaLabel}
-      className='absolute bottom-12 left-12'
+      as={Link}
+      className='absolute bottom-12 left-6'
       radius='full'
       size='lg'
       variant='flat'
-      onPress={onClick}
+      onPress={() => router.back()}
     >
-      <ArrowLeftOutlined aria-hidden='true' className='h-5 w-5' />
+      <ArrowLeftOutlined aria-hidden='true' className='w-5 h-5' />
     </Button>
   )
 }

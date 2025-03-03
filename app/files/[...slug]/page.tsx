@@ -37,8 +37,8 @@ export default async function BrowserPage({
     return (
       <div className='flex flex-col md:flex-row'>
         <RoundArrowButton />
-        <div className='flex max-w-[960px] w-screen'>
-          <div className={'md:w-60 pl-1'}>
+        <div className='flex w-screen max-w-[960px]'>
+          <div className={'pl-1 md:w-60'}>
             <Sidebar />
           </div>
           <div className='flex-1 px-10'>
@@ -52,10 +52,10 @@ export default async function BrowserPage({
   const inode = node2list(node)
 
   return (
-    <div className='w-full max-w-3xl mx-auto grid grid-cols-6 sm:grid-cols-4 gap-2 sm:gap-4'>
+    <div className='flex w-full max-w-3xl gap-2 mx-auto sm:gap-4'>
       <RoundArrowButton />
       <Sidebar />
-      <div className='col-span-5 sm:col-span-3 sm:row-span-2 row-start-1 row-end-4'>
+      <div className='w-full'>
         <FileList inode={inode} slug={slug} />
       </div>
     </div>
