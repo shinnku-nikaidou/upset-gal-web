@@ -22,7 +22,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
   const isSSR = useIsSSR()
 
   useLayoutEffect(() => {
-    setTheme('light')
+    if (!localStorage.getItem('theme')) {
+      setTheme('light')
+    }
   })
 
   const onChange = () => {
