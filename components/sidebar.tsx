@@ -13,7 +13,7 @@ export const Sidebar = () => {
           <Button
             isIconOnly
             as={Link}
-            className='flex ml-1 justify-self-center md:hidden'
+            className='flex md:hidden'
             href={item.link}
             variant='bordered'
           >
@@ -22,7 +22,7 @@ export const Sidebar = () => {
           <Button
             fullWidth
             as={Link}
-            className='hidden ml-1 justify-self-center md:flex'
+            className='justify-start hidden md:flex'
             href={item.link}
             variant='bordered'
           >

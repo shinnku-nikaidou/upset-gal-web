@@ -6,7 +6,6 @@ import { FileList } from '@/components/fileList'
 import { tree } from '@/config/root'
 import { RoundArrowButton } from '@/components/returnButton'
 import { GameIntro } from '@/components/gameIntro'
-import { FileListWrapper } from '@/components/adaptive'
 
 export default async function BrowserPage({
   params,
@@ -14,7 +13,7 @@ export default async function BrowserPage({
   params: Promise<{ slug: string[] }>
 }) {
   const origin_slug = (await params).slug
-  const slug = [...origin_slug.map(decodeURIComponent)]
+  const slug = origin_slug.map(decodeURIComponent)
 
   origin_slug.pop()
   let node: any = tree
@@ -33,22 +32,6 @@ export default async function BrowserPage({
     notFound()
   }
 
-  if (variety === 'file') {
-    return (
-      <div className='flex flex-col md:flex-row'>
-        <RoundArrowButton />
-        <div className='flex w-screen max-w-[960px]'>
-          <div className={'pl-1 md:w-60'}>
-            <Sidebar />
-          </div>
-          <div className='flex-1 px-10'>
-            <GameIntro info={node} />
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   const inode = node2list(node)
 
   return (
@@ -56,7 +39,11 @@ export default async function BrowserPage({
       <RoundArrowButton />
       <Sidebar />
       <div className='w-full'>
-        <FileList inode={inode} slug={slug} />
+        {variety === 'file' ? (
+          <GameIntro info={node} />
+        ) : (
+          <FileList inode={inode} slug={slug} />
+        )}
       </div>
     </div>
   )
