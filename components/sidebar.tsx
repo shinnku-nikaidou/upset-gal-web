@@ -2,10 +2,13 @@
 
 import { Button } from '@heroui/button'
 import { Link } from '@heroui/link'
+import { usePathname } from 'next/navigation'
 
 import { IndexListForSlog } from '@/config/indexList'
 
 export const Sidebar = () => {
+  const pathname = usePathname()
+
   return (
     <div className='flex flex-col gap-4'>
       {IndexListForSlog.map((item, index) => (
@@ -14,8 +17,9 @@ export const Sidebar = () => {
             isIconOnly
             as={Link}
             className='flex md:hidden'
+            color={pathname === item.link ? 'primary' : 'default'}
             href={item.link}
-            variant='bordered'
+            variant={pathname === item.link ? 'solid' : 'bordered'}
           >
             {item.body}
           </Button>
@@ -23,8 +27,9 @@ export const Sidebar = () => {
             fullWidth
             as={Link}
             className='justify-start hidden md:flex'
+            color={pathname === item.link ? 'primary' : 'default'}
             href={item.link}
-            variant='bordered'
+            variant={pathname === item.link ? 'solid' : 'bordered'}
           >
             {item.body}
             <span>{item.title}</span>
