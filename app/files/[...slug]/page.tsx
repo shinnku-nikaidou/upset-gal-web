@@ -57,8 +57,10 @@ export default async function BrowserPage({
         <div className={'md:w-60 pl-1'}>
           <Sidebar />
         </div>
-        <div className='pl-12 min-w-96 max-w-[400px] md:max-w-[960px]'>
-          <FileList inode={inode} slug={slug} />
+        <div className='flex pl-3 md:pl-12 w-full justify-center items-center'>
+          <div className='min-w-[300px] max-w-[400px] md:min-w-[600px] md:max-w-[960px]'>
+            <FileList inode={inode} slug={slug} />
+          </div>
         </div>
       </div>
     </div>
