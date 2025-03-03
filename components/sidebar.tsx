@@ -24,12 +24,14 @@ export const Sidebar = () => {
           key={index}
           as={Link}
           className='sm:w-full'
-          isIconOnly={breakpoint}
           href={item.link}
+          isIconOnly={breakpoint}
           variant='bordered'
         >
-          <div className='inline-block min-w-4'>{item.body}</div>
-          <div className='justify-self-center hidden md:flex'>{item.title}</div>
+          {item.body}
+          <div className='justify-self-center hidden md:flex ml-1'>
+            {item.title}
+          </div>
         </Button>
       ))}
     </div>
