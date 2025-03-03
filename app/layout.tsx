@@ -2,13 +2,13 @@ import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { Link } from '@heroui/link'
 import clsx from 'clsx'
+import Script from 'next/script'
 
 import { Providers } from './providers'
 
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'
-import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
@@ -52,7 +52,7 @@ export default function RootLayout({
           defer
           data-cf-beacon='{"token": "65325546c71740a78ecc6e8fa7815010"}'
           src='https://static.cloudflareinsights.com/beacon.min.js'
-         />
+        />
       </head>
       <body
         className={clsx(

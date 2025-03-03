@@ -3,9 +3,11 @@
 import { FileZipOutlined, FolderOpenOutlined } from '@ant-design/icons'
 import { Listbox, ListboxItem, Pagination } from '@heroui/react'
 
-import { Inode } from '@/types'
-import { num2size } from '@/algorithm/util'
 import { useCallback, useState } from 'react'
+
+import type { Inode } from '@/types'
+
+import { num2size } from '@/algorithm/util'
 import { generateHref } from '@/algorithm/url'
 
 interface ListboxWrapperProps {

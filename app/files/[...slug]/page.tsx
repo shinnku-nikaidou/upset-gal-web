@@ -6,6 +6,7 @@ import { FileList } from '@/components/fileList'
 import { tree } from '@/config/root'
 import { RoundArrowButton } from '@/components/returnButton'
 import { GameIntro } from '@/components/gameIntro'
+import { FileListWrapper } from '@/components/adaptive'
 
 export default async function BrowserPage({
   params,
@@ -58,9 +59,9 @@ export default async function BrowserPage({
           <Sidebar />
         </div>
         <div className='flex pl-3 md:pl-12 w-full justify-center items-center'>
-          <div className='min-w-[300px] max-w-[400px] md:min-w-[600px] md:max-w-[960px]'>
+          <FileListWrapper>
             <FileList inode={inode} slug={slug} />
-          </div>
+          </FileListWrapper>
         </div>
       </div>
     </div>
