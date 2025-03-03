@@ -56,6 +56,7 @@ export const FileList: React.FC<{
         ))}
       </Listbox>
       <Pagination
+        boundaries={0}
         initialPage={1}
         size={'md'}
         total={Math.ceil(inode.length / 10)}
