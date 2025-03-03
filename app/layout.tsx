@@ -8,6 +8,7 @@ import { Providers } from './providers'
 import { siteConfig } from '@/config/site'
 import { fontSans } from '@/config/fonts'
 import { Navbar } from '@/components/navbar'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
@@ -34,7 +35,25 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang='en'>
-      <head />
+      <head>
+        <Script
+          async
+          src='https://www.googletagmanager.com/gtag/js?id=G-61P3NL510C'
+        />
+        <Script id='google-analytics'>
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-61P3NL510C');
+        `}
+        </Script>
+        <Script
+          defer
+          data-cf-beacon='{"token": "65325546c71740a78ecc6e8fa7815010"}'
+          src='https://static.cloudflareinsights.com/beacon.min.js'
+         />
+      </head>
       <body
         className={clsx(
           'min-h-screen bg-background font-sans antialiased',
