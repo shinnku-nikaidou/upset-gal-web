@@ -1,4 +1,4 @@
-import { wikipediaAnswer } from '@/types/wiki'
+import { WikipediaAnswer } from '@/types/wiki'
 
 /* eslint-disable no-console */
 type Lang = 'ja' | 'zh' | 'en'
@@ -6,7 +6,7 @@ type Lang = 'ja' | 'zh' | 'en'
 export default async function wikisearch(
   query: string,
   lang: Lang = 'zh',
-): Promise<wikipediaAnswer> {
+): Promise<WikipediaAnswer> {
   const queurl = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${query}&srlimit=1`
 
   const res = await (await fetch(queurl)).json()
