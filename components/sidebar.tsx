@@ -15,7 +15,7 @@ export const Sidebar = () => {
           variant='bordered'
         >
           <div>{item.body}</div>
-          <div className='justify-self-center'>{item.title}</div>
+          <div className='justify-self-center hidden sm:flex'>{item.title}</div>
         </Button>
       ))}
     </div>

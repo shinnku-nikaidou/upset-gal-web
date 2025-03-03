@@ -19,7 +19,7 @@ export default async function SearchPage({
         <div className='max-w-[720px] pl-10'>
           <Search initialSearchTerm={q} />
         </div>
-        <div className='grid grid-cols-2 pt-10 pl-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 pt-10 pl-10'>
           <div className='pr-20'>
             <SearchAnswer answer={answer} />
           </div>

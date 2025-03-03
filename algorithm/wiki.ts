@@ -1,6 +1,7 @@
+import Redis from 'ioredis'
+
 import { config } from '@/config/root'
 import { WikipediaAnswer } from '@/types/wiki'
-import Redis from 'ioredis'
 
 /* eslint-disable no-console */
 type Lang = 'ja' | 'zh' | 'en'
@@ -48,14 +49,17 @@ export async function wikiredissearch(
   lang: Lang = 'zh',
 ): Promise<WikipediaAnswer> {
   let pageid: number
+
   try {
     const ans = await redisClient.get(`cache:search:${query}`)
+
     console.log(`cache:search:${query}, ans = ${ans}`)
     if (ans) {
       pageid = parseInt(ans, 10)
     } else {
       const queurl = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${query}&srlimit=1`
       const res = await (await fetch(queurl)).json()
+
       pageid = res['query']['search'][0]['pageid']
       redisClient.set(`cache:search:${query}`, pageid)
     }
@@ -70,6 +74,7 @@ export async function wikiredissearch(
       'title',
       'text',
     )
+
     if (ans[0] && ans[1]) {
       return {
         title: ans[0],

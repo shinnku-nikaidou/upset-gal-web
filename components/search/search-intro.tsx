@@ -32,7 +32,7 @@ export const SearchIntro: React.FC<SearchIntroProps> = ({ name }) => {
   return (
     <ScrollShadow
       hideScrollBar
-      className='h-[960px] inline-block max-w-xl text-center justify-center'
+      className='h-[800px] inline-block max-w-xl text-center justify-center'
       size={100}
     >
       <div className={title({ color: 'violet' })}>{wikians.title}</div>

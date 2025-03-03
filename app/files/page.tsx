@@ -11,9 +11,9 @@ export default function FilesPage() {
   }
 
   return (
-    <div className='items-center'>
+    <div className='items-center text-center'>
       <h1 className={title()}>全部游戏</h1>
-      <div className='gap-4 grid grid-cols-2 sm:grid-cols-2 mt-8'>
+      <div className='gap-4 grid grid-cols-2 sm:grid-cols-4 mt-8 pt-10'>
         {IndexList.map((item, index) => (
           <Card
             key={index}
