@@ -35,13 +35,13 @@ export default async function BrowserPage({
 
   if (variety === 'file') {
     return (
-      <div>
+      <div className='flex flex-col md:flex-row'>
         <RoundArrowButton />
-        <div className='flex flex-1 min-w-max max-w-[960px] w-screen'>
+        <div className='flex max-w-[960px] w-screen'>
           <div className={'md:w-60 pl-1'}>
             <Sidebar />
           </div>
-          <div className='pl-4 md:pl-20 md:min-w-96 max-w-[400px] md:max-w-[600px]'>
+          <div className='flex-1'>
             <GameIntro info={node} />
           </div>
         </div>
@@ -52,17 +52,11 @@ export default async function BrowserPage({
   const inode = node2list(node)
 
   return (
-    <div>
+    <div className='w-full max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-4 gap-4'>
       <RoundArrowButton />
-      <div className='flex flex-1 min-w-max max-w-[960px] w-screen'>
-        <div className={'md:w-60 pl-1'}>
-          <Sidebar />
-        </div>
-        <div className='flex pl-3 md:pl-12 w-full justify-center items-center'>
-          <FileListWrapper>
-            <FileList inode={inode} slug={slug} />
-          </FileListWrapper>
-        </div>
+      <Sidebar />
+      <div className='sm:col-span-3 sm:row-span-2'>
+        <FileList inode={inode} slug={slug} />
       </div>
     </div>
   )

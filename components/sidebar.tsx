@@ -17,28 +17,13 @@ export const Sidebar = () => {
     }
   })
 
-  return breakpoint ? (
-    <div className='flex flex-col gap-[3vh]'>
-      {IndexListForSlog.map((item, index) => (
-        <Button
-          key={index}
-          isIconOnly
-          as={Link}
-          className='grid'
-          href={item.link}
-          variant='bordered'
-        >
-          {item.body}
-        </Button>
-      ))}
-    </div>
-  ) : (
-    <div className='flex flex-col gap-[3vh]'>
+  return (
+    <div className='grid grid-cols-4 gap-4 sm:grid-cols-1 justify-items-center'>
       {IndexListForSlog.map((item, index) => (
         <Button
           key={index}
           as={Link}
-          className='grid grid-cols-[auto_1fr]'
+          className='sm:w-full min-w-0'
           href={item.link}
           variant='bordered'
         >
