@@ -18,7 +18,7 @@ export const Sidebar = () => {
   })
 
   return (
-    <div className='grid grid-cols-4 gap-4 sm:grid-cols-1 justify-items-center'>
+    <div className='flex flex-col gap-4'>
       {IndexListForSlog.map((item, index) => (
         <Button
           key={index}

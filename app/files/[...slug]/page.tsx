@@ -52,10 +52,10 @@ export default async function BrowserPage({
   const inode = node2list(node)
 
   return (
-    <div className='w-full max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-4 gap-4'>
+    <div className='w-full max-w-3xl mx-auto grid grid-cols-6 sm:grid-cols-4 gap-2 sm:gap-4'>
       <RoundArrowButton />
       <Sidebar />
-      <div className='sm:col-span-3 sm:row-span-2'>
+      <div className='col-span-5 sm:col-span-3 sm:row-span-2'>
         <FileList inode={inode} slug={slug} />
       </div>
     </div>
