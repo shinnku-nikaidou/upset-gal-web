@@ -1,7 +1,6 @@
 export const KRKROutlined = (props: React.ComponentProps<'svg'>) => {
   const styles = {
     path: {
-      stroke: '#000',
       strokeMiterlimit: 10,
       fill: 'none',
     },
@@ -11,7 +10,13 @@ export const KRKROutlined = (props: React.ComponentProps<'svg'>) => {
   }
 
   return (
-    <svg viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg' {...props}>
+    <svg
+      fill='currentColor'
+      stroke='currentColor'
+      viewBox='0 0 20 20'
+      xmlns='http://www.w3.org/2000/svg'
+      {...props}
+    >
       <defs />
       <g data-name='Kirikirioid' id='krkr'>
         <g>
@@ -40,13 +45,14 @@ export const ONSOutlined = (props: React.ComponentProps<'svg'>) => {
   return (
     <svg
       version='1.0'
+      fill='currentColor'
       xmlns='http://www.w3.org/2000/svg'
       {...props}
       preserveAspectRatio='xMidYMid meet'
       viewBox='0 0 480.000000 480.000000'
     >
       <g
-        fill='#000000'
+        fill='currentColor'
         stroke='none'
         transform='translate(0.000000,480.000000) scale(0.100000,-0.100000)'
       >
