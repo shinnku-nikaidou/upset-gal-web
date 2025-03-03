@@ -56,22 +56,22 @@ export const IndexListForSlog = [
   {
     title: '真红论坛',
     link: 'https://galgame.dev/',
-    body: <GlobalOutlined className='my-icon-small' />,
+    body: <GlobalOutlined />,
   },
   {
     title: '前win汉化',
     link: '/files/shinnku/0/win',
-    body: <WindowsOutlined className='my-icon-small' />,
+    body: <WindowsOutlined />,
   },
   {
     title: '新win汉化',
     link: '/files/shinnku/zd',
-    body: <WindowsFilled className='my-icon-small' />,
+    body: <WindowsFilled />,
   },
   {
     title: 'apk集合',
     link: '/files/shinnku/0/apk',
-    body: <AndroidOutlined className='my-icon-small' />,
+    body: <AndroidOutlined />,
   },
   {
     title: 'ons集合',
@@ -86,7 +86,7 @@ export const IndexListForSlog = [
   {
     title: 'gal工具',
     link: '/files/shinnku/0/tools',
-    body: <CodeOutlined className='my-icon-small' />,
+    body: <CodeOutlined />,
   },
   {
     title: '生肉集合',

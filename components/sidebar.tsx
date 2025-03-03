@@ -27,7 +27,7 @@ export const Sidebar = () => {
           href={item.link}
           variant='bordered'
         >
-          <div>{item.body}</div>
+          <div className='inline-block min-w-4'>{item.body}</div>
           <div className='justify-self-center hidden md:flex'>{item.title}</div>
         </Button>
       ))}
