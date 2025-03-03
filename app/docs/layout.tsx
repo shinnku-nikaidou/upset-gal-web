@@ -1,13 +1,21 @@
-export default function DocsLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+import { ReactNode } from 'react'
+
+import { KunSidebar } from '@/components/docs/Sidebar'
+import { getDirectoryTree } from '@/lib/mdx/directoryTree'
+
+interface LayoutProps {
+  children: ReactNode
+}
+
+export default function Layout({ children }: LayoutProps) {
+  const tree = getDirectoryTree()
+
   return (
-    <section className='flex flex-col items-center justify-center gap-4 py-8 md:py-10'>
-      <div className='inline-block max-w-lg text-center justify-center'>
+    <div className='container mx-auto flex max-w-[1280px]'>
+      <KunSidebar tree={tree} />
+      <main className='flex-1 overflow-y-auto py-4 pl-0 md:pl-64'>
         {children}
-      </div>
-    </section>
+      </main>
+    </div>
   )
 }

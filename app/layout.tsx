@@ -1,7 +1,7 @@
-import '@/styles/globals.css'
 import { Metadata, Viewport } from 'next'
 import { Link } from '@heroui/link'
 import Script from 'next/script'
+import '@/styles/index.css'
 
 import { Providers } from './providers'
 
@@ -65,12 +65,12 @@ export default function RootLayout({
           id='box-main'
         />
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
-          <div className='relative flex flex-col h-screen'>
+          <div className='relative flex h-screen flex-col'>
             <Navbar />
-            <main className='container flex-grow px-6 pt-16 mx-auto max-w-8xl'>
+            <main className='max-w-8xl container mx-auto flex-grow px-6 pt-16'>
               {children}
             </main>
-            <footer className='flex items-center justify-center w-full py-3'>
+            <footer className='flex w-full items-center justify-center py-3'>
               <Link
                 isExternal
                 className='flex items-center gap-1 text-current'
