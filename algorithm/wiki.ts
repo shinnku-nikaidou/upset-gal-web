@@ -1,7 +1,21 @@
+import { config } from '@/config/root'
 import { WikipediaAnswer } from '@/types/wiki'
+import Redis from 'ioredis'
 
 /* eslint-disable no-console */
 type Lang = 'ja' | 'zh' | 'en'
+
+const redisClient = new Redis({
+  host: config.redis.host,
+  port: config.redis.port,
+  password: config.redis.password,
+  db: config.redis.database,
+})
+
+const emptyanswer = {
+  title: '',
+  text: '',
+}
 
 export async function wikifullsearch(
   query: string,
@@ -25,10 +39,7 @@ export async function wikifullsearch(
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    return {
-      title: '',
-      text: '',
-    }
+    return emptyanswer
   }
 }
 
@@ -36,27 +47,39 @@ export async function wikiredissearch(
   query: string,
   lang: Lang = 'zh',
 ): Promise<WikipediaAnswer> {
-  const queurl = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${query}&srlimit=1`
-
-  const res = await (await fetch(queurl)).json()
+  let pageid: number
+  try {
+    const ans = await redisClient.get(`cache:search:${query}`)
+    console.log(`cache:search:${query}, ans = ${ans}`)
+    if (ans) {
+      pageid = parseInt(ans, 10)
+    } else {
+      const queurl = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=${query}&srlimit=1`
+      const res = await (await fetch(queurl)).json()
+      pageid = res['query']['search'][0]['pageid']
+      redisClient.set(`cache:search:${query}`, pageid)
+    }
+  } catch (e) {
+    return emptyanswer
+  }
 
   try {
-    const pageid: number = res['query']['search'][0]['pageid']
-
-    return {
-      title: '',
-      text: '',
+    console.log(`looking for ${query}, wikipedia:zh:${pageid} `)
+    const ans = await redisClient.hmget(
+      `wikipedia:zh:${pageid}`,
+      'title',
+      'text',
+    )
+    if (ans[0] && ans[1]) {
+      return {
+        title: ans[0],
+        text: ans[1],
+      }
+    } else {
+      return emptyanswer
     }
-
-    // return {
-    //   title: context['title'],
-    //   text: context['extract'],
-    // }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
-    return {
-      title: '',
-      text: '',
-    }
+    return emptyanswer
   }
 }
