@@ -41,7 +41,7 @@ export default async function BrowserPage({
           <div className={'md:w-60 pl-1'}>
             <Sidebar />
           </div>
-          <div className='flex-1'>
+          <div className='flex-1 px-10'>
             <GameIntro info={node} />
           </div>
         </div>
