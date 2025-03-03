@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Card, CardBody, CardFooter } from '@heroui/react'
+import { Card, CardBody } from '@heroui/react'
 
 import { title } from '@/components/primitives'
 import { IndexList } from '@/config/indexList'
@@ -20,12 +20,10 @@ export default function FilesPage() {
             href={item.link}
             shadow='sm'
           >
-            <CardBody className='flex items-center justify-center h-16 p-0 overflow-visible'>
-              {item.body}
-            </CardBody>
-            <CardFooter className='justify-center text-small'>
+            <CardBody className='flex items-center justify-center gap-2 overflow-visible size-36'>
+              <span>{item.body}</span>
               <b>{item.title}</b>
-            </CardFooter>
+            </CardBody>
           </Card>
         ))}
       </div>
