@@ -1,6 +1,8 @@
-import type { BucketFiles, SearchList } from '@/types'
+import type { BucketFiles, Config, SearchList } from '@/types'
 
 import fs from 'fs'
+
+import toml from 'toml'
 
 import { generateTree } from '@/algorithm/tree'
 import { aggregate_builder } from '@/algorithm/search'
@@ -27,3 +29,9 @@ export const tree = {
   shinnku: shinnku_tree,
   galgame0: galgame0_tree['合集系列']['浮士德galgame游戏合集'],
 }
+
+export const config: Config = toml.parse(
+  fs.readFileSync('config.toml', {
+    encoding: 'utf8',
+  }),
+)
