@@ -1,31 +1,29 @@
 'use client'
 
+import Link from 'next/link'
 import { Card, CardBody, CardFooter } from '@heroui/react'
 
 import { title } from '@/components/primitives'
 import { IndexList } from '@/config/indexList'
 
 export default function FilesPage() {
-  const generatePress = (link: string) => () => {
-    window.location.href = link
-  }
-
   return (
     <div className='items-center text-center'>
       <h1 className={title()}>全部游戏</h1>
-      <div className='gap-4 grid grid-cols-2 sm:grid-cols-4 mt-8 pt-10'>
+      <div className='grid grid-cols-2 gap-4 pt-10 mt-8 sm:grid-cols-4'>
         {IndexList.map((item, index) => (
           <Card
             key={index}
             isPressable
+            as={Link}
             className='w-full'
+            href={item.link}
             shadow='sm'
-            onPress={generatePress(item.link)}
           >
-            <CardBody className='overflow-visible p-0 flex justify-center items-center h-16'>
+            <CardBody className='flex items-center justify-center h-16 p-0 overflow-visible'>
               {item.body}
             </CardBody>
-            <CardFooter className='text-small justify-center'>
+            <CardFooter className='justify-center text-small'>
               <b>{item.title}</b>
             </CardFooter>
           </Card>
