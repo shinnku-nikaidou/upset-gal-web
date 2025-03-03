@@ -37,10 +37,10 @@ export default async function BrowserPage({
       <div>
         <RoundArrowButton />
         <div className='flex flex-1 min-w-max max-w-[960px] w-screen'>
-          <div className={'w-60 pl-1'}>
+          <div className={'md:w-60 pl-1'}>
             <Sidebar />
           </div>
-          <div className='pl-20 min-w-96 max-w-[600px]'>
+          <div className='pl-4 md:pl-20 md:min-w-96 max-w-[400px] md:max-w-[600px]'>
             <GameIntro info={node} />
           </div>
         </div>
@@ -54,7 +54,7 @@ export default async function BrowserPage({
     <div>
       <RoundArrowButton />
       <div className='flex flex-1 min-w-max max-w-[960px] w-screen'>
-        <div className={'w-60 pl-1'}>
+        <div className={'md:w-60 pl-1'}>
           <Sidebar />
         </div>
         <div className='pl-12 min-w-96'>

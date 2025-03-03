@@ -18,6 +18,7 @@ export const RoundArrowButton: React.FC<RoundArrowButtonProps> = ({
 
   return (
     <Button
+      isIconOnly
       aria-label={ariaLabel}
       className='absolute bottom-12 left-12 p-4 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500'
       onPress={onClick}

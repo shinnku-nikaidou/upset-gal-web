@@ -41,6 +41,10 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <div
+          className="box bg-[url('/assets/GT5Bjdba4AAbCkU.jpeg')] md:bg-[url('/assets/81320307_p0.jpg')]"
+          id='box-main'
+        />
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'dark' }}>
           <div className='relative flex flex-col h-screen'>
             <Navbar />

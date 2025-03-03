@@ -1,6 +1,4 @@
 import { Link } from '@heroui/link'
-// import { Snippet } from '@heroui/snippet'
-// import { Code } from '@heroui/code'
 import { button as buttonStyles } from '@heroui/theme'
 
 import { siteConfig } from '@/config/site'
@@ -27,29 +25,19 @@ export default function Home() {
 
       <div className='flex gap-3 mt-8'>
         <Link
-          // isExternal
           className={buttonStyles({ variant: 'bordered', radius: 'full' })}
           href={siteConfig.links.files}
         >
           浏览全部游戏
         </Link>
         <Link
-          // isExternal
+          isExternal
           className={buttonStyles({ variant: 'bordered', radius: 'full' })}
-          href={siteConfig.links.github}
+          href={'https://galgame.dev'}
         >
-          {/* <GithubIcon size={20} /> */}
           I&apos;m feeling lucky
         </Link>
       </div>
-
-      {/* <div className='mt-8'>
-        <Snippet hideCopyButton hideSymbol variant='bordered'>
-          <span>
-            Get started by editing <Code color='primary'>app/page.tsx</Code>
-          </span>
-        </Snippet>
-      </div> */}
     </section>
   )
 }
