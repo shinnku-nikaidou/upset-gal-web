@@ -5,29 +5,13 @@ import { IconSvgProps } from '@/types'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Logo = ({ size = 36, ...props }) => {
-  const styles = {
-    imageContainer: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      // width: '100%',
-      height: '100%',
-    },
-    responsiveImage: {
-      display: 'flex',
-      alignItems: 'center',
-      margin: '0 auto',
-      width: '100%',
-    },
-  }
-
   return (
     <Image
       alt={`${'真红小站'}, ${'欢迎来到 galgame 分享站点'}`}
+      className='-mt-1'
       height={0}
       loading='lazy'
       src='/assets/upsetgal-logo.png'
-      style={styles.responsiveImage}
       width={100}
     />
   )

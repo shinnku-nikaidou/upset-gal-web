@@ -17,33 +17,21 @@ export const Sidebar = () => {
     }
   })
 
-  return breakpoint ? (
-    <div className='flex flex-col gap-[3vh]'>
+  return (
+    <div className='flex flex-col gap-4 row-start-2 row-end-3 sm:row-start-1 sm:row-end-2'>
       {IndexListForSlog.map((item, index) => (
         <Button
           key={index}
-          isIconOnly
           as={Link}
-          className='grid'
+          className='sm:w-full'
           href={item.link}
+          isIconOnly={breakpoint}
           variant='bordered'
         >
           {item.body}
-        </Button>
-      ))}
-    </div>
-  ) : (
-    <div className='flex flex-col gap-[3vh]'>
-      {IndexListForSlog.map((item, index) => (
-        <Button
-          key={index}
-          as={Link}
-          className='grid grid-cols-[auto_1fr]'
-          href={item.link}
-          variant='bordered'
-        >
-          <div>{item.body}</div>
-          <div className='justify-self-center hidden md:flex'>{item.title}</div>
+          <div className='justify-self-center hidden md:flex ml-1'>
+            {item.title}
+          </div>
         </Button>
       ))}
     </div>
