@@ -55,7 +55,7 @@ export default async function BrowserPage({
     <div className='w-full max-w-3xl mx-auto grid grid-cols-6 sm:grid-cols-4 gap-2 sm:gap-4'>
       <RoundArrowButton />
       <Sidebar />
-      <div className='col-span-5 sm:col-span-3 sm:row-span-2'>
+      <div className='col-span-5 sm:col-span-3 sm:row-span-2 row-start-1 row-end-4'>
         <FileList inode={inode} slug={slug} />
       </div>
     </div>

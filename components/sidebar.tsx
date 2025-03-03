@@ -18,12 +18,13 @@ export const Sidebar = () => {
   })
 
   return (
-    <div className='flex flex-col gap-4'>
+    <div className='flex flex-col gap-4 row-start-2 row-end-3 sm:row-start-1 sm:row-end-2'>
       {IndexListForSlog.map((item, index) => (
         <Button
           key={index}
           as={Link}
-          className='sm:w-full min-w-0'
+          className='sm:w-full'
+          isIconOnly={breakpoint}
           href={item.link}
           variant='bordered'
         >
