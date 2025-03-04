@@ -5,8 +5,8 @@ import { VisuallyHidden } from '@react-aria/visually-hidden'
 import { SwitchProps, useSwitch } from '@heroui/switch'
 import { useTheme } from 'next-themes'
 import { useIsSSR } from '@react-aria/ssr'
-import clsx from 'clsx'
 
+import { cn } from '@/utils/cn'
 import { SunFilledIcon, MoonFilledIcon } from '@/components/icons'
 
 export interface ThemeSwitchProps {
@@ -47,7 +47,7 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
   return (
     <Component
       {...getBaseProps({
-        className: clsx(
+        className: cn(
           'px-px transition-opacity hover:opacity-80 cursor-pointer',
           className,
           classNames?.base,
@@ -60,9 +60,9 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({
       <div
         {...getWrapperProps()}
         className={slots.wrapper({
-          class: clsx(
+          class: cn(
             [
-              'w-auto h-auto',
+              'h-auto w-auto',
               'bg-transparent',
               'rounded-lg',
               'flex items-center justify-center',

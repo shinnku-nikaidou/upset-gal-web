@@ -2,37 +2,39 @@
 
 import { Button } from '@heroui/button'
 import { Link } from '@heroui/link'
-import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 import { IndexListForSlog } from '@/config/indexList'
 
 export const Sidebar = () => {
-  const [breakpoint, setBreakpoint] = useState(true)
-
-  useEffect(() => {
-    const width = window.innerWidth
-
-    if (width > 768) {
-      setBreakpoint(false)
-    }
-  })
+  const pathname = usePathname()
 
   return (
-    <div className='flex flex-col gap-4 row-start-2 row-end-3 sm:row-start-1 sm:row-end-2'>
+    <div className='flex flex-col gap-4'>
       {IndexListForSlog.map((item, index) => (
-        <Button
-          key={index}
-          as={Link}
-          className='sm:w-full'
-          href={item.link}
-          isIconOnly={breakpoint}
-          variant='bordered'
-        >
-          {item.body}
-          <div className='justify-self-center hidden md:flex ml-1'>
-            {item.title}
-          </div>
-        </Button>
+        <div key={index}>
+          <Button
+            isIconOnly
+            as={Link}
+            className='flex md:hidden'
+            color={pathname === item.link ? 'primary' : 'default'}
+            href={item.link}
+            variant={pathname === item.link ? 'solid' : 'bordered'}
+          >
+            {item.body}
+          </Button>
+          <Button
+            fullWidth
+            as={Link}
+            className='justify-start hidden md:flex'
+            color={pathname === item.link ? 'primary' : 'default'}
+            href={item.link}
+            variant={pathname === item.link ? 'solid' : 'bordered'}
+          >
+            {item.body}
+            <span>{item.title}</span>
+          </Button>
+        </div>
       ))}
     </div>
   )
