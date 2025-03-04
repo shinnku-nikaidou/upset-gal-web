@@ -44,8 +44,8 @@ export const KRKROutlined = (props: React.ComponentProps<'svg'>) => {
 export const ONSOutlined = (props: React.ComponentProps<'svg'>) => {
   return (
     <svg
-      version='1.0'
       fill='currentColor'
+      version='1.0'
       xmlns='http://www.w3.org/2000/svg'
       {...props}
       preserveAspectRatio='xMidYMid meet'

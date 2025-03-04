@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+
 import { useResizeObserver } from '@/hooks/useResizeObserver'
 import { cn } from '@/utils/cn'
 
@@ -56,6 +57,7 @@ export const KunMasonryGrid = ({
         return
       }
       const shortestColumn = columnHeights.indexOf(Math.min(...columnHeights))
+
       columnItems[shortestColumn].push(child)
       columnHeights[shortestColumn]++
     })

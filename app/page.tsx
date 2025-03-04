@@ -8,7 +8,7 @@ import Search from '@/components/search/search'
 export default function Home() {
   return (
     <section className='flex flex-col items-center justify-center gap-4 py-8 md:py-10'>
-      <div className='justify-center inline-block max-w-xl text-center'>
+      <div className='inline-block max-w-xl justify-center text-center'>
         <span className={title({ color: 'pink' })}>真红&nbsp;</span>
         <span className={title()}>小站&nbsp;</span>
         <div className={subtitle({ class: 'mt-6' })}>
@@ -17,13 +17,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='flex items-center justify-center w-full mt-10'>
+      <div className='mt-10 flex w-full items-center justify-center'>
         <div className='w-full max-w-3xl gap-4'>
           <Search />
         </div>
       </div>
 
-      <div className='flex gap-3 mt-8'>
+      <div className='mt-8 flex gap-3'>
         <Link
           className={buttonStyles({ variant: 'bordered', radius: 'full' })}
           href={siteConfig.links.files}

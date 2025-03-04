@@ -26,7 +26,7 @@ export const Sidebar = () => {
           <Button
             fullWidth
             as={Link}
-            className='justify-start hidden md:flex'
+            className='hidden justify-start md:flex'
             color={pathname === item.link ? 'primary' : 'default'}
             href={item.link}
             variant={pathname === item.link ? 'solid' : 'bordered'}

@@ -10,7 +10,7 @@ export default function FilesPage() {
   return (
     <div className='items-center text-center'>
       <h1 className={title()}>全部游戏</h1>
-      <div className='grid grid-cols-2 gap-4 pt-10 mt-8 sm:grid-cols-4'>
+      <div className='mt-8 grid grid-cols-2 gap-4 pt-10 sm:grid-cols-4'>
         {IndexList.map((item, index) => (
           <Card
             key={index}
@@ -20,7 +20,7 @@ export default function FilesPage() {
             href={item.link}
             shadow='sm'
           >
-            <CardBody className='flex items-center justify-center gap-2 overflow-visible size-36'>
+            <CardBody className='flex size-36 items-center justify-center gap-2 overflow-visible'>
               <span>{item.body}</span>
               <b>{item.title}</b>
             </CardBody>

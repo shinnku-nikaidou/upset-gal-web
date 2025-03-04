@@ -24,7 +24,7 @@ export const RoundArrowButton: React.FC<RoundArrowButtonProps> = ({
       variant='flat'
       onPress={() => router.back()}
     >
-      <ArrowLeftOutlined aria-hidden='true' className='w-5 h-5' />
+      <ArrowLeftOutlined aria-hidden='true' className='h-5 w-5' />
     </Button>
   )
 }

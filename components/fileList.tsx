@@ -14,7 +14,7 @@ interface ListboxWrapperProps {
 }
 
 export const ListboxWrapper: React.FC<ListboxWrapperProps> = ({ children }) => (
-  <div className='px-1 py-2 rounded-small border-small border-default-200 dark:border-default-100'>
+  <div className='rounded-small border-small border-default-200 px-1 py-2 dark:border-default-100'>
     {children}
   </div>
 )

@@ -44,7 +44,7 @@ export const Search: React.FC<SearchProps> = ({ initialSearchTerm = '' }) => {
       radius='full'
       size='lg'
       startContent={
-        <SearchIcon className='text-base text-default-400 pointer-events-none flex-shrink-0' />
+        <SearchIcon className='pointer-events-none flex-shrink-0 text-base text-default-400' />
       }
       type='search'
       value={searchTerm}

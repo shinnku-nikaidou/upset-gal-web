@@ -21,7 +21,7 @@ export const CustomMDX = (props: MDXRemoteProps) => {
   return (
     <MDXRemote
       {...props}
-      components={{ ...components, ...(props.components || {}) }}
+      components={{ ...components, ...(props.components || {}) } as any}
     />
   )
 }

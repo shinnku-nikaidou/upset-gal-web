@@ -20,13 +20,13 @@ export const Navbar = () => {
   return (
     <HeroUINavbar maxWidth='xl' position='sticky'>
       <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
-        <NavbarBrand as='li' className='gap-3 max-w-fit'>
+        <NavbarBrand as='li' className='max-w-fit gap-3'>
           <NextLink className='flex items-center justify-start gap-1' href='/'>
             <Logo />
             <p className='font-bold text-inherit'>真红小站</p>
           </NextLink>
         </NavbarBrand>
-        <ul className='justify-start hidden gap-4 ml-2 lg:flex'>
+        <ul className='ml-2 hidden justify-start gap-4 lg:flex'>
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
@@ -68,7 +68,7 @@ export const Navbar = () => {
         </NavbarItem> */}
       </NavbarContent>
 
-      <NavbarContent className='pl-4 basis-1 sm:hidden' justify='end'>
+      <NavbarContent className='basis-1 pl-4 sm:hidden' justify='end'>
         <Link isExternal aria-label='Github' href={siteConfig.links.github}>
           <GithubIcon className='text-default-500' />
         </Link>
@@ -77,7 +77,7 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        <div className='flex flex-col gap-2 mx-4 mt-2'>
+        <div className='mx-4 mt-2 flex flex-col gap-2'>
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link

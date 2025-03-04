@@ -35,7 +35,7 @@ export default async function BrowserPage({
   const inode = node2list(node)
 
   return (
-    <div className='flex w-full max-w-3xl gap-2 mx-auto sm:gap-4'>
+    <div className='mx-auto flex w-full max-w-3xl gap-2 sm:gap-4'>
       <RoundArrowButton />
       <Sidebar />
       <div className='w-full'>
