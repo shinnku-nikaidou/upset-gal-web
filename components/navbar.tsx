@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -10,6 +13,7 @@ import {
 import { Link } from '@heroui/link'
 import { link as linkStyles } from '@heroui/theme'
 import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
 
 import { cn } from '@/utils/cn'
 import { siteConfig } from '@/config/site'
@@ -17,8 +21,19 @@ import { ThemeSwitch } from '@/components/theme-switch'
 import { GithubIcon, Logo } from '@/components/icons'
 
 export const Navbar = () => {
+  const pathname = usePathname()
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  useEffect(() => {
+    setIsMenuOpen(false)
+  }, [pathname])
+
   return (
-    <HeroUINavbar maxWidth='xl' position='sticky'>
+    <HeroUINavbar
+      isMenuOpen={isMenuOpen}
+      maxWidth='xl'
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className='basis-1/5 sm:basis-full' justify='start'>
         <NavbarBrand as='li' className='max-w-fit gap-3'>
           <NextLink className='flex items-center justify-start gap-1' href='/'>
@@ -79,7 +94,7 @@ export const Navbar = () => {
       <NavbarMenu>
         <div className='mx-4 mt-2 flex flex-col gap-2'>
           {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
+            <NavbarMenuItem key={index}>
               <Link
                 color={
                   index === 2
@@ -88,7 +103,7 @@ export const Navbar = () => {
                       ? 'danger'
                       : 'foreground'
                 }
-                href='#'
+                href={item.href}
                 size='lg'
               >
                 {item.label}
