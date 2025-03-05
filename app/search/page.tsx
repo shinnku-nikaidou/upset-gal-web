@@ -11,7 +11,7 @@ export default async function SearchPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const q = (await searchParams).q as string
-  const answer = default_search(q, 40)
+  const answer = default_search(q, 200)
 
   if (q) {
     return (
