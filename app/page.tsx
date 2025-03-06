@@ -33,9 +33,9 @@ export default function Home() {
         <Link
           isExternal
           className={buttonStyles({ variant: 'bordered', radius: 'full' })}
-          href={'https://galgame.dev'}
+          href={'https://congyu.moe/'}
         >
-          {`I'm feeling lucky`}
+          {`丛雨vpn(这是广告，但保证质量)`}
         </Link>
       </div>
     </section>
