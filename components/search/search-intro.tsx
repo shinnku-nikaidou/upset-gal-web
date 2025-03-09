@@ -21,6 +21,14 @@ export const SearchIntro: React.FC<SearchIntroProps> = ({ name }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (wikians.bg) {
+      const boxMain = document.getElementById('box-main')!
+      console.log(`set bg image https://www.shinnku.com/image/${wikians.bg}`)
+      boxMain.style.backgroundImage = `url('https://www.shinnku.com/image/${wikians.bg}')`
+    }
+  }, [wikians.bg])
+
+  useEffect(() => {
     if (loading) {
       setLoading(false)
       fetch(`/api/wiki?name=${encodeURIComponent(name)}`)
