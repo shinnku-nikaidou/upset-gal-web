@@ -68,7 +68,6 @@ export async function wikiredissearch(
   }
 
   try {
-    console.log(`looking for ${query}, wikipedia:zh:${pageid} `)
     const ans = await redisClient.hmget(
       `wikipedia:zh:${pageid}`,
       'title',
@@ -76,10 +75,18 @@ export async function wikiredissearch(
     )
 
     if (ans[0] && ans[1]) {
-      return {
-        title: ans[0],
-        text: ans[1],
-      }
+      const bg = await redisClient.get(`img:wiki:zh:${pageid}`)
+      if (bg) {
+        return {
+          title: ans[0],
+          text: ans[1],
+          bg: bg,
+        }
+      } else
+        return {
+          title: ans[0],
+          text: ans[1],
+        }
     } else {
       return emptyanswer
     }
