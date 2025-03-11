@@ -1,12 +1,18 @@
 import { NextResponse, NextRequest } from 'next/server'
 
-import { wikiredissearch } from '@/algorithm/wiki'
+import { Lang, wikifullsearch, wikiredissearch } from '@/algorithm/wiki'
+import { WikipediaAnswer } from '@/types/wiki'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
   const name = searchParams.get('name') as string
-
-  const ans = await wikiredissearch(name.substring(0, 40))
+  const lang = searchParams.get('lang') as Lang
+  let ans: WikipediaAnswer
+  if (lang) {
+    ans = await wikifullsearch(name.substring(0, 40), lang)
+  } else {
+    ans = await wikiredissearch(name.substring(0, 40))
+  }
 
   return NextResponse.json(ans)
 }

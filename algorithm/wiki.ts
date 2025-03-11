@@ -4,7 +4,7 @@ import { config } from '@/config/root'
 import { WikipediaAnswer } from '@/types/wiki'
 
 /* eslint-disable no-console */
-type Lang = 'ja' | 'zh' | 'en'
+export type Lang = 'ja' | 'zh' | 'en'
 
 const redisClient = new Redis({
   host: config.redis.host,
@@ -18,6 +18,15 @@ const emptyanswer = {
   text: '',
 }
 
+function assertLang(lang: string): asserts lang is Lang {
+  const validLangs: Lang[] = ['ja', 'zh', 'en']
+  if (!validLangs.includes(lang as Lang)) {
+    throw new Error(
+      `Invalid Lang type: ${lang}. Must be one of ${validLangs.join(', ')}`,
+    )
+  }
+}
+
 export async function wikifullsearch(
   query: string,
   lang: Lang = 'zh',
@@ -27,6 +36,7 @@ export async function wikifullsearch(
   const res = await (await fetch(queurl)).json()
 
   try {
+    assertLang(lang)
     const pageid: number = res['query']['search'][0]['pageid']
 
     const quer = `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&pageids=${pageid}&prop=info|categories|langlinks|extracts&explaintext=&`
@@ -40,6 +50,7 @@ export async function wikifullsearch(
     }
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
+    console.error(e)
     return emptyanswer
   }
 }
@@ -51,9 +62,10 @@ export async function wikiredissearch(
   let pageid: number
 
   try {
-    const ans = await redisClient.get(`cache:search:${query}`)
+    assertLang(lang)
+    const ans = await redisClient.get(`cache:search:wiki:${lang}:${query}`)
 
-    console.log(`cache:search:${query}, ans = ${ans}`)
+    console.log(`cache:search:wiki:${lang}:${query}, ans = ${ans}`)
     if (ans) {
       pageid = parseInt(ans, 10)
     } else {
@@ -61,21 +73,22 @@ export async function wikiredissearch(
       const res = await (await fetch(queurl)).json()
 
       pageid = res['query']['search'][0]['pageid']
-      redisClient.set(`cache:search:${query}`, pageid)
+      redisClient.set(`cache:search:wiki:${lang}:${query}`, pageid)
     }
   } catch (e) {
+    console.error(e)
     return emptyanswer
   }
 
   try {
     const ans = await redisClient.hmget(
-      `wikipedia:zh:${pageid}`,
+      `wikipedia:${lang}:${pageid}`,
       'title',
       'text',
     )
 
     if (ans[0] && ans[1]) {
-      const bg = await redisClient.get(`img:wiki:zh:${pageid}`)
+      const bg = await redisClient.get(`img:wiki:${lang}:${pageid}`)
       if (bg) {
         return {
           title: ans[0],
