@@ -11,7 +11,7 @@ export const Logo = ({ size = 36, ...props }) => {
       className='-mt-1'
       height={0}
       loading='lazy'
-      src='/assets/upsetgal-logo.png'
+      src='/assets/shinnku-logo.png'
       width={100}
     />
   )
