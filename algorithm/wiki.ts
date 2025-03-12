@@ -100,10 +100,11 @@ export async function wikiredissearch(
           title: ans[0],
           text: ans[1],
         }
-    } else {
+    } else if (lang == 'ja') {
       return emptyanswer
+    } else {
+      return wikiredissearch(query, 'ja')
     }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (e) {
     return emptyanswer
   }
